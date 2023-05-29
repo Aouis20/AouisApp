@@ -1,0 +1,29 @@
+{
+  "appName": "Aouis",
+  "navigation": {
+    "products" : "Produits",
+    "users": "Utilisateurs",
+    "myAccount": "Mon Compte",
+    "customerService": "Service Client",
+    "signOut": "Déconnexion",
+    "signIn": "Connexion",
+    "createAccount": "Créer mon compte"
+  },
+  "yes": "Oui",
+  "no": "Non",
+  "save": "Sauvegarder",
+  "modify": "Modifier",
+  "cancel": "Annuler",
+  "send": "Envoyer",
+  "at": "à",
+  "back": "Retour",
+  "noData": "Aucune donnée disponible",
+  "delete": "Supprimer",
+  "comments": "Commentaires",
+  "notifications": {
+    "notAuthorized": {
+      "title": "Vous n'êtes pas autorisé à accéder à cette page",
+      "message": "Vous n'êtes pas autorisé à accéder à cette page."
+    }
+  }
+}

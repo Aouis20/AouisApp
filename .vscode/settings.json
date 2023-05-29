@@ -1,0 +1,6 @@
+{
+    "i18n-ally.localesPaths": [
+        "public/locales"
+    ],
+    "i18next.i18nPaths": "/Users/aouis/Projets/AouisApp/public/locales"
+}
