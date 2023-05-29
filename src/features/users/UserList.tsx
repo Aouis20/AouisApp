@@ -4,7 +4,6 @@ import { User } from "./user.api";
 
 const UserList = () => {
   const userList: User[] = UserStore.useState((s) => s.userList);
-  console.log(userList);
 
   return (
     <Box>
