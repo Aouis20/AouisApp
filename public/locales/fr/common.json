@@ -3,6 +3,7 @@
   "navigation": {
     "products" : "Produits",
     "users": "Utilisateurs",
+    "categories": "Categories",
     "myAccount": "Mon Compte",
     "customerService": "Service Client",
     "signOut": "Déconnexion",

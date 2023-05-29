@@ -1,6 +1,6 @@
 import { Box, Text, Title } from "@mantine/core";
 import { UserStore } from "./UserStore";
-import { User } from "./user.api";
+import { User } from "../api/user.api";
 
 const UserList = () => {
   const userList: User[] = UserStore.useState((s) => s.userList);
@@ -9,7 +9,7 @@ const UserList = () => {
     <Box>
       <Title>Users :</Title>
       {userList.map((user: User) => (
-        <Text>{user.email}</Text>
+        <Text key={user.id}>{user.email}</Text>
       ))}
     </Box>
   );

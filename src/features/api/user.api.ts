@@ -19,9 +19,8 @@ export type SignInPayloadType = {
 };
 
 // rome-ignore lint/suspicious/noExplicitAny: for build process
-export type SignInResponseType = any;
-export const signInUser = async (payload: SignInPayloadType, api: KyInstance): Promise<SignInResponseType> => {
-  const data = await api.post('auth/token/', { json: payload }).json<SignInResponseType>();
+export const signInUser = async (payload: SignInPayloadType, api: KyInstance): Promise<any> => {
+  const data = await api.post('auth/token/', { json: payload }).json<any>();
   return data;
 };
 

@@ -1,7 +1,7 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
 import { setupPrivateApi } from "@/src/features/api";
-import { getUserList } from "@/src/features/api/user.api";
-import UserList from "@/src/features/users/UserList";
+import { getCategories } from "@/src/features/api/category.api";
+import Categories from "@/src/features/categories/Categories";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, createStyles } from "@mantine/core";
 import { HTTPError } from "ky-universal";
@@ -31,9 +31,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     // await getUserAndTenantInfo(stateInstance, api);
-    const userList = await getUserList(api);
-    stateInstance.stores.UserStore.update((s) => {
-      s.userList = userList;
+    const categories = await getCategories(api);
+    stateInstance.stores.CategoryStore.update((s) => {
+      s.categories = categories;
     });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
@@ -47,11 +47,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type UsersPageProps = {
+type CategoriesPageProps = {
   snapshot: PullStateInstance;
 };
 
-const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
+const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
   const { t } = useTranslation("common");
   const { classes } = useStyles();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
@@ -60,16 +60,16 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t("appName")} | {t("navigation.users")}
+          {t("appName")} | {t("navigation.categories")}
         </title>
         <meta name="description" content="test" />
       </Head>
 
       <Box className={classes.container}>
-        <UserList />
+        <Categories />
       </Box>
     </AuthenticatedAppLayout>
   );
 };
 
-export default UsersPage;
+export default CategoriesPage;
