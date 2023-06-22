@@ -60,8 +60,8 @@ const Products: NextPage<ProductsPageProps> = ({ snapshot }) => {
 
       <Box className={classes.container}>
         <Box className={classes.boxTitle}>
-          <Title order={1}>Liste des produits :</Title>
-          <Text>Retrouvez ici différents produits</Text>
+          <Title order={1}>Liste :</Title>
+          <Text>Retrouvez ici différents zza</Text>
         </Box>
         <Divider />
 
