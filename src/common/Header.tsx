@@ -171,9 +171,10 @@ export function HeaderSection() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            <a href="/" className={classes.link}>
               {t("appName")}
             </a>
+            <a href="/products" className={classes.link}>Produits</a>
             <HoverCard
               width={600}
               position="bottom"
@@ -270,9 +271,10 @@ export function HeaderSection() {
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          <a href="#" className={classes.link}>
-            Home
-          </a>
+          <a href="/" className={classes.link}>
+              {t("appName")}
+            </a>
+            <a href="/products" className={classes.link}>Produits</a>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>

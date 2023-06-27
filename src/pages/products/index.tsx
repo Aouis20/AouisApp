@@ -2,9 +2,9 @@ import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
 import ProductList from "@/src/features/products/ProductList";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, Divider, Text, Title, createStyles } from "@mantine/core";
+import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import { HTTPError } from "ky-universal";
 import { useTranslation } from "react-i18next";
 
 const useStyles = createStyles((theme) => ({
@@ -60,8 +60,7 @@ const Products: NextPage<ProductsPageProps> = ({ snapshot }) => {
 
       <Box className={classes.container}>
         <Box className={classes.boxTitle}>
-          <Title order={1}>Liste des produits :</Title>
-          <Text>Retrouvez ici différents produits</Text>
+          <Title order={1}>Liste :</Title>
         </Box>
         <Divider />
 

@@ -9,13 +9,15 @@ const useStyles = createStyles((theme) => ({
 
 export default function Home() {
   const { classes } = useStyles()
+  
   return (
     <>
       <HeaderSection />
-      <Title>Aouis</Title>
       <Container size={"2xl"} className={classes.container}>
-        <Text>azeaz</Text>
-        <Button>test</Button>
+        <Text>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit, iste asperiores! Placeat repudiandae, incidunt laborum quae amet dignissimos quod illum ullam odit eos veritatis nesciunt perferendis eveniet ea animi ipsa.
+          Beatae quia sint facilis molestias expedita rem harum mollitia, tempore ex nesciunt perspiciatis dicta sapiente quibusdam error unde corrupti aspernatur nostrum hic perferendis ab exercitationem reiciendis magni? Obcaecati, dicta enim?
+        </Text>
       </Container>
     </>
   );
