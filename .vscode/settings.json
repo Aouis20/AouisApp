@@ -4,7 +4,8 @@
     ],
     "i18next.i18nPaths": "/Users/aouis/Projets/AouisApp/public/locales",
     "conventionalCommits.scopes": [
-        "Setup"
+        "Setup",
+        "Users"
     ],
     "css.customData": [".vscode/tailwind.json"],
 }

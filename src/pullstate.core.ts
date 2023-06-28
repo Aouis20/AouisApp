@@ -1,9 +1,9 @@
 import { createPullstateCore } from 'pullstate';
-import { UserStore } from './features/users/UserStore';
+import { AccountStore } from './features/accounts/AccountStore';
 import { CategoryStore } from './features/categories/CategoryStore';
 
 const stores = {
-    UserStore,
+    AccountStore,
     CategoryStore
 };
 

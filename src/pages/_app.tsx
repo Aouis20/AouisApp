@@ -3,6 +3,7 @@ import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import "../i18n";
 import '../styles/globals.css'
+import theme from "../theme";
 
 
 export default function App(props: AppProps) {
@@ -21,14 +22,11 @@ export default function App(props: AppProps) {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{
-          colorScheme: "light",
-          fontFamily: 'Roboto, serif',
-          primaryColor: 'purple'
-        }}
+        theme={theme}
       >
         <Component {...pageProps} />
       </MantineProvider>
     </>
   );
 }
+

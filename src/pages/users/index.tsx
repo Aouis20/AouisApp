@@ -1,7 +1,7 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
 import { setupPrivateApi } from "@/src/features/api";
-import { getUserList } from "@/src/features/api/user.api";
-import UserList from "@/src/features/users/UserList";
+import { getUserList } from "@/src/features/api/account.api";
+import UserList from "@/src/features/accounts/AccountList";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, createStyles } from "@mantine/core";
 import { HTTPError } from "ky-universal";
@@ -32,7 +32,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // await getUserAndTenantInfo(stateInstance, api);
     const userList = await getUserList(api);
-    stateInstance.stores.UserStore.update((s) => {
+    stateInstance.stores.AccountStore.update((s) => {
       s.userList = userList;
     });
 

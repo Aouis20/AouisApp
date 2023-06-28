@@ -241,7 +241,7 @@ export function HeaderSection() {
             {logged ? (
               <>
                 <Button variant="default">{t("navigation.signIn")}</Button>
-                <Button>{t("navigation.createAccount")}</Button>
+                <Button variant="filled">{t("navigation.createAccount")}</Button>
               </>
             ) : (
               <Button variant="default">{t("navigation.signOut")}</Button>
