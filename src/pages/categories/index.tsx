@@ -1,6 +1,8 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
+import { getUserInfo } from "@/src/features/accounts/account.helper";
 import { setupPrivateApi } from "@/src/features/api";
 import { getCategories } from "@/src/features/api/category.api";
+import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
 import Categories from "@/src/features/categories/Categories";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, createStyles } from "@mantine/core";
@@ -30,7 +32,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const api = setupPrivateApi(ctx);
 
   try {
-    // await getUserAndTenantInfo(stateInstance, api);
+    await getUserInfo(stateInstance, api);
     const categories = await getCategories(api);
     stateInstance.stores.CategoryStore.update((s) => {
       s.categories = categories;
@@ -40,7 +42,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   } catch (e) {
     const error = e as HTTPError;
     if (error?.response?.status === 401) {
-      //   return redirectToLoginProps();
+      return redirectToLoginProps();
     }
 
     return { props: {} };

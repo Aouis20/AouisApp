@@ -1,4 +1,7 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
+import { getUserInfo } from "@/src/features/accounts/account.helper";
+import { setupPrivateApi } from "@/src/features/api";
+import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
 import ProductList from "@/src/features/products/ProductList";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, Divider, Text, Title, createStyles } from "@mantine/core";
@@ -25,15 +28,16 @@ const useStyles = createStyles((theme) => ({
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
+  const api = setupPrivateApi()
 
   try {
-    // await getUserAndTenantInfo(stateInstance, api);
+    await getUserInfo(stateInstance, api);
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
     const error = e as HTTPError;
     if (error.response.status === 401) {
-      //   return redirectToLoginProps();
+      return redirectToLoginProps();
     }
 
     return { props: {} };
