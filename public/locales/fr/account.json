@@ -1,0 +1,89 @@
+{
+  "signInFormTitle": "Formulaire de connexion",
+  "signInForm": {
+    "emailAddressLabel": "Adresse E-mail",
+    "passwordLabel": "Mot de passe",
+    "submitButton": "Se connecter"
+  },
+  "signInSuccess": {
+    "notification": {
+      "title": "Bienvenue !",
+      "message": "Connexion réussi."
+    }
+  },
+  "signInErrors": {
+    "email-No active account found with the given credentials": "L'adresse e-mail est invalide"
+  },
+  "signUpFormTitle": "Créer mon compte edko",
+  "signUpForm": {
+    "emailAddressLabel": "Adresse E-mail",
+    "passwordLabel": "Mot de passe",
+    "confirmationLabel": "Confirmation du mot de passe",
+    "submitButton": "Créer mon compte"
+  },
+  "signUpSuccess": {
+    "notification": {
+      "title": "Vous êtes maintenant inscrit !",
+      "message": "Vous pouvez à présent vous connecter."
+    }
+  },
+  "signUpErrors": {
+    "email-This field is required.": "L'adresse e-mail est obligatoire.",
+    "email-Enter a valid email address.": "Cette adresse e-mail n'est pas valide.",
+    "email-Email already registered": "Un compte existe déjà avec cette adresse e-mail",
+    "password-This field is required.": "Le mot de passe est obligatoire.",
+    "password-This password is too short. It must contain at least 8 characters.": "Le mot de passe est trop court.",
+    "confirmation-This field is required.": "La confirmation de mot de passe est obligatoire.",
+    "confirmation-Password and Confirmation do not match": "La confirmation et le mot de passe de correspondent pas.",
+    "token": {
+      "title": "Cette invitation a expirée",
+      "message": "Cette invitation a expirée, demandez à votre contact de la renouveler"
+    }
+  },
+  "signOutSuccess": {
+    "notification": {
+      "title": "Vous êtes déconnecté.",
+      "message": "Bonne continuation."
+    }
+  },
+  "tenantSwitch": {
+    "button": "Compte client",
+    "form": {
+      "label": "Compte Client",
+      "button": "Changer de compte"
+    },
+    "notification": {
+      "successTitle": "Changement de compte client",
+      "successMessage": "Vous avez changé de compte client, vous êtes maintenant sur le {{tenant}}"
+    }
+  },
+  "language": {
+    "title": "Langues",
+    "label": "Séléctionnez une langue",
+    "languages": {
+      "fr": "Français",
+      "en": "Anglais"
+    },
+    "notification": {
+      "successTitle": "Changement de langue",
+      "successMessage": "La langue a été changé en {{language}}",
+      "errorTitle": "Changement de langue",
+      "errorMessage": "Erreur lors du changement de la langue {{language}}"
+    }
+  },
+  "accountMenu": {
+    "application": {
+      "label": "Application",
+      "items": {
+       "myAccount": "Mon compte",
+       "notifications": "Notifications"
+      }
+    },
+    "admin": {
+      "label": "Admin",
+      "items": {
+        "forms": "Formulaires"
+      }
+    }
+  }
+}

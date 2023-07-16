@@ -17,7 +17,7 @@ i18n
     debug: false,
     // Should only contain common & features namespaces
     ns: ['common'],
-    defaultNS: 'common',
+    defaultNS: ['common', 'account'],
     interpolation: {
       escapeValue: false
     },

@@ -1,6 +1,8 @@
+
 {
   "appName": "Aouis",
   "navigation": {
+    "homepage": "Accueil",
     "products" : "Produits",
     "users": "Utilisateurs",
     "categories": "Categories",

@@ -28,7 +28,6 @@ export type SignUpPayloadType = {
   email: string;
   password: string;
   confirmation: string;
-  token: string;
 };
 
 export const getUserList = async (api: KyInstance): Promise<any> => {
@@ -36,8 +35,8 @@ export const getUserList = async (api: KyInstance): Promise<any> => {
   return data;
 };
 
-export const signUpUser = async (payload: SignUpPayloadType, api: KyInstance): Promise<User> => {
-  const data = await api.post('accounts/', { json: payload }).json<User>();
+export const signUpUser = async (payload: SignUpPayloadType, api: KyInstance): Promise<any> => {
+  const data = await api.post('accounts/', { json: payload }).json<any>();
   return data;
 };
 

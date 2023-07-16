@@ -1,36 +1,40 @@
 import {
-  createStyles,
-  Header,
-  HoverCard,
-  Group,
-  Button,
-  UnstyledButton,
-  Text,
-  SimpleGrid,
-  ThemeIcon,
   Anchor,
-  Divider,
-  Center,
   Box,
   Burger,
-  Drawer,
+  Button,
+  Center,
   Collapse,
+  Divider,
+  Drawer,
+  Group,
+  Header,
+  HoverCard,
+  Image,
   ScrollArea,
-  rem,
+  SimpleGrid,
+  Text,
+  ThemeIcon,
+  UnstyledButton,
+  createStyles,
+  rem
 } from "@mantine/core";
-import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
+import { showNotification } from "@mantine/notifications";
 import {
-  IconNotification,
-  IconCode,
   IconBook,
   IconChartPie3,
-  IconFingerprint,
-  IconCoin,
   IconChevronDown,
+  IconCode,
+  IconCoin,
+  IconFingerprint,
+  IconNotification,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { AccountStore } from "../features/accounts/AccountStore";
+import { removeTokens } from "../features/authentication/tokens.helper";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -135,12 +139,31 @@ const mockdata = [
 ];
 
 export function HeaderSection() {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = useStyles();
   const { t } = useTranslation("common");
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState<boolean>(false);
+  const router = useRouter();
+  const user = AccountStore.useState((s) => s.user)
+
+  useEffect(() => {
+    if (user) {
+      return setLogged(true)
+    }
+  }, [])
+
+  const signOut = () => {
+    removeTokens();
+
+    showNotification({
+      title: t('account:signOutSuccess.notification.title'),
+      message: t('account:signOutSuccess.notification.message'),
+      color: 'gray'
+    });
+
+    router.replace('/account/sign-in');
+  };
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -161,20 +184,19 @@ export function HeaderSection() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box mb={80}>
       <Header height={60} px="md">
-        <Group position="apart" sx={{ height: "100%" }}>
-          <MantineLogo size={30} />
+        <Group position="apart" sx={{ height: "100%" }} >
+          <Image alt={'logo'} src={'/logo.png'} width={150} />
 
           <Group
             sx={{ height: "100%" }}
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="/" className={classes.link}>
-              {t("appName")}
-            </a>
-            <a href="/products" className={classes.link}>Produits</a>
+
+            <Anchor href="/" className={classes.link}>{t('appName')}</Anchor>
+            <Anchor href="/products" className={classes.link}>Produits</Anchor>
             <HoverCard
               width={600}
               position="bottom"
@@ -240,11 +262,13 @@ export function HeaderSection() {
           <Group className={classes.hiddenMobile}>
             {logged ? (
               <>
-                <Button variant="default">{t("navigation.signIn")}</Button>
-                <Button>{t("navigation.createAccount")}</Button>
+                <Button variant="default" onClick={signOut}>{t("navigation.signOut")}</Button>
               </>
             ) : (
-              <Button variant="default">{t("navigation.signOut")}</Button>
+                <>
+                <Button variant="default">{t("navigation.signIn")}</Button>
+                <Button variant="filled">{t("navigation.createAccount")}</Button>
+              </>
             )}
           </Group>
 
@@ -261,20 +285,19 @@ export function HeaderSection() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
+        <Image alt={'logo'} src={'/logo.png'} width={180} pb={20} />
+
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider
             my="sm"
             color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          <a href="/" className={classes.link}>
-              {t("appName")}
-            </a>
-            <a href="/products" className={classes.link}>Produits</a>
+          <Anchor href="/" className={classes.link}>{t('appName')}</Anchor>
+          <Anchor href="/products" className={classes.link}>Produits</Anchor>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
@@ -297,8 +320,16 @@ export function HeaderSection() {
           />
 
           <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            {logged ? (
+              <>
+                <Button variant="default" onClick={signOut}>{t("navigation.signOut")}</Button>
+              </>
+            ) : (
+                <>
+                <Button variant="default">{t("navigation.signIn")}</Button>
+                <Button variant="filled">{t("navigation.createAccount")}</Button>
+              </>
+            )}
           </Group>
         </ScrollArea>
       </Drawer>
