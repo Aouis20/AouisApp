@@ -61,9 +61,7 @@ const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
-        <title>
-          {t("appName")} | {t("navigation.categories")}
-        </title>
+        <title>{t("navigation.categories")} | {t("appName")}</title>
         <meta name="description" content="test" />
       </Head>
 

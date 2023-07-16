@@ -2,7 +2,7 @@ import { MantineThemeOverride } from "@mantine/core";
 
 const theme: MantineThemeOverride = {
     fontFamily: 'Roboto, serif',
-    primaryColor: 'orange'
+    primaryColor: 'violet',
 }
 
 export default theme;

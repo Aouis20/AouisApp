@@ -1,42 +1,40 @@
 import {
-  createStyles,
-  Header,
-  HoverCard,
-  Group,
-  Button,
-  UnstyledButton,
-  Text,
-  SimpleGrid,
-  ThemeIcon,
   Anchor,
-  Divider,
-  Center,
   Box,
   Burger,
-  Drawer,
+  Button,
+  Center,
   Collapse,
+  Divider,
+  Drawer,
+  Group,
+  Header,
+  HoverCard,
+  Image,
   ScrollArea,
-  rem,
-  NavLink,
-  Title,
+  SimpleGrid,
+  Text,
+  ThemeIcon,
+  UnstyledButton,
+  createStyles,
+  rem
 } from "@mantine/core";
-import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import {
-  IconNotification,
-  IconCode,
   IconBook,
   IconChartPie3,
-  IconFingerprint,
-  IconCoin,
   IconChevronDown,
+  IconCode,
+  IconCoin,
+  IconFingerprint,
+  IconNotification,
 } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { removeTokens } from "../features/authentication/tokens.helper";
 import { AccountStore } from "../features/accounts/AccountStore";
+import { removeTokens } from "../features/authentication/tokens.helper";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -186,16 +184,17 @@ export function HeaderSection() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box mb={80}>
       <Header height={60} px="md">
-        <Group position="apart" sx={{ height: "100%" }}>
-          <MantineLogo size={30} />
+        <Group position="apart" sx={{ height: "100%" }} >
+          <Image alt={'logo'} src={'/logo.png'} width={150} />
 
           <Group
             sx={{ height: "100%" }}
             spacing={0}
             className={classes.hiddenMobile}
           >
+
             <Anchor href="/" className={classes.link}>{t('appName')}</Anchor>
             <Anchor href="/products" className={classes.link}>Produits</Anchor>
             <HoverCard
@@ -289,7 +288,8 @@ export function HeaderSection() {
         className={classes.hiddenDesktop}
         zIndex={1000000}
       >
-        <Title>{t('appName')}</Title>
+        <Image alt={'logo'} src={'/logo.png'} width={180} pb={20} />
+
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider
             my="sm"

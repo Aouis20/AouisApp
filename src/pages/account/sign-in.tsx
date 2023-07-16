@@ -40,7 +40,7 @@ const SignUp = () => {
         <AccountCard sx={{ width: '30vw', overflow: 'visible' }}>
           <CardSection className={classes.logoSection}>
             <Box className={classes.logoContainer}>
-              <Image alt={'logo'} src={'/logo.png'} height={200} width={200} />
+              <Image alt={'logo'} src={'/logo.png'} width={200} height={140} style={{ marginTop: '20px'}} />
             </Box>
           </CardSection>
 
