@@ -1,5 +1,5 @@
 import { KyInstance } from 'ky/distribution/types/ky';
-import { TokensType } from '../authentication/tokens.helper';
+import { TokensType } from '../features/authentication/tokens.helper';
 
 export type User = {
   id: number;

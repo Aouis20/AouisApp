@@ -29,6 +29,8 @@ const SignUp = () => {
   const { t } = useTranslation();
   const { classes } = useStyles();
 
+  // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
+  
   return (
     <UnAuthenticatedAppLayout>
       <Head>

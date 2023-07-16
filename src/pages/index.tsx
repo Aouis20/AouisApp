@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useTranslation } from "react-i18next";
 import { AuthenticatedAppLayout } from '../common/AuthenticatedAppLayout';
 import { getUserInfo } from "../features/accounts/account.helper";
-import { setupPrivateApi } from '../features/api';
+import { setupPrivateApi } from '../api';
 import { redirectToLoginProps } from '../features/authentication/redirect.helper';
 import { PullStateInstance, PullstateCore } from '../pullstate.core';
 

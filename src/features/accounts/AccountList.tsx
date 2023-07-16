@@ -1,5 +1,5 @@
 import { Box, Text, Title } from "@mantine/core";
-import { User } from "../api/account.api";
+import { User } from "../../api/account.api";
 import { AccountStore } from "./AccountStore";
 
 const AccountList = () => {

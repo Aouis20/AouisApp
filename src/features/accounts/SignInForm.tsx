@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { setTokens } from '../authentication/tokens.helper';
-import { setupPrivateApi } from '../api';
-import { SignInPayloadType, signInUser } from '../api/account.api';
+import { setupPrivateApi } from '../../api';
+import { SignInPayloadType, signInUser } from '../../api/account.api';
 import { showNotification } from '@mantine/notifications';
 import { HTTPError } from 'ky';
 
@@ -39,8 +39,6 @@ export const SignInForm = () => {
 
   const submitSignInForm = async (values: SignInPayloadType) => {
     const api = setupPrivateApi();
-    const result = await signInUser(values, api);
-    console.log(result)
 
    try {
       const token = await signInUser(values, api);

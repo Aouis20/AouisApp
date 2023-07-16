@@ -1,6 +1,6 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
-import { setupPrivateApi } from "@/src/features/api";
-import { getUserList } from "@/src/features/api/account.api";
+import { setupPrivateApi } from "@/src/api";
+import { getUserList } from "@/src/api/account.api";
 import UserList from "@/src/features/accounts/AccountList";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
 import { Box, createStyles } from "@mantine/core";

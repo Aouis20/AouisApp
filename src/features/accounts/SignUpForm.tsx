@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { setTokens } from '../authentication/tokens.helper';
-import { setupPrivateApi } from '../api';
-import { SignUpPayloadType, signUpUser } from '../api/account.api';
+import { setupPrivateApi } from '../../api';
+import { SignUpPayloadType, signUpUser } from '../../api/account.api';
 import { showNotification } from '@mantine/notifications';
 
 const useStyle = createStyles((theme) => ({

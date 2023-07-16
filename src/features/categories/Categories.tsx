@@ -1,5 +1,5 @@
 import { Box, Text, Title } from "@mantine/core";
-import { Category } from "../api/category.api";
+import { Category } from "../../api/category.api";
 import { CategoryStore } from "./CategoryStore";
 
 const Categories = () => {

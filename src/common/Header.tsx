@@ -184,7 +184,7 @@ export function HeaderSection() {
   ));
 
   return (
-    <Box mb={80}>
+    <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }} >
           <Image alt={'logo'} src={'/logo.png'} width={150} />

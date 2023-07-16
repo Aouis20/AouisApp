@@ -1,7 +1,7 @@
 import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
 import { getUserInfo } from "@/src/features/accounts/account.helper";
-import { setupPrivateApi } from "@/src/features/api";
-import { getCategories } from "@/src/features/api/category.api";
+import { setupPrivateApi } from "@/src/api";
+import { getCategories } from "@/src/api/category.api";
 import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
 import Categories from "@/src/features/categories/Categories";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
