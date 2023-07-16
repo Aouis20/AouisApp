@@ -8,6 +8,7 @@ import { AuthenticatedAppLayout } from '../common/AuthenticatedAppLayout';
 import { setupPrivateApi } from '../features/api';
 import { PullStateInstance, PullstateCore } from '../pullstate.core';
 import { getUserInfo } from "../features/accounts/account.helper";
+import { User } from "../features/api/account.api";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -33,7 +34,8 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
-  // const user = instance?.stores?.AccountStore.useState((s) => s.user) as User;
+  const user = instance?.stores?.AccountStore.useState((s) => s.user) as User;
+  console.log(user)
 
   return (
     <AuthenticatedAppLayout instance={instance}>
@@ -43,7 +45,6 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       </Head>
 
       <>
-        <HeaderSection />
         <Container size={"2xl"}>
           <Text>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit, iste asperiores! Placeat repudiandae, incidunt laborum quae amet dignissimos quod illum ullam odit eos veritatis nesciunt perferendis eveniet ea animi ipsa.

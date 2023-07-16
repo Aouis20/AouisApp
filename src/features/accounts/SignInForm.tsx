@@ -6,6 +6,7 @@ import { setTokens } from '../authentication/tokens.helper';
 import { setupPrivateApi } from '../api';
 import { SignInPayloadType, signInUser } from '../api/account.api';
 import { showNotification } from '@mantine/notifications';
+import { HTTPError } from 'ky';
 
 const useStyle = createStyles((theme) => ({
   form: {
@@ -41,10 +42,10 @@ export const SignInForm = () => {
     const result = await signInUser(values, api);
     console.log(result)
 
-    if (result?.detail) {
-      form.setErrors({ email: t(`account:signInErrors.email-${result.detail}`) });
-    } else {
-      setTokens(result);
+   try {
+      const token = await signInUser(values, api);
+
+      setTokens(token);
 
       router.replace('/');
 
@@ -53,6 +54,13 @@ export const SignInForm = () => {
         message: t('account:signInSuccess.notification.message'),
         color: 'green'
       });
+    } catch (e) {
+      if (!(e instanceof HTTPError)) return;
+
+      const error = e as HTTPError;
+      const data = await error.response.json();
+
+      form.setErrors({ email: t(`account:signInErrors.email-${data.detail}`) });
     }
   };
 

@@ -4,7 +4,7 @@ import { setupPrivateApi } from "@/src/features/api";
 import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
 import ProductList from "@/src/features/products/ProductList";
 import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
-import { Box, Divider, Text, Title, createStyles } from "@mantine/core";
+import { Box, Divider, Title, createStyles } from "@mantine/core";
 import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";

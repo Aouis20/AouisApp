@@ -4,7 +4,6 @@ import { Box, CardSection, createStyles } from '@mantine/core';
 import Image from 'next/image';
 import { AccountCard } from '@/src/features/accounts/AccountCard';
 import { UnAuthenticatedAppLayout } from '@/src/common/UnAuthenticatedAppLayout';
-import { SignInForm } from '@/src/features/accounts/SignInForm';
 import { SignUpForm } from '@/src/features/accounts/SignUpForm';
 
 const useStyles = createStyles((theme) => ({
