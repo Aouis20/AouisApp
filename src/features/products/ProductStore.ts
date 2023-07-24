@@ -1,5 +1,5 @@
-import { Product } from '@/src/api/product.api';
 import { Store } from 'pullstate';
+import { Product } from './types/Product';
 
 export type ProductStoreType = {
     product: Product | null;

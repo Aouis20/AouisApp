@@ -197,6 +197,7 @@ export function HeaderSection() {
 
             <Anchor href="/" className={classes.link}>{t('appName')}</Anchor>
             <Anchor href="/products" className={classes.link}>Produits</Anchor>
+            <Anchor href="/categories" className={classes.link}>Catégories</Anchor>
             <HoverCard
               width={600}
               position="bottom"
@@ -298,6 +299,7 @@ export function HeaderSection() {
 
           <Anchor href="/" className={classes.link}>{t('appName')}</Anchor>
           <Anchor href="/products" className={classes.link}>Produits</Anchor>
+          <Anchor href="/categories" className={classes.link}>Catégories</Anchor>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>

@@ -14,7 +14,7 @@
   "signInErrors": {
     "email-No active account found with the given credentials": "L'adresse e-mail est invalide"
   },
-  "signUpFormTitle": "Créer mon compte edko",
+  "signUpFormTitle": "Créer mon compte",
   "signUpForm": {
     "emailAddressLabel": "Adresse E-mail",
     "passwordLabel": "Mot de passe",

@@ -1,38 +1,22 @@
-import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
-import { getUserInfo } from "@/src/features/accounts/account.helper";
-import { setupPrivateApi } from "@/src/api";
-import { getCategories } from "@/src/api/category.api";
-import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
-import Categories from "@/src/features/categories/Categories";
-import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
-import { Box, createStyles } from "@mantine/core";
+import { setupPrivateApi } from "@/api";
+import { getCategories } from "@/api/category.api";
+import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
+import { getUserInfo } from "@/features/accounts/account.helper";
+import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
+import Categories from "@/features/categories/components/Categories";
+import { PullStateInstance, PullstateCore } from "@/pullstate.core";
 import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
-
-const useStyles = createStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    height: "calc(100vh - 64px)",
-    paddingTop: "32px",
-  },
-  boxTitle: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "16px",
-    margin: "0 0 32px 0",
-  },
-}));
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
   const api = setupPrivateApi(ctx);
 
   try {
-    await getUserInfo(stateInstance, api);
+    await getUserInfo(stateInstance, api)
+    
     const categories = await getCategories(api);
     stateInstance.stores.CategoryStore.update((s) => {
       s.categories = categories;
@@ -55,7 +39,6 @@ type CategoriesPageProps = {
 
 const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
   const { t } = useTranslation("common");
-  const { classes } = useStyles();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
@@ -65,9 +48,7 @@ const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
         <meta name="description" content="test" />
       </Head>
 
-      <Box className={classes.container}>
-        <Categories />
-      </Box>
+      <Categories />
     </AuthenticatedAppLayout>
   );
 };

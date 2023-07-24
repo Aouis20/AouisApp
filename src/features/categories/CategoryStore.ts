@@ -1,5 +1,5 @@
-import { Category } from '@/src/api/category.api';
 import { Store } from 'pullstate';
+import { Category } from './types/Category';
 
 export type CategoryStoreType = {
     category: Category | null;

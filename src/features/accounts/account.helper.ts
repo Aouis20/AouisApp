@@ -1,4 +1,4 @@
-import { PullStateInstance } from "@/src/pullstate.core";
+import { PullStateInstance } from "@/pullstate.core";
 import { KyInstance } from "ky/distribution/types/ky";
 import { getUserByToken } from "../../api/account.api";
 import { AccountStoreType } from "./AccountStore";
@@ -9,5 +9,4 @@ export const getUserInfo = async (stateInstance: PullStateInstance, api: KyInsta
   stateInstance.stores.AccountStore.update((s: AccountStoreType) => {
     s.user = user;
   });
-
 };

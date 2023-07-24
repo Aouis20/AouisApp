@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { Box, CardSection, createStyles } from '@mantine/core';
 import Image from 'next/image';
-import { AccountCard } from '@/src/features/accounts/AccountCard';
-import { UnAuthenticatedAppLayout } from '@/src/common/UnAuthenticatedAppLayout';
-import { SignUpForm } from '@/src/features/accounts/SignUpForm';
+import { AccountCard } from '@/features/accounts/components/AccountCard';
+import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
+import { SignUpForm } from '@/features/accounts/SignUpForm';
 
 const useStyles = createStyles((theme) => ({
   container: {

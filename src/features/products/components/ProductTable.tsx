@@ -1,5 +1,5 @@
-import { DataTable } from "@/components/data-table/data-table"
-import { Payment, columns } from "@/components/data-table/columns"
+import { DataTable } from "@/shadui/data-table/data-table"
+import { Payment, columns } from "@/shadui/data-table/columns"
 
 
 const data: Payment[] = [
