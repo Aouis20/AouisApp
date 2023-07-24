@@ -3,7 +3,7 @@ import { getCategories } from "@/api/category.api";
 import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
 import { getUserInfo } from "@/features/accounts/account.helper";
 import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
-import Categories from "@/features/categories/components/Categories";
+import Categories from "@/features/categories/components/CategoryPage";
 import { PullStateInstance, PullstateCore } from "@/pullstate.core";
 import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";

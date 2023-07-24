@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
 import { useRouter } from 'next/router';
 import { showNotification } from '@mantine/notifications';
-import { SignUpPayloadType, signUpUser } from '@/api/account.api';
+import { signUpUser } from '@/api/account.api';
 import { setupPrivateApi } from '@/api';
 import { setTokens } from '@/features/authentication/tokens.helper';
+import { SignUpPayloadType } from '../types/SignUp';
 
 const useStyle = createStyles((theme) => ({
   form: {

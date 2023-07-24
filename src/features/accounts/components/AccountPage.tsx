@@ -1,6 +1,6 @@
-import { User } from "@/api/account.api";
 import { Box, Text, Title } from "@mantine/core";
 import { AccountStore } from "../AccountStore";
+import { User } from "../types/User";
 
 const AccountList = () => {
   const accountList: User[] = AccountStore.useState((s) => s.userList);

@@ -3,7 +3,7 @@ import { getProducts } from "@/api/product.api";
 import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
 import { getUserInfo } from "@/features/accounts/account.helper";
 import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
-import ProductList from "@/features/products/components/ProductList";
+import ProductList from "@/features/products/components/ProductPage";
 import { PullStateInstance, PullstateCore } from "@/pullstate.core";
 import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";

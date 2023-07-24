@@ -2,7 +2,7 @@ import { setupPrivateApi } from "@/api";
 import { getUserList } from "@/api/account.api";
 import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
 import { getUserInfo } from "@/features/accounts/account.helper";
-import AccountList from "@/features/accounts/components/AccountList";
+import AccountList from "@/features/accounts/components/AccountPage";
 import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
 import { PullStateInstance, PullstateCore } from "@/pullstate.core";
 import { Box, createStyles } from "@mantine/core";
