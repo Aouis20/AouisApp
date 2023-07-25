@@ -3,7 +3,7 @@ import { TokensType } from '../features/authentication/tokens.helper';
 import { User } from '@/features/accounts/types/User';
 import { SignUpPayloadType } from '@/features/accounts/types/SignUp';
 import { SignInPayloadType } from '@/features/accounts/types/SignIn';
-import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/refreshToken';
+import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/RefreshToken';
 
 // rome-ignore lint/suspicious/noExplicitAny: for build process
 export const signInUser = async (payload: SignInPayloadType, api: KyInstance): Promise<any> => {

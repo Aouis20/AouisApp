@@ -25,3 +25,17 @@ export type Product = {
   user: User;
   category: Category;
 };
+
+type ProductListLinks = {
+  next: string | null;
+  previous: string | null;
+}
+
+export type ProductList = {
+  links: ProductListLinks;
+  items: number;
+  total_items: number;
+  page: number;
+  total_pages: number;
+  results: Product[]
+}

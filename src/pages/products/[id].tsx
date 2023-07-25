@@ -1,10 +1,9 @@
 import { setupPrivateApi } from '@/api';
-import { getProductById, getProducts } from '@/api/product.api';
+import { getProductById } from '@/api/product.api';
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/account.helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import ProductDetailsPage from '@/features/products/components/ProductDetailsPage';
-import ProductList from '@/features/products/components/ProductPage';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';

@@ -1,12 +1,12 @@
 import { Store } from 'pullstate';
-import { Product } from './types/Product';
+import { Product, ProductList } from './types/Product';
 
 export type ProductStoreType = {
     product: Product | null;
-    productList: Product[]
+    productList: ProductList | null
 };
 
 export const ProductStore = new Store<ProductStoreType>({
     product: null,
-    productList: []
+    productList: null
 });

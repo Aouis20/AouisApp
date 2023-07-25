@@ -14,12 +14,15 @@ import {
   IconMapPinFilled,
   IconMessageCircle2,
 } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
 
 type ProductCardProps = {
   product: Product;
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const router = useRouter();
+
   const handleLike = () => {
     // TODO add product to user wishlist
     // + if product already exists in his wishlist ? IconHeartFilled avec dans ActionIcon(color="pink") : HeartIcon
@@ -31,6 +34,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleProductDetails = () => {
     // TODO go to product details page
+    router.push(`/products/${product.id}`);
   };
 
   return (

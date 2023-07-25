@@ -4,6 +4,7 @@ import { ProductStore } from '../ProductStore';
 
 const ProductDetailsPage = () => {
   const product = ProductStore.useState((s) => s.product);
+  
   if (!product) {
     return <Text fs={'italic'}>Produit indisponible</Text>;
   }
