@@ -1,27 +1,68 @@
-import React from 'react';
-import { Product } from '../types/Product';
+import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
+  AspectRatio,
   Badge,
+  Box,
   Button,
   Card,
+  Flex,
   Group,
   Image,
   Text,
+  createStyles,
+  getStylesRef,
 } from '@mantine/core';
 import {
   IconHeart,
   IconMapPinFilled,
   IconMessageCircle2,
+  IconStarFilled,
+  IconThumbDown,
+  IconThumbDownFilled,
+  IconThumbUp,
+  IconThumbUpFilled,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
+import { ConditionType, PaymentType, Product } from '../types/Product';
+import _ from 'lodash';
 
 type ProductCardProps = {
   product: Product;
 };
 
+const useStyles = createStyles(() => ({
+  controls: {
+    ref: getStylesRef('controls'),
+    transition: 'opacity 150ms ease',
+    opacity: 0,
+  },
+  root: {
+    '&:hover': {
+      [`& .${getStylesRef('controls')}`]: {
+        opacity: 1,
+      },
+    },
+  },
+}));
+
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
+  const { classes } = useStyles();
+
+  const paymentType = {
+    [PaymentType.WEEKLY]: '/semaine',
+    [PaymentType.MONTHLY]: '/mois',
+    [PaymentType.YEARLY]: '/an',
+  };
+
+  const conditionIcon = {
+    [ConditionType.MINT]: <IconStarFilled size={16} />,
+    [ConditionType.EXCELLENT]: <IconThumbUpFilled size={16} />,
+    [ConditionType.GOOD]: <IconThumbUp size={16} />,
+    [ConditionType.FAIR]: <IconThumbDown size={16} />,
+    [ConditionType.POOR]: <IconThumbDownFilled size={16} />,
+  };
 
   const handleLike = () => {
     // TODO add product to user wishlist
@@ -43,27 +84,41 @@ const ProductCard = ({ product }: ProductCardProps) => {
       radius="md"
       withBorder
       padding={'md'}
-      w={360}
-      style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+      w={540}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 12,
+      }}
       key={product.id}
     >
-      {/* Image */}
-      <Card.Section onClick={handleProductDetails}>
+      {/* Images */}
+      <Card.Section>
         <>
-          <Image
-            src={product.images[0]}
-            height={160}
-            alt={product.title + 'banner'}
-          />
+          <Carousel classNames={classes}>
+            {product.images.map((image, index) => (
+              <Carousel.Slide key={index}>
+                <Image
+                  src={image}
+                  height={160}
+                  alt={product.title + '-image' + index}
+                />
+              </Carousel.Slide>
+            ))}
+          </Carousel>
           <ActionIcon
             bg={'white'}
             pos={'absolute'}
             w={40}
             h={40}
-            top={10}
-            right={10}
+            top={6}
+            right={6}
             p={4}
-            sx={{ borderRadius: '50%' }}
+            sx={{
+              borderRadius: '50%',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
+            }}
             onClick={handleLike}
           >
             <IconHeart />
@@ -71,32 +126,64 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </>
       </Card.Section>
 
-      {/* Title + Category */}
-      <Group position="apart" mt="md" mb="xs">
-        <Text weight={700}>{product.title}</Text>
-        <Badge color="pink" variant="light">
-          {product.category.name}
-        </Badge>
-      </Group>
-
-      {/* Description */}
-      <Text size="md" color="dimmed" style={{ flexGrow: 1 }}>
-        {product.description}
-      </Text>
-
-      {/* Localization and Contact */}
-      <Group position="apart">
-        <Button variant="subtle" radius="md">
-          <IconMessageCircle2 />
-        </Button>
-        <Button
-          leftIcon={<IconMapPinFilled />}
-          variant="subtle"
-          onClick={handleDistance}
+      <Flex
+        sx={{ '&:hover': { cursor: 'pointer' } }}
+        onClick={handleProductDetails}
+        direction={'column'}
+        gap={12}
+        h={'100%'}
+      >
+        {/* Title + Category */}
+        <Group
+          position="apart"
+          mt="md"
+          mb="xs"
+          align="start"
+          style={{ flexWrap: 'wrap' }}
         >
-          95
-        </Button>
-      </Group>
+          <Text sx={{ wordBreak: 'break-word', flex: 1 }} weight={700}>
+            {product.title}
+          </Text>
+          <Flex direction={'column'} gap={8}>
+            <Badge color="green" variant="light" fz={14} p={10}>
+              {product.price}€
+              {product.payment_type != PaymentType.UNIQ &&
+                paymentType[product.payment_type]}
+            </Badge>
+            <Badge color="pink" fz={12}>
+              <Group>
+                {product.condition} {conditionIcon[product.condition]}
+              </Group>
+            </Badge>
+          </Flex>
+        </Group>
+
+        {/* Description */}
+        <Text size="md" color="dimmed">
+          {product.description}
+        </Text>
+
+        {/* Price and owner informations */}
+        <Group position="apart" mt="auto">
+          <Box>
+            <Button
+              leftIcon={<IconMapPinFilled size={22} />}
+              variant="subtle"
+              onClick={handleDistance}
+            >
+              95
+            </Button>
+            <Button variant="subtle" radius="md">
+              <IconMessageCircle2 size={22} />
+            </Button>
+            {/* Think about a new feature to make proposal */}
+          </Box>
+          <Text color="gray" fs={'italic'} fz={'sm'}>
+            Vendu par {_.upperFirst(product.user.first_name)}{' '}
+            {product.user.last_name.toUpperCase()}
+          </Text>
+        </Group>
+      </Flex>
     </Card>
   );
 };
