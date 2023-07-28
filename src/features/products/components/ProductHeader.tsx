@@ -12,9 +12,9 @@ import {
   Title,
 } from '@mantine/core';
 import { IconAdjustments, IconArticle, IconTag } from '@tabler/icons-react';
-import _ from 'lodash';
 import { useState } from 'react';
 import { ProductStore } from '../ProductStore';
+import _ from 'lodash';
 
 type ProductHeaderProps = {
   open: () => void;
