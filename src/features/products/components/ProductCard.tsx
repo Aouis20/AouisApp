@@ -1,7 +1,6 @@
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
-  AspectRatio,
   Badge,
   Box,
   Button,
@@ -23,9 +22,9 @@ import {
   IconThumbUp,
   IconThumbUpFilled,
 } from '@tabler/icons-react';
+import _ from 'lodash';
 import { useRouter } from 'next/router';
 import { ConditionType, PaymentType, Product } from '../types/Product';
-import _ from 'lodash';
 
 type ProductCardProps = {
   product: Product;
@@ -36,6 +35,12 @@ const useStyles = createStyles(() => ({
     ref: getStylesRef('controls'),
     transition: 'opacity 150ms ease',
     opacity: 0,
+  },
+  control: {
+    '&[data-inactive]': {
+      opacity: 0,
+      cursor: 'default',
+    },
   },
   root: {
     '&:hover': {
