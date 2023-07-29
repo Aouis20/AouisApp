@@ -1,29 +1,24 @@
 import {
   Anchor,
-  Avatar,
   Box,
   Burger,
   Button,
-  Card,
   Center,
   Collapse,
   Divider,
   Drawer,
-  Flex,
   Group,
   Header,
   HoverCard,
   Image,
   Menu,
-  Paper,
   ScrollArea,
   SimpleGrid,
   Text,
   ThemeIcon,
-  Title,
   UnstyledButton,
   createStyles,
-  rem,
+  rem
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';

@@ -45,6 +45,10 @@ const PriceFilter = () => {
     ),
   }));
 
+  const handlePaymentType = () => {
+    // TODO Make a new request to get news products filtered by current payment type
+  };
+
   const handleMinInput = (newValue: number) => {
     if (!Number.isNaN(newValue)) {
       setValue([newValue, value[1]]);
@@ -63,7 +67,9 @@ const PriceFilter = () => {
       return 'Veuillez entrer un prix valide.';
     }
     if (currentValue < min || currentValue > max) {
-      return `Veuillez entrer un prix entre ${min}€ et ${max}€.`;
+      return `Veuillez entrer un prix entre ${min.toFixed(2)}€ et ${max.toFixed(
+        2
+      )}€.`;
     }
 
     // Values are good
@@ -71,16 +77,17 @@ const PriceFilter = () => {
   };
 
   return (
-    <Flex direction={'column'} gap={48}>
-      <Title order={3}>Select your price range</Title>
+    <Flex direction={'column'} gap={16} px={24}>
+      <Title order={2}>Price range</Title>
       {/* TODO Mettre un SegmentedControl (Mantine) Entre payment type */}
-      <SegmentedControl data={data} />
-      <Group position="center" align="start">
+      <SegmentedControl data={data} onChange={handlePaymentType} />
+      <Group align="start">
         <NumberInput
           label="Min"
           value={value[0]}
           onChange={handleMinInput}
           hideControls
+          step={0.5}
           style={{ maxWidth: '40%' }}
           rightSection={'€'}
           error={setErrors(value[0])}
@@ -91,6 +98,7 @@ const PriceFilter = () => {
           value={value[1]}
           onChange={handleMaxInput}
           hideControls
+          step={0.5}
           style={{ maxWidth: '40%' }}
           rightSection={'€'}
           error={setErrors(value[1])}
@@ -98,15 +106,24 @@ const PriceFilter = () => {
         />
       </Group>
       <RangeSlider
-        w={'80%'}
-        sx={{ alignSelf: 'center' }}
+        mt={24}
         radius="lg"
+        w={'100%'}
         min={min}
         max={max}
         label={(value) => `${value}€`}
         value={value}
         onChange={(newValue) => setValue([newValue[0], newValue[1]])}
       />
+      <Group
+        position="apart"
+        w={'110%'}
+        mt={'-10px'}
+        sx={{ alignSelf: 'center' }}
+      >
+        <Text color="gray">{min.toFixed(2)}€</Text>
+        <Text color="gray">{max.toFixed(2)}€</Text>
+      </Group>
     </Flex>
   );
 };

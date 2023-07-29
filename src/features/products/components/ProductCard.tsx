@@ -16,15 +16,12 @@ import {
   IconHeart,
   IconMapPinFilled,
   IconMessageCircle2,
-  IconStarFilled,
-  IconThumbDown,
-  IconThumbDownFilled,
-  IconThumbUp,
-  IconThumbUpFilled,
 } from '@tabler/icons-react';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
-import { ConditionType, PaymentType, Product } from '../types/Product';
+import { PaymentType, Product } from '../types/Product';
+import { conditionIcon } from '../variables/Conditions';
+import { paymentType } from '../variables/PaymentType';
 
 type ProductCardProps = {
   product: Product;
@@ -54,20 +51,6 @@ const useStyles = createStyles(() => ({
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { classes } = useStyles();
-
-  const paymentType = {
-    [PaymentType.WEEKLY]: '/semaine',
-    [PaymentType.MONTHLY]: '/mois',
-    [PaymentType.YEARLY]: '/an',
-  };
-
-  const conditionIcon = {
-    [ConditionType.MINT]: <IconStarFilled size={16} />,
-    [ConditionType.EXCELLENT]: <IconThumbUpFilled size={16} />,
-    [ConditionType.GOOD]: <IconThumbUp size={16} />,
-    [ConditionType.FAIR]: <IconThumbDown size={16} />,
-    [ConditionType.POOR]: <IconThumbDownFilled size={16} />,
-  };
 
   const handleLike = () => {
     // TODO add product to user wishlist
@@ -103,6 +86,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <Carousel classNames={classes}>
             {product.images.map((image, index) => (
               <Carousel.Slide key={index}>
+                {/* TODO add AspectRatio from mantine */}
                 <Image
                   src={image}
                   height={160}

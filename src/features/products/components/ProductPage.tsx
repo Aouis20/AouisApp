@@ -1,22 +1,13 @@
-import {
-  Box,
-  Divider,
-  Drawer,
-  Flex,
-  Loader,
-  SimpleGrid,
-  Text,
-  Title,
-} from '@mantine/core';
+import { setupPrivateApi } from '@/api';
+import { getProductByPage } from '@/api/product.api';
+import { PaginationComponent } from '@/features/common/pagination/Pagination';
+import { Box, Divider, Drawer, Flex, Loader, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useEffect, useState } from 'react';
 import { ProductStore } from '../ProductStore';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
 import DataTableDemo from './ProductTable';
-import { PaginationComponent } from '@/features/common/pagination/Pagination';
-import { useEffect, useState } from 'react';
-import { setupPrivateApi } from '@/api';
-import { getProductByPage } from '@/api/product.api';
 
 export const ProductList = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -59,7 +50,7 @@ export const ProductList = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Flex wrap="wrap" gap={'xl'} justify={'center'}>
+        <Flex direction="column" gap={48} justify={'center'}>
           {productList.results.map((product) => (
             <ProductCard product={product} />
           ))}
