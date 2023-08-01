@@ -50,7 +50,7 @@ export const ProductList = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Flex direction="column" gap={48} justify={'center'}>
+        <Flex direction="column" gap={48} px={8} justify={'center'}>
           {productList.results.map((product) => (
             <ProductCard product={product} />
           ))}
@@ -62,13 +62,14 @@ export const ProductList = () => {
         total={productList.total_pages}
       />
 
-      <DataTableDemo />
       {/* Filters */}
       <Drawer opened={opened} onClose={close} title={<Title>Filtres</Title>}>
         <Divider my="sm" />
         {/* From current categories display it filters */}
         <Box></Box>
       </Drawer>
+
+      <DataTableDemo />
     </Flex>
   );
 };

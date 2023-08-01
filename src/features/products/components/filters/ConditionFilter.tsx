@@ -2,12 +2,13 @@ import {
   Badge,
   Center,
   Flex,
+  ScrollArea,
   SegmentedControl,
   Text,
   Title,
 } from '@mantine/core';
 import { useState } from 'react';
-import { ProductStore } from '../ProductStore';
+import { ProductStore } from '../../ProductStore';
 
 const ConditionFilter = () => {
   const products = ProductStore.useState((s) => s.productList);
@@ -40,10 +41,15 @@ const ConditionFilter = () => {
   };
 
   return (
-    <Flex direction={'column'} gap={16} px={24}>
-      <Title order={2}>Price range</Title>
-      {/* TODO Mettre un SegmentedControl (Mantine) Entre payment type */}
-      <SegmentedControl data={data} onChange={handleConditionType} />
+    <Flex direction={'column'}>
+      <Title order={2}>Condition</Title>
+      <ScrollArea pb={10}>
+        <SegmentedControl
+          w={'100%'}
+          data={data}
+          onChange={handleConditionType}
+        />
+      </ScrollArea>
     </Flex>
   );
 };

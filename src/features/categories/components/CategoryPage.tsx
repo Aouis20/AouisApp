@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Categories = () => {
-  const categories: Category[] = CategoryStore.useState((s) => s.categories);
+  const categories: Category[] = CategoryStore.useState((s) => s.categoryList);
   const { classes } = useStyles();
 
   return (

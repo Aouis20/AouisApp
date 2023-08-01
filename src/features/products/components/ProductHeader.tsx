@@ -10,7 +10,8 @@ import {
 } from '@mantine/core';
 import { IconAdjustments, IconArticle, IconTag } from '@tabler/icons-react';
 import { ProductStore } from '../ProductStore';
-import PriceFilter from './PriceFilter';
+import ConditionFilter from './filters/ConditionFilter';
+import PriceFilter from './filters/PriceFilter';
 
 type ProductHeaderProps = {
   open: () => void;
@@ -39,7 +40,7 @@ const ProductHeader = ({ open }: ProductHeaderProps) => {
             Filters
           </Button>
 
-          {/* Price */}
+          {/* Price Filter */}
           <HoverCard withArrow arrowPosition="center" width={400}>
             <HoverCard.Target>
               <Button leftIcon={<IconTag />}>Price</Button>
@@ -49,7 +50,15 @@ const ProductHeader = ({ open }: ProductHeaderProps) => {
             </HoverCard.Dropdown>
           </HoverCard>
 
-          <Button leftIcon={<IconArticle />}>Condition</Button>
+          {/* Condition Filter */}
+          <HoverCard withArrow arrowPosition="center" width={400}>
+            <HoverCard.Target>
+              <Button leftIcon={<IconArticle />}>Condition</Button>
+            </HoverCard.Target>
+            <HoverCard.Dropdown>
+              <ConditionFilter />
+            </HoverCard.Dropdown>
+          </HoverCard>
         </Flex>
       </Flex>
     </Paper>

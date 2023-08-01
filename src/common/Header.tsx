@@ -1,3 +1,4 @@
+import { CategoryStore } from '@/features/categories/CategoryStore';
 import {
   Anchor,
   Box,
@@ -18,21 +19,17 @@ import {
   ThemeIcon,
   UnstyledButton,
   createStyles,
-  rem
+  rem,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import {
   IconBell,
-  IconBook,
-  IconChartPie3,
   IconChevronDown,
   IconCode,
-  IconCoin,
-  IconFingerprint,
   IconHeart,
   IconLogout,
-  IconNotification,
+  IconSearch,
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
@@ -111,84 +108,6 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mockdata = [
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCode,
-    title: 'Open source',
-    description: 'This Pokémon’s cry is very loud and distracting',
-  },
-  {
-    icon: IconCoin,
-    title: 'Free for everyone',
-    description: 'The fluid of Smeargle’s tail secretions changes',
-  },
-  {
-    icon: IconBook,
-    title: 'Documentation',
-    description: 'Yanma is capable of seeing 360 degrees without',
-  },
-  {
-    icon: IconFingerprint,
-    title: 'Security',
-    description: 'The shell’s rounded shape and the grooves on its.',
-  },
-  {
-    icon: IconChartPie3,
-    title: 'Analytics',
-    description: 'This Pokémon uses its flying ability to quickly chase',
-  },
-  {
-    icon: IconNotification,
-    title: 'Notifications',
-    description: 'Combusken battles with the intensely hot flames it spews',
-  },
-];
-
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -198,6 +117,13 @@ export function HeaderSection() {
   const [logged, setLogged] = useState<boolean>(false);
   const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
+  const categoryList = CategoryStore.useState((s) => s.categoryList);
+
+  const categories = categoryList.map((category) => ({
+    icon: IconCode,
+    description: 'Bienvenue sur la category ici',
+    ...category,
+  }));
 
   useEffect(() => {
     if (user) {
@@ -217,18 +143,18 @@ export function HeaderSection() {
     router.replace('/account/sign-in');
   };
 
-  const categories = mockdata.map((item, index) => (
+  const renderCategories = categories.map((category, index) => (
     <UnstyledButton className={classes.subLink} key={index}>
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
-          <item.icon size={rem(22)} color={theme.fn.primaryColor()} />
+          <category.icon size={rem(22)} color={theme.fn.primaryColor()} />
         </ThemeIcon>
         <div>
           <Text size="sm" fw={500}>
-            {item.title}
+            {category.title}
           </Text>
           <Text size="xs" color="dimmed">
-            {item.description}
+            {category.description}
           </Text>
         </div>
       </Group>
@@ -248,6 +174,10 @@ export function HeaderSection() {
           >
             <Anchor href="/" className={classes.link}>
               {t('appName')}
+            </Anchor>
+            <Anchor className={classes.link}>
+              <IconSearch size={18} />
+              <Text ml={4}>Rechercher</Text>
             </Anchor>
             <Anchor href="/products" className={classes.link}>
               Produits
@@ -282,7 +212,7 @@ export function HeaderSection() {
                 />
 
                 <SimpleGrid cols={3} spacing={0}>
-                  {categories}
+                  {renderCategories}
                 </SimpleGrid>
 
                 <div className={classes.dropdownFooter}>
@@ -300,12 +230,6 @@ export function HeaderSection() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
-            <a href="#" className={classes.link}>
-              Learn
-            </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
           </Group>
 
           <Group className={classes.hiddenMobile}>
@@ -315,13 +239,20 @@ export function HeaderSection() {
                   <Button>{user?.email}</Button>
                 </Menu.Target>
                 <Menu.Dropdown>
+                  <Menu.Label>My profile</Menu.Label>
                   <Menu.Item icon={<IconUser size={14} />}>Profile</Menu.Item>
+                  <Menu.Item icon={<IconUser size={14} />}>Historic</Menu.Item>
                   <Menu.Item icon={<IconBell size={14} />}>
                     Notifications
                   </Menu.Item>
                   <Menu.Item icon={<IconHeart size={14} />}>Favoris</Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Label>Settings</Menu.Label>
                   <Menu.Item icon={<IconSettings size={14} />}>
                     Settings
+                  </Menu.Item>
+                  <Menu.Item icon={<IconSettings size={14} />}>
+                    Payments
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item
@@ -381,13 +312,7 @@ export function HeaderSection() {
               <IconChevronDown size={16} color={theme.fn.primaryColor()} />
             </Center>
           </UnstyledButton>
-          <Collapse in={linksOpened}>{categories}</Collapse>
-          <a href="#" className={classes.link}>
-            Learn
-          </a>
-          <a href="#" className={classes.link}>
-            Academy
-          </a>
+          <Collapse in={linksOpened}>{renderCategories}</Collapse>
 
           <Divider
             my="sm"

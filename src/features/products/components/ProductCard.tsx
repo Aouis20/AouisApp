@@ -8,6 +8,7 @@ import {
   Flex,
   Group,
   Image,
+  Spoiler,
   Text,
   createStyles,
   getStylesRef,
@@ -39,9 +40,17 @@ const useStyles = createStyles(() => ({
       cursor: 'default',
     },
   },
+  indicators: {
+    ref: getStylesRef('indicators'),
+    transition: 'opacity 150ms ease',
+    opacity: 0,
+  },
   root: {
     '&:hover': {
       [`& .${getStylesRef('controls')}`]: {
+        opacity: 1,
+      },
+      [`& .${getStylesRef('indicators')}`]: {
         opacity: 1,
       },
     },
@@ -71,69 +80,64 @@ const ProductCard = ({ product }: ProductCardProps) => {
       shadow="sm"
       radius="md"
       withBorder
-      padding={'md'}
-      w={540}
+      p={'sm'}
       style={{
+        maxWidth: 800,
         display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
+        flexDirection: 'row',
+        gap: 32,
       }}
       key={product.id}
     >
       {/* Images */}
-      <Card.Section>
-        <>
-          <Carousel classNames={classes}>
-            {product.images.map((image, index) => (
-              <Carousel.Slide key={index}>
-                {/* TODO add AspectRatio from mantine */}
-                <Image
-                  src={image}
-                  height={160}
-                  alt={product.title + '-image' + index}
-                />
-              </Carousel.Slide>
-            ))}
-          </Carousel>
-          <ActionIcon
-            bg={'white'}
-            pos={'absolute'}
-            w={40}
-            h={40}
-            top={6}
-            right={6}
-            p={4}
-            sx={{
-              borderRadius: '50%',
-              transition: 'color 0.3s ease',
-              '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
-            }}
-            onClick={handleLike}
-          >
-            <IconHeart />
-          </ActionIcon>
-        </>
+      <Card.Section w={'40%'} sx={{ alignSelf: 'center' }}>
+        <Carousel classNames={classes} withIndicators>
+          {product.images.map((image, index) => (
+            <Carousel.Slide key={index}>
+              {/* TODO add AspectRatio from mantine */}
+              <Image
+                src={image}
+                height={200}
+                alt={product.title + '-image' + index}
+              />
+            </Carousel.Slide>
+          ))}
+        </Carousel>
       </Card.Section>
 
+      {/* Product Details */}
       <Flex
-        sx={{ '&:hover': { cursor: 'pointer' } }}
+        sx={{
+          '&:hover': { cursor: 'pointer' },
+        }}
+        w={'60%'}
         onClick={handleProductDetails}
         direction={'column'}
-        gap={12}
-        h={'100%'}
+        gap={16}
       >
-        {/* Title + Category */}
-        <Group
-          position="apart"
-          mt="md"
-          mb="xs"
-          align="start"
-          style={{ flexWrap: 'wrap' }}
-        >
-          <Text sx={{ wordBreak: 'break-word', flex: 1 }} weight={700}>
+        {/* Title */}
+        <Group position="apart" align="start" m={0}>
+          <Text sx={{ flex: 1, alignSelf: 'end' }} weight={700} w={'100%'}>
             {product.title}
           </Text>
-          <Flex direction={'column'} gap={8}>
+          <Flex direction={'column'} align={'end'} gap={8}>
+            {/* Like Button */}
+            <ActionIcon
+              bg={'white'}
+              w={40}
+              h={40}
+              p={4}
+              top={'-4px'}
+              right={'-4px'}
+              sx={{
+                borderRadius: '50%',
+                transition: 'color 0.3s ease',
+                '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
+              }}
+              onClick={handleLike}
+            >
+              <IconHeart />
+            </ActionIcon>
             <Badge color="green" variant="light" fz={14} p={10}>
               {product.price}€
               {product.payment_type != PaymentType.UNIQ &&
@@ -148,9 +152,23 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </Group>
 
         {/* Description */}
-        <Text size="md" color="dimmed">
-          {product.description}
-        </Text>
+        <Spoiler
+          maxHeight={80}
+          showLabel="Show more"
+          hideLabel="Hide"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Text size="md" color="dimmed">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
+            mollitia accusamus, natus laboriosam veritatis pariatur maiores
+            libero facilis at perferendis ad dolore. Repudiandae nisi tenetur
+            maxime, animi nam reiciendis quis? Tenetur itaque et sit eum ipsa
+            culpa iste nulla consequatur ratione necessitatibus ipsam,
+            dignissimos minus sequi beatae, esse quidem omnis aperiam, pariatur
+            dolores vitae? Magnam dolores voluptate eveniet libero
+            exercitationem.
+          </Text>
+        </Spoiler>
 
         {/* Price and owner informations */}
         <Group position="apart" mt="auto">
@@ -168,7 +186,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {/* Think about a new feature to make proposal */}
           </Box>
           <Text color="gray" fs={'italic'} fz={'sm'}>
-            Vendu par {_.upperFirst(product.user.first_name)}{' '}
+            {_.upperFirst(product.user.first_name)}{' '}
             {product.user.last_name.toUpperCase()}
           </Text>
         </Group>
