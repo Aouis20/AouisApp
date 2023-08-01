@@ -1,5 +1,6 @@
 import {
   Badge,
+  Box,
   Checkbox,
   Flex,
   Group,
@@ -28,7 +29,7 @@ const PriceFilter = () => {
   // Payments
   // Keep existing payments on at least 1 product
   const paymentsFiltered = Object.fromEntries(
-    Object.entries(products.payment_types).filter(([key, count]) => count === 0)
+    Object.entries(products.payment_types).filter(([key, count]) => count !== 0)
   );
   const paymentData = Object.entries(paymentsFiltered).map(
     ([payment, count]) => ({
@@ -37,8 +38,6 @@ const PriceFilter = () => {
       checked: false,
     })
   );
-
-  // Payments
   const [values, handlers] = useListState(paymentData);
   const allChecked = values.every((value) => value.checked);
   const indeterminate = values.some((value) => value.checked) && !allChecked;
@@ -69,6 +68,7 @@ const PriceFilter = () => {
 
   const payments = values.map((value, index) => (
     <Checkbox
+      mt={8}
       ml={33}
       label={
         <Flex gap={6}>
@@ -90,18 +90,20 @@ const PriceFilter = () => {
 
       {/* Payment types */}
       <Text>Préférence de paiement</Text>
-      <Checkbox
-        checked={allChecked}
-        indeterminate={indeterminate}
-        label="All"
-        transitionDuration={0}
-        onChange={() =>
-          handlers.setState((current) =>
-            current.map((value) => ({ ...value, checked: !allChecked }))
-          )
-        }
-      />
-      {payments}
+      <Box>
+        <Checkbox
+          checked={allChecked}
+          indeterminate={indeterminate}
+          label="All"
+          transitionDuration={0}
+          onChange={() =>
+            handlers.setState((current) =>
+              current.map((value) => ({ ...value, checked: !allChecked }))
+            )
+          }
+        />
+        {payments}
+      </Box>
 
       {/* Price inputs (min and max) */}
       <Group align="start">
