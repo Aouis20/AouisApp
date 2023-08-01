@@ -17,7 +17,7 @@ const ConditionFilter = () => {
     ([payment, count]) => ({
       label: payment,
       count: count,
-      checked: false,
+      checked: true,
     })
   );
   const [values, handlers] = useListState(conditions);
@@ -50,8 +50,10 @@ const ConditionFilter = () => {
     <Flex direction={'column'} gap={16} px={16}>
       <Title order={2}>Condition</Title>
       {/* Payment types */}
-      <Text>Préférence de paiement</Text>
       <Box>
+        <Text c={'gray'} mb={12}>
+          Conditions
+        </Text>
         <Checkbox
           checked={allChecked}
           indeterminate={indeterminate}

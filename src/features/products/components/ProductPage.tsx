@@ -8,6 +8,7 @@ import { ProductStore } from '../ProductStore';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
 import DataTableDemo from './ProductTable';
+import Filters from './filters/Filters';
 
 export const ProductList = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -41,7 +42,8 @@ export const ProductList = () => {
 
   return (
     <Flex direction={'column'} align={'center'} gap={'xl'}>
-      <ProductHeader open={open} />
+      <ProductHeader />
+      <Filters open={open} />
       <PaginationComponent
         page={activePage}
         setPage={setPage}

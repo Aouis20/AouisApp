@@ -35,7 +35,7 @@ const PriceFilter = () => {
     ([payment, count]) => ({
       label: payment,
       count: count,
-      checked: false,
+      checked: true,
     })
   );
   const [values, handlers] = useListState(paymentData);
@@ -85,12 +85,14 @@ const PriceFilter = () => {
   ));
 
   return (
-    <Flex direction={'column'} gap={16} px={16}>
+    <Flex direction={'column'} gap={20} px={16}>
       <Title order={2}>Price</Title>
 
       {/* Payment types */}
-      <Text>Préférence de paiement</Text>
       <Box>
+        <Text c={'gray'} mb={12}>
+          Préférence de paiement
+        </Text>
         <Checkbox
           checked={allChecked}
           indeterminate={indeterminate}
@@ -106,7 +108,8 @@ const PriceFilter = () => {
       </Box>
 
       {/* Price inputs (min and max) */}
-      <Group align="start">
+      <Text c={'gray'}>Prix</Text>
+      <Group align="start" mt={-8}>
         <NumberInput
           label="Min"
           value={priceRange[0]}
