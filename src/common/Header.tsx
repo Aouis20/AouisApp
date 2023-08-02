@@ -175,9 +175,9 @@ export function HeaderSection() {
             <Anchor href="/" className={classes.link}>
               {t('appName')}
             </Anchor>
-            <Anchor className={classes.link}>
+            <Anchor href="/search" className={classes.link}>
               <IconSearch size={18} />
-              <Text ml={4}>Rechercher</Text>
+              <Text ml={4}>{t('navigation.search')}</Text>
             </Anchor>
             <Anchor href="/products" className={classes.link}>
               Produits

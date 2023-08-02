@@ -14,8 +14,8 @@ const ConditionFilter = () => {
     Object.entries(products.conditions).filter(([key, count]) => count !== 0)
   );
   const conditions = Object.entries(conditionFiltered).map(
-    ([payment, count]) => ({
-      label: payment,
+    ([condition, count]) => ({
+      label: condition,
       count: count,
       checked: true,
     })
@@ -28,7 +28,7 @@ const ConditionFilter = () => {
     // TODO Make a new request to get news products filtered by current condition type
   };
 
-  const payments = values.map((value, index) => (
+  const renderConditions = values.map((value, index) => (
     <Checkbox
       mt={8}
       ml={33}
@@ -49,7 +49,7 @@ const ConditionFilter = () => {
   return (
     <Flex direction={'column'} gap={16} px={16}>
       <Title order={2}>Condition</Title>
-      {/* Payment types */}
+      {/* Conditions */}
       <Box>
         <Text c={'gray'} mb={12}>
           Conditions
@@ -65,7 +65,7 @@ const ConditionFilter = () => {
             )
           }
         />
-        {payments}
+        {renderConditions}
       </Box>
     </Flex>
   );

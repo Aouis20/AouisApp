@@ -6,7 +6,8 @@
     "conventionalCommits.scopes": [
         "Setup",
         "Users",
-        "Products"
+        "Products",
+        "Search"
     ],
     "css.customData": [".vscode/tailwind.json"],
 }
