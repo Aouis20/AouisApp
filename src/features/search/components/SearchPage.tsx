@@ -69,7 +69,7 @@ const SearchPage = () => {
   return (
     <Container size="md">
       <Paper shadow="sm" radius="md" p="lg" withBorder>
-        <Title>Search</Title>
+        <Title>{t('common:navigation.search')}</Title>
         <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
           {/* Search Input */}
           <TextInput
@@ -79,38 +79,8 @@ const SearchPage = () => {
             icon={<IconSearch size={18} />}
           />
 
-          {/* Categories */}
-          <HoverCard withArrow arrowPosition="center" position="bottom-start">
-            <HoverCard.Target>
-              <TextInput
-                w={200}
-                label="Catégories"
-                icon={<IconCategory size={18} />}
-              />
-            </HoverCard.Target>
-            <HoverCard.Dropdown p={28}>
-              <Box>
-                <Checkbox
-                  checked={allChecked}
-                  indeterminate={indeterminate}
-                  label="All"
-                  transitionDuration={0}
-                  onChange={() =>
-                    handlers.setState((current) =>
-                      current.map((value) => ({
-                        ...value,
-                        checked: !allChecked,
-                      }))
-                    )
-                  }
-                />
-                {items}
-              </Box>
-            </HoverCard.Dropdown>
-          </HoverCard>
-
           {/* Price */}
-          <Group>
+          <Group align="start" sx={{ height: '100%' }}>
             <NumberInput
               w={160}
               label="Min"
@@ -149,6 +119,36 @@ const SearchPage = () => {
                 w={200}
                 label="Conditions"
                 icon={<IconArticle size={18} />}
+              />
+            </HoverCard.Target>
+            <HoverCard.Dropdown p={28}>
+              <Box>
+                <Checkbox
+                  checked={allChecked}
+                  indeterminate={indeterminate}
+                  label="All"
+                  transitionDuration={0}
+                  onChange={() =>
+                    handlers.setState((current) =>
+                      current.map((value) => ({
+                        ...value,
+                        checked: !allChecked,
+                      }))
+                    )
+                  }
+                />
+                {items}
+              </Box>
+            </HoverCard.Dropdown>
+          </HoverCard>
+
+          {/* Categories */}
+          <HoverCard withArrow arrowPosition="center" position="bottom-start">
+            <HoverCard.Target>
+              <TextInput
+                w={200}
+                label="Categories"
+                icon={<IconCategory size={18} />}
               />
             </HoverCard.Target>
             <HoverCard.Dropdown p={28}>
