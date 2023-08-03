@@ -3,7 +3,7 @@ import { getProductByPage } from '@/api/product.api';
 import { PaginationComponent } from '@/features/common/pagination/Pagination';
 import { Box, Divider, Drawer, Flex, Loader, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProductStore } from '../ProductStore';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
@@ -15,6 +15,7 @@ export const ProductList = () => {
   const [activePage, setPage] = useState(1);
   const productList = ProductStore.useState((s) => s.productList);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const cardHeight = useRef<HTMLDivElement>(null);
 
   if (!productList) {
     return <Text>Aucun produit trouvé</Text>;
@@ -54,7 +55,7 @@ export const ProductList = () => {
       ) : (
         <Flex direction="column" gap={48} px={8} justify={'center'}>
           {productList.results.map((product) => (
-            <ProductCard product={product} />
+            <ProductCard product={product} cardHeight={cardHeight} />
           ))}
         </Flex>
       )}

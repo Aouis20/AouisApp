@@ -20,12 +20,14 @@ import {
 } from '@tabler/icons-react';
 import _ from 'lodash';
 import { useRouter } from 'next/router';
+import { useRef, useState } from 'react';
 import { PaymentType, Product } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
 
 type ProductCardProps = {
   product: Product;
+  cardHeight: any;
 };
 
 const useStyles = createStyles(() => ({
@@ -57,9 +59,11 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
   const router = useRouter();
   const { classes } = useStyles();
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const detailsRef = useRef<HTMLDivElement>(null);
 
   const handleLike = () => {
     // TODO add product to user wishlist
@@ -81,6 +85,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       radius="md"
       withBorder
       p={'sm'}
+      pb={0}
       style={{
         maxWidth: 800,
         display: 'flex',
@@ -88,10 +93,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
         gap: 32,
       }}
       key={product.id}
+      h={'100%'}
     >
       {/* Images */}
-      <Card.Section w={'40%'} sx={{ alignSelf: 'center' }}>
-        <Carousel classNames={classes} withIndicators>
+      <Card.Section
+        p={0}
+        sx={{
+          alignSelf: isOpened ? 'start' : 'center',
+          flex: 1,
+        }}
+      >
+        <Carousel
+          sx={{ flex: 1 }}
+          mx="auto"
+          classNames={classes}
+          orientation="vertical"
+          align={'start'}
+          slideGap={'md'}
+          slidesToScroll={1}
+          height={isOpened ? cardHeight.current?.clientHeight : 200}
+          mah={detailsRef.current?.clientHeight}
+        >
           {product.images.map((image, index) => (
             <Carousel.Slide key={index}>
               {/* TODO add AspectRatio from mantine */}
@@ -114,6 +136,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         onClick={handleProductDetails}
         direction={'column'}
         gap={16}
+        ref={detailsRef}
       >
         {/* Title */}
         <Group position="apart" align="start" m={0}>
@@ -156,17 +179,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
           maxHeight={80}
           showLabel="Show more"
           hideLabel="Hide"
-          onClick={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpened(!isOpened);
+          }}
         >
           <Text size="md" color="dimmed">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
-            mollitia accusamus, natus laboriosam veritatis pariatur maiores
-            libero facilis at perferendis ad dolore. Repudiandae nisi tenetur
-            maxime, animi nam reiciendis quis? Tenetur itaque et sit eum ipsa
-            culpa iste nulla consequatur ratione necessitatibus ipsam,
-            dignissimos minus sequi beatae, esse quidem omnis aperiam, pariatur
-            dolores vitae? Magnam dolores voluptate eveniet libero
-            exercitationem.
+            {product.description}
           </Text>
         </Spoiler>
 
