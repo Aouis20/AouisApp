@@ -190,7 +190,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
         </Spoiler>
 
         {/* Price and owner informations */}
-        <Group position="apart" mt="auto">
+        <Group position="apart" my="auto" pb={12}>
           <Box>
             <Button
               leftIcon={<IconMapPinFilled size={22} />}
