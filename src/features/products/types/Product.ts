@@ -31,6 +31,7 @@ export enum ConditionType {
   POOR = 'POOR',
 }
 
+
 export type Product = {
   id: number;
   title: string;

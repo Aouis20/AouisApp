@@ -1,3 +1,4 @@
+import DisplayName from '@/common/DisplayName';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
@@ -17,7 +18,6 @@ import {
   getStylesRef,
 } from '@mantine/core';
 import { IconHeart, IconMail, IconPhone } from '@tabler/icons-react';
-import _ from 'lodash';
 import { ProductStore } from '../ProductStore';
 import { PaymentType } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
@@ -143,8 +143,7 @@ const ProductDetailsPage = () => {
             <Flex direction={'column'} gap={4}>
               <>
                 <Title order={3}>
-                  {_.upperFirst(product.user.first_name)}{' '}
-                  {product.user.last_name.toUpperCase()}
+                  <DisplayName user={product.user} />
                 </Title>
                 <Anchor>6 annonces</Anchor>
               </>

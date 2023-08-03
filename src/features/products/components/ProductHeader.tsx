@@ -1,4 +1,4 @@
-import { Badge, Flex, Group, Paper, Text, Title } from '@mantine/core';
+import { Flex, Paper, Text, Title } from '@mantine/core';
 import { ProductStore } from '../ProductStore';
 
 const ProductHeader = () => {
@@ -12,11 +12,6 @@ const ProductHeader = () => {
           Accueil/products/cars
         </Text>
         <Title>Others category</Title>
-        <Group>
-          <Badge fz={'sm'} p={12}>
-            {totalItems} annonces
-          </Badge>
-        </Group>
       </Flex>
     </Paper>
   );

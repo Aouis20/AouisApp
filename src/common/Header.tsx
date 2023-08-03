@@ -1,6 +1,7 @@
 import { CategoryStore } from '@/features/categories/CategoryStore';
 import {
   Anchor,
+  Badge,
   Box,
   Burger,
   Button,
@@ -24,6 +25,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import {
+  IconArrowsExchange,
   IconBell,
   IconChevronDown,
   IconCode,
@@ -241,18 +243,27 @@ export function HeaderSection() {
                 <Menu.Dropdown>
                   <Menu.Label>My profile</Menu.Label>
                   <Menu.Item icon={<IconUser size={14} />}>Profile</Menu.Item>
-                  <Menu.Item icon={<IconUser size={14} />}>Historic</Menu.Item>
+                  <Menu.Item icon={<IconArrowsExchange size={14} />}>
+                    Historic
+                  </Menu.Item>
                   <Menu.Item icon={<IconBell size={14} />}>
                     Notifications
+                    <Badge
+                      ml={'xs'}
+                      color="red"
+                      variant="filled"
+                      p={2}
+                      w={16}
+                      h={16}
+                    >
+                      2
+                    </Badge>
                   </Menu.Item>
                   <Menu.Item icon={<IconHeart size={14} />}>Favoris</Menu.Item>
                   <Menu.Divider />
                   <Menu.Label>Settings</Menu.Label>
                   <Menu.Item icon={<IconSettings size={14} />}>
                     Settings
-                  </Menu.Item>
-                  <Menu.Item icon={<IconSettings size={14} />}>
-                    Payments
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item

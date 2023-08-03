@@ -11,11 +11,12 @@ import {
 } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
 import _ from 'lodash';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductStore } from '../../ProductStore';
 
 const PriceFilter = () => {
   const products = ProductStore.useState((s) => s.productList);
+  const filters = ProductStore.useState((s) => s.filters);
 
   if (!products) {
     return <Text>Aucune donnée disponible</Text>;
@@ -24,23 +25,38 @@ const PriceFilter = () => {
   const min =
     Math.floor(Number(_.minBy(products.results, 'price')?.price)) || 0;
   const max = Math.ceil(Number(_.maxBy(products.results, 'price')?.price)) || 0;
-  const [priceRange, setPriceRange] = useState<[number, number]>([min, max]);
+
+  // Price
+  const [priceRange, setPriceRange] = useState<[number, number]>(
+    filters.price ? filters.price : [min, max]
+  );
 
   // Payments
-  // Keep existing payments on at least 1 product
+  // [Payments] Keep existing payments on at least 1 product
   const paymentsFiltered = Object.fromEntries(
     Object.entries(products.payment_types).filter(([key, count]) => count !== 0)
   );
-  const paymentData = Object.entries(paymentsFiltered).map(
-    ([payment, count]) => ({
-      label: payment,
-      count: count,
-      checked: true,
-    })
-  );
-  const [values, handlers] = useListState(paymentData);
-  const allChecked = values.every((value) => value.checked);
-  const indeterminate = values.some((value) => value.checked) && !allChecked;
+  const paymentData = Object.keys(filters.payment_type).length
+    ? filters.payment_type
+    : Object.entries(paymentsFiltered).map(([payment, count]) => ({
+        label: payment,
+        count: count as number,
+        checked: true,
+      }));
+  const [payments, handlers] = useListState(paymentData);
+  const allChecked = payments.every((value) => value.checked);
+  const indeterminate = payments.some((value) => value.checked) && !allChecked;
+
+  // Update filters in ProductStore
+  useEffect(() => {
+    ProductStore.update((s) => {
+      s.filters = {
+        ...s.filters,
+        price: priceRange,
+        payment_type: payments,
+      };
+    });
+  }, [priceRange, payments]);
 
   const handleMinInput = (newValue: number) => {
     if (!Number.isNaN(newValue)) {
@@ -50,7 +66,7 @@ const PriceFilter = () => {
 
   const handleMaxInput = (newValue: number) => {
     if (!Number.isNaN(newValue)) {
-      setPriceRange([newValue, priceRange[1]]);
+      setPriceRange([priceRange[0], newValue]);
     }
   };
 
@@ -66,18 +82,18 @@ const PriceFilter = () => {
     return false;
   };
 
-  const payments = values.map((value, index) => (
+  const renderPayments = payments.map((payment, index) => (
     <Checkbox
       mt={8}
       ml={33}
       label={
         <Flex gap={6}>
-          <Text>{value.label}</Text>
-          <Badge p={4}>{value.count}</Badge>
+          <Text>{payment.label}</Text>
+          <Badge p={4}>{payment.count}</Badge>
         </Flex>
       }
       key={index}
-      checked={value.checked}
+      checked={payment.checked}
       onChange={(event) =>
         handlers.setItemProp(index, 'checked', event.currentTarget.checked)
       }
@@ -104,7 +120,7 @@ const PriceFilter = () => {
             )
           }
         />
-        {payments}
+        {renderPayments}
       </Box>
 
       {/* Price inputs (min and max) */}

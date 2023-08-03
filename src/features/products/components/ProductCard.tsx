@@ -1,8 +1,9 @@
+import Message from '@/common/DirectMessage';
+import DisplayName from '@/common/DisplayName';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
   Badge,
-  Box,
   Button,
   Card,
   Flex,
@@ -13,12 +14,7 @@ import {
   createStyles,
   getStylesRef,
 } from '@mantine/core';
-import {
-  IconHeart,
-  IconMapPinFilled,
-  IconMessageCircle2,
-} from '@tabler/icons-react';
-import _ from 'lodash';
+import { IconHeart, IconMapPinFilled } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { PaymentType, Product } from '../types/Product';
@@ -191,7 +187,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
 
         {/* Price and owner informations */}
         <Group position="apart" my="auto" pb={12}>
-          <Box>
+          <Flex>
             <Button
               leftIcon={<IconMapPinFilled size={22} />}
               variant="subtle"
@@ -199,14 +195,11 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             >
               95
             </Button>
-            <Button variant="subtle" radius="md">
-              <IconMessageCircle2 size={22} />
-            </Button>
+            <Message product={product} />
             {/* Think about a new feature to make proposal */}
-          </Box>
+          </Flex>
           <Text color="gray" fs={'italic'} fz={'sm'}>
-            {_.upperFirst(product.user.first_name)}{' '}
-            {product.user.last_name.toUpperCase()}
+            <DisplayName user={product.user} />
           </Text>
         </Group>
       </Flex>
