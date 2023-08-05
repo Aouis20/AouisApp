@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ProductStore } from '../ProductStore';
 import ProductCard from './ProductCard';
 import ProductHeader from './ProductHeader';
-import DataTableDemo from './ProductTable';
 import Filters from './filters/Filters';
 
 export const ProductList = () => {
@@ -71,8 +70,6 @@ export const ProductList = () => {
         {/* From current categories display it filters */}
         <Box></Box>
       </Drawer>
-
-      <DataTableDemo />
     </Flex>
   );
 };

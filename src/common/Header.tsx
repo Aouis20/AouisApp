@@ -31,6 +31,8 @@ import {
   IconCode,
   IconHeart,
   IconLogout,
+  IconMessageCircle2,
+  IconPhoto,
   IconSearch,
   IconSettings,
   IconUser,
@@ -241,10 +243,31 @@ export function HeaderSection() {
                   <Button>{user?.email}</Button>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <Menu.Label>My profile</Menu.Label>
-                  <Menu.Item icon={<IconUser size={14} />}>Profile</Menu.Item>
+                  <Menu.Label>My Account</Menu.Label>
+                  <Menu.Item icon={<IconUser size={14} />}>
+                    <Anchor href="/myprofile" c={'inherit'} underline={false}>
+                      Profile
+                    </Anchor>
+                  </Menu.Item>
+                  <Menu.Item icon={<IconPhoto size={14} />}>My ads</Menu.Item>
                   <Menu.Item icon={<IconArrowsExchange size={14} />}>
                     Historic
+                  </Menu.Item>
+                  <Menu.Item icon={<IconHeart size={14} />}>Favoris</Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Label>News</Menu.Label>
+                  <Menu.Item icon={<IconMessageCircle2 size={14} />}>
+                    Messages
+                    <Badge
+                      ml={'xs'}
+                      color="red"
+                      variant="filled"
+                      p={2}
+                      w={16}
+                      h={16}
+                    >
+                      2
+                    </Badge>
                   </Menu.Item>
                   <Menu.Item icon={<IconBell size={14} />}>
                     Notifications
@@ -259,7 +282,6 @@ export function HeaderSection() {
                       2
                     </Badge>
                   </Menu.Item>
-                  <Menu.Item icon={<IconHeart size={14} />}>Favoris</Menu.Item>
                   <Menu.Divider />
                   <Menu.Label>Settings</Menu.Label>
                   <Menu.Item icon={<IconSettings size={14} />}>
