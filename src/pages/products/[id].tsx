@@ -1,9 +1,9 @@
 import { setupPrivateApi } from '@/api';
-import { getCategories } from '@/api/category.api';
+import { getProductById } from '@/api/product.api';
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/account.helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import Categories from '@/features/categories/components/CategoryPage';
+import ProductDetailsPage from '@/features/products/components/ProductDetailsPage';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
@@ -13,13 +13,14 @@ import { useTranslation } from 'react-i18next';
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
   const api = setupPrivateApi(ctx);
+  const id = Number(ctx.params?.id);
 
   try {
     await getUserInfo(stateInstance, api);
 
-    const categoryList = await getCategories(api);
-    stateInstance.stores.CategoryStore.update((s) => {
-      s.categoryList = categoryList;
+    const product = await getProductById(id, api);
+    stateInstance.stores.ProductStore.update((s) => {
+      s.product = product;
     });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
@@ -33,11 +34,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type CategoriesPageProps = {
+type ProductDetailsProps = {
   snapshot: PullStateInstance;
 };
 
-const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
+const ProductDetails: NextPage<ProductDetailsProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
@@ -45,14 +46,13 @@ const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.categories')} | {t('appName')}
+          {t('navigation.products')} | {t('appName')}
         </title>
         <meta name="description" content="test" />
       </Head>
 
-      <Categories />
+      <ProductDetailsPage />
     </AuthenticatedAppLayout>
   );
 };
-
-export default CategoriesPage;
+export default ProductDetails;

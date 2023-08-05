@@ -1,11 +1,11 @@
-import { Button, Container, Flex, Paper, Space, Text } from "@mantine/core";
+import { Button, Container, Flex, Paper, Space, Text } from '@mantine/core';
 import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import { setupPrivateApi } from '../api';
 import { AuthenticatedAppLayout } from '../common/AuthenticatedAppLayout';
-import { getUserInfo } from "../features/accounts/account.helper";
-import { setupPrivateApi } from '../features/api';
+import { getUserInfo } from '../features/accounts/account.helper';
 import { redirectToLoginProps } from '../features/authentication/redirect.helper';
 import { PullStateInstance, PullstateCore } from '../pullstate.core';
 
@@ -33,30 +33,38 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('common');
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
-        <title>{t("navigation.homepage")} | {t("appName")}</title>
+        <title>
+          {t('navigation.homepage')} | {t('appName')}
+        </title>
         <meta name="description" content="Aouis Homepage" />
       </Head>
 
       <Container size={'md'}>
         <Container pb={40}>
           <Flex justify={'center'} gap={'xl'}>
-            <Button fz={'xl'} w={140} h={44}>Acheter</Button>
+            <Button fz={'xl'} w={140} h={44}>
+              Acheter
+            </Button>
             <Space w="xl" />
-            <Button fz={'xl'} w={140} h={44}>Vendre</Button>
+            <Button fz={'xl'} w={140} h={44}>
+              Vendre
+            </Button>
             <Space w="xl" />
-          <Button fz={'xl'} w={140} h={44}>Echanger</Button>
+            <Button fz={'xl'} w={140} h={44}>
+              Echanger
+            </Button>
           </Flex>
         </Container>
         <Paper shadow="sm" p="md">
           <Text>Paper is the most basic ui component</Text>
           <Text>
-            Use it to create cards, dropdowns, modals and other components that require background
-            with shadow
+            Use it to create cards, dropdowns, modals and other components that
+            require background with shadow
           </Text>
         </Paper>
       </Container>

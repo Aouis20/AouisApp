@@ -1,5 +1,5 @@
 import { Store } from 'pullstate';
-import { User } from '../api/account.api';
+import { User } from './types/User';
 
 export type AccountStoreType = {
     user: User | null;

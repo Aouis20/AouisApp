@@ -2,27 +2,28 @@ import { useForm } from '@mantine/form';
 import { useTranslation } from 'react-i18next';
 import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
 import { useRouter } from 'next/router';
-import { setTokens } from '../authentication/tokens.helper';
-import { setupPrivateApi } from '../api';
-import { SignInPayloadType, signInUser } from '../api/account.api';
 import { showNotification } from '@mantine/notifications';
 import { HTTPError } from 'ky';
+import { signInUser } from '@/api/account.api';
+import { setupPrivateApi } from '@/api';
+import { setTokens } from '@/features/authentication/tokens.helper';
+import { SignInPayloadType } from '../types/SignIn';
 
 const useStyle = createStyles((theme) => ({
   form: {
     marginTop: '8px',
 
     '& > div': {
-      marginTop: '8px'
-    }
+      marginTop: '8px',
+    },
   },
   formTitle: {
     fontSize: theme.fontSizes.xl,
-    fontWeight: 600
+    fontWeight: 600,
   },
   formButton: {
-    marginTop: '16px'
-  }
+    marginTop: '16px',
+  },
 }));
 
 export const SignInForm = () => {
@@ -33,16 +34,14 @@ export const SignInForm = () => {
   const form = useForm<SignInPayloadType>({
     initialValues: {
       email: '',
-      password: ''
-    }
+      password: '',
+    },
   });
 
   const submitSignInForm = async (values: SignInPayloadType) => {
     const api = setupPrivateApi();
-    const result = await signInUser(values, api);
-    console.log(result)
 
-   try {
+    try {
       const token = await signInUser(values, api);
 
       setTokens(token);
@@ -52,7 +51,7 @@ export const SignInForm = () => {
       showNotification({
         title: t('account:signInSuccess.notification.title'),
         message: t('account:signInSuccess.notification.message'),
-        color: 'green'
+        color: 'green',
       });
     } catch (e) {
       if (!(e instanceof HTTPError)) return;
@@ -68,7 +67,11 @@ export const SignInForm = () => {
     <>
       <Text className={classes.formTitle}>{t('account:signInFormTitle')}</Text>
       <form className={classes.form} onSubmit={form.onSubmit(submitSignInForm)}>
-        <TextInput label={t('account:signInForm.emailAddressLabel')} {...form.getInputProps('email')} required={true} />
+        <TextInput
+          label={t('account:signInForm.emailAddressLabel')}
+          {...form.getInputProps('email')}
+          required={true}
+        />
         <TextInput
           type={'password'}
           label={t('account:signInForm.passwordLabel')}

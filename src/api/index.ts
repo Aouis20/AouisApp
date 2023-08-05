@@ -1,7 +1,7 @@
 import ky from 'ky-universal';
 import { GetServerSidePropsContext } from 'next';
 import { KyInstance } from 'ky/distribution/types/ky';
-import { getTokens, setTokens } from '../authentication/tokens.helper';
+import { getTokens, setTokens } from '../features/authentication/tokens.helper';
 import { refreshUserAccessToken } from './account.api';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000';

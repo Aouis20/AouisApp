@@ -1,6 +1,6 @@
-import { UnAuthenticatedAppLayout } from '@/src/common/UnAuthenticatedAppLayout';
-import { AccountCard } from '@/src/features/accounts/AccountCard';
-import { SignInForm } from '@/src/features/accounts/SignInForm';
+import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
+import { AccountCard } from '@/features/accounts/components/AccountCard';
+import { SignInForm } from '@/features/accounts/components/SignInForm';
 import { Box, CardSection, createStyles } from '@mantine/core';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -29,6 +29,8 @@ const SignUp = () => {
   const { t } = useTranslation();
   const { classes } = useStyles();
 
+  // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
+  
   return (
     <UnAuthenticatedAppLayout>
       <Head>

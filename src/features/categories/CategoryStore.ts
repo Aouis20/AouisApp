@@ -1,12 +1,12 @@
-import { Category } from '@/src/features/api/category.api';
 import { Store } from 'pullstate';
+import { Category } from './types/Category';
 
 export type CategoryStoreType = {
     category: Category | null;
-    categories: Category[]
+    categoryList: Category[]
 };
 
 export const CategoryStore = new Store<CategoryStoreType>({
     category: null,
-    categories: []
+    categoryList: []
 });

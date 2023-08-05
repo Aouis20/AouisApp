@@ -1,15 +1,15 @@
-import { AuthenticatedAppLayout } from "@/src/common/AuthenticatedAppLayout";
-import { setupPrivateApi } from "@/src/features/api";
-import { getUserList } from "@/src/features/api/account.api";
-import UserList from "@/src/features/accounts/AccountList";
-import { PullStateInstance, PullstateCore } from "@/src/pullstate.core";
+import { setupPrivateApi } from "@/api";
+import { getUserList } from "@/api/account.api";
+import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
+import { getUserInfo } from "@/features/accounts/account.helper";
+import AccountList from "@/features/accounts/components/AccountPage";
+import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
+import { PullStateInstance, PullstateCore } from "@/pullstate.core";
 import { Box, createStyles } from "@mantine/core";
 import { HTTPError } from "ky-universal";
 import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { useTranslation } from "react-i18next";
-import { getUserInfo } from "@/src/features/accounts/account.helper";
-import { redirectToLoginProps } from "@/src/features/authentication/redirect.helper";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -68,7 +68,7 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
       </Head>
 
       <Box className={classes.container}>
-        <UserList />
+        <AccountList />
       </Box>
     </AuthenticatedAppLayout>
   );

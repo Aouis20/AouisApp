@@ -1,12 +1,11 @@
 import { setupPrivateApi } from '@/api';
-import { getCategories } from '@/api/category.api';
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/account.helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import Categories from '@/features/categories/components/CategoryPage';
+import SearchPage from '@/features/search/components/SearchPage';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
-import { GetServerSidePropsContext, NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
@@ -17,15 +16,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     await getUserInfo(stateInstance, api);
 
-    const categoryList = await getCategories(api);
-    stateInstance.stores.CategoryStore.update((s) => {
-      s.categoryList = categoryList;
-    });
-
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
     const error = e as HTTPError;
-    if (error?.response?.status === 401) {
+    if (error.response?.status === 401) {
       return redirectToLoginProps();
     }
 
@@ -33,26 +27,26 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type CategoriesPageProps = {
+interface SearchPageProps {
   snapshot: PullStateInstance;
-};
+}
 
-const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
-  const { t } = useTranslation('common');
+const Search: NextPage<SearchPageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
+  const { t } = useTranslation('common');
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.categories')} | {t('appName')}
+          {t('navigation.search')} | {t('appName')}
         </title>
-        <meta name="description" content="test" />
+        <meta name="description" content="Aouis Search" />
       </Head>
 
-      <Categories />
+      <SearchPage />
     </AuthenticatedAppLayout>
   );
 };
 
-export default CategoriesPage;
+export default Search;

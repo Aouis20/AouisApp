@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext } from 'next';
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
-export const accessTokenCookie = 'edko.access';
-export const refreshTokenCookie = 'edko.refresh';
+export const accessTokenCookie = 'aouis.access';
+export const refreshTokenCookie = 'aouis.refresh';
 
 export type TokensType = {
   access: string;

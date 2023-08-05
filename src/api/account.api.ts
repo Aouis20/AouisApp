@@ -1,33 +1,14 @@
 import { KyInstance } from 'ky/distribution/types/ky';
-import { TokensType } from '../authentication/tokens.helper';
-
-export type User = {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-
-  is_staff: boolean;
-  is_admin: boolean;
-  is_superuser: boolean;
-  is_active: boolean;
-};
-
-export type SignInPayloadType = {
-  email: string;
-  password: string;
-};
+import { TokensType } from '../features/authentication/tokens.helper';
+import { User } from '@/features/accounts/types/User';
+import { SignUpPayloadType } from '@/features/accounts/types/SignUp';
+import { SignInPayloadType } from '@/features/accounts/types/SignIn';
+import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/RefreshToken';
 
 // rome-ignore lint/suspicious/noExplicitAny: for build process
 export const signInUser = async (payload: SignInPayloadType, api: KyInstance): Promise<any> => {
   const data = await api.post('auth/token/', { json: payload }).json<any>();
   return data;
-};
-
-export type SignUpPayloadType = {
-  email: string;
-  password: string;
-  confirmation: string;
 };
 
 export const getUserList = async (api: KyInstance): Promise<any> => {
@@ -43,10 +24,6 @@ export const signUpUser = async (payload: SignUpPayloadType, api: KyInstance): P
 export const getUserByToken = async (api: KyInstance): Promise<User> => {
   const data = await api.get('auth/verify/').json<User>();
   return data;
-};
-
-export type RefreshUserAccessTokenResponseType = {
-  access: string;
 };
 
 export const refreshUserAccessToken = async (
