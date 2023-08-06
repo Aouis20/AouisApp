@@ -7,6 +7,7 @@ import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -34,6 +35,8 @@ type MyProfileProps = {
 const MyProfile: NextPage<MyProfileProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
+  const router = useRouter();
+  const tab = router.query.tab;
 
   return (
     <AuthenticatedAppLayout instance={instance}>
@@ -44,7 +47,7 @@ const MyProfile: NextPage<MyProfileProps> = ({ snapshot }) => {
         <meta name="description" content="test" />
       </Head>
 
-      <MyProfilePage />
+      <MyProfilePage tab={tab as string} />
     </AuthenticatedAppLayout>
   );
 };

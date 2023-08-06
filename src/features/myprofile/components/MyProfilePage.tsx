@@ -10,15 +10,20 @@ import {
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
+import Ads from './Tabs/Ads';
 import Me from './Tabs/Me';
 
-const MyProfilePage = () => {
+type MyProfilePageProps = {
+  tab: string | null;
+};
+
+const MyProfilePage = ({ tab }: MyProfilePageProps) => {
   const user = AccountStore.useState((s) => s.user);
 
   if (!user) {
     return (
       <Text>
-        Utilisateur introuvable, veuillez vous authentifier ou crée un compte
+        Utilisateur introuvable, veuillez vous authentifier ou crée un compte.
       </Text>
     );
   }
@@ -35,7 +40,7 @@ const MyProfilePage = () => {
         </Text>
       </Paper>
 
-      <Tabs variant="outline" defaultValue="profile">
+      <Tabs variant="outline" defaultValue={tab || 'profile'}>
         {/* TABS */}
         <Tabs.List
           sx={{
@@ -83,7 +88,7 @@ const MyProfilePage = () => {
           </Tabs.Tab>
 
           <Tabs.Tab
-            value="notification"
+            value="notifications"
             icon={<IconBell size="0.8rem" />}
             rightSection={
               <Badge
@@ -101,18 +106,18 @@ const MyProfilePage = () => {
             Notification
           </Tabs.Tab>
 
-          <Tabs.Tab value="parameters" icon={<IconSettings size="0.8rem" />}>
+          <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>
             Parameters
           </Tabs.Tab>
         </Tabs.List>
 
         {/* PANELS */}
         <Tabs.Panel value="profile" pt="xs">
-          <Me user={user} />
+          <Me />
         </Tabs.Panel>
 
         <Tabs.Panel value="ads" pt="xs">
-          My ads
+          <Ads />
         </Tabs.Panel>
 
         <Tabs.Panel value="message" pt="xs">
@@ -123,7 +128,7 @@ const MyProfilePage = () => {
           Historic
         </Tabs.Panel>
 
-        <Tabs.Panel value="notification" pt="xs">
+        <Tabs.Panel value="notifications" pt="xs">
           Notification
         </Tabs.Panel>
 
@@ -131,7 +136,7 @@ const MyProfilePage = () => {
           Favoris
         </Tabs.Panel>
 
-        <Tabs.Panel value="parameters" pt="xs">
+        <Tabs.Panel value="settings" pt="xs">
           Parameters
         </Tabs.Panel>
       </Tabs>

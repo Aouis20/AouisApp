@@ -35,6 +35,7 @@ import {
   IconPhoto,
   IconSearch,
   IconSettings,
+  IconSquarePlus,
   IconUser,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
@@ -42,8 +43,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AccountStore } from '../features/accounts/AccountStore';
 import { removeTokens } from '../features/authentication/tokens.helper';
+import LanguageSelector from './LanguageSelector';
 
 const useStyles = createStyles((theme) => ({
+  logo: {
+    cursor: 'pointer',
+  },
   link: {
     display: 'flex',
     alignItems: 'center',
@@ -167,17 +172,26 @@ export function HeaderSection() {
 
   return (
     <Box>
-      <Header height={60} px="md">
-        <Group position="apart" sx={{ height: '100%' }}>
-          <Image alt={'logo'} src={'/logo.png'} width={150} />
+      <Header height={60} px="md" pos={'relative'}>
+        <Group position="apart" h={'100%'}>
+          {/* Left Section - Logo */}
+          <Group>
+            <Image
+              onClick={() => router.push('/')}
+              className={classes.logo}
+              alt={'logo'}
+              src={'/logo.png'}
+              width={150}
+            />
+            <Button variant="light" leftIcon={<IconSquarePlus size={20} />}>
+              Déposer une annonce
+            </Button>
+          </Group>
 
-          <Group
-            sx={{ height: '100%' }}
-            spacing={0}
-            className={classes.hiddenMobile}
-          >
+          {/* Middle Section - Nav links */}
+          <Group h={'100%'} spacing={0} className={classes.hiddenMobile}>
             <Anchor href="/" className={classes.link}>
-              {t('appName')}
+              {t('navigation.homepage')}
             </Anchor>
             <Anchor href="/search" className={classes.link}>
               <IconSearch size={18} />
@@ -236,70 +250,104 @@ export function HeaderSection() {
             </HoverCard>
           </Group>
 
+          {/* Right Section - Add product button && Account Menu */}
           <Group className={classes.hiddenMobile}>
             {logged ? (
-              <Menu shadow="md" width={200}>
-                <Menu.Target>
-                  <Button>{user?.email}</Button>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Label>My Account</Menu.Label>
-                  <Menu.Item icon={<IconUser size={14} />}>
-                    <Anchor href="/myprofile" c={'inherit'} underline={false}>
+              <>
+                <LanguageSelector />
+                <Menu shadow="md" width={200}>
+                  <Menu.Target>
+                    <Button>{user?.email}</Button>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    <Menu.Label>My Account</Menu.Label>
+                    <Menu.Item
+                      icon={<IconUser size={14} />}
+                      onClick={() => router.push('/myprofile?tab=profile')}
+                    >
                       Profile
-                    </Anchor>
-                  </Menu.Item>
-                  <Menu.Item icon={<IconPhoto size={14} />}>My ads</Menu.Item>
-                  <Menu.Item icon={<IconArrowsExchange size={14} />}>
-                    Historic
-                  </Menu.Item>
-                  <Menu.Item icon={<IconHeart size={14} />}>Favoris</Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Label>News</Menu.Label>
-                  <Menu.Item icon={<IconMessageCircle2 size={14} />}>
-                    Messages
-                    <Badge
-                      ml={'xs'}
-                      color="red"
-                      variant="filled"
-                      p={2}
-                      w={16}
-                      h={16}
+                    </Menu.Item>
+                    <Menu.Item
+                      icon={<IconPhoto size={14} />}
+                      onClick={() => router.push('/myprofile?tab=ads')}
                     >
-                      2
-                    </Badge>
-                  </Menu.Item>
-                  <Menu.Item icon={<IconBell size={14} />}>
-                    Notifications
-                    <Badge
-                      ml={'xs'}
-                      color="red"
-                      variant="filled"
-                      p={2}
-                      w={16}
-                      h={16}
+                      Ads
+                    </Menu.Item>
+                    <Menu.Item
+                      icon={<IconArrowsExchange size={14} />}
+                      onClick={() => router.push('/myprofile?tab=historic')}
                     >
-                      2
-                    </Badge>
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Label>Settings</Menu.Label>
-                  <Menu.Item icon={<IconSettings size={14} />}>
-                    Settings
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Item
-                    color="red"
-                    icon={<IconLogout size={14} />}
-                    onClick={signOut}
-                  >
-                    {t('navigation.signOut')}
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
+                      Historic
+                    </Menu.Item>
+                    <Menu.Item
+                      icon={<IconHeart size={14} />}
+                      onClick={() => router.push('/myprofile?tab=favoris')}
+                    >
+                      Favoris
+                    </Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Label>News</Menu.Label>
+                    <Menu.Item
+                      icon={<IconMessageCircle2 size={14} />}
+                      onClick={() => router.push('/myprofile?tab=message')}
+                    >
+                      Mesage
+                      <Badge
+                        ml={'xs'}
+                        color="red"
+                        variant="filled"
+                        p={2}
+                        w={16}
+                        h={16}
+                      >
+                        2
+                      </Badge>
+                    </Menu.Item>
+                    <Menu.Item
+                      icon={<IconBell size={14} />}
+                      onClick={() =>
+                        router.push('/myprofile?tab=notifications')
+                      }
+                    >
+                      Notifications
+                      <Badge
+                        ml={'xs'}
+                        color="red"
+                        variant="filled"
+                        p={2}
+                        w={16}
+                        h={16}
+                      >
+                        2
+                      </Badge>
+                    </Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Label>Settings</Menu.Label>
+                    <Menu.Item
+                      icon={<IconSettings size={14} />}
+                      onClick={() => router.push('/myprofile?tab=settings')}
+                    >
+                      Settings
+                    </Menu.Item>
+                    <Menu.Divider />
+                    <Menu.Item
+                      color="red"
+                      icon={<IconLogout size={14} />}
+                      onClick={signOut}
+                    >
+                      {t('navigation.signOut')}
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
+              </>
             ) : (
               <>
-                <Button variant="default">{t('navigation.signIn')}</Button>
+                <Button
+                  variant="default"
+                  onClick={() => router.replace('/account/sign-in')}
+                >
+                  {t('navigation.signIn')}
+                </Button>
                 <Button variant="filled">
                   {t('navigation.createAccount')}
                 </Button>

@@ -1,4 +1,5 @@
-import { SalutationType, User } from '@/features/accounts/types/User';
+import { AccountStore } from '@/features/accounts/AccountStore';
+import { SalutationType } from '@/features/accounts/types/User';
 import {
   AspectRatio,
   Box,
@@ -9,21 +10,26 @@ import {
   Image,
   InputBase,
   Select,
+  Text,
   TextInput,
+  Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { useTranslation } from 'react-i18next';
 import { IMaskInput } from 'react-imask';
-
-type MeProps = {
-  user: User;
-};
 
 const Salutation = {
   [SalutationType.MR]: 'M.',
   [SalutationType.MRS]: 'Mme.',
 };
 
-const Me = ({ user }: MeProps) => {
+const Me = () => {
+  const user = AccountStore.useState((s) => s.user);
+  if (!user) {
+    return <Text>Veuillez vous authentifier</Text>;
+  }
+  const { t } = useTranslation('');
   const userForm = useForm({
     initialValues: {
       salutation: user.salutation || '',
@@ -57,10 +63,28 @@ const Me = ({ user }: MeProps) => {
 
   const handleSubmit = () => {
     console.log('handleSubmit');
+    // TODO update account
+    try {
+      showNotification({
+        title: 'Account Updated',
+        message: 'Account has been successfully updated',
+        color: 'green',
+      });
+    } catch (err) {
+      console.log(err);
+      showNotification({
+        title: 'Error updating account',
+        message: 'An error has occurred while updating your account',
+        color: 'red',
+      });
+    }
   };
 
   return (
     <Container size={'2xl'}>
+      <Title order={2}>Mon compte</Title>
+      <Text>Retrouvez ici, vos informations confidentielles.</Text>
+
       {/* User Form */}
       <form onSubmit={userForm.onSubmit(handleSubmit)}>
         <Group align="start" mt={'md'}>
@@ -107,12 +131,12 @@ const Me = ({ user }: MeProps) => {
             <Flex direction={'column'} gap={'xl'} mb={32}>
               <TextInput
                 label="Email"
-                placeholder="Your email"
+                placeholder="Email"
                 {...userForm.getInputProps('email')}
               />
               <InputBase
-                label="Phone_number"
-                placeholder="Your phone_number"
+                label="Phone"
+                placeholder="Phone number"
                 component={IMaskInput}
                 mask="+33 0 00 00 00 00"
                 {...userForm.getInputProps('phone_number')}

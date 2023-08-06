@@ -1,6 +1,6 @@
+import { getUserByToken } from "@/api/authentication.api";
 import { PullStateInstance } from "@/pullstate.core";
 import { KyInstance } from "ky/distribution/types/ky";
-import { getUserByToken } from "../../api/account.api";
 import { AccountStoreType } from "./AccountStore";
 
 // Verify user token
