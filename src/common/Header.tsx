@@ -105,13 +105,19 @@ const useStyles = createStyles((theme) => ({
   },
 
   hiddenMobile: {
-    [theme.fn.smallerThan('sm')]: {
+    [theme.fn.smallerThan('md')]: {
+      display: 'none',
+    },
+  },
+
+  hiddenMobileLg: {
+    [theme.fn.smallerThan('lg')]: {
       display: 'none',
     },
   },
 
   hiddenDesktop: {
-    [theme.fn.largerThan('sm')]: {
+    [theme.fn.largerThan('md')]: {
       display: 'none',
     },
   },
@@ -183,7 +189,11 @@ export function HeaderSection() {
               src={'/logo.png'}
               width={150}
             />
-            <Button variant="light" leftIcon={<IconSquarePlus size={20} />}>
+            <Button
+              className={classes.hiddenMobileLg}
+              variant="light"
+              leftIcon={<IconSquarePlus size={20} />}
+            >
               Déposer une annonce
             </Button>
           </Group>
@@ -254,7 +264,9 @@ export function HeaderSection() {
           <Group className={classes.hiddenMobile}>
             {logged ? (
               <>
-                <LanguageSelector />
+                <Box className={classes.hiddenMobileLg}>
+                  <LanguageSelector />
+                </Box>
                 <Menu shadow="md" width={200}>
                   <Menu.Target>
                     <Button>{user?.email}</Button>

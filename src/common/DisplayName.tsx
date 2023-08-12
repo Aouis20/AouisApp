@@ -8,6 +8,7 @@ type DisplayNameProps = {
 
 const DisplayName = (props: DisplayNameProps) => {
   const { user } = props;
+  console.log('🚀 ~ file: DisplayName.tsx:11 ~ DisplayName ~ user:', user);
   const name = user.username
     ? user.username
     : _.upperFirst(user.first_name) + ' ' + user.last_name?.toUpperCase();

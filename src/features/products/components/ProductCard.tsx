@@ -199,7 +199,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             {/* Think about a new feature to make proposal */}
           </Flex>
           <Text color="gray" fs={'italic'} fz={'sm'}>
-            <DisplayName user={product.user} />
+            <DisplayName user={product.owner} />
           </Text>
         </Group>
       </Flex>

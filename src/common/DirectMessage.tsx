@@ -37,7 +37,7 @@ const DirectMessage = ({ product }: MessageProps) => {
         radius="md"
       >
         <Title size="sm" mb="xs" weight={500}>
-          Envoyer un message à <DisplayName user={product.user} />
+          Envoyer un message à <DisplayName user={product.owner} />
         </Title>
 
         <Textarea

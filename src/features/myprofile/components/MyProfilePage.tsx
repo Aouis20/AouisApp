@@ -11,7 +11,12 @@ import {
   IconUser,
 } from '@tabler/icons-react';
 import Ads from './Tabs/Ads';
+import Favoris from './Tabs/Favoris';
+import Historic from './Tabs/Historic';
 import Me from './Tabs/Me';
+import Messages from './Tabs/Messages';
+import Notifications from './Tabs/Notifications';
+import Settings from './Tabs/Settings';
 
 type MyProfilePageProps = {
   tab: string | null;
@@ -103,41 +108,48 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
               </Badge>
             }
           >
-            Notification
+            Notifications
           </Tabs.Tab>
 
           <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>
-            Parameters
+            Settings
           </Tabs.Tab>
         </Tabs.List>
 
-        {/* PANELS */}
+        {/* TABS CONTENT */}
+        {/* Me */}
         <Tabs.Panel value="profile" pt="xs">
           <Me />
         </Tabs.Panel>
 
+        {/* Ads */}
         <Tabs.Panel value="ads" pt="xs">
           <Ads />
         </Tabs.Panel>
 
-        <Tabs.Panel value="message" pt="xs">
-          Messages
-        </Tabs.Panel>
-
+        {/* Historic */}
         <Tabs.Panel value="historic" pt="xs">
-          Historic
+          <Historic />
         </Tabs.Panel>
 
-        <Tabs.Panel value="notifications" pt="xs">
-          Notification
-        </Tabs.Panel>
-
+        {/* Favoris */}
         <Tabs.Panel value="favoris" pt="xs">
-          Favoris
+          <Favoris />
         </Tabs.Panel>
 
+        {/* Messages */}
+        <Tabs.Panel value="message" pt="xs">
+          <Messages />
+        </Tabs.Panel>
+
+        {/* Notifications */}
+        <Tabs.Panel value="notifications" pt="xs">
+          <Notifications />
+        </Tabs.Panel>
+
+        {/* Settings */}
         <Tabs.Panel value="settings" pt="xs">
-          Parameters
+          <Settings />
         </Tabs.Panel>
       </Tabs>
     </Flex>

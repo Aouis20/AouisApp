@@ -1,22 +1,22 @@
-import { setupPrivateApi } from "@/api";
-import { getProducts } from "@/api/product.api";
-import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
-import { getUserInfo } from "@/features/accounts/account.helper";
-import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
-import ProductList from "@/features/products/components/ProductPage";
-import { PullStateInstance, PullstateCore } from "@/pullstate.core";
-import { HTTPError } from "ky-universal";
-import { GetServerSidePropsContext, NextPage } from "next";
-import Head from "next/head";
-import { useTranslation } from "react-i18next";
+import { setupPrivateApi } from '@/api';
+import { getProducts } from '@/api/product.api';
+import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
+import { getUserInfo } from '@/features/accounts/account.helper';
+import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
+import { ProductPage } from '@/features/products/components/ProductPage';
+import { PullStateInstance, PullstateCore } from '@/pullstate.core';
+import { HTTPError } from 'ky-universal';
+import { GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
   const api = setupPrivateApi(ctx);
 
   try {
-    await getUserInfo(stateInstance, api)
-    
+    await getUserInfo(stateInstance, api);
+
     const products = await getProducts(api);
     stateInstance.stores.ProductStore.update((s) => {
       s.productList = products;
@@ -38,21 +38,23 @@ type ProductsProps = {
 };
 
 const Products: NextPage<ProductsProps> = ({ snapshot }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
-        <title>{t("navigation.products")} | {t("appName")}</title>
+        <title>
+          {t('navigation.products')} | {t('appName')}
+        </title>
         <meta name="description" content="test" />
       </Head>
 
       {/* TODO: Ajouter un visualiseur de la route actuelle () */}
       {/* https://www.lacentrale.fr/occasion-voiture-marque-audi.html */}
       {/* (Accueil/Voiture Audi occasion/Annonces voiture AUDI d'occasion) */}
-      
-      <ProductList />
+
+      <ProductPage />
     </AuthenticatedAppLayout>
   );
 };

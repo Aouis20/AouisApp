@@ -41,8 +41,8 @@ export type Product = {
   payment_type: PaymentType;
   condition: ConditionType;
   price: number;
-  user: User;
   category: Category;
+  owner: User;
 };
 
 export type ProductList = {
