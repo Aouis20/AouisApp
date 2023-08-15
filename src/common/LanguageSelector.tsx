@@ -23,6 +23,7 @@ const LanguageSelector = () => {
     const api = setupPrivateApi();
 
     try {
+      console.log(user);
       const updatedUser = await updateUser(
         user.id,
         { language: language },
@@ -72,13 +73,13 @@ const LanguageSelector = () => {
         <Menu.Label>{t('language.label')}</Menu.Label>
         <Menu.Item
           icon={<ReactCountryFlag countryCode="FR" svg />}
-          onClick={() => handleChangeLanguage('fr')}
+          onClick={() => handleChangeLanguage('FR')}
         >
           {t('language.languages.fr')}
         </Menu.Item>
         <Menu.Item
           icon={<ReactCountryFlag countryCode="GB" svg />}
-          onClick={() => handleChangeLanguage('en')}
+          onClick={() => handleChangeLanguage('EN')}
         >
           {t('language.languages.en')}
         </Menu.Item>

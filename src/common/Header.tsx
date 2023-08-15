@@ -43,7 +43,9 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AccountStore } from '../features/accounts/AccountStore';
 import { removeTokens } from '../features/authentication/tokens.helper';
+import DisplayName from './DisplayName';
 import LanguageSelector from './LanguageSelector';
+import { Target } from 'lucide-react';
 
 const useStyles = createStyles((theme) => ({
   logo: {
@@ -269,7 +271,9 @@ export function HeaderSection() {
                 </Box>
                 <Menu shadow="md" width={200}>
                   <Menu.Target>
-                    <Button>{user?.email}</Button>
+                    <Button>
+                      <DisplayName />
+                    </Button>
                   </Menu.Target>
                   <Menu.Dropdown>
                     <Menu.Label>My Account</Menu.Label>

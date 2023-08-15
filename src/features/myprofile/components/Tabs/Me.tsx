@@ -1,5 +1,7 @@
+import { setupPrivateApi } from '@/api';
+import { updateUser } from '@/api/account.api';
 import { AccountStore } from '@/features/accounts/AccountStore';
-import { SalutationType } from '@/features/accounts/types/User';
+import { SalutationType, User } from '@/features/accounts/types/User';
 import {
   AspectRatio,
   Box,
@@ -9,6 +11,7 @@ import {
   Group,
   Image,
   InputBase,
+  Paper,
   Select,
   Text,
   TextInput,
@@ -30,7 +33,7 @@ const Me = () => {
     return <Text>Veuillez vous authentifier</Text>;
   }
   const { t } = useTranslation('');
-  const userForm = useForm({
+  const userForm = useForm<Partial<User>>({
     initialValues: {
       salutation: user.salutation || '',
       first_name: user.first_name || '',
@@ -61,17 +64,34 @@ const Me = () => {
     userForm.reset();
   };
 
-  const handleSubmit = () => {
-    console.log('handleSubmit');
+  const handleSubmit = async () => {
     // TODO update account
     try {
+      const api = setupPrivateApi();
+      const updatedUser = userForm.values;
+
+      // Keep only updated values
+      // updatedUser.values - user.values
+      for (const key in updatedUser) {
+        if (
+          user.hasOwnProperty(key) &&
+          (updatedUser as any)[key] === (user as any)[key]
+        ) {
+          delete (updatedUser as any)[key];
+        }
+      }
+
+      const newUser = await updateUser(user.id, updatedUser, api);
+      AccountStore.update((s) => {
+        s.user = newUser;
+      });
+
       showNotification({
         title: 'Account Updated',
         message: 'Account has been successfully updated',
         color: 'green',
       });
     } catch (err) {
-      console.log(err);
       showNotification({
         title: 'Error updating account',
         message: 'An error has occurred while updating your account',
@@ -82,11 +102,13 @@ const Me = () => {
 
   return (
     <Container size={'2xl'}>
-      <Title order={2}>Mon compte</Title>
-      <Text>Retrouvez ici, vos informations confidentielles.</Text>
+      <Paper shadow="sm" radius="md" p="lg" withBorder mb={'lg'}>
+        <Title order={2}>Mon compte</Title>
+        <Text>Retrouvez ici, vos informations confidentielles.</Text>
+      </Paper>
 
       {/* User Form */}
-      <form onSubmit={userForm.onSubmit(handleSubmit)}>
+      <form>
         <Group align="start" mt={'md'}>
           <Box w={300} sx={{ alignSelf: 'start' }} mt={'sm'} mr={30} mb={32}>
             <AspectRatio ratio={4 / 3} maw={300}>
@@ -184,7 +206,7 @@ const Me = () => {
                 <Button variant="outline" onClick={handleCancel} size="md">
                   Cancel
                 </Button>
-                <Button type="submit" size="md">
+                <Button onClick={handleSubmit} size="md">
                   Save
                 </Button>
               </Group>

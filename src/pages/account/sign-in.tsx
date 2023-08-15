@@ -13,16 +13,16 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: theme.colors.gray[0],
-    height: '100vh'
+    height: '100vh',
   },
   logoSection: {
     padding: theme.spacing.sm,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   logoContainer: {
-    height: '200px'
-  }
+    height: '200px',
+  },
 }));
 
 const SignUp = () => {
@@ -30,11 +30,12 @@ const SignUp = () => {
   const { classes } = useStyles();
 
   // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
-  
+
   return (
     <UnAuthenticatedAppLayout>
       <Head>
         <title>{`${t('appName')} - ${t('navigation.signIn')}`}</title>
+        <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - SignUp" />
       </Head>
 
@@ -42,7 +43,13 @@ const SignUp = () => {
         <AccountCard sx={{ width: '30vw', overflow: 'visible' }}>
           <CardSection className={classes.logoSection}>
             <Box className={classes.logoContainer}>
-              <Image alt={'logo'} src={'/logo.png'} width={200} height={140} style={{ marginTop: '20px'}} />
+              <Image
+                alt={'logo'}
+                src={'/logo.png'}
+                width={200}
+                height={140}
+                style={{ marginTop: '20px' }}
+              />
             </Box>
           </CardSection>
 

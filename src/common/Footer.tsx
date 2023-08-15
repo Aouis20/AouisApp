@@ -21,6 +21,7 @@ const FooterSection = () => {
       px={'lg'}
     >
       <Image
+        sx={{ cursor: 'pointer' }}
         onClick={() => router.push('/')}
         alt={'logo'}
         src={'/logo.png'}
@@ -31,7 +32,7 @@ const FooterSection = () => {
           {t('termsOfService.title')}
         </Anchor>
         <Anchor href="/documents/privacy" c={'gray'} p={'sm'}>
-          {t('privacyPolicy.title')}
+          {t('privacy.title')}
         </Anchor>
         <Anchor href="/documents/cookies" c={'gray'} p={'sm'}>
           {t('cookies.title')}

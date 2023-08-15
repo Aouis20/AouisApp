@@ -37,7 +37,7 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
     <Flex direction={'column'} gap={'xl'}>
       <Paper shadow="sm" radius="md" p="lg" withBorder>
         <Title>
-          Bonjour <DisplayName user={user} /> !
+          Bonjour <DisplayName /> !
         </Title>
         <Text mt={16}>
           Welcome to your profile. Here you will find all the information about

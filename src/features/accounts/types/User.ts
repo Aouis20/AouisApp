@@ -5,12 +5,15 @@ export enum SalutationType {
 
 export type User = {
   id: number;
-  
+  archived_at: string | null;
+
+
   salutation: SalutationType;
   first_name: string | undefined;
   last_name: string | undefined;
   username: string | undefined;
   language: string
+  favoris: [];
 
   email: string;
   phone_number: string;
