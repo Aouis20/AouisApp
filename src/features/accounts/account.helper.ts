@@ -9,4 +9,5 @@ export const getUserInfo = async (stateInstance: PullStateInstance, api: KyInsta
   stateInstance.stores.AccountStore.update((s: AccountStoreType) => {
     s.user = user;
   });
+  return user
 };

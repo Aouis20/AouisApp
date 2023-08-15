@@ -19,6 +19,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IMaskInput } from 'react-imask';
 
@@ -29,6 +30,8 @@ const Salutation = {
 
 const Me = () => {
   const user = AccountStore.useState((s) => s.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   if (!user) {
     return <Text>Veuillez vous authentifier</Text>;
   }
@@ -65,26 +68,27 @@ const Me = () => {
   };
 
   const handleSubmit = async () => {
+    console.log('submitted');
     // TODO update account
+    setIsLoading(true);
     try {
       const api = setupPrivateApi();
       const updatedUser = userForm.values;
 
       // Keep only updated values
       // updatedUser.values - user.values
-      for (const key in updatedUser) {
-        if (
-          user.hasOwnProperty(key) &&
-          (updatedUser as any)[key] === (user as any)[key]
-        ) {
+      Object.entries(updatedUser).forEach(([key, value]) => {
+        if (user.hasOwnProperty(key) && value === (user as any)[key]) {
           delete (updatedUser as any)[key];
         }
-      }
+      });
 
       const newUser = await updateUser(user.id, updatedUser, api);
       AccountStore.update((s) => {
         s.user = newUser;
       });
+      userForm.setValues(newUser);
+      userForm.resetDirty();
 
       showNotification({
         title: 'Account Updated',
@@ -203,10 +207,15 @@ const Me = () => {
                 w={300}
                 sx={{ justifyContent: 'end' }}
               >
-                <Button variant="outline" onClick={handleCancel} size="md">
+                <Button
+                  disabled={isLoading}
+                  variant="outline"
+                  onClick={handleCancel}
+                  size="md"
+                >
                   Cancel
                 </Button>
-                <Button onClick={handleSubmit} size="md">
+                <Button disabled={isLoading} onClick={handleSubmit} size="md">
                   Save
                 </Button>
               </Group>

@@ -1,8 +1,12 @@
 import { Product, ProductList } from '@/features/products/types/Product';
 import { KyInstance } from 'ky/distribution/types/ky';
 
-export const getProducts = async (api: KyInstance): Promise<ProductList> => {
-  const data = await api.get('products/').json<ProductList>();
+export type ProductListFilter = {
+  user_id?: number | null;
+};
+
+export const getProducts = async (page: number, filters: ProductListFilter, api: KyInstance): Promise<ProductList> => {
+  const data = await api.post(`products/?page=${page}`, { json: { filters } }).json<ProductList>();
   return data;
 };
 
@@ -12,6 +16,6 @@ export const getProductById = async (id: number, api: KyInstance): Promise<Produ
 };
 
 export const getProductByPage = async (page: number, api: KyInstance): Promise<ProductList> => {
-  const data = await api.get(`products/?page=${page}`).json<ProductList>();
+  const data = await api.post(`products/?page=${page}`).json<ProductList>();
   return data;
 };

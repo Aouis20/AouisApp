@@ -17,7 +17,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     await getUserInfo(stateInstance, api);
 
-    const products = await getProducts(api);
+    const products = await getProducts(1, {}, api);
     stateInstance.stores.ProductStore.update((s) => {
       s.productList = products;
     });

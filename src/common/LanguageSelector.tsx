@@ -23,7 +23,6 @@ const LanguageSelector = () => {
     const api = setupPrivateApi();
 
     try {
-      console.log(user);
       const updatedUser = await updateUser(
         user.id,
         { language: language },

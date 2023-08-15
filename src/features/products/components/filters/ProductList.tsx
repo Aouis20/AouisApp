@@ -1,5 +1,5 @@
 import { setupPrivateApi } from '@/api';
-import { getProductByPage } from '@/api/product.api';
+import { getProductByPage, getProducts } from '@/api/product.api';
 import { PaginationComponent } from '@/features/common/pagination/Pagination';
 import { Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
@@ -24,7 +24,7 @@ const ProductList = () => {
     // Called when page is changed
     const api = setupPrivateApi();
     setIsLoading(true);
-    const newProductList = await getProductByPage(page, api);
+    const newProductList = await getProducts(page, {}, api);
     ProductStore.update((s) => {
       s.productList = newProductList;
     });
