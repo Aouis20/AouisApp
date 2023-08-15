@@ -1,5 +1,5 @@
 import { setupPrivateApi } from '@/api';
-import { getProductByPage, getProducts } from '@/api/product.api';
+import { getProducts } from '@/api/product.api';
 import { PaginationComponent } from '@/features/common/pagination/Pagination';
 import { Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
