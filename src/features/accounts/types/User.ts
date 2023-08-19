@@ -1,9 +1,28 @@
+export enum SalutationType {
+  MR = 'MR',
+  MRS = 'MRS',
+}
+
 export type User = {
   id: number;
+  archived_at: string | null;
+
+
+  salutation: SalutationType;
+  first_name: string | undefined;
+  last_name: string | undefined;
+  username: string | undefined;
+  language: string
+  favoris: [];
+
   email: string;
-  first_name: string;
-  last_name: string;
-  username: string;
+  phone_number: string;
+
+  address_line1: string | null;
+  address_line2: string | null;
+  city: string | null;
+  state: string | null;
+  postal_code: string | null;
 
   is_staff: boolean;
   is_admin: boolean;

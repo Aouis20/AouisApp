@@ -1,10 +1,10 @@
-import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
-import { Box, CardSection, createStyles } from '@mantine/core';
-import Image from 'next/image';
-import { AccountCard } from '@/features/accounts/components/AccountCard';
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
-import { SignUpForm } from '@/features/accounts/SignUpForm';
+import { AccountCard } from '@/features/accounts/components/AccountCard';
+import { SignUpForm } from '@/features/accounts/components/SignUpForm';
+import { Box, CardSection, createStyles } from '@mantine/core';
+import Head from 'next/head';
+import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -13,16 +13,16 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-around',
     backgroundColor: theme.colors.gray[0],
-    height: '100vh'
+    height: '100vh',
   },
   logoSection: {
     padding: theme.spacing.sm,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   logoContainer: {
-    height: '200px'
-  }
+    height: '200px',
+  },
 }));
 
 const SignUp = () => {
@@ -33,6 +33,7 @@ const SignUp = () => {
     <UnAuthenticatedAppLayout>
       <Head>
         <title>{`${t('appName')} - ${t('navigation.signIn')}`}</title>
+        <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - SignUp" />
       </Head>
 

@@ -1,16 +1,25 @@
+import { AccountStore } from '@/features/accounts/AccountStore';
 import { User } from '@/features/accounts/types/User';
 import { Text } from '@mantine/core';
 import _ from 'lodash';
 
 type DisplayNameProps = {
-  user: User;
+  user?: User;
 };
 
+// Render username by preference
+// If a user is specified => other account
+// Else its the current user
 const DisplayName = (props: DisplayNameProps) => {
-  const { user } = props;
-  const name = user.username
+  let user;
+  if (props.user) {
+    user = props.user;
+  } else {
+    user = AccountStore.useState((s) => s.user);
+  }
+  const name = user?.username
     ? user.username
-    : _.upperFirst(user.first_name) + ' ' + user.last_name.toUpperCase();
+    : _.upperFirst(user?.first_name) + ' ' + user?.last_name?.toUpperCase();
   return <Text span>{name}</Text>;
 };
 

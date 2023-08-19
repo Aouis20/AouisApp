@@ -1,13 +1,13 @@
 import { setupPrivateApi } from '@/api';
-import { getProducts } from '@/api/product.api';
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/account.helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import { ProductPage } from '@/features/products/components/ProductPage';
+import MyProfilePage from '@/features/myprofile/components/MyProfilePage';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -16,11 +16,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     await getUserInfo(stateInstance, api);
-
-    const products = await getProducts(1, {}, api);
-    stateInstance.stores.ProductStore.update((s) => {
-      s.productList = products;
-    });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
@@ -33,29 +28,28 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type ProductsProps = {
+type MyProfileProps = {
   snapshot: PullStateInstance;
 };
 
-const Products: NextPage<ProductsProps> = ({ snapshot }) => {
+const MyProfile: NextPage<MyProfileProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
+  const router = useRouter();
+  const tab = router.query.tab;
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.products')} | {t('appName')}
+          {t('appName')} | {t('navigation.myAccount')}
         </title>
         <meta name="description" content="test" />
       </Head>
 
-      {/* TODO: Ajouter un visualiseur de la route actuelle () */}
-      {/* https://www.lacentrale.fr/occasion-voiture-marque-audi.html */}
-      {/* (Accueil/Voiture Audi occasion/Annonces voiture AUDI d'occasion) */}
-
-      <ProductPage />
+      <MyProfilePage tab={tab as string} />
     </AuthenticatedAppLayout>
   );
 };
-export default Products;
+
+export default MyProfile;

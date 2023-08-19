@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Paper, Space, Text } from '@mantine/core';
+import { Button, Container, Group, Paper } from '@mantine/core';
 import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
@@ -45,27 +45,18 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       </Head>
 
       <Container size={'md'}>
-        <Container pb={40}>
-          <Flex justify={'center'} gap={'xl'}>
+        <Paper shadow="sm" p="xl">
+          <Group position="center" spacing={'xl'}>
             <Button fz={'xl'} w={140} h={44}>
               Acheter
             </Button>
-            <Space w="xl" />
             <Button fz={'xl'} w={140} h={44}>
               Vendre
             </Button>
-            <Space w="xl" />
             <Button fz={'xl'} w={140} h={44}>
               Echanger
             </Button>
-          </Flex>
-        </Container>
-        <Paper shadow="sm" p="md">
-          <Text>Paper is the most basic ui component</Text>
-          <Text>
-            Use it to create cards, dropdowns, modals and other components that
-            require background with shadow
-          </Text>
+          </Group>
         </Paper>
       </Container>
     </AuthenticatedAppLayout>

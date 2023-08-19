@@ -143,7 +143,7 @@ const ProductDetailsPage = () => {
             <Flex direction={'column'} gap={4}>
               <>
                 <Title order={3}>
-                  <DisplayName user={product.user} />
+                  <DisplayName user={product.owner} />
                 </Title>
                 <Anchor>6 annonces</Anchor>
               </>

@@ -1,7 +1,7 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
+import { initReactI18next } from 'react-i18next';
 
 const env = process.env.NODE_ENV;
 const isProduction = env === 'production';
@@ -13,11 +13,10 @@ i18n
   .use(LanguageDetector)
   .init({
     fallbackLng: 'fr',
-    supportedLngs: ['fr'],
+    supportedLngs: ['fr','en'],
     debug: false,
-    // Should only contain common & features namespaces
-    ns: ['common'],
-    defaultNS: ['common', 'account'],
+    ns: ['common', 'account', 'documents'],
+    defaultNS: 'common',
     interpolation: {
       escapeValue: false
     },

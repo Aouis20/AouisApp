@@ -1,13 +1,13 @@
-import { useForm } from '@mantine/form';
-import { useTranslation } from 'react-i18next';
-import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
-import { useRouter } from 'next/router';
-import { showNotification } from '@mantine/notifications';
-import { HTTPError } from 'ky';
-import { signInUser } from '@/api/account.api';
 import { setupPrivateApi } from '@/api';
 import { setTokens } from '@/features/authentication/tokens.helper';
+import { Button, Group, Text, TextInput, createStyles } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { HTTPError } from 'ky';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { SignInPayloadType } from '../types/SignIn';
+import { signInUser } from '@/api/authentication.api';
 
 const useStyle = createStyles((theme) => ({
   form: {
