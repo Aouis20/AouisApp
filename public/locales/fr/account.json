@@ -46,17 +46,6 @@
       "message": "Bonne continuation."
     }
   },
-  "tenantSwitch": {
-    "button": "Compte client",
-    "form": {
-      "label": "Compte Client",
-      "button": "Changer de compte"
-    },
-    "notification": {
-      "successTitle": "Changement de compte client",
-      "successMessage": "Vous avez changé de compte client, vous êtes maintenant sur le {{tenant}}"
-    }
-  },
   "language": {
     "title": "Langues",
     "label": "Séléctionnez une langue",

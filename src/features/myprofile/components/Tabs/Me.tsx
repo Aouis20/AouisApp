@@ -68,8 +68,6 @@ const Me = () => {
   };
 
   const handleSubmit = async () => {
-    console.log('submitted');
-    // TODO update account
     setIsLoading(true);
     try {
       const api = setupPrivateApi();

@@ -15,6 +15,8 @@ type FiltersProps = {
 };
 
 const Filters = ({ open }: FiltersProps) => {
+  const totalItems = ProductStore.useState((s) => s.productList?.total_items);
+
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const filters = ProductStore.useState((s) => s.filters);
   const [initialFilters, setInitialFilters] = useState(filters);
@@ -67,7 +69,7 @@ const Filters = ({ open }: FiltersProps) => {
           </HoverCard>
         </Group>
 
-        <Badge>annonces</Badge>
+        <Badge>{totalItems} annonces</Badge>
       </Group>
     </Paper>
   );

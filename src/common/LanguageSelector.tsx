@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next';
 const LanguageSelector = () => {
   const { t } = useTranslation('account');
   const user = AccountStore.useState((s) => s.user);
-  const currentLanguage: Record<string, JSX.Element> = {
-    fr: <ReactCountryFlag countryCode="FR" svg />,
-    en: <ReactCountryFlag countryCode="GB" svg />,
+  const languageDict: Record<string, JSX.Element> = {
+    FR: <ReactCountryFlag countryCode="FR" svg />,
+    EN: <ReactCountryFlag countryCode="GB" svg />,
   };
 
   const handleChangeLanguage = async (language: string) => {
@@ -58,7 +58,7 @@ const LanguageSelector = () => {
           variant="outline"
           leftIcon={
             user?.language ? (
-              currentLanguage[user.language]
+              languageDict[user.language]
             ) : (
               <IconWorld size={14} />
             )

@@ -1,6 +1,7 @@
 import { AccountStore } from '@/features/accounts/AccountStore';
 import ProductList from '@/features/products/components/filters/ProductList';
 import { Container, Paper, Text, Title } from '@mantine/core';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Ads = () => {

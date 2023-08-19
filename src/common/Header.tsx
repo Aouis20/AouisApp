@@ -1,3 +1,5 @@
+import { setupPrivateApi } from '@/api';
+import { getCategories } from '@/api/category.api';
 import { CategoryStore } from '@/features/categories/CategoryStore';
 import {
   Anchor,
@@ -45,7 +47,6 @@ import { AccountStore } from '../features/accounts/AccountStore';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import DisplayName from './DisplayName';
 import LanguageSelector from './LanguageSelector';
-import { Target } from 'lucide-react';
 
 const useStyles = createStyles((theme) => ({
   logo: {
@@ -136,16 +137,24 @@ export function HeaderSection() {
   const user = AccountStore.useState((s) => s.user);
   const categoryList = CategoryStore.useState((s) => s.categoryList);
 
-  const categories = categoryList.map((category) => ({
-    icon: IconCode,
-    description: 'Bienvenue sur la category ici',
-    ...category,
-  }));
+  const fetchCategories = async () => {
+    const api = setupPrivateApi();
+    const categories = await getCategories(api);
+    CategoryStore.update((s) => {
+      s.categoryList = categories;
+    });
+    console.log(categoryList);
+  };
 
   useEffect(() => {
     if (user) {
       return setLogged(true);
     }
+
+    if (!categoryList.length) {
+      fetchCategories();
+    }
+    console.log('oui');
   }, []);
 
   const signOut = () => {
@@ -159,6 +168,18 @@ export function HeaderSection() {
 
     router.replace('/account/sign-in');
   };
+
+  const truc = [
+    { id: 1, title: 'Category1' },
+    { id: 2, title: 'Category2' },
+    { id: 3, title: 'Category3' },
+  ];
+
+  const categories = truc.map((category) => ({
+    icon: IconCode,
+    description: 'Bienvenue sur la category ici',
+    ...category,
+  }));
 
   const renderCategories = categories.map((category, index) => (
     <UnstyledButton className={classes.subLink} key={index}>
@@ -195,6 +216,7 @@ export function HeaderSection() {
               className={classes.hiddenMobileLg}
               variant="light"
               leftIcon={<IconSquarePlus size={20} />}
+              onClick={() => router.push('/products/create')}
             >
               Déposer une annonce
             </Button>
@@ -230,9 +252,7 @@ export function HeaderSection() {
               <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
                 <Group position="apart" px="md">
                   <Text fw={500}>Catégories</Text>
-                  <Anchor href="/categories" fz="xs">
-                    View all
-                  </Anchor>
+                  <Anchor href="/categories">View all</Anchor>
                 </Group>
 
                 <Divider
@@ -247,14 +267,11 @@ export function HeaderSection() {
 
                 <div className={classes.dropdownFooter}>
                   <Group position="apart">
-                    <div>
+                    <Box>
                       <Text fw={500} fz="sm">
                         Get started
                       </Text>
-                      <Text size="xs" color="dimmed">
-                        Their food sources have decreased, and their numbers
-                      </Text>
-                    </div>
+                    </Box>
                     <Button variant="default">Get started</Button>
                   </Group>
                 </div>

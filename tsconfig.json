@@ -23,6 +23,14 @@
         "src/*"
       ]
     },
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": ["react", "react-dom"],
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
