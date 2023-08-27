@@ -1,9 +1,7 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
-import { AccountCard } from '@/features/accounts/components/AccountCard';
-import { SignUpForm } from '@/features/accounts/components/SignUpForm';
-import { Box, CardSection, createStyles } from '@mantine/core';
+import LoginPage from '@/features/authentication/components/LoginPage';
+import { createStyles } from '@mantine/core';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
@@ -25,9 +23,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const Login = () => {
   const { t } = useTranslation();
   const { classes } = useStyles();
+
+  // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
 
   return (
     <UnAuthenticatedAppLayout>
@@ -37,19 +37,9 @@ const SignUp = () => {
         <meta name="description" content="Aouis - SignUp" />
       </Head>
 
-      <Box className={classes.container}>
-        <AccountCard sx={{ width: '30vw', overflow: 'visible' }}>
-          <CardSection className={classes.logoSection}>
-            <Box className={classes.logoContainer}>
-              <Image alt={'logo'} src={'/logo.png'} height={200} width={200} />
-            </Box>
-          </CardSection>
-
-          <SignUpForm />
-        </AccountCard>
-      </Box>
+      <LoginPage />
     </UnAuthenticatedAppLayout>
   );
 };
 
-export default SignUp;
+export default Login;

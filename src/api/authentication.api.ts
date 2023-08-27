@@ -1,11 +1,10 @@
 import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/RefreshToken';
-import { SignInPayloadType } from '@/features/accounts/types/SignIn';
 import { User } from '@/features/accounts/types/User';
 import { KyInstance } from 'ky/distribution/types/ky';
 import { TokensType } from '../features/authentication/tokens.helper';
+import { LoginPayloadType } from '@/features/accounts/types/SignIn';
 
-// rome-ignore lint/suspicious/noExplicitAny: for build process
-export const signInUser = async (payload: SignInPayloadType, api: KyInstance): Promise<any> => {
+export const loginUser = async (payload: LoginPayloadType, api: KyInstance): Promise<any> => {
   const data = await api.post('auth/token/', { json: payload }).json<any>();
   return data;
 };

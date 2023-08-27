@@ -34,11 +34,7 @@
     "password-This field is required.": "Le mot de passe est obligatoire.",
     "password-This password is too short. It must contain at least 8 characters.": "Le mot de passe est trop court.",
     "confirmation-This field is required.": "La confirmation de mot de passe est obligatoire.",
-    "confirmation-Password and Confirmation do not match": "La confirmation et le mot de passe de correspondent pas.",
-    "token": {
-      "title": "Cette invitation a expirée",
-      "message": "Cette invitation a expirée, demandez à votre contact de la renouveler"
-    }
+    "confirmation-Password and Confirmation do not match": "La confirmation et le mot de passe de correspondent pas."
   },
   "signOutSuccess": {
     "notification": {

@@ -1,4 +1,5 @@
 import { setupPrivateApi } from '@/api';
+import { signInUser } from '@/api/authentication.api';
 import { setTokens } from '@/features/authentication/tokens.helper';
 import { Button, Group, Text, TextInput, createStyles } from '@mantine/core';
 import { useForm } from '@mantine/form';
@@ -6,8 +7,7 @@ import { showNotification } from '@mantine/notifications';
 import { HTTPError } from 'ky';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { SignInPayloadType } from '../types/SignIn';
-import { signInUser } from '@/api/authentication.api';
+import { LoginPayloadType } from '../types/SignIn';
 
 const useStyle = createStyles((theme) => ({
   form: {
@@ -31,14 +31,14 @@ export const SignInForm = () => {
   const { classes } = useStyle();
   const router = useRouter();
 
-  const form = useForm<SignInPayloadType>({
+  const form = useForm<LoginPayloadType>({
     initialValues: {
       email: '',
       password: '',
     },
   });
 
-  const submitSignInForm = async (values: SignInPayloadType) => {
+  const submitSignInForm = async (values: LoginPayloadType) => {
     const api = setupPrivateApi();
 
     try {

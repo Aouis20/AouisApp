@@ -1,4 +1,13 @@
-import { Button, Container, Group, Paper } from '@mantine/core';
+import {
+  Accordion,
+  Button,
+  Container,
+  Flex,
+  Group,
+  Paper,
+  Text,
+  Title,
+} from '@mantine/core';
 import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
@@ -46,7 +55,10 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
 
       <Container size={'md'}>
         <Paper shadow="sm" p="xl">
-          <Group position="center" spacing={'xl'}>
+          <Title align="center" order={2}>
+            Je souhaite...
+          </Title>
+          <Group position="center" spacing={'xl'} mt={'md'}>
             <Button fz={'xl'} w={140} h={44}>
               Acheter
             </Button>
@@ -58,6 +70,80 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
             </Button>
           </Group>
         </Paper>
+        <Flex direction={'column'} gap={'lg'} mt={'xl'}>
+          <Title>Qu'est-ce que Aouis ?</Title>
+          <Text>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
+            voluptatem adipisci amet similique, eius eos animi, ab, minus
+            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
+            eaque vitae aspernatur!
+          </Text>
+
+          <Title>Comment ça marche ?</Title>
+          <Text>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
+            voluptatem adipisci amet similique, eius eos animi, ab, minus
+            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
+            eaque vitae aspernatur!
+          </Text>
+
+          <Title>FAQ</Title>
+          <Accordion variant="separated" radius="md" chevronPosition="left">
+            <Accordion.Item value="transactions">
+              <Accordion.Control>
+                Comment acheter ou vendre un produit ?
+              </Accordion.Control>
+              <Accordion.Panel>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                sunt perspiciatis rerum sequi aliquam, doloremque impedit
+                corrupti magnam voluptatum fuga dolorem facilis consequatur at
+                blanditiis est iste porro quasi veniam.
+              </Accordion.Panel>
+            </Accordion.Item>
+
+            <Accordion.Item value="payments">
+              <Accordion.Control>
+                Quelles moyens de paiement ?
+              </Accordion.Control>
+              <Accordion.Panel>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                sunt perspiciatis rerum sequi aliquam, doloremque impedit
+                corrupti magnam voluptatum fuga dolorem facilis consequatur at
+                blanditiis est iste porro quasi veniam.
+              </Accordion.Panel>
+            </Accordion.Item>
+
+            <Accordion.Item value="lost">
+              <Accordion.Control>
+                Le colis est perdu comment faire ?
+              </Accordion.Control>
+              <Accordion.Panel>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                sunt perspiciatis rerum sequi aliquam, doloremque impedit
+                corrupti magnam voluptatum fuga dolorem facilis consequatur at
+                blanditiis est iste porro quasi veniam.
+              </Accordion.Panel>
+            </Accordion.Item>
+
+            <Accordion.Item value="security">
+              <Accordion.Control>Est-ce sécurisé ?</Accordion.Control>
+              <Accordion.Panel>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                labore eos dolor beatae iste. Perspiciatis saepe omnis fugit
+                repellendus sunt. Aperiam aliquid deserunt asperiores dolorem
+                inventore ullam iste mollitia! Rem.
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
+
+          <Title>Nous contacter</Title>
+          <Text>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
+            voluptatem adipisci amet similique, eius eos animi, ab, minus
+            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
+            eaque vitae aspernatur!
+          </Text>
+        </Flex>
       </Container>
     </AuthenticatedAppLayout>
   );

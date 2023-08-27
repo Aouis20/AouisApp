@@ -1,9 +1,7 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
-import { AccountCard } from '@/features/accounts/components/AccountCard';
-import { SignInForm } from '@/features/accounts/components/SignInForm';
-import { Box, CardSection, createStyles } from '@mantine/core';
+import SignInPage from '@/features/authentication/components/SignInPage';
+import { createStyles } from '@mantine/core';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
@@ -25,7 +23,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignIn = () => {
   const { t } = useTranslation();
   const { classes } = useStyles();
 
@@ -39,25 +37,9 @@ const SignUp = () => {
         <meta name="description" content="Aouis - SignUp" />
       </Head>
 
-      <Box className={classes.container}>
-        <AccountCard sx={{ width: '30vw', overflow: 'visible' }}>
-          <CardSection className={classes.logoSection}>
-            <Box className={classes.logoContainer}>
-              <Image
-                alt={'logo'}
-                src={'/logo.png'}
-                width={200}
-                height={140}
-                style={{ marginTop: '20px' }}
-              />
-            </Box>
-          </CardSection>
-
-          <SignInForm />
-        </AccountCard>
-      </Box>
+      <SignInPage />
     </UnAuthenticatedAppLayout>
   );
 };
 
-export default SignUp;
+export default SignIn;
