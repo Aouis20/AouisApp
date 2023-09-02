@@ -29,22 +29,22 @@ const LanguageSelector = () => {
         api
       );
       i18next.changeLanguage(language);
+      i18next.reloadResources();
       AccountStore.update((s) => {
         s.user = updatedUser;
       });
-      i18next.reloadResources();
       showNotification({
-        title: t('language.notification.successTitle'),
-        message: t('language.notification.successMessage', {
-          language: t(`language.languages.${String(language)}`),
+        title: t('languageSelector.notifications.success.title'),
+        message: t('languageSelector.notifications.success.message', {
+          language: t(`languageSelector.languages.${String(language)}`),
         }),
         color: 'green',
       });
     } catch (err) {
       showNotification({
-        title: t('language.notification.errorTitle'),
-        message: t('language.notification.errorMessage', {
-          language: t(`language.languages.${String(language)}`),
+        title: t('languageSelector.notifications.error.title'),
+        message: t('languageSelector.notifications.error.message', {
+          language: t(`languageSelector.languages.${String(language)}`),
         }),
         color: 'red',
       });
@@ -64,23 +64,23 @@ const LanguageSelector = () => {
             )
           }
         >
-          {t('language.title')}
+          {t('languageSelector.title')}
         </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
-        <Menu.Label>{t('language.label')}</Menu.Label>
+        <Menu.Label>{t('languageSelector.label')}</Menu.Label>
         <Menu.Item
           icon={<ReactCountryFlag countryCode="FR" svg />}
           onClick={() => handleChangeLanguage('FR')}
         >
-          {t('language.languages.fr')}
+          {t('languageSelector.languages.fr')}
         </Menu.Item>
         <Menu.Item
           icon={<ReactCountryFlag countryCode="GB" svg />}
           onClick={() => handleChangeLanguage('EN')}
         >
-          {t('language.languages.en')}
+          {t('languageSelector.languages.en')}
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>

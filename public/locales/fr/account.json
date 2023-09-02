@@ -1,74 +1,83 @@
 {
-  "signInFormTitle": "Formulaire de connexion",
-  "signInForm": {
-    "emailAddressLabel": "Adresse E-mail",
-    "passwordLabel": "Mot de passe",
-    "submitButton": "Se connecter"
-  },
-  "signInSuccess": {
-    "notification": {
-      "title": "Bienvenue !",
-      "message": "Connexion réussi."
+  "authentication": {
+    "form": {
+      "email": "Email",
+      "password": "Mot de passe",
+      "passwordConfirmation": "Confirmer le mot de passe",
+      "orContinueWith": "SINON CONTINUER AVEC",
+      "byClicking": "En cliquant, vous acceptez nos",
+      "termsOfService": "conditions de service",
+      "andOur": "et notre",
+      "privacyPolicy": "politique de confidentialité."
+    },
+    "login" : {
+      "pageTitle": "Connectez-vous à votre compte",
+      "text": "Veuillez remplir les champs afin de vous connecter.",
+      "form": {
+        "submit": "Se connecter",
+        "missingAccount": "Vous n'avez pas de compte ?",
+        "register": "Crée mon compte"
+      },
+      "notifications": {
+        "success": {
+          "title": "Connexion réussie",
+          "message": "Vous êtes maintenant connecté"
+        },
+        "error": {
+          "title": "Connexion échouée",
+          "message": "Erreur lors de la connexion"
+        }
+      }
+    },
+    "register": {
+      "pageTitle": "Crée votre compte",
+      "text": "Veuillez remplir les champs afin de vous connecter.",
+      "form": {
+        "submit": "S'inscrire",
+        "existingAccount": "Vous avez déjà un compte ?",
+        "login": "Se connecter"
+      },
+      "notifications": {
+        "success": {
+          "title": "Inscription réussie",
+          "message": "Vous êtes maintenant inscrit"
+        },
+        "error": {
+          "title": "Inscription échouée",
+          "message": "Erreur lors de l'inscription"
+        }
+      }
+    },
+    "logout" : {
+      "notifications": {
+        "success": {
+          "title": "Déconnexion réussie",
+          "message": "Vous êtes maintenant déconnecté"
+        },
+        "error": {
+          "title": "Déconnexion échouée",
+          "message": "Erreur lors de la déconnexion"
+        }
+      }
     }
   },
-  "signInErrors": {
-    "email-No active account found with the given credentials": "L'adresse e-mail est invalide"
-  },
-  "signUpFormTitle": "Créer mon compte",
-  "signUpForm": {
-    "emailAddressLabel": "Adresse E-mail",
-    "passwordLabel": "Mot de passe",
-    "confirmationLabel": "Confirmation du mot de passe",
-    "submitButton": "Créer mon compte"
-  },
-  "signUpSuccess": {
-    "notification": {
-      "title": "Vous êtes maintenant inscrit !",
-      "message": "Vous pouvez à présent vous connecter."
-    }
-  },
-  "signUpErrors": {
-    "email-This field is required.": "L'adresse e-mail est obligatoire.",
-    "email-Enter a valid email address.": "Cette adresse e-mail n'est pas valide.",
-    "email-Email already registered": "Un compte existe déjà avec cette adresse e-mail",
-    "password-This field is required.": "Le mot de passe est obligatoire.",
-    "password-This password is too short. It must contain at least 8 characters.": "Le mot de passe est trop court.",
-    "confirmation-This field is required.": "La confirmation de mot de passe est obligatoire.",
-    "confirmation-Password and Confirmation do not match": "La confirmation et le mot de passe de correspondent pas."
-  },
-  "signOutSuccess": {
-    "notification": {
-      "title": "Vous êtes déconnecté.",
-      "message": "Bonne continuation."
-    }
-  },
-  "language": {
+  "languageSelector": {
     "title": "Langues",
     "label": "Séléctionnez une langue",
     "languages": {
       "fr": "Français",
       "en": "Anglais"
     },
-    "notification": {
-      "successTitle": "Changement de langue",
-      "successMessage": "La langue a été changé en {{language}}",
-      "errorTitle": "Changement de langue",
-      "errorMessage": "Erreur lors du changement de la langue {{language}}"
-    }
-  },
-  "accountMenu": {
-    "application": {
-      "label": "Application",
-      "items": {
-       "myAccount": "Mon compte",
-       "notifications": "Notifications"
-      }
-    },
-    "admin": {
-      "label": "Admin",
-      "items": {
-        "forms": "Formulaires"
+    "notifications": {
+      "success": {
+          "title": "Changement de langue",
+          "message": "La langue a été changé en {{language}}."
+        },
+      "error": {
+        "title": "Erreur au changement de langue",
+        "message": "Erreur lors du changement de la langue en {{language}}"
       }
     }
   }
+
 }

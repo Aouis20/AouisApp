@@ -161,14 +161,15 @@ export function HeaderSection() {
     removeTokens();
 
     showNotification({
-      title: t('account:signOutSuccess.notification.title'),
-      message: t('account:signOutSuccess.notification.message'),
+      title: t('account:authentication.logout.notifications.title'),
+      message: t('account:authentication.logout.notifications.message'),
       color: 'gray',
     });
 
     router.replace('/account/login');
   };
 
+  // TODO get categories
   const truc = [
     { id: 1, title: 'Category1' },
     { id: 2, title: 'Category2' },

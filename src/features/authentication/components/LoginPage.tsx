@@ -1,56 +1,43 @@
-import { Image } from '@mantine/core';
+import LanguageSelector from '@/common/LanguageSelector';
+import { Group } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
+import LeftPanel from './LeftPanel';
 import LoginForm from './LoginForm';
 
 const LoginPage = () => {
   const router = useRouter();
+  const { t } = useTranslation('account');
   return (
     // Component from shadcn/ui edited by Aouis
     <div className="container min-h-screen relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left Panel */}
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-indigo-600" />
-        <Image
-          sx={{ cursor: 'pointer' }}
-          alt={'logo'}
-          src={'/logo.png'}
-          width={150}
-          onClick={() => router.reload()}
-        />
-        <Image src={'/assets/aouis-pros.svg'} />
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              &ldquo;En échangeant, nous comblons les lacunes de nos possessions
-              et élargissons nos horizons.&rdquo;
-            </p>
-            <footer className="text-sm">Juliet Schor</footer>
-          </blockquote>
-        </div>
-      </div>
+      <LeftPanel />
 
       {/* Right Panel */}
       <div className="lg:p-8">
+        <Group position="center" my={'xl'}>
+          <LanguageSelector />
+        </Group>
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <LoginForm />
           {/* Terms and privacy */}
           <p className="px-8 text-center text-sm text-muted-foreground">
-            By clicking continue, you agree to our{' '}
+            {t('authentication.form.byClicking')}{' '}
             <Link
               href="/documents/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Terms of Service
+              {t('authentication.form.termsOfService')}
             </Link>{' '}
-            and{' '}
+            {t('authentication.form.andOur')}{' '}
             <Link
               href="/documents/privacy"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Privacy Policy
+              {t('authentication.form.privacyPolicy')}
             </Link>
-            .
           </p>
         </div>
       </div>

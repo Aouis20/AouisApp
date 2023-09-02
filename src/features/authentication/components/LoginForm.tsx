@@ -7,12 +7,13 @@ import { ShadButton } from '@/shadui/ui/button';
 import { Anchor, Button, Group, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import { t } from 'i18next';
 import router from 'next/router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { setTokens } from '../tokens.helper';
 
 const LoginForm = () => {
+  const { t } = useTranslation('account');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const passwordReggex = new RegExp(
     '^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}[]:;<>,.?~-]).{8,}$'
@@ -44,15 +45,15 @@ const LoginForm = () => {
       router.replace('/');
 
       showNotification({
-        title: t('account:signInSuccess.notification.title'),
-        message: t('account:signInSuccess.notification.message'),
+        title: t('authentication.login.notifications.success.title'),
+        message: t('authentication.login.notifications.success.message'),
         color: 'green',
       });
     } catch (e) {
       console.log(e);
       showNotification({
-        title: 'Error occured',
-        message: 'An error occurred while signing in.',
+        title: t('authentication.login.notifications.error.title'),
+        message: t('authentication.login.notifications.error.message'),
         color: 'red',
       });
     }
@@ -62,10 +63,10 @@ const LoginForm = () => {
       {/* Form Header */}
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Log in to your account
+          {t('authentication.login.pageTitle')}
         </h1>
         <p className="text-sm text-muted-foreground">
-          Please fill in the fields to log in.
+          {t('authentication.login.text')}
         </p>
       </div>
 
@@ -77,7 +78,7 @@ const LoginForm = () => {
               {/* Email */}
               <TextInput
                 id="email"
-                placeholder="Email"
+                placeholder={t('authentication.form.email') as string}
                 type="email"
                 autoCapitalize="none"
                 autoComplete="email"
@@ -91,7 +92,8 @@ const LoginForm = () => {
               <TextInput
                 id="password"
                 type="password"
-                placeholder="Password"
+                placeholder={t('authentication.form.password') as string}
+                autoComplete="password"
                 disabled={isLoading}
                 required={true}
                 {...form.getInputProps('password')}
@@ -105,13 +107,16 @@ const LoginForm = () => {
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Log in with Email
+              {t('authentication.login.form.submit')}
             </Button>
           </div>
         </form>
 
         <p className="text-md text-muted-foreground text-center">
-          Don't have an account yet? <Anchor href="register">Register</Anchor>
+          {t('authentication.login.form.missingAccount')}{' '}
+          <Anchor href="register">
+            {t('authentication.login.form.register')}
+          </Anchor>
         </p>
 
         {/* Divider */}
@@ -121,7 +126,7 @@ const LoginForm = () => {
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
+              {t('authentication.form.orContinueWith')}
             </span>
           </div>
         </div>
