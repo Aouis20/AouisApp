@@ -45,7 +45,7 @@ const Products: NextPage<ProductsProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.products')} | {t('appName')}
+          {t('content:header.navigation.products')} | {t('appName')}
         </title>
         <meta name="description" content="Aouis Products" />
       </Head>

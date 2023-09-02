@@ -6,6 +6,19 @@
     "text2": "Nous traiterons votre demande dans les plus brefs délais."
   },
   "header": {
+    "navigation": {
+        "addAd": "Déposer une annonce",
+        "homepage": "Accueil",
+        "products" : "Produits",
+        "search" : "Rechercher",
+        "users": "Utilisateurs",
+        "categories": "Categories",
+        "customerService": "Service Client",
+        "createAccount": "Créer mon compte",
+        "register": "Inscription",
+        "login": "Connexion",
+        "logout": "Déconnexion"
+    },
     "profileMenu": {
         "profile": "Profile",
         "myAds": "Mes annonces",
@@ -15,6 +28,31 @@
         "messages": "Messages",
         "notifications": "Notifications",
         "settings": "Paramètres"
+    }
+  },
+  "addAd": {
+    "title": "Déposer une annonce",
+    "text": "Créer ici une annonce, vous pourrez la modifier plus tard.",
+    "form": {
+        "type": "Type de l'annonce",
+        "dropzone": {
+            "placeholder": "Glisser des images ici ou cliquer pour séléctionner des images.",
+            "tips": "Les images ne doivent pas excéder plus de 10MB."
+        },
+        "categories": "Categories",
+        "title": "Titre",
+        "description": "Description",
+        "price": "Prix",
+        "priceMethod": "Moyen de paiment",
+        "condition": "Etat",
+        "status": "Status",
+        "visibility": "Visibilité",
+        "visibilityTooltip": "Vous pouvez décider si votre annonce est disponible ou non à la vue de tout le monde.",
+        "submit": "Créer une annonce",
+        "error": {
+            "title": "Le titre doit faire au minimum 2 caractères",
+            "price": "Le prix minimum acceptable est de 0.01€"
+        }
     }
   },
   "homepage": {
@@ -45,6 +83,38 @@
             "question": "Est-ce sécurisé ?",
             "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
         }
+    }
+  },
+  "product": {
+    "paymentTypesFormat": {
+        "UNIQ": "€",
+        "WEEKLY": "€/semaine",
+        "MONTHLY": "€/mois",
+        "YEARLY": "€/an"
+    },
+    "paymentTypes": {
+        "UNIQ": "Permanent",
+        "WEEKLY": "Hebdomadaire",
+        "MONTHLY": "Mensuel",
+        "YEARLY": "Annuel"
+    },
+    "conditionTypes": {
+        "MINT": "Neuf",
+        "EXCELLENT": "Excellent",
+        "GOOD": "Bon",
+        "FAIR": "Moyen",
+        "POOR": "Mauvais"
+    },
+    "statusTypes": {
+        "SOLD": "Vendu",
+        "FOR_SALE": "À vendre",
+        "EXCHANGED": "Echangé",
+        "TO_EXCHANGE": "À échanger",
+        "REFUNDED": "Remboursé",
+        "PENDING_REFUND": "Remboursement en cours",
+        "RESERVED": "Réservé",
+        "PENDING_PAYMENT": "Paiement en attente",
+        "NEGOTIATING": "Négotiation en cours"
     }
   }
 }

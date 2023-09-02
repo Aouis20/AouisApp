@@ -1,8 +1,11 @@
 import { AspectRatio, Box, Image, SimpleGrid, Text } from '@mantine/core';
-import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ImagesDropzone = () => {
+  const { t } = useTranslation('content');
+
   const [files, setFiles] = useState<FileWithPath[]>([]);
 
   const previews = files.map((file, index) => {
@@ -30,12 +33,14 @@ const ImagesDropzone = () => {
       </SimpleGrid>
 
       {/* Dropzone */}
-      <Dropzone accept={IMAGE_MIME_TYPE} onDrop={setFiles}>
-        <Text align="center">
-          Glisser des images ici ou cliquer pour séléctionner des images.
-        </Text>
+      <Dropzone
+        mt={'md'}
+        accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
+        onDrop={setFiles}
+      >
+        <Text align="center">{t('addAd.form.dropzone.placeholder')}</Text>
         <Text align="center" mt={'sm'} fs={'italic'} c={'gray'}>
-          Les images ne doivent pas excéder plus de 10MB.
+          {t('addAd.form.dropzone.tips')}
         </Text>
       </Dropzone>
     </Box>

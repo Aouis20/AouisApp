@@ -32,7 +32,7 @@ const Login = () => {
   return (
     <UnAuthenticatedAppLayout>
       <Head>
-        <title>{`${t('appName')} - ${t('navigation.signIn')}`}</title>
+        <title>{`${t('appName')} - ${t('navigation.register')}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - Login" />
       </Head>

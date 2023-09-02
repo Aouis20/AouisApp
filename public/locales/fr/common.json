@@ -1,24 +1,11 @@
 
 {
   "appName": "Aouis",
-  "navigation": {
-    "homepage": "Accueil",
-    "products" : "Produits",
-    "search" : "Rechercher",
-    "users": "Utilisateurs",
-    "categories": "Categories",
-    "customerService": "Service Client",
-    "createAccount": "Créer mon compte",
-    "register": "Inscription",
-    "login": "Connexion",
-    "logout": "Déconnexion"
-  },
   "myAccount": "Mon compte",
   "viewAll": "Voir tout",
   "buy": "Acheter",
   "sell": "Vendre",
   "exchange": "Echanger",
-  "addAd": "Déposer une annonce",
   "yes": "Oui",
   "no": "Non",
   "save": "Sauvegarder",

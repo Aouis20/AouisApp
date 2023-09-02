@@ -223,28 +223,28 @@ export function HeaderSection() {
               leftIcon={<IconSquarePlus size={20} />}
               onClick={() => router.push('/products/create')}
             >
-              {t('addAd')}
+              {t('content:header.navigation.addAd')}
             </Button>
           </Group>
 
           {/* Middle Section - Nav links */}
           <Group h={'100%'} spacing={0} className={classes.hiddenMobile}>
             <Anchor href="/" className={classes.link}>
-              {t('navigation.homepage')}
+              {t('content:header.navigation.homepage')}
             </Anchor>
             <Anchor href="/search" className={classes.link}>
               <IconSearch size={18} />
-              <Text ml={4}>{t('navigation.search')}</Text>
+              <Text ml={4}>{t('content:header.navigation.search')}</Text>
             </Anchor>
             <Anchor href="/products" className={classes.link}>
-              {t('navigation.products')}
+              {t('content:header.navigation.products')}
             </Anchor>
             <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
                 <Anchor href="/categories" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      {t('navigation.categories')}
+                      {t('content:header.navigation.categories')}
                     </Box>
                     <IconChevronDown
                       size={16}
@@ -256,7 +256,9 @@ export function HeaderSection() {
 
               <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
                 <Group position="apart" px="md">
-                  <Text fw={500}>{t('navigation.categories')}</Text>
+                  <Text fw={500}>
+                    {t('content:header.navigation.categories')}
+                  </Text>
                   <Anchor href="/categories">{t('viewAll')}</Anchor>
                 </Group>
 
@@ -366,7 +368,7 @@ export function HeaderSection() {
                       icon={<IconLogout size={14} />}
                       onClick={logout}
                     >
-                      {t('navigation.logout')}
+                      {t('content:header.navigation.logout')}
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
@@ -377,10 +379,10 @@ export function HeaderSection() {
                   variant="default"
                   onClick={() => router.replace('/account/login')}
                 >
-                  {t('navigation.signIn')}
+                  {t('content:header.navigation.login')}
                 </Button>
                 <Button variant="filled">
-                  {t('navigation.createAccount')}
+                  {t('content:header.navigation.createAccount')}
                 </Button>
               </>
             )}
@@ -437,14 +439,16 @@ export function HeaderSection() {
               <>
                 <Button variant="light">Mon profil</Button>
                 <Button variant="default" onClick={logout}>
-                  {t('navigation.logout')}
+                  {t('content:header.navigation.logout')}
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="default">{t('navigation.signIn')}</Button>
+                <Button variant="default">
+                  {t('content:header.navigation.login')}
+                </Button>
                 <Button variant="filled">
-                  {t('navigation.createAccount')}
+                  {t('content:header.navigation.register')}
                 </Button>
               </>
             )}
