@@ -1,5 +1,5 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
-import SignInPage from '@/features/authentication/components/SignInPage';
+import RegisterPage from '@/features/authentication/components/RegisterPage';
 import { createStyles } from '@mantine/core';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +23,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SignIn = () => {
+const Register = () => {
   const { t } = useTranslation();
   const { classes } = useStyles();
 
@@ -37,9 +37,9 @@ const SignIn = () => {
         <meta name="description" content="Aouis - SignUp" />
       </Head>
 
-      <SignInPage />
+      <RegisterPage />
     </UnAuthenticatedAppLayout>
   );
 };
 
-export default SignIn;
+export default Register;

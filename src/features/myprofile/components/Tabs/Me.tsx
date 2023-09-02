@@ -1,7 +1,7 @@
-import { setupPrivateApi } from '@/api';
-import { updateUser } from '@/api/account.api';
-import { AccountStore } from '@/features/accounts/AccountStore';
+import { updateUser } from '@/features/accounts/api';
+import { AccountStore } from '@/features/accounts/store';
 import { SalutationType, User } from '@/features/accounts/types/User';
+import { setupPrivateApi } from '@/pages/api';
 import {
   AspectRatio,
   Box,

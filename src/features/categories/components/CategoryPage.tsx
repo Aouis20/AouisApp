@@ -1,5 +1,5 @@
 import { Box, Text, Title, createStyles } from '@mantine/core';
-import { CategoryStore } from '../CategoryStore';
+import { CategoryStore } from '../store';
 import { Category } from '../types/Category';
 
 const useStyles = createStyles((theme) => ({

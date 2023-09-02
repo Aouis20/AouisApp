@@ -1,9 +1,9 @@
 import { Image } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import SignInForm from './forms/SignInForm';
+import RegisterForm from './RegisterForm';
 
-const SignInPage = () => {
+const RegisterPage = () => {
   const router = useRouter();
   return (
     <div className="container min-h-screen relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -32,7 +32,7 @@ const SignInPage = () => {
       {/* Right Panel */}
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <SignInForm />
+          <RegisterForm />
           {/* Terms and privacy */}
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{' '}
@@ -57,7 +57,7 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default RegisterPage;
 
 // Citations
 // "En échangeant, nous comblons les lacunes de nos possessions et élargissons nos horizons." - Juliet Schor

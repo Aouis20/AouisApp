@@ -1,8 +1,8 @@
 import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/RefreshToken';
+import { LoginPayloadType } from '@/features/accounts/types/SignIn';
 import { User } from '@/features/accounts/types/User';
 import { KyInstance } from 'ky/distribution/types/ky';
-import { TokensType } from '../features/authentication/tokens.helper';
-import { LoginPayloadType } from '@/features/accounts/types/SignIn';
+import { TokensType } from './tokens.helper';
 
 export const loginUser = async (payload: LoginPayloadType, api: KyInstance): Promise<any> => {
   const data = await api.post('auth/token/', { json: payload }).json<any>();

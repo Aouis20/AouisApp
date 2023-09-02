@@ -1,29 +1,29 @@
-import { setupPrivateApi } from "@/api";
-import { getUserList } from "@/api/account.api";
-import { AuthenticatedAppLayout } from "@/common/AuthenticatedAppLayout";
-import { getUserInfo } from "@/features/accounts/account.helper";
-import AccountList from "@/features/accounts/components/AccountPage";
-import { redirectToLoginProps } from "@/features/authentication/redirect.helper";
-import { PullStateInstance, PullstateCore } from "@/pullstate.core";
-import { Box, createStyles } from "@mantine/core";
-import { HTTPError } from "ky-universal";
-import { GetServerSidePropsContext, NextPage } from "next";
-import Head from "next/head";
-import { useTranslation } from "react-i18next";
+import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
+import { getUserList } from '@/features/accounts/api';
+import AccountList from '@/features/accounts/components/AccountPage';
+import { getUserInfo } from '@/features/accounts/helper';
+import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
+import { setupPrivateApi } from '@/pages/api';
+import { PullStateInstance, PullstateCore } from '@/pullstate.core';
+import { Box, createStyles } from '@mantine/core';
+import { HTTPError } from 'ky-universal';
+import { GetServerSidePropsContext, NextPage } from 'next';
+import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createStyles((theme) => ({
   container: {
-    display: "flex",
-    flexDirection: "column",
-    height: "calc(100vh - 64px)",
-    paddingTop: "32px",
+    display: 'flex',
+    flexDirection: 'column',
+    height: 'calc(100vh - 64px)',
+    paddingTop: '32px',
   },
   boxTitle: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "16px",
-    margin: "0 0 32px 0",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '16px',
+    margin: '0 0 32px 0',
   },
 }));
 
@@ -54,7 +54,7 @@ type UsersPageProps = {
 };
 
 const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const { classes } = useStyles();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
@@ -62,7 +62,7 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t("appName")} | {t("navigation.users")}
+          {t('appName')} | {t('navigation.users')}
         </title>
         <meta name="description" content="test" />
       </Head>

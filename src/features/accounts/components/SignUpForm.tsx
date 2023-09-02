@@ -1,11 +1,11 @@
-import { useForm } from '@mantine/form';
-import { useTranslation } from 'react-i18next';
-import { Text, Group, TextInput, Button, createStyles } from '@mantine/core';
-import { useRouter } from 'next/router';
-import { showNotification } from '@mantine/notifications';
-import { signUpUser } from '@/api/account.api';
-import { setupPrivateApi } from '@/api';
+import { signUpUser } from '@/features/accounts/api';
 import { setTokens } from '@/features/authentication/tokens.helper';
+import { setupPrivateApi } from '@/pages/api';
+import { Button, Group, Text, TextInput, createStyles } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import { SignUpPayloadType } from '../types/SignUp';
 
 const useStyle = createStyles((theme) => ({
@@ -13,16 +13,16 @@ const useStyle = createStyles((theme) => ({
     marginTop: '8px',
 
     '& > div': {
-      marginTop: '8px'
-    }
+      marginTop: '8px',
+    },
   },
   formTitle: {
     fontSize: theme.fontSizes.xl,
-    fontWeight: 600
+    fontWeight: 600,
   },
   formButton: {
-    marginTop: '16px'
-  }
+    marginTop: '16px',
+  },
 }));
 
 export const SignUpForm = () => {
@@ -34,8 +34,8 @@ export const SignUpForm = () => {
     initialValues: {
       email: '',
       password: '',
-      confirmation: ''
-    }
+      confirmation: '',
+    },
   });
 
   const submitSignUpForm = async (values: SignUpPayloadType) => {
@@ -43,7 +43,9 @@ export const SignUpForm = () => {
     const result = await signUpUser(values, api);
 
     if (result?.detail) {
-      form.setErrors({ email: t(`account:signUpErrors.email-${result.detail}`) });
+      form.setErrors({
+        email: t(`account:signUpErrors.email-${result.detail}`),
+      });
     } else {
       setTokens(result);
 
@@ -52,7 +54,7 @@ export const SignUpForm = () => {
       showNotification({
         title: t('account:signUpSuccess.notification.title'),
         message: t('account:signUpSuccess.notification.message'),
-        color: 'green'
+        color: 'green',
       });
     }
   };
@@ -61,7 +63,11 @@ export const SignUpForm = () => {
     <>
       <Text className={classes.formTitle}>{t('account:signUpFormTitle')}</Text>
       <form className={classes.form} onSubmit={form.onSubmit(submitSignUpForm)}>
-        <TextInput label={t('account:signUpForm.emailAddressLabel')} {...form.getInputProps('email')} required={true} />
+        <TextInput
+          label={t('account:signUpForm.emailAddressLabel')}
+          {...form.getInputProps('email')}
+          required={true}
+        />
         <TextInput
           type={'password'}
           label={t('account:signUpForm.passwordLabel')}

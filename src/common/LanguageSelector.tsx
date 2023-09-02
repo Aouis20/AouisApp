@@ -1,6 +1,6 @@
-import { setupPrivateApi } from '@/api';
-import { updateUser } from '@/api/account.api';
-import { AccountStore } from '@/features/accounts/AccountStore';
+import { updateUser } from '@/features/accounts/api';
+import { AccountStore } from '@/features/accounts/store';
+import { setupPrivateApi } from '@/pages/api';
 import { Button, Menu } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconWorld } from '@tabler/icons-react';

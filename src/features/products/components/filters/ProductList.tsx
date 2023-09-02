@@ -1,9 +1,9 @@
-import { setupPrivateApi } from '@/api';
-import { getProducts } from '@/api/product.api';
 import { PaginationComponent } from '@/common/pagination/Pagination';
+import { getProducts } from '@/features/products/api';
+import { setupPrivateApi } from '@/pages/api';
 import { Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
-import { ProductStore } from '../../ProductStore';
+import { ProductStore } from '../../store';
 import ProductCard from '../ProductCard';
 
 const ProductList = () => {

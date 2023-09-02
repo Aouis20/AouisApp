@@ -12,7 +12,7 @@ import {
 import { useListState } from '@mantine/hooks';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import { ProductStore } from '../../ProductStore';
+import { ProductStore } from '../../store';
 
 const PriceFilter = () => {
   const products = ProductStore.useState((s) => s.productList);

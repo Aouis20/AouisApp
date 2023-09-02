@@ -1,1 +1,1 @@
-export const redirectToLoginProps = () => ({ redirect: { destination: '/account/sign-in', permanent: false } });
+export const redirectToLoginProps = () => ({ redirect: { destination: '/account/login', permanent: false } });

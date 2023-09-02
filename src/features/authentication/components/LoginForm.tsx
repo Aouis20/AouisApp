@@ -1,7 +1,7 @@
-import { setupPrivateApi } from '@/api';
-import { signUpUser } from '@/api/account.api';
-import { SignInPayloadType } from '@/features/accounts/types/SignIn';
+import { LoginPayloadType } from '@/features/accounts/types/SignIn';
+import { loginUser } from '@/features/authentication/api';
 import { cn } from '@/lib/utils';
+import { setupPrivateApi } from '@/pages/api';
 import { Icons } from '@/shadui/icons';
 import { ShadButton } from '@/shadui/ui/button';
 import { Anchor, Button, Group, TextInput } from '@mantine/core';
@@ -10,19 +10,18 @@ import { showNotification } from '@mantine/notifications';
 import { t } from 'i18next';
 import router from 'next/router';
 import { useState } from 'react';
-import { setTokens } from '../../tokens.helper';
+import { setTokens } from '../tokens.helper';
 
-const SignInForm = () => {
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const passwordReggex = new RegExp(
     '^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}[]:;<>,.?~-]).{8,}$'
   );
 
-  const form = useForm<SignInPayloadType>({
+  const form = useForm<LoginPayloadType>({
     initialValues: {
       email: '',
       password: '',
-      confirmation: '',
     },
 
     validate: {
@@ -31,23 +30,14 @@ const SignInForm = () => {
         value &&
         !passwordReggex.test(value) &&
         'Votre mot passe doit faire 8 caractères minimum, contenir au minimum une majuscule, un nombre et un caractère spécial.',
-      confirmation: (value) =>
-        value &&
-        !passwordReggex.test(value) &&
-        'Le mot passe doit être identique et faire 8 caractères minimum, contenir au minimum une majuscule, un nombre et un caractère spécial.',
     },
   });
 
-  const SubmitSignInForm = async () => {
-    if (form.values.password !== form.values.confirmation) {
-      form.setFieldError('confirmation', 'Both passwords do not match');
-      return;
-    }
-
+  const SubmitLoginForm = async () => {
     setIsLoading(true);
     const api = setupPrivateApi();
     try {
-      const token = await signUpUser(form.values, api);
+      const token = await loginUser(form.values, api);
 
       setTokens(token);
 
@@ -72,10 +62,10 @@ const SignInForm = () => {
       {/* Form Header */}
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Create your account
+          Log in to your account
         </h1>
         <p className="text-sm text-muted-foreground">
-          Complete the fields to create your account.
+          Please fill in the fields to log in.
         </p>
       </div>
 
@@ -106,32 +96,22 @@ const SignInForm = () => {
                 required={true}
                 {...form.getInputProps('password')}
               />
-
-              {/* Password confirmation */}
-              <TextInput
-                id="confirmation"
-                type="password"
-                placeholder="Confirm password"
-                required={true}
-                disabled={isLoading}
-                {...form.getInputProps('confirmation')}
-              />
             </div>
             <Button
               color={'indigo'}
-              onClick={SubmitSignInForm}
+              onClick={SubmitLoginForm}
               disabled={isLoading}
             >
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Sign In with Email
+              Log in with Email
             </Button>
           </div>
         </form>
 
         <p className="text-md text-muted-foreground text-center">
-          Already have an account? <Anchor href="/account/login">Login</Anchor>
+          Don't have an account yet? <Anchor href="register">Register</Anchor>
         </p>
 
         {/* Divider */}
@@ -183,4 +163,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default LoginForm;

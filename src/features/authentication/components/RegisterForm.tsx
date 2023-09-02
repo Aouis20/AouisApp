@@ -1,7 +1,7 @@
-import { setupPrivateApi } from '@/api';
-import { loginUser } from '@/api/authentication.api';
-import { LoginPayloadType } from '@/features/accounts/types/SignIn';
+import { signUpUser } from '@/features/accounts/api';
+import { SignInPayloadType } from '@/features/accounts/types/SignIn';
 import { cn } from '@/lib/utils';
+import { setupPrivateApi } from '@/pages/api';
 import { Icons } from '@/shadui/icons';
 import { ShadButton } from '@/shadui/ui/button';
 import { Anchor, Button, Group, TextInput } from '@mantine/core';
@@ -10,18 +10,19 @@ import { showNotification } from '@mantine/notifications';
 import { t } from 'i18next';
 import router from 'next/router';
 import { useState } from 'react';
-import { setTokens } from '../../tokens.helper';
+import { setTokens } from '../tokens.helper';
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const passwordReggex = new RegExp(
     '^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}[]:;<>,.?~-]).{8,}$'
   );
 
-  const form = useForm<LoginPayloadType>({
+  const form = useForm<SignInPayloadType>({
     initialValues: {
       email: '',
       password: '',
+      confirmation: '',
     },
 
     validate: {
@@ -30,14 +31,23 @@ const LoginForm = () => {
         value &&
         !passwordReggex.test(value) &&
         'Votre mot passe doit faire 8 caractères minimum, contenir au minimum une majuscule, un nombre et un caractère spécial.',
+      confirmation: (value) =>
+        value &&
+        !passwordReggex.test(value) &&
+        'Le mot passe doit être identique et faire 8 caractères minimum, contenir au minimum une majuscule, un nombre et un caractère spécial.',
     },
   });
 
-  const SubmitLoginForm = async () => {
+  const submitRegisterForm = async () => {
+    if (form.values.password !== form.values.confirmation) {
+      form.setFieldError('confirmation', 'Both passwords do not match');
+      return;
+    }
+
     setIsLoading(true);
     const api = setupPrivateApi();
     try {
-      const token = await loginUser(form.values, api);
+      const token = await signUpUser(form.values, api);
 
       setTokens(token);
 
@@ -62,10 +72,10 @@ const LoginForm = () => {
       {/* Form Header */}
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          Log in to your account
+          Create your account
         </h1>
         <p className="text-sm text-muted-foreground">
-          Please fill in the fields to log in.
+          Complete the fields to create your account.
         </p>
       </div>
 
@@ -96,23 +106,32 @@ const LoginForm = () => {
                 required={true}
                 {...form.getInputProps('password')}
               />
+
+              {/* Password confirmation */}
+              <TextInput
+                id="confirmation"
+                type="password"
+                placeholder="Confirm password"
+                required={true}
+                disabled={isLoading}
+                {...form.getInputProps('confirmation')}
+              />
             </div>
             <Button
               color={'indigo'}
-              onClick={SubmitLoginForm}
+              onClick={submitRegisterForm}
               disabled={isLoading}
             >
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
-              Sign In with Email
+              Register with Email
             </Button>
           </div>
         </form>
 
         <p className="text-md text-muted-foreground text-center">
-          Don't have an account yet?{' '}
-          <Anchor href="/account/sign-in">Sign In</Anchor>
+          Already have an account? <Anchor href="/account/login">Login</Anchor>
         </p>
 
         {/* Divider */}
@@ -164,4 +183,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

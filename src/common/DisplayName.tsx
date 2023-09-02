@@ -1,4 +1,4 @@
-import { AccountStore } from '@/features/accounts/AccountStore';
+import { AccountStore } from '@/features/accounts/store';
 import { User } from '@/features/accounts/types/User';
 import { Text } from '@mantine/core';
 import _ from 'lodash';

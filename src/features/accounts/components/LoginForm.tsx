@@ -1,6 +1,6 @@
-import { setupPrivateApi } from '@/api';
-import { signInUser } from '@/api/authentication.api';
+import { loginUser } from '@/features/authentication/api';
 import { setTokens } from '@/features/authentication/tokens.helper';
+import { setupPrivateApi } from '@/pages/api';
 import { Button, Group, Text, TextInput, createStyles } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
@@ -26,7 +26,7 @@ const useStyle = createStyles((theme) => ({
   },
 }));
 
-export const SignInForm = () => {
+export const LoginForm = () => {
   const { t } = useTranslation();
   const { classes } = useStyle();
   const router = useRouter();
@@ -38,11 +38,11 @@ export const SignInForm = () => {
     },
   });
 
-  const submitSignInForm = async (values: LoginPayloadType) => {
+  const submitLoginForm = async (values: LoginPayloadType) => {
     const api = setupPrivateApi();
 
     try {
-      const token = await signInUser(values, api);
+      const token = await loginUser(values, api);
 
       setTokens(token);
 
@@ -66,7 +66,7 @@ export const SignInForm = () => {
   return (
     <>
       <Text className={classes.formTitle}>{t('account:signInFormTitle')}</Text>
-      <form className={classes.form} onSubmit={form.onSubmit(submitSignInForm)}>
+      <form className={classes.form} onSubmit={form.onSubmit(submitLoginForm)}>
         <TextInput
           label={t('account:signInForm.emailAddressLabel')}
           {...form.getInputProps('email')}

@@ -12,11 +12,11 @@ import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
-import { setupPrivateApi } from '../api';
 import { AuthenticatedAppLayout } from '../common/AuthenticatedAppLayout';
-import { getUserInfo } from '../features/accounts/account.helper';
+import { getUserInfo } from '../features/accounts/helper';
 import { redirectToLoginProps } from '../features/authentication/redirect.helper';
 import { PullStateInstance, PullstateCore } from '../pullstate.core';
+import { setupPrivateApi } from './api';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });

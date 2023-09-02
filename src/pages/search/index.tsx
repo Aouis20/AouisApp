@@ -1,8 +1,8 @@
-import { setupPrivateApi } from '@/api';
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
-import { getUserInfo } from '@/features/accounts/account.helper';
+import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import SearchPage from '@/features/search/components/SearchPage';
+import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';

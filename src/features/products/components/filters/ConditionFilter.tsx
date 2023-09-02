@@ -1,6 +1,6 @@
 import { Badge, Box, Checkbox, Flex, Text, Title } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
-import { ProductStore } from '../../ProductStore';
+import { ProductStore } from '../../store';
 
 const ConditionFilter = () => {
   const products = ProductStore.useState((s) => s.productList);

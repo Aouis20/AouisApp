@@ -1,6 +1,6 @@
 import { Box, Divider, Drawer, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { ProductStore } from '../ProductStore';
+import { ProductStore } from '../store';
 import ProductHeader from './ProductHeader';
 import Filters from './filters/Filters';
 import ProductList from './filters/ProductList';

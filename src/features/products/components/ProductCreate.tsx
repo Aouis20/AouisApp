@@ -1,5 +1,5 @@
 import ImagesDropzone from '@/common/ImagesDropzone';
-import { CategoryStore } from '@/features/categories/CategoryStore';
+import { CategoryStore } from '@/features/categories/store';
 import {
   Container,
   Flex,

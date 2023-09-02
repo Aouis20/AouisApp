@@ -18,7 +18,7 @@ import {
   getStylesRef,
 } from '@mantine/core';
 import { IconHeart, IconMail, IconPhone } from '@tabler/icons-react';
-import { ProductStore } from '../ProductStore';
+import { ProductStore } from '../store';
 import { PaymentType } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';

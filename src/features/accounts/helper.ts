@@ -1,7 +1,7 @@
-import { getUserByToken } from "@/api/authentication.api";
+import { getUserByToken } from "@/features/authentication/api";
 import { PullStateInstance } from "@/pullstate.core";
 import { KyInstance } from "ky/distribution/types/ky";
-import { AccountStoreType } from "./AccountStore";
+import { AccountStoreType } from "./store";
 
 // Verify user token
 export const getUserInfo = async (stateInstance: PullStateInstance, api: KyInstance) => {

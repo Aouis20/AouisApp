@@ -1,5 +1,5 @@
 import DisplayName from '@/common/DisplayName';
-import { AccountStore } from '@/features/accounts/AccountStore';
+import { AccountStore } from '@/features/accounts/store';
 import { Badge, Flex, Paper, Tabs, Text, Title } from '@mantine/core';
 import {
   IconArrowsExchange,

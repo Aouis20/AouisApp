@@ -1,6 +1,6 @@
-import { setupPrivateApi } from '@/api';
-import { getCategories } from '@/api/category.api';
-import { CategoryStore } from '@/features/categories/CategoryStore';
+import { getCategories } from '@/features/categories/api';
+import { CategoryStore } from '@/features/categories/store';
+import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
   Badge,
@@ -43,7 +43,7 @@ import {
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AccountStore } from '../features/accounts/AccountStore';
+import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import DisplayName from './DisplayName';
 import LanguageSelector from './LanguageSelector';
@@ -166,7 +166,7 @@ export function HeaderSection() {
       color: 'gray',
     });
 
-    router.replace('/account/sign-in');
+    router.replace('/account/login');
   };
 
   const truc = [
@@ -377,7 +377,7 @@ export function HeaderSection() {
               <>
                 <Button
                   variant="default"
-                  onClick={() => router.replace('/account/sign-in')}
+                  onClick={() => router.replace('/account/login')}
                 >
                   {t('navigation.signIn')}
                 </Button>

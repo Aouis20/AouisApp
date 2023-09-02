@@ -1,12 +1,12 @@
 import { Image } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import SignInForm from './forms/SignInForm';
-import LoginForm from './forms/LoginForm';
+import LoginForm from './LoginForm';
 
 const LoginPage = () => {
   const router = useRouter();
   return (
+    // Component from shadcn/ui edited by Aouis
     <div className="container min-h-screen relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left Panel */}
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">

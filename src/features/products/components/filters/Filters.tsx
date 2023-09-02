@@ -6,7 +6,7 @@ import {
   IconTag,
 } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
-import { ProductStore } from '../../ProductStore';
+import { ProductStore } from '../../store';
 import ConditionFilter from './ConditionFilter';
 import PriceFilter from './PriceFilter';
 
