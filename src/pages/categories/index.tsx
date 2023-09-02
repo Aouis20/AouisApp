@@ -47,7 +47,7 @@ const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
         <title>
           {t('navigation.categories')} | {t('appName')}
         </title>
-        <meta name="description" content="test" />
+        <meta name="description" content="Aouis Categories" />
       </Head>
 
       <Categories />

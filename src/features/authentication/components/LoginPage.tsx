@@ -46,8 +46,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-// Citations
-// "En échangeant, nous comblons les lacunes de nos possessions et élargissons nos horizons." - Juliet Schor
-// "Dans l'échange, chaque partie trouve de la valeur dans ce qu'elle reçoit et dans ce qu'elle donne." - Michael Phillips
-// "L'échange mutuel conduit à l'enrichissement mutuel." - Lailah Gifty Akita

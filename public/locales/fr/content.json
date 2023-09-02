@@ -1,0 +1,50 @@
+{
+  "contact": {
+    "title": "Nous contacter",
+    "text": "Pour nous contacter, veuillez nous envoyer un mail à l'adresse suivante:",
+    "email": "aouiscontact@gmail.com",
+    "text2": "Nous traiterons votre demande dans les plus brefs délais."
+  },
+  "header": {
+    "profileMenu": {
+        "profile": "Profile",
+        "myAds": "Mes annonces",
+        "transactions": "Transactions",
+        "favorites": "Favoris",
+        "news": "News",
+        "messages": "Messages",
+        "notifications": "Notifications",
+        "settings": "Paramètres"
+    }
+  },
+  "homepage": {
+    "introduction": "Je souhaite...",
+    "p1": {
+        "title": "Qu'est-ce que Aouis ?",
+        "text": "Aouis est une plateforme en ligne qui permet aux utilisateurs de vendre et d'acheter une grande variété de produits et de services, tels que des voitures d'occasion, des meubles, des vêtements, des emplois, et même des locations immobilières."
+    },
+    "p2": {
+        "title": "Comment ça marche ?",
+        "text": "Il fonctionne comme un marché de petites annonces où les utilisateurs peuvent publier leurs annonces gratuitement, interagir avec les acheteurs ou les vendeurs par le biais de messages, et conclure des transactions en personne."
+    },
+    "p3": {
+        "title": "FAQ",
+        "q1": {
+            "question": "Comment acheter ou vendre un produit ?",
+            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+        },
+        "q2": {
+            "question": "Quelles sont les moyens de paiment",
+            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+        },
+        "q3": {
+            "question": "Colis perdu, volé ? Comment faire ?",
+            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+        },
+        "q4": {
+            "question": "Est-ce sécurisé ?",
+            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+        }
+    }
+  }
+}

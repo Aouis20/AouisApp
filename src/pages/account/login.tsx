@@ -34,7 +34,7 @@ const Login = () => {
       <Head>
         <title>{`${t('appName')} - ${t('navigation.signIn')}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
-        <meta name="description" content="Aouis - SignUp" />
+        <meta name="description" content="Aouis - Login" />
       </Head>
 
       <LoginPage />

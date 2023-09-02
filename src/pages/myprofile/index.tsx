@@ -42,9 +42,9 @@ const MyProfile: NextPage<MyProfileProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('appName')} | {t('navigation.myAccount')}
+          {t('appName')} | {t('myAccount')}
         </title>
-        <meta name="description" content="test" />
+        <meta name="description" content="Aouis Profile" />
       </Head>
 
       <MyProfilePage tab={tab as string} />

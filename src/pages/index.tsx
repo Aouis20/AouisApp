@@ -1,5 +1,7 @@
 import {
   Accordion,
+  Anchor,
+  Box,
   Button,
   Container,
   Flex,
@@ -42,13 +44,13 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('content');
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.homepage')} | {t('appName')}
+          {t('common:navigation.homepage')} | {t('common:appName')}
         </title>
         <meta name="description" content="Aouis Homepage" />
       </Head>
@@ -56,93 +58,86 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       <Container size={'md'}>
         <Paper shadow="sm" p="xl">
           <Title align="center" order={2}>
-            Je souhaite...
+            {t('homepage.introduction')}
           </Title>
           <Group position="center" spacing={'xl'} mt={'md'}>
             <Button fz={'xl'} w={140} h={44}>
-              Acheter
+              {t('common:buy')}
             </Button>
             <Button fz={'xl'} w={140} h={44}>
-              Vendre
+              {t('common:sell')}
             </Button>
             <Button fz={'xl'} w={140} h={44}>
-              Echanger
+              {t('common:exchange')}
             </Button>
           </Group>
         </Paper>
-        <Flex direction={'column'} gap={'lg'} mt={'xl'}>
-          <Title>Qu'est-ce que Aouis ?</Title>
-          <Text>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
-            voluptatem adipisci amet similique, eius eos animi, ab, minus
-            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
-            eaque vitae aspernatur!
-          </Text>
+        <Flex direction={'column'} gap={'xl'} mt={'xl'}>
+          {/* What is Aouis */}
+          <Group spacing={'md'}>
+            <Title>{t('homepage.p1.title')}</Title>
+            <Text>{t('homepage.p1.text')}</Text>
+          </Group>
 
-          <Title>Comment ça marche ?</Title>
-          <Text>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
-            voluptatem adipisci amet similique, eius eos animi, ab, minus
-            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
-            eaque vitae aspernatur!
-          </Text>
+          {/* How does it work */}
+          <Group spacing={'md'}>
+            <Title>{t('homepage.p2.title')}</Title>
+            <Text>{t('homepage.p2.text')}</Text>
+          </Group>
 
-          <Title>FAQ</Title>
-          <Accordion variant="separated" radius="md" chevronPosition="left">
-            <Accordion.Item value="transactions">
-              <Accordion.Control>
-                Comment acheter ou vendre un produit ?
-              </Accordion.Control>
-              <Accordion.Panel>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                sunt perspiciatis rerum sequi aliquam, doloremque impedit
-                corrupti magnam voluptatum fuga dolorem facilis consequatur at
-                blanditiis est iste porro quasi veniam.
-              </Accordion.Panel>
-            </Accordion.Item>
+          {/* FAQ */}
+          <Box>
+            <Title mb={'md'}>{t('homepage.p3.title')}</Title>
+            <Accordion variant="separated" radius="md" chevronPosition="left">
+              <Accordion.Item value="transactions">
+                <Accordion.Control>
+                  {t('homepage.p3.q1.question')}
+                </Accordion.Control>
+                <Accordion.Panel>
+                  {t('homepage.p3.q1.response')}
+                </Accordion.Panel>
+              </Accordion.Item>
 
-            <Accordion.Item value="payments">
-              <Accordion.Control>
-                Quelles moyens de paiement ?
-              </Accordion.Control>
-              <Accordion.Panel>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                sunt perspiciatis rerum sequi aliquam, doloremque impedit
-                corrupti magnam voluptatum fuga dolorem facilis consequatur at
-                blanditiis est iste porro quasi veniam.
-              </Accordion.Panel>
-            </Accordion.Item>
+              <Accordion.Item value="payments">
+                <Accordion.Control>
+                  {t('homepage.p3.q2.question')}
+                </Accordion.Control>
+                <Accordion.Panel>
+                  {t('homepage.p3.q2.response')}
+                </Accordion.Panel>
+              </Accordion.Item>
 
-            <Accordion.Item value="lost">
-              <Accordion.Control>
-                Le colis est perdu comment faire ?
-              </Accordion.Control>
-              <Accordion.Panel>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                sunt perspiciatis rerum sequi aliquam, doloremque impedit
-                corrupti magnam voluptatum fuga dolorem facilis consequatur at
-                blanditiis est iste porro quasi veniam.
-              </Accordion.Panel>
-            </Accordion.Item>
+              <Accordion.Item value="lost">
+                <Accordion.Control>
+                  {t('homepage.p3.q3.question')}
+                </Accordion.Control>
+                <Accordion.Panel>
+                  {t('homepage.p3.q3.response')}
+                </Accordion.Panel>
+              </Accordion.Item>
 
-            <Accordion.Item value="security">
-              <Accordion.Control>Est-ce sécurisé ?</Accordion.Control>
-              <Accordion.Panel>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo
-                labore eos dolor beatae iste. Perspiciatis saepe omnis fugit
-                repellendus sunt. Aperiam aliquid deserunt asperiores dolorem
-                inventore ullam iste mollitia! Rem.
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
+              <Accordion.Item value="security">
+                <Accordion.Control>
+                  {t('homepage.p3.q4.question')}
+                </Accordion.Control>
+                <Accordion.Panel>
+                  {t('homepage.p3.q4.response')}
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion>
+          </Box>
 
-          <Title>Nous contacter</Title>
-          <Text>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam
-            voluptatem adipisci amet similique, eius eos animi, ab, minus
-            tempora tempore quos. Doloribus quaerat voluptas architecto unde eum
-            eaque vitae aspernatur!
-          </Text>
+          {/* Contact */}
+          <Box>
+            <Title mb={'md'}>{t('contact.title')}</Title>
+            <Text>
+              {t('contact.text')}{' '}
+              <Anchor span href={`mailto:${t('contact.email')}`}>
+                {t('contact.email')}
+              </Anchor>
+            </Text>
+            <Text>{t('contact.text2')}</Text>
+          </Box>
         </Flex>
       </Container>
     </AuthenticatedAppLayout>

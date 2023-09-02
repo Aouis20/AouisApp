@@ -134,10 +134,14 @@ const RegisterForm = () => {
         </form>
 
         <p className="text-md text-muted-foreground text-center">
-          {t('authentication.register.form.existingAccount')}{' '}
-          <Anchor href="/account/login">
-            {t('authentication.register.form.login')}
-          </Anchor>
+          {!isLoading && (
+            <>
+              {t('authentication.register.form.existingAccount')}{' '}
+              <Anchor href="/account/login">
+                {t('authentication.register.form.login')}
+              </Anchor>
+            </>
+          )}
         </p>
 
         {/* Divider */}

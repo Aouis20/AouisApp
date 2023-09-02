@@ -47,7 +47,7 @@ const Products: NextPage<ProductsProps> = ({ snapshot }) => {
         <title>
           {t('navigation.products')} | {t('appName')}
         </title>
-        <meta name="description" content="test" />
+        <meta name="description" content="Aouis Products" />
       </Head>
 
       {/* TODO: Ajouter un visualiseur de la route actuelle () */}

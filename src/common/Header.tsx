@@ -93,20 +93,6 @@ const useStyles = createStyles((theme) => ({
     '&:active': theme.activeStyles,
   },
 
-  dropdownFooter: {
-    backgroundColor:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[7]
-        : theme.colors.gray[0],
-    margin: `calc(${theme.spacing.md} * -1)`,
-    marginTop: theme.spacing.sm,
-    padding: `${theme.spacing.md} calc(${theme.spacing.md} * 2)`,
-    paddingBottom: theme.spacing.xl,
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
-    }`,
-  },
-
   hiddenMobile: {
     [theme.fn.smallerThan('md')]: {
       display: 'none',
@@ -157,28 +143,46 @@ export function HeaderSection() {
     console.log('oui');
   }, []);
 
-  const signOut = () => {
-    removeTokens();
+  const logout = () => {
+    try {
+      removeTokens();
 
-    showNotification({
-      title: t('account:authentication.logout.notifications.title'),
-      message: t('account:authentication.logout.notifications.message'),
-      color: 'gray',
-    });
+      showNotification({
+        title: t('account:authentication.logout.notifications.success.title'),
+        message: t(
+          'account:authentication.logout.notifications.success.message'
+        ),
+        color: 'gray',
+      });
+      router.replace('/account/login');
+    } catch (err) {
+      console.log(err);
 
-    router.replace('/account/login');
+      showNotification({
+        title: t('account:authentication.logout.notifications.error.title'),
+        message: t('account:authentication.logout.notifications.error.message'),
+        color: 'red',
+      });
+    }
   };
 
   // TODO get categories
   const truc = [
-    { id: 1, title: 'Category1' },
-    { id: 2, title: 'Category2' },
-    { id: 3, title: 'Category3' },
+    { id: 1, title: 'Category1', description: 'Bienvenue sur la category ici' },
+    {
+      id: 2,
+      title: 'Category2',
+      description: 'Bienvenue sur la category2 ici',
+    },
+    {
+      id: 3,
+      title: 'Category3',
+      description: 'Bienvenue sur la category3 ici',
+    },
   ];
 
   const categories = truc.map((category) => ({
     icon: IconCode,
-    description: 'Bienvenue sur la category ici',
     ...category,
   }));
 
@@ -188,14 +192,14 @@ export function HeaderSection() {
         <ThemeIcon size={34} variant="default" radius="md">
           <category.icon size={rem(22)} color={theme.fn.primaryColor()} />
         </ThemeIcon>
-        <div>
+        <Box>
           <Text size="sm" fw={500}>
             {category.title}
           </Text>
           <Text size="xs" color="dimmed">
             {category.description}
           </Text>
-        </div>
+        </Box>
       </Group>
     </UnstyledButton>
   ));
@@ -219,7 +223,7 @@ export function HeaderSection() {
               leftIcon={<IconSquarePlus size={20} />}
               onClick={() => router.push('/products/create')}
             >
-              Déposer une annonce
+              {t('addAd')}
             </Button>
           </Group>
 
@@ -233,14 +237,14 @@ export function HeaderSection() {
               <Text ml={4}>{t('navigation.search')}</Text>
             </Anchor>
             <Anchor href="/products" className={classes.link}>
-              Produits
+              {t('navigation.products')}
             </Anchor>
             <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
                 <Anchor href="/categories" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Catégories
+                      {t('navigation.categories')}
                     </Box>
                     <IconChevronDown
                       size={16}
@@ -252,8 +256,8 @@ export function HeaderSection() {
 
               <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
                 <Group position="apart" px="md">
-                  <Text fw={500}>Catégories</Text>
-                  <Anchor href="/categories">View all</Anchor>
+                  <Text fw={500}>{t('navigation.categories')}</Text>
+                  <Anchor href="/categories">{t('viewAll')}</Anchor>
                 </Group>
 
                 <Divider
@@ -265,17 +269,6 @@ export function HeaderSection() {
                 <SimpleGrid cols={3} spacing={0}>
                   {renderCategories}
                 </SimpleGrid>
-
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <Box>
-                      <Text fw={500} fz="sm">
-                        Get started
-                      </Text>
-                    </Box>
-                    <Button variant="default">Get started</Button>
-                  </Group>
-                </div>
               </HoverCard.Dropdown>
             </HoverCard>
           </Group>
@@ -294,38 +287,40 @@ export function HeaderSection() {
                     </Button>
                   </Menu.Target>
                   <Menu.Dropdown>
-                    <Menu.Label>My Account</Menu.Label>
+                    <Menu.Label>{t('myAccount')}</Menu.Label>
                     <Menu.Item
                       icon={<IconUser size={14} />}
                       onClick={() => router.push('/myprofile?tab=profile')}
                     >
-                      Profile
+                      {t('content:header.profileMenu.profile')}
                     </Menu.Item>
                     <Menu.Item
                       icon={<IconPhoto size={14} />}
                       onClick={() => router.push('/myprofile?tab=ads')}
                     >
-                      Ads
+                      {t('content:header.profileMenu.myAds')}
                     </Menu.Item>
                     <Menu.Item
                       icon={<IconArrowsExchange size={14} />}
                       onClick={() => router.push('/myprofile?tab=historic')}
                     >
-                      Historic
+                      {t('content:header.profileMenu.transactions')}
                     </Menu.Item>
                     <Menu.Item
                       icon={<IconHeart size={14} />}
                       onClick={() => router.push('/myprofile?tab=favoris')}
                     >
-                      Favoris
+                      {t('content:header.profileMenu.favorites')}
                     </Menu.Item>
                     <Menu.Divider />
-                    <Menu.Label>News</Menu.Label>
+                    <Menu.Label>
+                      {t('content:header.profileMenu.news')}
+                    </Menu.Label>
                     <Menu.Item
                       icon={<IconMessageCircle2 size={14} />}
                       onClick={() => router.push('/myprofile?tab=message')}
                     >
-                      Mesage
+                      {t('content:header.profileMenu.messages')}
                       <Badge
                         ml={'xs'}
                         color="red"
@@ -343,7 +338,7 @@ export function HeaderSection() {
                         router.push('/myprofile?tab=notifications')
                       }
                     >
-                      Notifications
+                      {t('content:header.profileMenu.notifications')}
                       <Badge
                         ml={'xs'}
                         color="red"
@@ -356,20 +351,22 @@ export function HeaderSection() {
                       </Badge>
                     </Menu.Item>
                     <Menu.Divider />
-                    <Menu.Label>Settings</Menu.Label>
+                    <Menu.Label>
+                      {t('content:header.profileMenu.settings')}
+                    </Menu.Label>
                     <Menu.Item
                       icon={<IconSettings size={14} />}
                       onClick={() => router.push('/myprofile?tab=settings')}
                     >
-                      Settings
+                      {t('content:header.profileMenu.settings')}
                     </Menu.Item>
                     <Menu.Divider />
                     <Menu.Item
                       color="red"
                       icon={<IconLogout size={14} />}
-                      onClick={signOut}
+                      onClick={logout}
                     >
-                      {t('navigation.signOut')}
+                      {t('navigation.logout')}
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>
@@ -397,6 +394,7 @@ export function HeaderSection() {
         </Group>
       </Header>
 
+      {/* Mobile View */}
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
@@ -438,8 +436,8 @@ export function HeaderSection() {
             {logged ? (
               <>
                 <Button variant="light">Mon profil</Button>
-                <Button variant="default" onClick={signOut}>
-                  {t('navigation.signOut')}
+                <Button variant="default" onClick={logout}>
+                  {t('navigation.logout')}
                 </Button>
               </>
             ) : (

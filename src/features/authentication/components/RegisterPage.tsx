@@ -2,11 +2,13 @@ import LanguageSelector from '@/common/LanguageSelector';
 import { Group } from '@mantine/core';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 import LeftPanel from './LeftPanel';
 import RegisterForm from './RegisterForm';
 
 const RegisterPage = () => {
   const router = useRouter();
+  const { t } = useTranslation('account');
   return (
     <div className="container min-h-screen relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left Panel */}
@@ -21,21 +23,20 @@ const RegisterPage = () => {
           <RegisterForm />
           {/* Terms and privacy */}
           <p className="px-8 text-center text-sm text-muted-foreground">
-            By clicking continue, you agree to our{' '}
+            {t('authentication.form.byClicking')}{' '}
             <Link
               href="/documents/terms"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Terms of Service
+              {t('authentication.form.termsOfService')}
             </Link>{' '}
-            and{' '}
+            {t('authentication.form.andOur')}{' '}
             <Link
               href="/documents/privacy"
               className="underline underline-offset-4 hover:text-primary"
             >
-              Privacy Policy
+              {t('authentication.form.privacyPolicy')}
             </Link>
-            .
           </p>
         </div>
       </div>

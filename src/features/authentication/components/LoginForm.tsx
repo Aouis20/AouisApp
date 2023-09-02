@@ -113,10 +113,14 @@ const LoginForm = () => {
         </form>
 
         <p className="text-md text-muted-foreground text-center">
-          {t('authentication.login.form.missingAccount')}{' '}
-          <Anchor href="register">
-            {t('authentication.login.form.register')}
-          </Anchor>
+          {!isLoading && (
+            <>
+              {t('authentication.login.form.missingAccount')}{' '}
+              <Anchor href="register">
+                {t('authentication.login.form.register')}
+              </Anchor>
+            </>
+          )}
         </p>
 
         {/* Divider */}
