@@ -1,7 +1,7 @@
 import { MantineThemeOverride } from '@mantine/core';
 
 const theme: MantineThemeOverride = {
-  fontFamily: 'Roboto, serif',
+  fontFamily: 'Roboto, sans-serif',
   primaryColor: 'indigo',
 };
 

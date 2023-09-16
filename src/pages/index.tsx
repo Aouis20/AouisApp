@@ -50,7 +50,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('common:navigation.homepage')} | {t('common:appName')}
+          {t('content:header.navigation.homepage')} | {t('common:appName')}
         </title>
         <meta name="description" content="Aouis Homepage" />
       </Head>

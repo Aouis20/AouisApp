@@ -62,7 +62,7 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('appName')} | {t('navigation.users')}
+          {t('appName')} | {t('content:header.navigation.users')}
         </title>
         <meta name="description" content="test" />
       </Head>

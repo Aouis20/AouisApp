@@ -39,7 +39,7 @@ const Search: NextPage<SearchPageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.search')} | {t('appName')}
+          {t('content:header.navigation.search')} | {t('appName')}
         </title>
         <meta name="description" content="Aouis Search" />
       </Head>

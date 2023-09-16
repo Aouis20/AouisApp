@@ -4,7 +4,7 @@ import { GetServerSidePropsContext } from 'next';
 import { refreshUserAccessToken } from '../features/authentication/api';
 import { getTokens, setTokens } from '../features/authentication/tokens.helper';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000';
+const API_BASE_URL = 'http://127.0.0.1:8000';
 
 export const setupPrivateApi = (ctx?: GetServerSidePropsContext): KyInstance => {
   const authTokens = getTokens(ctx);

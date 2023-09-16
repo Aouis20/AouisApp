@@ -32,7 +32,9 @@ const Register = () => {
   return (
     <UnAuthenticatedAppLayout>
       <Head>
-        <title>{`${t('appName')} - ${t('navigation.register')}`}</title>
+        <title>{`${t('appName')} - ${t(
+          'content:header.navigation.register'
+        )}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - Register" />
       </Head>

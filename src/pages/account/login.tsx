@@ -24,7 +24,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Login = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const { classes } = useStyles();
 
   // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
@@ -32,7 +32,9 @@ const Login = () => {
   return (
     <UnAuthenticatedAppLayout>
       <Head>
-        <title>{`${t('appName')} - ${t('navigation.register')}`}</title>
+        <title>{`${t('appName')} - ${t(
+          'content:header.navigation.login'
+        )}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - Login" />
       </Head>
