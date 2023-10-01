@@ -25,9 +25,6 @@ const useStyles = createStyles((theme) => ({
 
 const Login = () => {
   const { t } = useTranslation('common');
-  const { classes } = useStyles();
-
-  // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
 
   return (
     <UnAuthenticatedAppLayout>
