@@ -1,6 +1,7 @@
 import DisplayName from '@/common/DisplayName';
 import { AccountStore } from '@/features/accounts/store';
 import { Badge, Flex, Paper, Tabs, Text, Title } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   IconArrowsExchange,
   IconBell,
@@ -24,6 +25,7 @@ type MyProfilePageProps = {
 
 const MyProfilePage = ({ tab }: MyProfilePageProps) => {
   const user = AccountStore.useState((s) => s.user);
+  const matches = useMediaQuery('(min-width: 750px)');
 
   if (!user) {
     return (
@@ -45,37 +47,40 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
         </Text>
       </Paper>
 
-      <Tabs variant="outline" defaultValue={tab || 'profile'}>
+      <Tabs
+        variant={matches ? 'outline' : 'pills'}
+        orientation={matches ? 'vertical' : 'horizontal'}
+        defaultValue={tab || 'profile'}
+      >
         {/* TABS */}
-        <Tabs.List
-          sx={{
-            overflow: 'auto hidden',
-            width: '100%',
-            display: 'flex',
-            flexWrap: 'nowrap',
-          }}
-        >
-          <Tabs.Tab value="profile" icon={<IconUser size="0.8rem" />}>
+        <Tabs.List>
+          <Tabs.Tab fz={'md'} value="profile" icon={<IconUser size="1.1rem" />}>
             Profile
           </Tabs.Tab>
-          <Tabs.Tab value="ads" icon={<IconPhoto size="0.8rem" />}>
+          <Tabs.Tab fz={'md'} value="ads" icon={<IconPhoto size="1.1rem" />}>
             Ads
           </Tabs.Tab>
 
           <Tabs.Tab
+            fz={'md'}
             value="historic"
-            icon={<IconArrowsExchange size="0.8rem" />}
+            icon={<IconArrowsExchange size="1.1rem" />}
           >
             Historic
           </Tabs.Tab>
 
-          <Tabs.Tab value="favoris" icon={<IconHeart size="0.8rem" />}>
+          <Tabs.Tab
+            fz={'md'}
+            value="favoris"
+            icon={<IconHeart size="1.1rem" />}
+          >
             Favoris
           </Tabs.Tab>
 
           <Tabs.Tab
+            fz={'md'}
             value="message"
-            icon={<IconMessageCircle2 size="0.8rem" />}
+            icon={<IconMessageCircle2 size="1.1rem" />}
             rightSection={
               <Badge
                 w={16}
@@ -93,8 +98,9 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
           </Tabs.Tab>
 
           <Tabs.Tab
+            fz={'md'}
             value="notifications"
-            icon={<IconBell size="0.8rem" />}
+            icon={<IconBell size="1.1rem" />}
             rightSection={
               <Badge
                 w={16}
@@ -111,7 +117,11 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
             Notifications
           </Tabs.Tab>
 
-          <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>
+          <Tabs.Tab
+            fz={'md'}
+            value="settings"
+            icon={<IconSettings size="1.1rem" />}
+          >
             Settings
           </Tabs.Tab>
         </Tabs.List>
