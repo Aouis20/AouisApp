@@ -17,9 +17,12 @@ const DisplayName = (props: DisplayNameProps) => {
   } else {
     user = AccountStore.useState((s) => s.user);
   }
-  const name = user?.username
-    ? user.username
-    : _.upperFirst(user?.first_name) + ' ' + user?.last_name?.toUpperCase();
+  const name =
+    user?.username || user?.first_name || user?.last_name
+      ? user.username
+        ? user.username
+        : _.upperFirst(user?.first_name) + ' ' + user?.last_name?.toUpperCase()
+      : user?.email;
   return <Text span>{name}</Text>;
 };
 

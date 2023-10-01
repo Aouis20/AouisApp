@@ -27,7 +27,7 @@ const FooterSection = () => {
         src={'/logo.png'}
         width={150}
       />
-      <Group c="gray">
+      <Group c="gray" py={'md'}>
         <Anchor href="/documents/terms" c={'gray'} p={'sm'}>
           {t('termsOfService.title')}
         </Anchor>

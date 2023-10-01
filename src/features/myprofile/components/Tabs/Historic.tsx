@@ -1,5 +1,4 @@
 import DataTableDemo from '@/features/products/components/ProductTable';
-import ProductList from '@/features/products/components/filters/ProductList';
 import { Container, Paper, Text, Title } from '@mantine/core';
 
 const Historic = () => {
@@ -10,7 +9,6 @@ const Historic = () => {
         <Title order={2}>Historique</Title>
         <Text>Retrouvez ici l'historique de vos transactions</Text>
       </Paper>
-      <ProductList />
       <DataTableDemo />
     </Container>
   );
