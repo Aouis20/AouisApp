@@ -1,37 +1,39 @@
 import { Group, Paper, Text, Title } from '@mantine/core';
-import { useState } from 'react';
-import { OptionValue, OptionsType } from '../types/OptionsType';
+import { useEffect, useState } from 'react';
+import { OptionValue } from '../types/OptionsType';
+import { Setting } from '../types/Settings';
 import { SwitchOption } from './SwitchOption';
 
 type SwitchContainerProps = {
-  title: string;
-  description?: string;
-  settings: OptionsType;
+  setting: Setting;
 };
 
-export const SwitchContainer = ({
-  title,
-  description,
-  settings,
-}: SwitchContainerProps) => {
-  const [options, setOptions] = useState<OptionsType>(settings);
+export const SwitchContainer = ({ setting }: SwitchContainerProps) => {
+  const [currentSetting, setCurrentSetting] = useState<Setting>(setting);
 
-  const handleUpdateOptions = (newSetting: OptionValue) => {
-    const settingToUpdate = Object.keys(settings).find(
-      (key) => settings[key].title === newSetting.title
+  useEffect(() => {
+    console.log('newsetting', currentSetting);
+  }, [currentSetting]);
+
+  const handleUpdateOptions = (newOption: OptionValue) => {
+    const optionToUpdate = Object.keys(currentSetting.options).find(
+      (key) => currentSetting.options[key].title === newOption.title
     );
-    if (settingToUpdate) {
-      const newSettings = { ...settings, [settingToUpdate]: newSetting };
-      setOptions(newSettings);
+    if (optionToUpdate) {
+      const newSettings = {
+        ...currentSetting,
+        options: { ...currentSetting.options, [optionToUpdate]: newOption },
+      };
+      setCurrentSetting(newSettings);
     }
   };
 
   return (
     <Paper shadow="sm" radius="md" p={'lg'} withBorder maw={'32rem'}>
-      <Title order={3}>{title}</Title>
-      <Text>{description}</Text>
+      <Title order={3}>{setting.title}</Title>
+      <Text>{setting.description}</Text>
       <Group mt={'lg'}>
-        {Object.values(options).map((option) => (
+        {Object.values(currentSetting.options).map((option) => (
           <SwitchOption option={option} onChangeOption={handleUpdateOptions} />
         ))}
       </Group>

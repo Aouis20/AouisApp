@@ -15,7 +15,7 @@ i18n
     fallbackLng: 'fr',
     supportedLngs: ['fr','en'],
     debug: false,
-    ns: ['common', 'account', 'documents', 'content'],
+    ns: ['common', 'account', 'documents', 'content', 'settings'],
     defaultNS: 'common',
     interpolation: {
       escapeValue: false

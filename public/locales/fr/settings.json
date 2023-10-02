@@ -1,0 +1,76 @@
+{
+    "title": "Paramètres",
+    "description": "Personnalisez et gérer les réglages à votre convenance.",
+    "identity": {
+        "title": "Identité",
+        "description": "Gérez vos informations personnelles",
+        "options": {
+            "nickname": {
+                "title": "Pseudonyme",
+                "description": "Utiliser mon pseudonyme"
+            },
+            "email": {
+                "title": "Adresse mail",
+                "description": "Adresse mail vérifiée"
+            },
+            "nothing": {
+                "title": "Téléphone",
+                "description": "Numéro de téléphone vérifié"
+            }
+        }
+    },
+    "notifications": {
+        "title": "Notifications",
+        "description": "Personnalisez les notifications à recevoir.",
+        "options": {
+            "all": {
+                "title": "Toutes",
+                "description": "Recevoir toutes les notifications"
+            },
+            "essentials": {
+                "title": "Essentielles",
+                "description": "Recevoir uniquement les notifications essentielles"
+            },
+            "nothing": {
+                "title": "Téléphone",
+                "description": "Ignorer toutes les notifications"
+            }
+        }
+    },
+    "cookies": {
+        "title": "Cookies",
+        "description": "Gérez ici vos cookies.",
+        "options": {
+            "all": {
+                "title": "Tous",
+                "description": "Accepter tous les cookies"
+            },
+            "essentials": {
+                "title": "Nécessaires",
+                "description": "Ces cookies sont essentiels pour utiliser le site web et ses fonctionnalités"
+            },
+            "performance": {
+                "title": "Performance",
+                "description": "Ces cookies aident à l’amélioration des performances du site."
+            },
+            "nothing": {
+                "title": "Aucune",
+                "description": "Refuser tous les cookies"
+            }
+        }
+    },
+    "commercials": {
+        "title": "Commerciales",
+        "description": "Adaptez vos préférences publicitaires selon vos intérêts.",
+        "options": {
+            "commercialsOffers": {
+                "title": "Offres commerciales",
+                "description": "Recevoir des offres commerciales"
+            },
+            "targetedAdvertising": {
+                "title": "Publicité ciblée",
+                "description": "Personnaliser les publicités en fonction de vos tendances"
+            }
+        }
+    }
+}
