@@ -51,9 +51,6 @@ const ConditionFilter = () => {
       <Title order={2}>Condition</Title>
       {/* Conditions */}
       <Box>
-        <Text c={'gray'} mb={12}>
-          Conditions
-        </Text>
         <Checkbox
           checked={allChecked}
           indeterminate={indeterminate}

@@ -7,7 +7,6 @@ import ProductList from './filters/ProductList';
 
 export const ProductPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const productList = ProductStore.useState((s) => s.productList);
 
   // TODO filtres (voir la centrale)
   // Footer avec code départemental + distance en km (demande l'autorisation à l'utilsateur de prendre sa position (useEffect au changement qui va réactualiser tous les produits) puis calcul)

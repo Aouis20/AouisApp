@@ -2,7 +2,8 @@ import { Product, ProductList } from '@/features/products/types/Product';
 import { KyInstance } from 'ky/distribution/types/ky';
 
 export type ProductListFilter = {
-  user_id?: number | null;
+  user_id?: number;
+  category?: number
 };
 
 export const getProducts = async (page: number, filters: ProductListFilter, api: KyInstance): Promise<ProductList> => {

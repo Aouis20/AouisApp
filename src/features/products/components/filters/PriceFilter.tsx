@@ -106,7 +106,7 @@ const PriceFilter = () => {
 
       {/* Payment types */}
       <Box>
-        <Text c={'gray'} mb={12}>
+        <Text mb={12} fw={'bold'}>
           Préférence de paiement
         </Text>
         <Checkbox
@@ -124,7 +124,7 @@ const PriceFilter = () => {
       </Box>
 
       {/* Price inputs (min and max) */}
-      <Text c={'gray'}>Prix</Text>
+      <Text mt={20} fw={'bold'}>Prix</Text>
       <Group align="start" mt={-8}>
         <NumberInput
           label="Min"

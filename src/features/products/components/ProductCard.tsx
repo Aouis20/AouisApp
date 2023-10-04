@@ -136,7 +136,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
       >
         {/* Title */}
         <Group position="apart" align="start" m={0}>
-          <Text sx={{ flex: 1, alignSelf: 'end' }} weight={700} w={'100%'}>
+          <Text sx={{ flex: 1, alignSelf: 'center' }} weight={700} w={'100%'}>
             {product.title}
           </Text>
           <Flex direction={'column'} align={'end'} gap={8}>

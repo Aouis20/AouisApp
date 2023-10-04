@@ -1,5 +1,13 @@
 import { Product } from '@/features/products/types/Product';
-import { Box, Button, Dialog, Group, Textarea, Title } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Dialog,
+  Flex,
+  Group,
+  Textarea,
+  Title,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMessageCircle2 } from '@tabler/icons-react';
 import { useState } from 'react';
@@ -18,6 +26,7 @@ const DirectMessage = ({ product }: MessageProps) => {
   // TODO Connection required
 
   const handleSubmit = () => {
+    // TODO send message
     console.log('to send');
   };
 
@@ -49,14 +58,19 @@ const DirectMessage = ({ product }: MessageProps) => {
           maxRows={4}
         />
 
-        <Button
-          onClick={() => {
-            handleSubmit();
-            close();
-          }}
-        >
-          Envoyer
-        </Button>
+        <Flex justify={'end'} gap={'md'}>
+          <Button variant="outline" onClick={() => close()}>
+            Annuler
+          </Button>
+          <Button
+            onClick={() => {
+              handleSubmit();
+              close();
+            }}
+          >
+            Envoyer
+          </Button>
+        </Flex>
       </Dialog>
     </Box>
   );

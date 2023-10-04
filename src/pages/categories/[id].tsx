@@ -1,8 +1,9 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import { getCategories } from '@/features/categories/api';
-import CategoryPage from '@/features/categories/components/CategoryPage';
+import { getCategoryById } from '@/features/categories/api';
+import CategoryDetailsPage from '@/features/categories/components/CategoryDetailsPage';
+import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
@@ -13,13 +14,19 @@ import { useTranslation } from 'react-i18next';
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
   const api = setupPrivateApi(ctx);
+  const id = Number(ctx.params?.id);
 
   try {
     await getUserInfo(stateInstance, api);
 
-    const categoryList = await getCategories(api);
+    const category = await getCategoryById(id, api);
     stateInstance.stores.CategoryStore.update((s) => {
-      s.categoryList = categoryList;
+      s.category = category;
+    });
+
+    const products = await getProducts(1, {}, api);
+    stateInstance.stores.ProductStore.update((s) => {
+      s.productList = products;
     });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
@@ -33,26 +40,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type CategoriesPageProps = {
+type CategoryDetailsProps = {
   snapshot: PullStateInstance;
 };
 
-const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
-  const { t } = useTranslation('content');
+const CategoryDetails: NextPage<CategoryDetailsProps> = ({ snapshot }) => {
+  const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('header.navigation.categories')} | {t('common:appName')}
+          {t('content:header.navigation.categories')} | {t('appName')}
         </title>
-        <meta name="description" content="Aouis Categories" />
+        <meta name="description" content="test" />
       </Head>
 
-      <CategoryPage />
+      <CategoryDetailsPage />
     </AuthenticatedAppLayout>
   );
 };
-
-export default CategoriesPage;
+export default CategoryDetails;

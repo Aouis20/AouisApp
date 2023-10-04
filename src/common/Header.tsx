@@ -129,7 +129,6 @@ export function HeaderSection() {
     CategoryStore.update((s) => {
       s.categoryList = categories;
     });
-    console.log(categoryList);
   };
 
   useEffect(() => {
@@ -140,7 +139,6 @@ export function HeaderSection() {
     if (!categoryList.length) {
       fetchCategories();
     }
-    console.log('oui');
   }, []);
 
   const logout = () => {
@@ -187,7 +185,11 @@ export function HeaderSection() {
   }));
 
   const renderCategories = categories.map((category, index) => (
-    <UnstyledButton className={classes.subLink} key={index}>
+    <UnstyledButton
+      className={classes.subLink}
+      key={index}
+      onClick={() => router.push(`../../categories/${category.id}`)}
+    >
       <Group noWrap align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
           <category.icon size={rem(22)} color={theme.fn.primaryColor()} />
