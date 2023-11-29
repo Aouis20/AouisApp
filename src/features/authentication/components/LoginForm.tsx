@@ -50,13 +50,14 @@ const LoginForm = () => {
         color: 'green',
       });
     } catch (e) {
-      console.log(e);
       showNotification({
         title: t('authentication.login.notifications.error.title'),
         message: t('authentication.login.notifications.error.message'),
         color: 'red',
       });
     }
+    setIsLoading(false);
+
   };
   return (
     <>

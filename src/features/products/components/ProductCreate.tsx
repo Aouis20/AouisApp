@@ -18,6 +18,7 @@ import {
   Title,
   Tooltip,
 } from '@mantine/core';
+import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { IconHelp } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
@@ -49,13 +50,22 @@ const ProductCreate = () => {
     },
   });
 
-  const handleChangeImages = () => {
-    createProductForm.setFieldValue('images', []);
+  const handleChangeImages = (images: FileWithPath[]) => {
+    createProductForm.setFieldValue('images', images);
+    console.log('images sets', images);
   };
 
   const handleSubmit = (values: CreateProductFormType) => {
     console.log('oui submitted');
     console.log(values);
+    // TODO create product
+    try {
+      // TODO ask user create a new one ?
+        // if yes back to form
+        // else redirect to homepage
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -85,7 +95,7 @@ const ProductCreate = () => {
           </Radio.Group>
 
           {/* Images */}
-          <ImagesDropzone />
+          <ImagesDropzone onChange={handleChangeImages} />
           {/* TODO SET IMAGES INTO CREATEPRODUCTFORM */}
 
           {/* Categories */}

@@ -1,3 +1,4 @@
+import { getCategories } from '@/features/categories/api';
 import {
   Accordion,
   Anchor,
@@ -26,6 +27,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     await getUserInfo(stateInstance, api);
+    const categoryList = await getCategories(api);
+    stateInstance.stores.CategoryStore.update((s) => {
+      s.categoryList = categoryList;
+    });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {

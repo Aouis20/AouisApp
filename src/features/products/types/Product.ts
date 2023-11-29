@@ -1,5 +1,6 @@
 import { User } from "@/features/accounts/types/User";
 import { Category } from "@/features/categories/types/Category";
+import { FileWithPath } from "@mantine/dropzone";
 
 export enum StatusType {
   SOLD = 'Sold',
@@ -36,7 +37,7 @@ export type Product = {
   id: number;
   title: string;
   description: string;
-  images: string[];
+  images: FileWithPath[];
   status: StatusType;
   payment_type: PaymentType;
   condition: ConditionType;

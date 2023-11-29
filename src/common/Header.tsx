@@ -1,6 +1,4 @@
-import { getCategories } from '@/features/categories/api';
 import { CategoryStore } from '@/features/categories/store';
-import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
   Badge,
@@ -123,29 +121,16 @@ export function HeaderSection() {
   const user = AccountStore.useState((s) => s.user);
   const categoryList = CategoryStore.useState((s) => s.categoryList);
 
-  const fetchCategories = async () => {
-    const api = setupPrivateApi();
-    const categories = await getCategories(api);
-    CategoryStore.update((s) => {
-      s.categoryList = categories;
-    });
-    console.log(categoryList);
-  };
-
   useEffect(() => {
     if (user) {
       return setLogged(true);
     }
-
-    if (!categoryList.length) {
-      fetchCategories();
-    }
-    console.log('oui');
   }, []);
 
   const logout = () => {
     try {
       removeTokens();
+      // TODO destroy cookies
 
       showNotification({
         title: t('account:authentication.logout.notifications.success.title'),
@@ -181,7 +166,7 @@ export function HeaderSection() {
     },
   ];
 
-  const categories = truc.map((category) => ({
+  const categories = categoryList.map((category) => ({
     icon: IconCode,
     ...category,
   }));
