@@ -1,21 +1,24 @@
+import { CategoryStore } from '@/features/categories/store';
 import {
+  Anchor,
   Box,
   Checkbox,
+  Collapse,
   Container,
   Flex,
   Group,
   HoverCard,
+  MultiSelect,
   NumberInput,
   Paper,
   Text,
   TextInput,
   Title,
 } from '@mantine/core';
-import { useListState } from '@mantine/hooks';
+import { useDisclosure, useListState } from '@mantine/hooks';
 import {
   IconArticle,
   IconCategory,
-  IconCode,
   IconCurrencyEuro,
   IconMapPinFilled,
   IconSearch,
@@ -23,23 +26,23 @@ import {
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const SearchPage = () => {
+export const SearchPage = () => {
   const { t } = useTranslation('');
   const [minPrice, setMinPrice] = useState<number | ''>('');
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
+  const [opened, { toggle }] = useDisclosure(false);
+  const categoryList = CategoryStore.useState((s) => s.categoryList);
 
   const initialValues = [
     {
       label: 'Receive sms notifications',
       checked: true,
       key: 'unkey2',
-      icon: IconCode,
     },
     {
       label: 'Receive push notifications',
       checked: true,
       key: 'unkey3',
-      icon: IconCode,
     },
   ];
 
@@ -52,12 +55,7 @@ const SearchPage = () => {
     <Checkbox
       my="md"
       ml={33}
-      label={
-        <Group>
-          <value.icon size={16} />
-          <Text>{value.label}</Text>
-        </Group>
-      }
+      label={<Text>{value.label}</Text>}
       key={value.key}
       checked={value.checked}
       onChange={(event) =>
@@ -69,16 +67,15 @@ const SearchPage = () => {
   return (
     <Container size="md">
       <Paper shadow="sm" radius="md" p="lg" withBorder>
-        <Title>{t('common:navigation.search')}</Title>
-        <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
+        <Title>{t('content:header.navigation.search')}</Title>
+        <Flex gap={'md'} mt={'md'}>
           {/* Search Input */}
           <TextInput
             w={300}
-            label={t('common:navigation.search')}
+            label={t('content:header.navigation.search')}
             placeholder="Voiture, Casque, Meuble ..."
             icon={<IconSearch size={18} />}
           />
-
           {/* Price */}
           <Group align="start" sx={{ height: '100%' }}>
             <NumberInput
@@ -111,78 +108,72 @@ const SearchPage = () => {
               precision={2}
             />
           </Group>
-
-          {/* Conditions */}
-          <HoverCard withArrow arrowPosition="center" position="bottom-start">
-            <HoverCard.Target>
-              <TextInput
-                w={200}
-                label="Conditions"
-                icon={<IconArticle size={18} />}
-              />
-            </HoverCard.Target>
-            <HoverCard.Dropdown p={28}>
-              <Box>
-                <Checkbox
-                  checked={allChecked}
-                  indeterminate={indeterminate}
-                  label="All"
-                  transitionDuration={0}
-                  onChange={() =>
-                    handlers.setState((current) =>
-                      current.map((value) => ({
-                        ...value,
-                        checked: !allChecked,
-                      }))
-                    )
-                  }
-                />
-                {items}
-              </Box>
-            </HoverCard.Dropdown>
-          </HoverCard>
-
-          {/* Categories */}
-          <HoverCard withArrow arrowPosition="center" position="bottom-start">
-            <HoverCard.Target>
-              <TextInput
-                w={200}
-                label="Categories"
-                icon={<IconCategory size={18} />}
-              />
-            </HoverCard.Target>
-            <HoverCard.Dropdown p={28}>
-              <Box>
-                <Checkbox
-                  checked={allChecked}
-                  indeterminate={indeterminate}
-                  label="All"
-                  transitionDuration={0}
-                  onChange={() =>
-                    handlers.setState((current) =>
-                      current.map((value) => ({
-                        ...value,
-                        checked: !allChecked,
-                      }))
-                    )
-                  }
-                />
-                {items}
-              </Box>
-            </HoverCard.Dropdown>
-          </HoverCard>
-
-          {/* Localization */}
-          <NumberInput
-            w={200}
-            label="Localization"
-            hideControls
-            icon={<IconMapPinFilled size={18} />}
-          />
         </Flex>
+        <Flex mb={'xl'}>
+          <Collapse in={opened}>
+            <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
+              {/* Conditions */}
+              <HoverCard
+                withArrow
+                arrowPosition="center"
+                position="bottom-start"
+              >
+                <HoverCard.Target>
+                  <TextInput
+                    w={200}
+                    label="Conditions"
+                    icon={<IconArticle size={18} />}
+                  />
+                </HoverCard.Target>
+                <HoverCard.Dropdown p={28}>
+                  <Box>
+                    <Checkbox
+                      checked={allChecked}
+                      indeterminate={indeterminate}
+                      label="All"
+                      transitionDuration={0}
+                      onChange={() =>
+                        handlers.setState((current) =>
+                          current.map((value) => ({
+                            ...value,
+                            checked: !allChecked,
+                          }))
+                        )
+                      }
+                    />
+                    {items}
+                  </Box>
+                </HoverCard.Dropdown>
+              </HoverCard>
+
+              {/* Categories */}
+              <MultiSelect
+                icon={<IconCategory size={18} />}
+                label="Categories"
+                searchable
+                clearable
+                data={categoryList.map((category) => ({
+                  value: String(category.id),
+                  label: category.title,
+                }))}
+              />
+
+              {/* Localization */}
+              <NumberInput
+                w={200}
+                label="Localization"
+                hideControls
+                icon={<IconMapPinFilled size={18} />}
+              />
+            </Flex>
+          </Collapse>
+        </Flex>
+        <Anchor onClick={toggle}>
+          {opened
+            ? 'Masquer les réglages avancées'
+            : 'Afficher les réglages avancées'}
+        </Anchor>
       </Paper>
     </Container>
   );
 };
-
-export default SearchPage;

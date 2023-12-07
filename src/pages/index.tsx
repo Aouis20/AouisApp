@@ -8,7 +8,6 @@ import {
   Anchor,
   AspectRatio,
   Box,
-  Box,
   Button,
   Flex,
   Group,
@@ -58,6 +57,7 @@ interface HomePageProps {
 const useStyle = createStyles((theme) => ({
   paper: {
     transition: 'all .4s ease-in-out',
+    cursor: 'pointer',
     '&:hover': {
       transform: 'scale(1.05)',
     },

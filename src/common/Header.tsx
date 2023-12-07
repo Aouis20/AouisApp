@@ -130,7 +130,6 @@ export function HeaderSection() {
   const logout = () => {
     try {
       removeTokens();
-      // TODO destroy cookies
 
       showNotification({
         title: t('account:authentication.logout.notifications.success.title'),
