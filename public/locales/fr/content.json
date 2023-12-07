@@ -56,7 +56,20 @@
     }
   },
   "homepage": {
-    "introduction": "Je souhaite...",
+    "intro": {
+        "buy": {
+            "button": "J'achètes !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        },
+        "sell": {
+            "button":"Je vends !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        },
+        "exchange": {
+            "button": "J'échanges !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        }
+    },
     "p1": {
         "title": "Qu'est-ce que Aouis ?",
         "text": "Aouis est une plateforme en ligne qui permet aux utilisateurs de vendre et d'acheter une grande variété de produits et de services, tels que des voitures d'occasion, des meubles, des vêtements, des emplois, et même des locations immobilières."
