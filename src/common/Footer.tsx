@@ -19,6 +19,7 @@ const FooterSection = () => {
       position="apart"
       sx={{ borderTop: '1px solid #dee2e6' }}
       px={'lg'}
+      mt={'xl'}
     >
       <Image
         sx={{ cursor: 'pointer' }}

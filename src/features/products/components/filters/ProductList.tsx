@@ -1,7 +1,7 @@
 import { PaginationComponent } from '@/common/pagination/Pagination';
 import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
-import { Flex, Loader, Text } from '@mantine/core';
+import { Box, Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useRef, useState } from 'react';
 import { ProductStore } from '../../store';
 import ProductCard from '../ProductCard';
@@ -44,9 +44,17 @@ const ProductList = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Flex direction="column" gap={48} px={8} justify={'center'}>
+        <Flex
+          direction="column"
+          gap={48}
+          px={8}
+          justify={'center'}
+          align={'center'}
+        >
           {productList.results.map((product) => (
-            <ProductCard product={product} cardHeight={cardHeight} />
+            <Box key={product.id}>
+              <ProductCard product={product} cardHeight={cardHeight} />
+            </Box>
           ))}
         </Flex>
       )}

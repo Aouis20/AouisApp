@@ -1,5 +1,5 @@
 import { Product } from '@/features/products/types/Product';
-import { Box, Button, Dialog, Group, Textarea, Title } from '@mantine/core';
+import { Box, Button, Dialog, Textarea, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMessageCircle2 } from '@tabler/icons-react';
 import { useState } from 'react';
@@ -9,7 +9,7 @@ type MessageProps = {
   product: Product;
 };
 
-const DirectMessage = ({ product }: MessageProps) => {
+export const DirectMessage = ({ product }: MessageProps) => {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [message, setMessage] = useState<string>(
     `Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?`
@@ -23,11 +23,9 @@ const DirectMessage = ({ product }: MessageProps) => {
 
   return (
     <Box onClick={(e) => e.stopPropagation()}>
-      <Group position="center">
-        <Button variant="subtle" radius="md" onClick={(e) => toggle()}>
-          <IconMessageCircle2 size={22} />
-        </Button>
-      </Group>
+      <Button variant="subtle" radius="md" onClick={() => toggle()} p={6}>
+        <IconMessageCircle2 size={22} />
+      </Button>
 
       <Dialog
         opened={opened}
@@ -61,5 +59,3 @@ const DirectMessage = ({ product }: MessageProps) => {
     </Box>
   );
 };
-
-export default DirectMessage;

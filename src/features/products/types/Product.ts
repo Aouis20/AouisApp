@@ -34,6 +34,8 @@ export enum ConditionType {
 
 
 export type Product = {
+  created_at: string;
+  updated_at: string;
   id: number;
   title: string;
   description: string;

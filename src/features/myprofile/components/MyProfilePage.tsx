@@ -28,7 +28,7 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
   if (!user) {
     return (
       <Text>
-        Utilisateur introuvable, veuillez vous authentifier ou crée un compte.
+        Utilisateur introuvable, veuillez vous authentifier ou créer un compte.
       </Text>
     );
   }
@@ -40,8 +40,8 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
           Bonjour <DisplayName /> !
         </Title>
         <Text mt={16}>
-          Welcome to your profile. Here you will find all the information about
-          you.
+          Bienvenue sur votre profil, retrouvez ici, toutes les informations
+          vous concernant.
         </Text>
       </Paper>
 

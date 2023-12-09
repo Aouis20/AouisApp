@@ -25,7 +25,7 @@ export default function Privacy() {
         >
           {t('common:back')}
         </Button>
-        <Flex direction={'column'} gap={'md'}>
+        <Flex direction={'column'} gap={'xl'}>
           <Title>{t('privacy.title')}</Title>
 
           {/* Introduction */}

@@ -1,20 +1,32 @@
-import Message from '@/common/DirectMessage';
+import { DirectMessage } from '@/common/DirectMessage';
 import DisplayName from '@/common/DisplayName';
+import { AccountStore } from '@/features/accounts/store';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
   Badge,
+  Box,
   Button,
   Card,
   Flex,
   Group,
   Image,
-  Spoiler,
   Text,
+  Title,
   createStyles,
   getStylesRef,
 } from '@mantine/core';
-import { IconHeart, IconMapPinFilled } from '@tabler/icons-react';
+import { useHover } from '@mantine/hooks';
+import {
+  IconHeart,
+  IconHeartFilled,
+  IconMapPinFilled,
+  IconStarFilled,
+} from '@tabler/icons-react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
+import 'dayjs/locale/fr';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { PaymentType, Product } from '../types/Product';
@@ -25,6 +37,8 @@ type ProductCardProps = {
   product: Product;
   cardHeight: any;
 };
+
+dayjs.extend(LocalizedFormat);
 
 const useStyles = createStyles(() => ({
   controls: {
@@ -60,6 +74,8 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
   const { classes } = useStyles();
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const detailsRef = useRef<HTMLDivElement>(null);
+  const { hovered, ref } = useHover();
+  const user = AccountStore.useState((s) => s.user);
 
   const handleLike = () => {
     // TODO add product to user wishlist
@@ -75,134 +91,170 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
     router.push(`/products/${product.id}`);
   };
 
+  const images = [
+    'https://cdn.pixabay.com/photo/2023/07/29/17/36/fly-8157417_1280.jpg',
+    'https://cdn.pixabay.com/photo/2023/11/30/07/51/bridge-8420945_640.jpg',
+    'https://cdn.pixabay.com/photo/2023/04/22/10/28/sheep-7943526_640.jpg',
+    'https://cdn.pixabay.com/photo/2023/12/04/18/10/lilac-8430051_640.jpg',
+    'https://cdn.pixabay.com/photo/2023/06/01/05/59/oranges-8032713_640.jpg',
+    'https://cdn.pixabay.com/photo/2023/11/25/16/56/dragon-8412130_640.jpg',
+  ];
+
+  const slides = images.map((image) => (
+    <Carousel.Slide key={image}>
+      <Image src={image} height={200} />
+    </Carousel.Slide>
+  ));
+
   return (
     <Card
-      shadow="sm"
-      radius="md"
       withBorder
-      p={'sm'}
-      pb={0}
-      style={{
-        maxWidth: 800,
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 32,
+      radius="md"
+      p={0}
+      ref={ref}
+      h={200}
+      w={600}
+      sx={{
+        transition: 'all .4s ease-in-out',
+        '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
       }}
-      key={product.id}
-      h={'100%'}
     >
-      {/* Images */}
-      <Card.Section
-        p={0}
-        sx={{
-          alignSelf: isOpened ? 'start' : 'center',
-          flex: 1,
-        }}
-      >
-        <Carousel
-          sx={{ flex: 1 }}
-          mx="auto"
-          classNames={classes}
-          orientation="vertical"
-          align={'start'}
-          slideGap={'md'}
-          slidesToScroll={1}
-          height={isOpened ? cardHeight.current?.clientHeight : 200}
-          mah={detailsRef.current?.clientHeight}
+      <Group noWrap spacing={'xs'} align="start">
+        <Box w={'40%'} miw={'40%'}>
+          <Carousel
+            loop
+            withControls={hovered ? true : false}
+            style={{ position: 'relative' }}
+          >
+            {slides}
+          </Carousel>
+          {hovered && (
+            <Group position="center">
+              <Badge
+                style={{
+                  position: 'absolute',
+                  bottom: 4,
+                  userSelect: 'none',
+                }}
+              >
+                {images.length} Images
+              </Badge>
+            </Group>
+          )}
+        </Box>
+        <Flex
+          direction={'column'}
+          gap={'xs'}
+          w={'100%'}
+          h={200}
+          p={8}
+          style={{ position: 'relative', boxSizing: 'border-box' }}
         >
-          {product.images.map((image, index) => (
-            <Carousel.Slide key={index}>
-              {/* TODO add AspectRatio from mantine */}
-              <Image
-                src={image}
-                height={200}
-                alt={product.title + '-image' + index}
-              />
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-      </Card.Section>
+          {/* Like Button */}
+          <ActionIcon
+            bg={'white'}
+            h={40}
+            w={40}
+            right={2}
+            top={2}
+            sx={{
+              position: 'absolute',
+              borderRadius: '50%',
+              transition: 'color 0.3s ease',
+              display: hovered ? 'block' : 'none',
+              '&:hover': {
+                color: 'red',
+                animation: 'enlarge 0.3s ease',
+              },
+            }}
+            onClick={handleLike}
+            color={user?.favoris.includes(product) ? 'red' : 'gray'}
+          >
+            <Group position="center">
+              {user?.favoris.includes(product) ? (
+                <IconHeartFilled />
+              ) : (
+                <IconHeart />
+              )}
+            </Group>
+          </ActionIcon>
 
-      {/* Product Details */}
-      <Flex
-        sx={{
-          '&:hover': { cursor: 'pointer' },
-        }}
-        w={'60%'}
-        onClick={handleProductDetails}
-        direction={'column'}
-        gap={16}
-        ref={detailsRef}
-      >
-        {/* Title */}
-        <Group position="apart" align="start" m={0}>
-          <Text sx={{ flex: 1, alignSelf: 'end' }} weight={700} w={'100%'}>
-            {product.title}
-          </Text>
-          <Flex direction={'column'} align={'end'} gap={8}>
-            {/* Like Button */}
-            <ActionIcon
-              bg={'white'}
-              w={40}
-              h={40}
-              p={4}
-              top={'-4px'}
-              right={'-4px'}
-              sx={{
-                borderRadius: '50%',
-                transition: 'color 0.3s ease',
-                '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
-              }}
-              onClick={handleLike}
-            >
-              <IconHeart />
-            </ActionIcon>
-            <Badge color="green" variant="light" fz={14} p={10}>
-              {product.price}€
-              {product.payment_type != PaymentType.UNIQ &&
-                paymentType[product.payment_type]}
-            </Badge>
-            <Badge color="pink" fz={12}>
-              <Group>
-                {product.condition} {conditionIcon[product.condition]}
+          <Group position="apart" noWrap align="start">
+            {/* Title */}
+            <Title order={4}>{product.title}</Title>
+
+            {/* Badges */}
+            <Flex direction={'column'} gap={'xs'}>
+              <Badge color="green" variant="light" fz={14} p={10} mt={40}>
+                {product.price}€
+                {product.payment_type != PaymentType.UNIQ &&
+                  paymentType[product.payment_type]}
+              </Badge>
+              <Badge color="pink" fz={12}>
+                <Group noWrap>
+                  <Text mr={-6}>{product.condition}</Text>
+                  {conditionIcon[product.condition]}
+                </Group>
+              </Badge>
+            </Flex>
+          </Group>
+          {/* Description */}
+          {/* <Spoiler
+            maxHeight={20}
+            showLabel="Voir plus"
+            hideLabel="Voir moins"
+            transitionDuration={500}
+          >
+            <Text c={'dimmed'} fz={14}>
+              {product.description}
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+              itaque fugiat sunt provident distinctio excepturi id, eaque
+              reiciendis sed maiores accusantium cumque odit eveniet consequatur
+              quasi ea mollitia hic autem! jeizgaeignoierg Lorem ipsum, dolor
+              sit amet consectetur adipisicing elit. Esse assumenda
+              exercitationem est quidem culpa fugit voluptatibus. Qui, similique
+              iste unde maiores molestiae in labore maxime officia enim sequi!
+              Facere, nam.
+            </Text>
+          </Spoiler> */}
+
+          {/* Owner */}
+          <Group noWrap spacing="xs" position="apart" mt={'auto'} align="end">
+            {/* Owner Information */}
+            <Flex direction={'column'}>
+              <Group spacing={8}>
+                <Text c="dimmed">
+                  <DisplayName user={product.owner} />
+                </Text>
+                <Text c="dimmed">•</Text>
+                <Group spacing={2}>
+                  <Text c="dimmed" fw={'bold'} span>
+                    5
+                  </Text>
+                  <ActionIcon c="dimmed">
+                    <IconStarFilled style={{ marginTop: -4 }} />
+                  </ActionIcon>
+                </Group>
               </Group>
-            </Badge>
-          </Flex>
-        </Group>
+              <Text c="dimmed">{dayjs(product.created_at).format('ll')}</Text>
+            </Flex>
 
-        {/* Description */}
-        <Spoiler
-          maxHeight={80}
-          showLabel="Show more"
-          hideLabel="Hide"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsOpened(!isOpened);
-          }}
-        >
-          <Text size="md" color="dimmed">
-            {product.description}
-          </Text>
-        </Spoiler>
-
-        {/* Price and owner informations */}
-        <Group position="apart" my="auto" pb={12}>
-          <Flex>
-            <Button
-              leftIcon={<IconMapPinFilled size={22} />}
-              variant="subtle"
-              onClick={handleDistance}
-            >
-              95
-            </Button>
-            <Message product={product} />
-            {/* Think about a new feature to make proposal */}
-          </Flex>
-          <Text color="gray" fs={'italic'} fz={'sm'}>
-            <DisplayName user={product.owner} />
-          </Text>
-        </Group>
-      </Flex>
+            {/* Action Buttons */}
+            <Group noWrap>
+              <Button
+                leftIcon={<IconMapPinFilled size={22} />}
+                variant="subtle"
+                onClick={handleDistance}
+                p={8}
+              >
+                95
+              </Button>
+              <DirectMessage product={product} />
+              {/* Think about a new feature to make proposal */}
+            </Group>
+          </Group>
+        </Flex>
+      </Group>
     </Card>
   );
 };

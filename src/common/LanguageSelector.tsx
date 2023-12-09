@@ -55,7 +55,7 @@ const LanguageSelector = () => {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <Button
-          variant="outline"
+          variant="light"
           leftIcon={
             user?.language ? (
               languageDict[user.language]

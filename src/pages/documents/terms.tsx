@@ -25,7 +25,7 @@ export default function Terms() {
         >
           {t('common:back')}
         </Button>
-        <Flex direction={'column'} gap={'md'}>
+        <Flex direction={'column'} gap={'xl'}>
           <Title>{t('termsOfService.title')}</Title>
 
           {/* Property */}
@@ -48,8 +48,8 @@ export default function Terms() {
 
           {/* Responsability */}
           <Box>
-            <Title order={3}>{t('termsOfService.externalLinks.title')}</Title>
-            <Text>{t('termsOfService.externalLinks.text')}</Text>
+            <Title order={3}>{t('termsOfService.responsability.title')}</Title>
+            <Text>{t('termsOfService.responsability.text')}</Text>
           </Box>
 
           {/* Contact us */}

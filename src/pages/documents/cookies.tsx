@@ -25,7 +25,7 @@ function Cookies() {
         >
           {t('common:back')}
         </Button>
-        <Flex direction={'column'} gap={'md'}>
+        <Flex direction={'column'} gap={'xl'}>
           <Title>{t('cookies.title')}</Title>
 
           {/* Introduction */}
