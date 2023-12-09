@@ -2,7 +2,7 @@ import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import { getProductById } from '@/features/products/api';
-import ProductDetailsPage from '@/features/products/components/ProductDetailsPage';
+import { ProductDetailsPage } from '@/features/products/components/ProductDetailsPage';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';

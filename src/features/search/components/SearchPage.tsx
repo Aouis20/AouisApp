@@ -1,6 +1,7 @@
 import { CategoryStore } from '@/features/categories/store';
 import {
   Anchor,
+  AspectRatio,
   Box,
   Checkbox,
   Collapse,
@@ -8,6 +9,7 @@ import {
   Flex,
   Group,
   HoverCard,
+  Image,
   MultiSelect,
   NumberInput,
   Paper,
@@ -174,6 +176,9 @@ export const SearchPage = () => {
             : 'Afficher les réglages avancées'}
         </Anchor>
       </Paper>
+      <AspectRatio ratio={16 / 9} style={{ zoom: 2 }}>
+        <Image src="assets/search/search.svg" />
+      </AspectRatio>
     </Container>
   );
 };

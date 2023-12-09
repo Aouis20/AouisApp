@@ -118,6 +118,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
         transition: 'all .4s ease-in-out',
         '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
       }}
+      onClick={() => router.push(`/products/${product.id}`)}
     >
       <Group noWrap spacing={'xs'} align="start">
         <Box w={'40%'} miw={'40%'}>
@@ -227,12 +228,12 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
                   <DisplayName user={product.owner} />
                 </Text>
                 <Text c="dimmed">•</Text>
-                <Group spacing={2}>
-                  <Text c="dimmed" fw={'bold'} span>
+                <Group spacing={0} align="center">
+                  <Text c="dimmed" fw={'bold'} fz={'md'} span>
                     5
                   </Text>
-                  <ActionIcon c="dimmed">
-                    <IconStarFilled style={{ marginTop: -4 }} />
+                  <ActionIcon c="dimmed" pb={2}>
+                    <IconStarFilled size={16} />
                   </ActionIcon>
                 </Group>
               </Group>

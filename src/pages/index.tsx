@@ -2,20 +2,17 @@ import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import { getCategories } from '@/features/categories/api';
+import { WayCard } from '@/homepage/WayCard';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import {
   Accordion,
   Anchor,
-  AspectRatio,
   Box,
-  Button,
+  Container,
   Flex,
   Group,
-  Image,
-  Paper,
   Text,
   Title,
-  createStyles,
 } from '@mantine/core';
 import {
   IconArrowsLeftRight,
@@ -54,83 +51,36 @@ interface HomePageProps {
   snapshot: PullStateInstance;
 }
 
-const useStyle = createStyles((theme) => ({
-  paper: {
-    transition: 'all .4s ease-in-out',
-    cursor: 'pointer',
-    '&:hover': {
-      transform: 'scale(1.05)',
-    },
-  },
-}));
-
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
   const { t } = useTranslation('content');
-  const { classes } = useStyle();
 
-  const ways = [
-    {
+  const ways = {
+    buy: {
       title: t('common:buy'),
       description: t('homepage.intro.buy.description'),
-      icon: IconShoppingBag,
+      icon: <IconShoppingBag stroke={2.3} />,
       button: t('homepage.intro.buy.button'),
+      onclick: 'search',
       img: 'assets/homepage-buy.svg',
     },
-    {
+    sell: {
       title: t('common:sell'),
       description: t('homepage.intro.sell.description'),
-      icon: IconCurrencyEuro,
+      icon: <IconCurrencyEuro stroke={2.45} />,
       button: t('homepage.intro.sell.button'),
+      onclick: 'products/create',
       img: 'assets/homepage-sell.svg',
     },
-    {
+    exchange: {
       title: t('common:exchange'),
       description: t('homepage.intro.exchange.description'),
-      icon: IconArrowsLeftRight,
+      icon: <IconArrowsLeftRight stroke={2.2} />,
       button: t('homepage.intro.exchange.button'),
+      onclick: 'products/create',
       img: 'assets/homepage-exchange.svg',
     },
-  ];
-
-  const features = ways.map((way) => (
-    <Paper
-      key={way.title}
-      shadow="md"
-      radius="md"
-      p="xl"
-      w={'33%'}
-      className={classes.paper}
-    >
-      <Flex gap={'md'} direction={'column'} h={'100%'}>
-        <Title>{way.title}</Title>
-
-        <AspectRatio
-          ratio={4 / 3}
-          w={300}
-          h={300}
-          style={{ alignSelf: 'center' }}
-        >
-          <Image src={way.img} />
-        </AspectRatio>
-
-        <Button
-          fz={'xl'}
-          p={10}
-          px={14}
-          w={'auto'}
-          h={'auto'}
-          rightIcon={<way.icon stroke={2} />}
-          style={{ alignSelf: 'end' }}
-        >
-          {way.title}
-        </Button>
-        <Text fz="sm" c="dimmed" mt="sm">
-          {way.description}
-        </Text>
-      </Flex>
-    </Paper>
-  ));
+  };
 
   return (
     <AuthenticatedAppLayout instance={instance}>
@@ -141,16 +91,16 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
         <meta name="description" content="Aouis Homepage" />
       </Head>
 
-      <Flex
-        gap={'xl'}
-        w={'100%'}
-        px={64}
-        my={50}
-        justify="center"
-        wrap={'nowrap'}
-      >
-        {features}
-      </Flex>
+      {/* Ways */}
+      <Container size={'xl'} my={'xl'}>
+        <Group noWrap spacing={'xl'}>
+          <WayCard way={ways.buy} />
+          <WayCard way={ways.sell} />
+        </Group>
+        <Container my={'xl'}>
+          <WayCard way={ways.exchange} />
+        </Container>
+      </Container>
 
       <Flex direction={'column'} gap={96} px={128} mt={'xl'}>
         {/* What is Aouis */}

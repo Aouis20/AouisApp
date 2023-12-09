@@ -189,7 +189,7 @@ export function HeaderSection() {
   ));
 
   return (
-    <Box>
+    <>
       <Header height={60} px="md" pos={'relative'}>
         <Group position="apart" h={'100%'}>
           {/* Left Section - Logo */}
@@ -439,6 +439,6 @@ export function HeaderSection() {
           </Group>
         </ScrollArea>
       </Drawer>
-    </Box>
+    </>
   );
 }
