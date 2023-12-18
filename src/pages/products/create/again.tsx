@@ -1,6 +1,7 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
+import { getCategories } from '@/features/categories/api';
 import ProductCreate from '@/features/products/components/ProductCreate';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
@@ -15,6 +16,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     await getUserInfo(stateInstance, api);
+    const categoryList = await getCategories(api);
+    stateInstance.stores.CategoryStore.update((s) => {
+      s.categoryList = categoryList;
+    });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
@@ -27,11 +32,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type ProductsProps = {
+type SearchAgainProps = {
   snapshot: PullStateInstance;
 };
 
-const Products: NextPage<ProductsProps> = ({ snapshot }) => {
+const SearchAgain: NextPage<SearchAgainProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
@@ -41,11 +46,11 @@ const Products: NextPage<ProductsProps> = ({ snapshot }) => {
         <title>
           {t('content:header.navigation.products')} | {t('appName')}
         </title>
-        <meta name="description" content="test" />
+        <meta name="description" />
       </Head>
 
       <ProductCreate />
     </AuthenticatedAppLayout>
   );
 };
-export default Products;
+export default SearchAgain;

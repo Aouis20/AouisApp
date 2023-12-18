@@ -118,9 +118,9 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
         transition: 'all .4s ease-in-out',
         '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
       }}
-      onClick={() => router.push(`/products/${product.id}`)}
     >
       <Group noWrap spacing={'xs'} align="start">
+        {/* Left Section */}
         <Box w={'40%'} miw={'40%'}>
           <Carousel
             loop
@@ -143,13 +143,19 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             </Group>
           )}
         </Box>
+
+        {/* Right Section */}
         <Flex
           direction={'column'}
           gap={'xs'}
           w={'100%'}
           h={200}
           p={8}
-          style={{ position: 'relative', boxSizing: 'border-box' }}
+          style={{
+            position: 'relative',
+            boxSizing: 'border-box',
+          }}
+          onClick={() => router.push(`/products/${product.id}`)}
         >
           {/* Like Button */}
           <ActionIcon

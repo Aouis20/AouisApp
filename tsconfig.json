@@ -28,6 +28,6 @@
     ],
     "types": ["react", "react-dom"],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/features/products/variables/Conditions.js"],
   "exclude": ["node_modules"]
 }

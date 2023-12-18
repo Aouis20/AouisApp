@@ -34,6 +34,7 @@ const ProductList = () => {
   useEffect(() => {
     fetchProducts(activePage);
   }, [activePage]);
+
   return (
     <>
       <PaginationComponent

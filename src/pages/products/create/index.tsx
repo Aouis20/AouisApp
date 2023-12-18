@@ -1,8 +1,8 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import { getProducts } from '@/features/products/api';
-import { ProductPage } from '@/features/products/components/ProductPage';
+import { getCategories } from '@/features/categories/api';
+import ProductCreate from '@/features/products/components/ProductCreate';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
@@ -16,10 +16,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     await getUserInfo(stateInstance, api);
-
-    const products = await getProducts(1, {}, api);
-    stateInstance.stores.ProductStore.update((s) => {
-      s.productList = products;
+    const categoryList = await getCategories(api);
+    stateInstance.stores.CategoryStore.update((s) => {
+      s.categoryList = categoryList;
     });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
@@ -33,11 +32,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-type ProductsProps = {
+type SearchProps = {
   snapshot: PullStateInstance;
 };
 
-const Products: NextPage<ProductsProps> = ({ snapshot }) => {
+const Search: NextPage<SearchProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
@@ -47,11 +46,11 @@ const Products: NextPage<ProductsProps> = ({ snapshot }) => {
         <title>
           {t('content:header.navigation.products')} | {t('appName')}
         </title>
-        <meta name="description" content="Aouis Products" />
+        <meta name="description" />
       </Head>
 
-      <ProductPage />
+      <ProductCreate />
     </AuthenticatedAppLayout>
   );
 };
-export default Products;
+export default Search;

@@ -1,23 +1,25 @@
 import { CategoryStore } from '@/features/categories/store';
+import { submitSearch } from '@/features/products/api';
+import { ProductStore } from '@/features/products/store';
+import { ConditionType } from '@/features/products/types/Product';
+import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
   AspectRatio,
-  Box,
-  Checkbox,
+  Button,
   Collapse,
   Container,
   Flex,
   Group,
-  HoverCard,
   Image,
   MultiSelect,
   NumberInput,
   Paper,
-  Text,
   TextInput,
   Title,
 } from '@mantine/core';
-import { useDisclosure, useListState } from '@mantine/hooks';
+import { useForm } from '@mantine/form';
+import { useDisclosure } from '@mantine/hooks';
 import {
   IconArticle,
   IconCategory,
@@ -25,160 +27,131 @@ import {
   IconMapPinFilled,
   IconSearch,
 } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { SearchPayload } from '../types/SearchPayload';
 
 export const SearchPage = () => {
   const { t } = useTranslation('');
-  const [minPrice, setMinPrice] = useState<number | ''>('');
-  const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [opened, { toggle }] = useDisclosure(false);
   const categoryList = CategoryStore.useState((s) => s.categoryList);
-
-  const initialValues = [
-    {
-      label: 'Receive sms notifications',
-      checked: true,
-      key: 'unkey2',
+  const router = useRouter();
+  const form = useForm<SearchPayload>({
+    initialValues: {
+      name: '',
+      min_price: 0,
+      max_price: 100,
+      conditions: [],
+      categories: [],
+      localization: '',
     },
-    {
-      label: 'Receive push notifications',
-      checked: true,
-      key: 'unkey3',
-    },
-  ];
+  });
 
-  const [values, handlers] = useListState(initialValues);
-
-  const allChecked = values.every((value) => value.checked);
-  const indeterminate = values.some((value) => value.checked) && !allChecked;
-
-  const items = values.map((value, index) => (
-    <Checkbox
-      my="md"
-      ml={33}
-      label={<Text>{value.label}</Text>}
-      key={value.key}
-      checked={value.checked}
-      onChange={(event) =>
-        handlers.setItemProp(index, 'checked', event.currentTarget.checked)
-      }
-    />
-  ));
+  const handleSubmit = async () => {
+    try {
+      const api = setupPrivateApi();
+      const products = await submitSearch(form.values, api);
+      ProductStore.update((s) => {
+        s.productList = products;
+      });
+      router.push('/products/search');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container size="md">
-      <Paper shadow="sm" radius="md" p="lg" withBorder>
-        <Title>{t('content:header.navigation.search')}</Title>
-        <Flex gap={'md'} mt={'md'}>
-          {/* Search Input */}
-          <TextInput
-            w={300}
-            label={t('content:header.navigation.search')}
-            placeholder="Voiture, Casque, Meuble ..."
-            icon={<IconSearch size={18} />}
-          />
-          {/* Price */}
-          <Group align="start" sx={{ height: '100%' }}>
-            <NumberInput
-              w={160}
-              label="Min"
-              placeholder="Prix min."
-              value={minPrice}
-              min={0}
-              onChange={setMinPrice}
-              hideControls
-              step={0.5}
-              icon={<IconCurrencyEuro size={18} />}
-              error={
-                minPrice > maxPrice &&
-                'Veuillez séléctionnez un prix inférieure'
-              }
-              precision={2}
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <Paper shadow="sm" radius="md" p="lg" withBorder>
+          <Title>{t('content:header.navigation.search')}</Title>
+          <Flex gap={'md'} mt={'md'}>
+            {/* Search Input */}
+            <TextInput
+              w={300}
+              label={t('content:header.navigation.search')}
+              placeholder="Voiture, Casque, Meuble ..."
+              icon={<IconSearch size={18} />}
+              {...form.getInputProps('name')}
             />
-            <NumberInput
-              w={160}
-              label="Max"
-              placeholder="Prix max."
-              value={maxPrice}
-              min={0}
-              onChange={setMaxPrice}
-              hideControls
-              step={0.5}
-              icon={<IconCurrencyEuro size={18} />}
-              error={maxPrice}
-              precision={2}
-            />
-          </Group>
-        </Flex>
-        <Flex mb={'xl'}>
-          <Collapse in={opened}>
-            <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
-              {/* Conditions */}
-              <HoverCard
-                withArrow
-                arrowPosition="center"
-                position="bottom-start"
-              >
-                <HoverCard.Target>
-                  <TextInput
-                    w={200}
-                    label="Conditions"
-                    icon={<IconArticle size={18} />}
-                  />
-                </HoverCard.Target>
-                <HoverCard.Dropdown p={28}>
-                  <Box>
-                    <Checkbox
-                      checked={allChecked}
-                      indeterminate={indeterminate}
-                      label="All"
-                      transitionDuration={0}
-                      onChange={() =>
-                        handlers.setState((current) =>
-                          current.map((value) => ({
-                            ...value,
-                            checked: !allChecked,
-                          }))
-                        )
-                      }
-                    />
-                    {items}
-                  </Box>
-                </HoverCard.Dropdown>
-              </HoverCard>
-
-              {/* Categories */}
-              <MultiSelect
-                icon={<IconCategory size={18} />}
-                label="Categories"
-                searchable
-                clearable
-                data={categoryList.map((category) => ({
-                  value: String(category.id),
-                  label: category.title,
-                }))}
-              />
-
-              {/* Localization */}
+            {/* Price */}
+            <Group>
               <NumberInput
-                w={200}
-                label="Localization"
+                w={160}
+                label="Min"
+                placeholder="Prix min."
+                min={0}
                 hideControls
-                icon={<IconMapPinFilled size={18} />}
+                step={0.5}
+                icon={<IconCurrencyEuro size={18} />}
+                precision={2}
+                {...form.getInputProps('min_price')}
               />
-            </Flex>
-          </Collapse>
-        </Flex>
-        <Anchor onClick={toggle}>
-          {opened
-            ? 'Masquer les réglages avancées'
-            : 'Afficher les réglages avancées'}
-        </Anchor>
-      </Paper>
-      <AspectRatio ratio={16 / 9} style={{ zoom: 2 }}>
-        <Image src="assets/search/search.svg" />
-      </AspectRatio>
+              <NumberInput
+                w={160}
+                label="Max"
+                placeholder="Prix max."
+                min={0}
+                hideControls
+                step={0.5}
+                icon={<IconCurrencyEuro size={18} />}
+                precision={2}
+                {...form.getInputProps('max_price')}
+              />
+            </Group>
+          </Flex>
+          <Flex mb={'xl'}>
+            <Collapse in={opened}>
+              <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
+                {/* Conditions */}
+                <MultiSelect
+                  label="Conditions"
+                  icon={<IconArticle size={18} />}
+                  clearable
+                  searchable
+                  data={Object.values(ConditionType)}
+                  {...form.getInputProps('conditions')}
+                />
+
+                {/* Categories */}
+                <MultiSelect
+                  icon={<IconCategory size={18} />}
+                  label="Categories"
+                  searchable
+                  clearable
+                  data={categoryList.map((category) => ({
+                    value: String(category.id),
+                    label: category.title,
+                  }))}
+                  {...form.getInputProps('categories')}
+                />
+
+                {/* Localization */}
+                <NumberInput
+                  w={200}
+                  label="Localization"
+                  hideControls
+                  icon={<IconMapPinFilled size={18} />}
+                  {...form.getInputProps('localization')}
+                />
+              </Flex>
+            </Collapse>
+          </Flex>
+
+          <Group position="apart">
+            <Anchor onClick={toggle}>
+              {opened
+                ? 'Masquer les réglages avancées'
+                : 'Afficher les réglages avancées'}
+            </Anchor>
+
+            <Button type="submit">Rechercher</Button>
+          </Group>
+        </Paper>
+        <AspectRatio ratio={16 / 9} style={{ zoom: 2 }}>
+          <Image src="assets/search/search.svg" />
+        </AspectRatio>
+      </form>
     </Container>
   );
 };

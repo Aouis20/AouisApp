@@ -1,5 +1,6 @@
 import ImagesDropzone from '@/common/ImagesDropzone';
 import { CategoryStore } from '@/features/categories/store';
+import { setupPrivateApi } from '@/pages/api';
 import {
   Badge,
   Box,
@@ -20,8 +21,10 @@ import {
 } from '@mantine/core';
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
 import { IconHelp } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
+import { createProduct } from '../api';
 import {
   CreateProductFormType,
   CreateStatusType,
@@ -55,16 +58,26 @@ const ProductCreate = () => {
     console.log('images sets', images);
   };
 
-  const handleSubmit = (values: CreateProductFormType) => {
-    console.log('oui submitted');
-    console.log(values);
+  const handleSubmit = async (values: CreateProductFormType) => {
     // TODO create product
     try {
+      const api = setupPrivateApi();
+      await createProduct(createProductForm.values, api);
+      showNotification({
+        title: t('product.create.notifications.success.title'),
+        message: t('product.create.notifications.success.message'),
+        color: 'green',
+      });
       // TODO ask user create a new one ?
-        // if yes back to form
-        // else redirect to homepage
+      // if yes back to form
+      // else redirect to homepage
     } catch (err) {
       console.log(err);
+      showNotification({
+        title: t('product.create.notifications.error.title'),
+        message: t('product.create.notifications.error.message'),
+        color: 'red',
+      });
     }
   };
 

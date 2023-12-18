@@ -36,7 +36,9 @@ const LanguageSelector = () => {
       showNotification({
         title: t('languageSelector.notifications.success.title'),
         message: t('languageSelector.notifications.success.message', {
-          language: t(`languageSelector.languages.${String(language)}`),
+          language: t(
+            `languageSelector.languages.${String(language).toLowerCase()}`
+          ),
         }),
         color: 'green',
       });
@@ -44,7 +46,9 @@ const LanguageSelector = () => {
       showNotification({
         title: t('languageSelector.notifications.error.title'),
         message: t('languageSelector.notifications.error.message', {
-          language: t(`languageSelector.languages.${String(language)}`),
+          language: t(
+            `languageSelector.languages.${String(language).toLowerCase()}`
+          ),
         }),
         color: 'red',
       });

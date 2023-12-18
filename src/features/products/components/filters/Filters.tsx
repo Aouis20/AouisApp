@@ -1,4 +1,4 @@
-import { Badge, Button, Group, HoverCard, Paper } from '@mantine/core';
+import { Badge, Button, Group, HoverCard, Paper, Title } from '@mantine/core';
 import {
   IconAdjustments,
   IconArticle,
@@ -33,6 +33,9 @@ const Filters = ({ open }: FiltersProps) => {
 
   return (
     <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
+      <Group position="center" mb={'xl'}>
+        <Title>Others category</Title>
+      </Group>
       <Group position="apart">
         <Button
           variant="light"

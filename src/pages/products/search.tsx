@@ -17,11 +17,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     await getUserInfo(stateInstance, api);
 
-    const products = await getProducts(1, {}, api);
-    stateInstance.stores.ProductStore.update((s) => {
-      s.productList = products;
-    });
-
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
     const error = e as HTTPError;
