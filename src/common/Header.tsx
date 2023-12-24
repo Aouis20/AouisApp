@@ -13,12 +13,7 @@ import {
   HoverCard,
   Image,
   Menu,
-  ScrollArea,
-  SimpleGrid,
   Text,
-  ThemeIcon,
-  UnstyledButton,
-  rem,
 } from '@mantine/core';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
@@ -26,7 +21,6 @@ import {
   IconArrowsExchange,
   IconBell,
   IconChevronDown,
-  IconCode,
   IconHeart,
   IconLogout,
   IconMessageCircle2,
@@ -101,33 +95,13 @@ export function HeaderSection() {
   ];
 
   const categories = [...categoryList, ...truc].map((category) => ({
-    icon: IconCode,
     ...category,
   }));
 
   const renderCategories = categories.map((category, index) => (
-    <UnstyledButton
-      style={{
-        width: '100%',
-        padding: 'md',
-        borderRadius: 'md',
-      }}
-      key={index}
-    >
-      <Group wrap={'nowrap'} align="flex-start">
-        <ThemeIcon size={34} variant="default" radius="md">
-          <category.icon size={rem(22)} />
-        </ThemeIcon>
-        <Box>
-          <Text size="sm" fw={500}>
-            {category.title}
-          </Text>
-          <Text size="xs" c="dimmed">
-            {category.description}
-          </Text>
-        </Box>
-      </Group>
-    </UnstyledButton>
+    <Button variant="light" key={index}>
+      {category.title}
+    </Button>
   ));
 
   return (
@@ -206,7 +180,7 @@ export function HeaderSection() {
               </Anchor>
             </HoverCard.Target>
 
-            <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
+            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={'70%'}>
               <Group justify="space-between" px="md">
                 <Text fw={500}>
                   {t('content:header.navigation.categories')}
@@ -216,9 +190,9 @@ export function HeaderSection() {
 
               <Divider my="sm" mx="-md" color={'gray.1'} />
 
-              <SimpleGrid cols={3} spacing={0}>
+              <Flex gap={'md'} wrap={'wrap'}>
                 {renderCategories}
-              </SimpleGrid>
+              </Flex>
             </HoverCard.Dropdown>
           </HoverCard>
         </Group>
@@ -353,112 +327,86 @@ export function HeaderSection() {
           <LanguageSelector />
         </Group>
 
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider my="sm" />
+        <Divider my="sm" />
 
-          <Flex direction={'column'}>
-            <Anchor
-              href="/"
+        <Flex direction={'column'} gap={'sm'} pl={'lg'}>
+          <Anchor
+            href="/"
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            {t('content:header.navigation.homepage')}
+          </Anchor>
+          <Anchor
+            href="/products"
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            {t('content:header.navigation.products')}
+          </Anchor>
+          <Anchor href="/search" fw={500} fz={'sm'}>
+            {t('content:header.navigation.search')}
+            <IconSearch
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                height: '100%',
-                paddingLeft: 'md',
-                paddingRight: 'md',
-                paddingTop: 'xl',
-                paddingBottom: 'xl',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: 'sm',
+                transform: 'scaleX(-1)',
+                marginBottom: -3,
+                marginLeft: 4,
               }}
-            >
-              {t('content:header.navigation.homepage')}
-            </Anchor>
-            <Anchor
-              href="/products"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                height: '100%',
-                paddingLeft: 'md',
-                paddingRight: 'md',
-                paddingTop: 'xl',
-                paddingBottom: 'xl',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: 'sm',
-              }}
-            >
-              {t('content:header.navigation.products')}
-            </Anchor>
-            <Anchor
-              href="/search"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                height: '100%',
-                paddingLeft: 'md',
-                paddingRight: 'md',
-                paddingTop: 'xl',
-                paddingBottom: 'xl',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: 'sm',
-              }}
-            >
-              {t('content:header.navigation.search')}
-              <IconSearch
-                style={{ transform: 'scaleX(-1)', marginLeft: 4 }}
-                size={18}
-              />
-            </Anchor>
-            <UnstyledButton
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                height: '100%',
-                paddingLeft: 'md',
-                paddingRight: 'md',
-                paddingTop: 'xl',
-                paddingBottom: 'xl',
-                textDecoration: 'none',
-                fontWeight: 500,
-                fontSize: 'sm',
-              }}
-              onClick={toggleLinks}
-            >
-              <Box component="span" mr={5}>
-                {t('content:header.navigation.categories')}
-              </Box>
-              <IconChevronDown size={16} />
-            </UnstyledButton>
-            <Collapse in={linksOpened}>{renderCategories}</Collapse>
-          </Flex>
+              size={18}
+            />
+          </Anchor>
+          <Anchor
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+            mr={5}
+            onClick={toggleLinks}
+          >
+            {t('content:header.navigation.categories')}
+            <IconChevronDown
+              size={16}
+              style={{ marginBottom: -3, marginLeft: 4 }}
+            />
+          </Anchor>
+          <Collapse in={linksOpened}>
+            <Flex gap={'md'} wrap={'wrap'}>
+              {renderCategories}
+            </Flex>
+          </Collapse>
+        </Flex>
 
-          <Divider my="sm" color="gray.1" />
+        <Divider my="sm" color="gray.1" />
 
-          <Group justify="center" grow pb="xl" px="md">
-            {logged ? (
-              <>
-                <Button variant="light">
-                  {t('content:header.profileMenu.profile')}
-                </Button>
-                <Button variant="default" onClick={logout}>
-                  {t('content:header.navigation.logout')}
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="default">
-                  {t('content:header.navigation.login')}
-                </Button>
-                <Button variant="filled">
-                  {t('content:header.navigation.register')}
-                </Button>
-              </>
-            )}
-          </Group>
-        </ScrollArea>
+        <Group justify="center" grow pb="xl" px="md">
+          {logged ? (
+            <>
+              <Button>{t('content:header.profileMenu.profile')}</Button>
+              <Button variant="outline" onClick={logout}>
+                {t('content:header.navigation.logout')}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="default">
+                {t('content:header.navigation.login')}
+              </Button>
+              <Button variant="filled">
+                {t('content:header.navigation.register')}
+              </Button>
+            </>
+          )}
+        </Group>
       </Drawer>
     </>
   );

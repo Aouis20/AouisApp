@@ -1,7 +1,7 @@
 import { BackLinkButton } from '@/common/BackLinkButton';
+import { DisplayName } from '@/common/DisplayName';
 import { Carousel } from '@mantine/carousel';
 import {
-  ActionIcon,
   Anchor,
   Avatar,
   Badge,
@@ -15,28 +15,27 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { IconHeart, IconMail, IconPhone } from '@tabler/icons-react';
-import classes from '../carousel.module.css';
+import { useHover } from '@mantine/hooks';
+import { IconMail, IconPhone } from '@tabler/icons-react';
 import { ProductStore } from '../store';
 import { PaymentType } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
-import { DisplayName } from '@/common/DisplayName';
+import { LikeButton } from './LikeButton';
 
 export const ProductDetailsPage = () => {
   const product = ProductStore.useState((s) => s.product);
+  const { hovered, ref } = useHover();
 
   if (!product) {
     return <Text fs={'italic'}>Produit indisponible</Text>;
   }
 
-  const handleLike = () => {
-    // TODO hande like
-  };
-
   return (
     <>
-      <BackLinkButton />
+      <Box ml={'xl'}>
+        <BackLinkButton />
+      </Box>
       <Group align="start" p={32}>
         {/* Product Overview */}
         <Paper
@@ -46,20 +45,10 @@ export const ProductDetailsPage = () => {
           w={'70%'}
           style={{ overflow: 'hidden' }}
         >
-          <Carousel
-            classNames={classes}
-            withIndicators
-            height={400}
-            slideGap="md"
-            align="start"
-            breakpoints={[
-              { maxWidth: 'md', slideSize: '50%' },
-              { maxWidth: 'sm', slideSize: '100%', slideGap: 0 },
-            ]}
-          >
+          <Carousel withIndicators height={400} slideGap="md" align="start">
             {product.images.map((image, index) => (
               <>
-                <Carousel.Slide key={index}>
+                <Carousel.Slide key={index} ref={ref}>
                   {/* TODO Aspect Ratio */}
                   <Image
                     src={image}
@@ -68,23 +57,7 @@ export const ProductDetailsPage = () => {
                     alt={product.title + '-image' + index}
                   />
                 </Carousel.Slide>
-                <ActionIcon
-                  bg={'white'}
-                  pos={'absolute'}
-                  w={40}
-                  h={40}
-                  top={10}
-                  right={28}
-                  p={4}
-                  style={{
-                    borderRadius: '50%',
-                    transition: 'color 0.3s ease',
-                    '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
-                  }}
-                  onClick={handleLike}
-                >
-                  <IconHeart />
-                </ActionIcon>
+                <LikeButton product={product} hovered={hovered} />
               </>
             ))}
           </Carousel>

@@ -113,7 +113,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
 
         {/* FAQ */}
         <Box
-          bg={'primary.2'}
+          bg={'primary.3'}
           w={'100%'}
           px={matches ? 128 : 'xl'}
           py={48}

@@ -1,6 +1,5 @@
 import { DirectMessage } from '@/common/DirectMessage';
 import { DisplayName } from '@/common/DisplayName';
-import { AccountStore } from '@/features/accounts/store';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
@@ -16,12 +15,7 @@ import {
   Title,
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
-import {
-  IconHeart,
-  IconHeartFilled,
-  IconMapPinFilled,
-  IconStarFilled,
-} from '@tabler/icons-react';
+import { IconMapPinFilled, IconStarFilled } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
@@ -30,6 +24,7 @@ import { useRouter } from 'next/router';
 import { PaymentType, Product } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
+import { LikeButton } from './LikeButton';
 
 type ProductCardProps = {
   product: Product;
@@ -37,15 +32,9 @@ type ProductCardProps = {
 
 dayjs.extend(LocalizedFormat);
 
-const ProductCard = ({ product }: ProductCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { hovered, ref } = useHover();
-  const user = AccountStore.useState((s) => s.user);
-
-  const handleLike = () => {
-    // TODO add product to user wishlist
-    // + if product already exists in his wishlist ? IconHeartFilled avec dans ActionIcon(color="pink") : HeartIcon
-  };
 
   const handleDistance = () => {
     // TODO get distance between user and product owner
@@ -76,17 +65,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       w={600}
       style={{
         transition: 'all .4s ease-in-out',
-        '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
+        transform: hovered ? 'scale(1.05)' : 'none',
       }}
     >
       <Group wrap={'nowrap'} gap={'xs'} align="start">
         {/* Left Section */}
         <Box w={'40%'} miw={'40%'}>
-          <Carousel
-            loop
-            withControls={hovered ? true : false}
-            style={{ position: 'relative' }}
-          >
+          <Carousel loop withControls={hovered ? true : false}>
             {slides}
           </Carousel>
           {hovered && (
@@ -114,38 +99,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           style={{
             position: 'relative',
             boxSizing: 'border-box',
+            cursor: 'pointer',
           }}
           onClick={() => router.push(`/products/${product.id}`)}
         >
           {/* Like Button */}
-          <ActionIcon
-            bg={'white'}
-            h={40}
-            w={40}
-            right={2}
-            top={2}
-            style={{
-              position: 'absolute',
-              borderRadius: '50%',
-              transition: 'color 0.3s ease',
-              display: hovered ? 'block' : 'none',
-              '&:hover': {
-                color: 'red',
-                animation: 'enlarge 0.3s ease',
-              },
-              zIndex: 99999999,
-            }}
-            onClick={handleLike}
-            color={user?.favoris.includes(product) ? 'red' : 'gray'}
-          >
-            <Group justify="center">
-              {user?.favoris.includes(product) ? (
-                <IconHeartFilled />
-              ) : (
-                <IconHeart />
-              )}
-            </Group>
-          </ActionIcon>
+          <LikeButton product={product} hovered={hovered} />
 
           <Group justify="space-between" wrap={'nowrap'} align="start">
             <Flex direction={'column'}>
@@ -155,8 +114,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
               {/* Description */}
               <Spoiler
                 maxHeight={44}
-                showLabel="Voir plus"
-                hideLabel="Voir moins"
+                showLabel={''}
+                hideLabel={''}
                 transitionDuration={500}
                 mt={'xl'}
               >
@@ -181,11 +140,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 {product.payment_type != PaymentType.UNIQ &&
                   paymentType[product.payment_type]}
               </Badge>
-              <Badge color="pink" fz={12}>
-                <Group wrap={'nowrap'}>
-                  <Text mr={-6}>{product.condition}</Text>
-                  {conditionIcon[product.condition]}
-                </Group>
+              <Badge
+                color="secondary.5"
+                variant="light"
+                fz={12}
+                rightSection={conditionIcon[product.condition]}
+              >
+                {product.condition}
               </Badge>
             </Flex>
           </Group>
@@ -209,7 +170,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
                   <Text c="dimmed" fw={'bold'} fz={'md'} span>
                     5
                   </Text>
-                  <ActionIcon c="dimmed" pb={2}>
+                  <ActionIcon c="dimmed" variant="transparent" pb={2}>
                     <IconStarFilled size={16} />
                   </ActionIcon>
                 </Group>
@@ -236,5 +197,3 @@ const ProductCard = ({ product }: ProductCardProps) => {
     </Card>
   );
 };
-
-export default ProductCard;

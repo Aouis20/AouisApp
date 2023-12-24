@@ -4,7 +4,7 @@ import { setupPrivateApi } from '@/pages/api';
 import { Box, Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
-import ProductCard from '../ProductCard';
+import { ProductCard } from '../ProductCard';
 
 type ProductListProps = {
   display?: 'column' | 'row';

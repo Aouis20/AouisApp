@@ -1,5 +1,5 @@
 import { Button, Flex, Group, Image, Paper, Text, Title } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+import { useHover, useMediaQuery } from '@mantine/hooks';
 import { t } from 'i18next';
 import { useRouter } from 'next/router';
 import { WayType } from '../types/WayType';
@@ -11,6 +11,7 @@ interface WayCardProps {
 export const WayCard = ({ way }: WayCardProps) => {
   const router = useRouter();
   const matches = useMediaQuery('(min-width: 500px)');
+  const { hovered, ref } = useHover();
 
   return (
     <Paper
@@ -19,9 +20,11 @@ export const WayCard = ({ way }: WayCardProps) => {
       radius="md"
       p="xl"
       mx={'xl'}
+      ref={ref}
       style={{
         cursor: 'pointer',
-        '&:hover': { transform: 'scale(1.04)' },
+        transition: 'transform 0.3s',
+        transform: hovered ? 'scale(1.04)' : 'none',
       }}
       onClick={() => router.push(way.onclick)}
     >

@@ -1,4 +1,3 @@
-import { Product } from "@/features/products/types/Product";
 
 export enum SalutationType {
   MR = 'MR',
@@ -15,7 +14,7 @@ export type User = {
   last_name: string | undefined;
   username: string | undefined;
   language: string
-  favoris: Product[];
+  favoris: number[];
 
   email: string;
   phone_number: string;
