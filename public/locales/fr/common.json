@@ -17,6 +17,8 @@
   "noData": "Aucune donnée disponible",
   "delete": "Supprimer",
   "comments": "Commentaires",
+  "price": "Prix",
+  "search": "Rechercher",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",

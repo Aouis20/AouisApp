@@ -5,27 +5,11 @@ import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
-import { Box, createStyles } from '@mantine/core';
+import { Box } from '@mantine/core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
-
-const useStyles = createStyles((theme) => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: 'calc(100vh - 64px)',
-    paddingTop: '32px',
-  },
-  boxTitle: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '16px',
-    margin: '0 0 32px 0',
-  },
-}));
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -55,7 +39,6 @@ type UsersPageProps = {
 
 const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
   const { t } = useTranslation('common');
-  const { classes } = useStyles();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
@@ -67,7 +50,14 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
         <meta name="description" content="test" />
       </Head>
 
-      <Box className={classes.container}>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: 'calc(100vh - 64px)',
+          paddingTop: '32px',
+        }}
+      >
         <AccountList />
       </Box>
     </AuthenticatedAppLayout>

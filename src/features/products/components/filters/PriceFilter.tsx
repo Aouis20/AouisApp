@@ -12,11 +12,13 @@ import {
 import { useListState } from '@mantine/hooks';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProductStore } from '../../store';
 
 const PriceFilter = () => {
   const products = ProductStore.useState((s) => s.productList);
   const filters = ProductStore.useState((s) => s.filters);
+  const { t } = useTranslation();
 
   if (!products) {
     return <Text>Aucune donnée disponible</Text>;
@@ -102,7 +104,7 @@ const PriceFilter = () => {
 
   return (
     <Flex direction={'column'} gap={20} px={16}>
-      <Title order={2}>Price</Title>
+      <Title order={2}>{t('price')}</Title>
 
       {/* Payment types */}
       <Box>
@@ -165,10 +167,10 @@ const PriceFilter = () => {
         }}
       />
       <Group
-        position="apart"
+        justify="space-between"
         w={'100%'}
         mt={'-10px'}
-        sx={{ alignSelf: 'center' }}
+        style={{ alignSelf: 'center' }}
       >
         <Text color="gray">{min}€</Text>
         <Text color="gray">{max}€</Text>

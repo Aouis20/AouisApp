@@ -60,7 +60,7 @@ const LanguageSelector = () => {
       <Menu.Target>
         <Button
           variant="light"
-          leftIcon={
+          leftSection={
             user?.language ? (
               languageDict[user.language]
             ) : (
@@ -75,13 +75,13 @@ const LanguageSelector = () => {
       <Menu.Dropdown>
         <Menu.Label>{t('languageSelector.label')}</Menu.Label>
         <Menu.Item
-          icon={<ReactCountryFlag countryCode="FR" svg />}
+          leftSection={<ReactCountryFlag countryCode="FR" svg />}
           onClick={() => handleChangeLanguage('FR')}
         >
           {t('languageSelector.languages.fr')}
         </Menu.Item>
         <Menu.Item
-          icon={<ReactCountryFlag countryCode="GB" svg />}
+          leftSection={<ReactCountryFlag countryCode="GB" svg />}
           onClick={() => handleChangeLanguage('EN')}
         >
           {t('languageSelector.languages.en')}

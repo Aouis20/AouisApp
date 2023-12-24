@@ -21,11 +21,11 @@ export default function Terms() {
           onClick={() => router.back()}
           my={'xl'}
           variant="default"
-          leftIcon={<IconArrowNarrowLeft />}
+          leftSection={<IconArrowNarrowLeft />}
         >
           {t('common:back')}
         </Button>
-        <Flex direction={'column'} gap={'xl'}>
+        <Flex direction={'column'} gap={64}>
           <Title>{t('termsOfService.title')}</Title>
 
           {/* Property */}

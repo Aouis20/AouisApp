@@ -48,39 +48,39 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
       <Tabs variant="outline" defaultValue={tab || 'profile'}>
         {/* TABS */}
         <Tabs.List
-          sx={{
+          style={{
             overflow: 'auto hidden',
             width: '100%',
             display: 'flex',
             flexWrap: 'nowrap',
           }}
         >
-          <Tabs.Tab value="profile" icon={<IconUser size="0.8rem" />}>
+          <Tabs.Tab value="profile" leftSection={<IconUser size="0.8rem" />}>
             Profile
           </Tabs.Tab>
-          <Tabs.Tab value="ads" icon={<IconPhoto size="0.8rem" />}>
+          <Tabs.Tab value="ads" leftSection={<IconPhoto size="0.8rem" />}>
             Ads
           </Tabs.Tab>
 
           <Tabs.Tab
             value="historic"
-            icon={<IconArrowsExchange size="0.8rem" />}
+            leftSection={<IconArrowsExchange size="0.8rem" />}
           >
             Historic
           </Tabs.Tab>
 
-          <Tabs.Tab value="favoris" icon={<IconHeart size="0.8rem" />}>
+          <Tabs.Tab value="favoris" leftSection={<IconHeart size="0.8rem" />}>
             Favoris
           </Tabs.Tab>
 
           <Tabs.Tab
             value="message"
-            icon={<IconMessageCircle2 size="0.8rem" />}
+            leftSection={<IconMessageCircle2 size="0.8rem" />}
             rightSection={
               <Badge
                 w={16}
                 h={16}
-                sx={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none' }}
                 variant="filled"
                 size="xs"
                 p={0}
@@ -94,12 +94,12 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
 
           <Tabs.Tab
             value="notifications"
-            icon={<IconBell size="0.8rem" />}
+            leftSection={<IconBell size="0.8rem" />}
             rightSection={
               <Badge
                 w={16}
                 h={16}
-                sx={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none' }}
                 variant="filled"
                 size="xs"
                 p={0}
@@ -111,7 +111,10 @@ const MyProfilePage = ({ tab }: MyProfilePageProps) => {
             Notifications
           </Tabs.Tab>
 
-          <Tabs.Tab value="settings" icon={<IconSettings size="0.8rem" />}>
+          <Tabs.Tab
+            value="settings"
+            leftSection={<IconSettings size="0.8rem" />}
+          >
             Settings
           </Tabs.Tab>
         </Tabs.List>

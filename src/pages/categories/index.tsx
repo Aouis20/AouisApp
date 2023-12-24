@@ -38,14 +38,14 @@ type CategoriesPageProps = {
 };
 
 const CategoriesPage: NextPage<CategoriesPageProps> = ({ snapshot }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('content');
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('navigation.categories')} | {t('appName')}
+          {t('header.navigation.categories')} | {t('common:appName')}
         </title>
         <meta name="description" content="Aouis Categories" />
       </Head>

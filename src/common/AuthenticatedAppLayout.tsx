@@ -15,8 +15,14 @@ export const AuthenticatedAppLayout = ({
 }: AppLayoutProps) => {
   return (
     <PullstateProvider instance={instance}>
-      <AppShell header={<HeaderSection />} footer={<FooterSection />}>
-        {children}
+      <AppShell>
+        <AppShell.Header>
+          <HeaderSection />
+        </AppShell.Header>
+
+        <AppShell.Main mt={100}>{children}</AppShell.Main>
+
+        <FooterSection />
       </AppShell>
     </PullstateProvider>
   );

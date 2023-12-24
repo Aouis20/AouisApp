@@ -1,32 +1,17 @@
-import { Anchor, Group, Image, createStyles } from '@mantine/core';
+import { Anchor, Group, Image } from '@mantine/core';
 import router from 'next/router';
 import { useTranslation } from 'react-i18next';
 
-const useStyles = createStyles((theme) => ({
-  links: {
-    cursor: 'pointer',
-    color: 'gray',
-    padding: 16,
-  },
-}));
-
 const FooterSection = () => {
-  const { classes } = useStyles();
   const { t } = useTranslation('documents');
   return (
-    <Group
-      spacing={0}
-      position="apart"
-      sx={{ borderTop: '1px solid #dee2e6' }}
-      px={'lg'}
-      mt={'xl'}
-    >
+    <Group gap={0} justify="space-between" p={'xl'}>
       <Image
-        sx={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer' }}
         onClick={() => router.push('/')}
         alt={'logo'}
         src={'/logo.png'}
-        width={150}
+        w={150}
       />
       <Group c="gray" py={'md'}>
         <Anchor href="/documents/terms" c={'gray'} p={'sm'}>

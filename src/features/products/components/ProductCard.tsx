@@ -11,10 +11,9 @@ import {
   Flex,
   Group,
   Image,
+  Spoiler,
   Text,
   Title,
-  createStyles,
-  getStylesRef,
 } from '@mantine/core';
 import { useHover } from '@mantine/hooks';
 import {
@@ -28,52 +27,18 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
 import { PaymentType, Product } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
 
 type ProductCardProps = {
   product: Product;
-  cardHeight: any;
 };
 
 dayjs.extend(LocalizedFormat);
 
-const useStyles = createStyles(() => ({
-  controls: {
-    ref: getStylesRef('controls'),
-    transition: 'opacity 150ms ease',
-    opacity: 0,
-  },
-  control: {
-    '&[data-inactive]': {
-      opacity: 0,
-      cursor: 'default',
-    },
-  },
-  indicators: {
-    ref: getStylesRef('indicators'),
-    transition: 'opacity 150ms ease',
-    opacity: 0,
-  },
-  root: {
-    '&:hover': {
-      [`& .${getStylesRef('controls')}`]: {
-        opacity: 1,
-      },
-      [`& .${getStylesRef('indicators')}`]: {
-        opacity: 1,
-      },
-    },
-  },
-}));
-
-const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
-  const { classes } = useStyles();
-  const [isOpened, setIsOpened] = useState<boolean>(false);
-  const detailsRef = useRef<HTMLDivElement>(null);
   const { hovered, ref } = useHover();
   const user = AccountStore.useState((s) => s.user);
 
@@ -84,11 +49,6 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
 
   const handleDistance = () => {
     // TODO get distance between user and product owner
-  };
-
-  const handleProductDetails = () => {
-    // TODO go to product details page
-    router.push(`/products/${product.id}`);
   };
 
   const images = [
@@ -114,12 +74,12 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
       ref={ref}
       h={200}
       w={600}
-      sx={{
+      style={{
         transition: 'all .4s ease-in-out',
         '&:hover': { transform: 'scale(1.05)', cursor: 'pointer' },
       }}
     >
-      <Group noWrap spacing={'xs'} align="start">
+      <Group wrap={'nowrap'} gap={'xs'} align="start">
         {/* Left Section */}
         <Box w={'40%'} miw={'40%'}>
           <Carousel
@@ -130,7 +90,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             {slides}
           </Carousel>
           {hovered && (
-            <Group position="center">
+            <Group justify="center">
               <Badge
                 style={{
                   position: 'absolute',
@@ -164,7 +124,7 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             w={40}
             right={2}
             top={2}
-            sx={{
+            style={{
               position: 'absolute',
               borderRadius: '50%',
               transition: 'color 0.3s ease',
@@ -173,11 +133,12 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
                 color: 'red',
                 animation: 'enlarge 0.3s ease',
               },
+              zIndex: 99999999,
             }}
             onClick={handleLike}
             color={user?.favoris.includes(product) ? 'red' : 'gray'}
           >
-            <Group position="center">
+            <Group justify="center">
               {user?.favoris.includes(product) ? (
                 <IconHeartFilled />
               ) : (
@@ -186,9 +147,32 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             </Group>
           </ActionIcon>
 
-          <Group position="apart" noWrap align="start">
-            {/* Title */}
-            <Title order={4}>{product.title}</Title>
+          <Group justify="space-between" wrap={'nowrap'} align="start">
+            <Flex direction={'column'}>
+              {/* Title */}
+              <Title order={4}>{product.title}</Title>
+
+              {/* Description */}
+              <Spoiler
+                maxHeight={44}
+                showLabel="Voir plus"
+                hideLabel="Voir moins"
+                transitionDuration={500}
+                mt={'xl'}
+              >
+                <Text c={'dimmed'} fz={14}>
+                  {product.description}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Beatae itaque fugiat sunt provident distinctio excepturi id,
+                  eaque reiciendis sed maiores accusantium cumque odit eveniet
+                  consequatur quasi ea mollitia hic autem! jeizgaeignoierg Lorem
+                  ipsum, dolor sit amet consectetur adipisicing elit. Esse
+                  assumenda exercitationem est quidem culpa fugit voluptatibus.
+                  Qui, similique iste unde maiores molestiae in labore maxime
+                  officia enim sequi! Facere, nam.
+                </Text>
+              </Spoiler>
+            </Flex>
 
             {/* Badges */}
             <Flex direction={'column'} gap={'xs'}>
@@ -198,43 +182,30 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
                   paymentType[product.payment_type]}
               </Badge>
               <Badge color="pink" fz={12}>
-                <Group noWrap>
+                <Group wrap={'nowrap'}>
                   <Text mr={-6}>{product.condition}</Text>
                   {conditionIcon[product.condition]}
                 </Group>
               </Badge>
             </Flex>
           </Group>
-          {/* Description */}
-          {/* <Spoiler
-            maxHeight={20}
-            showLabel="Voir plus"
-            hideLabel="Voir moins"
-            transitionDuration={500}
-          >
-            <Text c={'dimmed'} fz={14}>
-              {product.description}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              itaque fugiat sunt provident distinctio excepturi id, eaque
-              reiciendis sed maiores accusantium cumque odit eveniet consequatur
-              quasi ea mollitia hic autem! jeizgaeignoierg Lorem ipsum, dolor
-              sit amet consectetur adipisicing elit. Esse assumenda
-              exercitationem est quidem culpa fugit voluptatibus. Qui, similique
-              iste unde maiores molestiae in labore maxime officia enim sequi!
-              Facere, nam.
-            </Text>
-          </Spoiler> */}
 
           {/* Owner */}
-          <Group noWrap spacing="xs" position="apart" mt={'auto'} align="end">
+          <Group
+            wrap={'nowrap'}
+            gap="xs"
+            justify="space-between"
+            mt={'auto'}
+            align="end"
+          >
             {/* Owner Information */}
             <Flex direction={'column'}>
-              <Group spacing={8}>
+              <Group gap={8}>
                 <Text c="dimmed">
                   <DisplayName user={product.owner} />
                 </Text>
                 <Text c="dimmed">•</Text>
-                <Group spacing={0} align="center">
+                <Group gap={0} align="center">
                   <Text c="dimmed" fw={'bold'} fz={'md'} span>
                     5
                   </Text>
@@ -247,9 +218,9 @@ const ProductCard = ({ product, cardHeight }: ProductCardProps) => {
             </Flex>
 
             {/* Action Buttons */}
-            <Group noWrap>
+            <Group wrap={'nowrap'}>
               <Button
-                leftIcon={<IconMapPinFilled size={22} />}
+                leftSection={<IconMapPinFilled size={22} />}
                 variant="subtle"
                 onClick={handleDistance}
                 p={8}

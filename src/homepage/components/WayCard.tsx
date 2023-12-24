@@ -1,44 +1,16 @@
-import {
-  AspectRatio,
-  Button,
-  Flex,
-  Group,
-  Image,
-  Paper,
-  Text,
-  Title,
-  createStyles,
-} from '@mantine/core';
+import { Button, Flex, Group, Image, Paper, Text, Title } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { t } from 'i18next';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
-
-interface WayType {
-  title: string;
-  icon: ReactNode;
-  button: string;
-  description: string;
-  onclick: string;
-  img: string;
-}
+import { WayType } from '../types/WayType';
 
 interface WayCardProps {
   way: WayType;
 }
 
-const useStyle = createStyles((theme) => ({
-  paper: {
-    transition: 'all .4s ease-in-out',
-    cursor: 'pointer',
-    '&:hover': {
-      transform: 'scale(1.05)',
-    },
-  },
-}));
-
 export const WayCard = ({ way }: WayCardProps) => {
-  const { classes } = useStyle();
   const router = useRouter();
+  const matches = useMediaQuery('(min-width: 500px)');
 
   return (
     <Paper
@@ -46,10 +18,18 @@ export const WayCard = ({ way }: WayCardProps) => {
       shadow="md"
       radius="md"
       p="xl"
-      className={classes.paper}
+      mx={'xl'}
+      style={{
+        cursor: 'pointer',
+        '&:hover': { transform: 'scale(1.04)' },
+      }}
       onClick={() => router.push(way.onclick)}
     >
-      <Group position="apart" align="start" noWrap grow>
+      <Group
+        align="start"
+        wrap={matches ? 'nowrap' : 'wrap'}
+        grow={matches ? true : false}
+      >
         <Flex direction={'column'} gap={'lg'}>
           <Title order={1} style={{ alignSelf: 'start' }}>
             {way.title}
@@ -60,16 +40,14 @@ export const WayCard = ({ way }: WayCardProps) => {
         </Flex>
 
         <Flex direction={'column'} gap={'lg'} align={'end'}>
-          <AspectRatio ratio={16 / 9} w={300} h={300}>
-            <Image src={way.img} />
-          </AspectRatio>
+          <Image src={way.img} w={300} />
           <Button
             fz={'xl'}
             p={10}
             px={14}
             w={'auto'}
             h={'auto'}
-            rightIcon={way.icon}
+            rightSection={way.icon}
             color={
               way.title === t('common:exchange') ? 'secondary.4' : 'primary.4'
             }

@@ -30,7 +30,3 @@ const theme: MantineThemeOverride = {
 };
 
 export default theme;
-
-// Indigo :
-// #4c6ef5
-// #ff325c

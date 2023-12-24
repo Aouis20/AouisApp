@@ -1,3 +1,4 @@
+import { IconStarFilled, IconThumbDown, IconThumbDownFilled, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
 import { ConditionType } from "../types/Product";
 
 

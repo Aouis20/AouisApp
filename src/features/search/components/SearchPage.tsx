@@ -5,10 +5,8 @@ import { ConditionType } from '@/features/products/types/Product';
 import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
-  AspectRatio,
   Button,
   Collapse,
-  Container,
   Flex,
   Group,
   Image,
@@ -61,21 +59,21 @@ export const SearchPage = () => {
   };
 
   return (
-    <Container size="md">
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Paper shadow="sm" radius="md" p="lg" withBorder>
+    <Flex m={'xl'} direction={'column'} align={'center'}>
+      <Paper shadow="md" radius={'md'} withBorder p={'xl'}>
+        <form onSubmit={form.onSubmit(handleSubmit)}>
           <Title>{t('content:header.navigation.search')}</Title>
-          <Flex gap={'md'} mt={'md'}>
+          <Flex gap={'xl'} mt={'md'} wrap={'wrap'}>
             {/* Search Input */}
             <TextInput
               w={300}
               label={t('content:header.navigation.search')}
               placeholder="Voiture, Casque, Meuble ..."
-              icon={<IconSearch size={18} />}
+              leftSection={<IconSearch size={18} />}
               {...form.getInputProps('name')}
             />
             {/* Price */}
-            <Group>
+            <Group wrap="nowrap">
               <NumberInput
                 w={160}
                 label="Min"
@@ -83,8 +81,8 @@ export const SearchPage = () => {
                 min={0}
                 hideControls
                 step={0.5}
-                icon={<IconCurrencyEuro size={18} />}
-                precision={2}
+                leftSection={<IconCurrencyEuro size={18} />}
+                decimalScale={2}
                 {...form.getInputProps('min_price')}
               />
               <NumberInput
@@ -94,8 +92,8 @@ export const SearchPage = () => {
                 min={0}
                 hideControls
                 step={0.5}
-                icon={<IconCurrencyEuro size={18} />}
-                precision={2}
+                leftSection={<IconCurrencyEuro size={18} />}
+                decimalScale={2}
                 {...form.getInputProps('max_price')}
               />
             </Group>
@@ -106,7 +104,7 @@ export const SearchPage = () => {
                 {/* Conditions */}
                 <MultiSelect
                   label="Conditions"
-                  icon={<IconArticle size={18} />}
+                  leftSection={<IconArticle size={18} />}
                   clearable
                   searchable
                   data={Object.values(ConditionType)}
@@ -115,7 +113,7 @@ export const SearchPage = () => {
 
                 {/* Categories */}
                 <MultiSelect
-                  icon={<IconCategory size={18} />}
+                  leftSection={<IconCategory size={18} />}
                   label="Categories"
                   searchable
                   clearable
@@ -131,27 +129,25 @@ export const SearchPage = () => {
                   w={200}
                   label="Localization"
                   hideControls
-                  icon={<IconMapPinFilled size={18} />}
+                  leftSection={<IconMapPinFilled size={18} />}
                   {...form.getInputProps('localization')}
                 />
               </Flex>
             </Collapse>
           </Flex>
 
-          <Group position="apart">
+          <Group justify="space-between">
             <Anchor onClick={toggle}>
               {opened
                 ? 'Masquer les réglages avancées'
                 : 'Afficher les réglages avancées'}
             </Anchor>
 
-            <Button type="submit">Rechercher</Button>
+            <Button type="submit">{t('search')}</Button>
           </Group>
-        </Paper>
-        <AspectRatio ratio={16 / 9} style={{ zoom: 2 }}>
-          <Image src="assets/search/search.svg" />
-        </AspectRatio>
-      </form>
-    </Container>
+        </form>
+      </Paper>
+      <Image mt={'xl'} src="assets/search/search.svg" w={'50%'} />
+    </Flex>
   );
 };

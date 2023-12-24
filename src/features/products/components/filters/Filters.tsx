@@ -1,22 +1,32 @@
-import { Badge, Button, Group, HoverCard, Paper, Title } from '@mantine/core';
+import {
+  Badge,
+  Button,
+  Group,
+  HoverCard,
+  Paper,
+  SegmentedControl,
+  Title,
+} from '@mantine/core';
 import {
   IconAdjustments,
   IconArticle,
   IconFilterOff,
+  IconLayoutColumns,
+  IconLayoutList,
   IconTag,
 } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
 import ConditionFilter from './ConditionFilter';
 import PriceFilter from './PriceFilter';
 
 type FiltersProps = {
   open: () => void;
+  setDisplay: Dispatch<SetStateAction<'column' | 'row'>>;
 };
 
-const Filters = ({ open }: FiltersProps) => {
+const Filters = ({ open, setDisplay }: FiltersProps) => {
   const totalItems = ProductStore.useState((s) => s.productList?.total_items);
-
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const filters = ProductStore.useState((s) => s.filters);
   const [initialFilters, setInitialFilters] = useState(filters);
@@ -33,13 +43,13 @@ const Filters = ({ open }: FiltersProps) => {
 
   return (
     <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
-      <Group position="center" mb={'xl'}>
+      <Group justify="center" mb={'xl'}>
         <Title>Others category</Title>
       </Group>
-      <Group position="apart">
+      <Group justify="space-between">
         <Button
           variant="light"
-          leftIcon={<IconFilterOff size={16} />}
+          leftSection={<IconFilterOff size={16} />}
           disabled={!isModifying}
           onClick={handleClearFilters}
         >
@@ -48,13 +58,13 @@ const Filters = ({ open }: FiltersProps) => {
 
         <Group>
           {/* Filters */}
-          <Button leftIcon={<IconAdjustments />} onClick={open}>
+          <Button leftSection={<IconAdjustments />} onClick={open}>
             Filters
           </Button>
           {/* Price Filter */}
           <HoverCard withArrow arrowPosition="center" width={400}>
             <HoverCard.Target>
-              <Button leftIcon={<IconTag />}>Price</Button>
+              <Button leftSection={<IconTag />}>Price</Button>
             </HoverCard.Target>
             <HoverCard.Dropdown>
               <PriceFilter />
@@ -64,7 +74,7 @@ const Filters = ({ open }: FiltersProps) => {
           {/* Condition Filter */}
           <HoverCard withArrow arrowPosition="center" width={400}>
             <HoverCard.Target>
-              <Button leftIcon={<IconArticle />}>Condition</Button>
+              <Button leftSection={<IconArticle />}>Condition</Button>
             </HoverCard.Target>
             <HoverCard.Dropdown>
               <ConditionFilter />
@@ -73,6 +83,15 @@ const Filters = ({ open }: FiltersProps) => {
         </Group>
 
         <Badge>{totalItems} annonces</Badge>
+      </Group>
+      <Group mt={'xl'}>
+        <SegmentedControl
+          onChange={(e) => setDisplay(e as 'column' | 'row')}
+          data={[
+            { label: <IconLayoutList size={16} />, value: 'column' },
+            { label: <IconLayoutColumns size={16} />, value: 'row' },
+          ]}
+        />
       </Group>
     </Paper>
   );

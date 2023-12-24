@@ -10,7 +10,7 @@ export const BackLinkButton = () => {
       onClick={() => router.back()}
       my={'xl'}
       variant="default"
-      leftIcon={<IconArrowNarrowLeft />}
+      leftSection={<IconArrowNarrowLeft />}
     >
       {t('common:back')}
     </Button>

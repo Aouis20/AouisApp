@@ -1,0 +1,6 @@
+.carousel {
+    .controls {
+        transition: 'opacity 150ms ease';
+        opacity: 0
+    }
+}

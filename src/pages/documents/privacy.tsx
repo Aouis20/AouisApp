@@ -21,11 +21,11 @@ export default function Privacy() {
           onClick={() => router.back()}
           my={'xl'}
           variant="default"
-          leftIcon={<IconArrowNarrowLeft />}
+          leftSection={<IconArrowNarrowLeft />}
         >
           {t('common:back')}
         </Button>
-        <Flex direction={'column'} gap={'xl'}>
+        <Flex direction={'column'} gap={64}>
           <Title>{t('privacy.title')}</Title>
 
           {/* Introduction */}

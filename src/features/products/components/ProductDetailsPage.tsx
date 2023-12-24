@@ -15,38 +15,15 @@ import {
   Rating,
   Text,
   Title,
-  createStyles,
-  getStylesRef,
 } from '@mantine/core';
 import { IconHeart, IconMail, IconPhone } from '@tabler/icons-react';
+import classes from '../carousel.module.css';
 import { ProductStore } from '../store';
 import { PaymentType } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
 
-const useStyles = createStyles(() => ({
-  controls: {
-    ref: getStylesRef('controls'),
-    transition: 'opacity 150ms ease',
-    opacity: 0,
-  },
-  control: {
-    '&[data-inactive]': {
-      opacity: 0,
-      cursor: 'default',
-    },
-  },
-  root: {
-    '&:hover': {
-      [`& .${getStylesRef('controls')}`]: {
-        opacity: 1,
-      },
-    },
-  },
-}));
-
 export const ProductDetailsPage = () => {
-  const { classes } = useStyles();
   const product = ProductStore.useState((s) => s.product);
 
   if (!product) {
@@ -67,7 +44,7 @@ export const ProductDetailsPage = () => {
           radius="md"
           withBorder
           w={'70%'}
-          sx={{ overflow: 'hidden' }}
+          style={{ overflow: 'hidden' }}
         >
           <Carousel
             classNames={classes}
@@ -99,7 +76,7 @@ export const ProductDetailsPage = () => {
                   top={10}
                   right={28}
                   p={4}
-                  sx={{
+                  style={{
                     borderRadius: '50%',
                     transition: 'color 0.3s ease',
                     '&:hover': { color: 'red', animation: 'enlarge 0.3s ease' },
@@ -114,7 +91,7 @@ export const ProductDetailsPage = () => {
 
           <Flex w={'100%'} p={20} direction={'column'} gap={20}>
             <>
-              <Group sx={{ justifyContent: 'end' }}>
+              <Group style={{ justifyContent: 'end' }}>
                 <Badge color="yellow">Others</Badge>
                 <Badge color="pink" fz={12}>
                   <Group>
@@ -127,7 +104,7 @@ export const ProductDetailsPage = () => {
                     paymentType[product.payment_type]}
                 </Badge>
               </Group>
-              <Group position="apart">
+              <Group justify="space-between">
                 <Title>{product.title}</Title>
               </Group>
             </>
@@ -155,17 +132,17 @@ export const ProductDetailsPage = () => {
             <Rating
               w={'100%'}
               mt={'sm'}
-              sx={{ justifyContent: 'end' }}
+              style={{ justifyContent: 'end' }}
               size={'md'}
               value={2.5}
               fractions={3}
               readOnly
             />
             <Group mt={20}>
-              <Button leftIcon={<IconPhone />} radius={'md'}>
+              <Button leftSection={<IconPhone />} radius={'md'}>
                 Téléphone
               </Button>
-              <Button leftIcon={<IconMail />} radius={'md'}>
+              <Button leftSection={<IconMail />} radius={'md'}>
                 Message
               </Button>
             </Group>

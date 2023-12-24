@@ -2,13 +2,16 @@ import { PaginationComponent } from '@/common/pagination/Pagination';
 import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
 import { Box, Flex, Loader, Text } from '@mantine/core';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
 import ProductCard from '../ProductCard';
 
-const ProductList = () => {
+type ProductListProps = {
+  display?: 'column' | 'row';
+};
+
+const ProductList = ({ display = 'column' }: ProductListProps) => {
   const productList = ProductStore.useState((s) => s.productList);
-  const cardHeight = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activePage, setPage] = useState(1);
 
@@ -46,15 +49,16 @@ const ProductList = () => {
         <Loader />
       ) : (
         <Flex
-          direction="column"
+          direction={display}
           gap={48}
           px={8}
+          wrap={'wrap'}
           justify={'center'}
           align={'center'}
         >
           {productList.results.map((product) => (
             <Box key={product.id}>
-              <ProductCard product={product} cardHeight={cardHeight} />
+              <ProductCard product={product} />
             </Box>
           ))}
         </Flex>

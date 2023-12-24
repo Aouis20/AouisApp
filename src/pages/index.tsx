@@ -1,25 +1,23 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
-import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import { getCategories } from '@/features/categories/api';
-import { WayCard } from '@/homepage/WayCard';
+import { WayCard } from '@/homepage/components/WayCard';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import {
   Accordion,
   Anchor,
   Box,
-  Container,
   Flex,
   Group,
   Text,
   Title,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   IconArrowsLeftRight,
   IconCurrencyEuro,
   IconShoppingBag,
 } from '@tabler/icons-react';
-import { HTTPError } from 'ky-universal';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
@@ -35,15 +33,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     stateInstance.stores.CategoryStore.update((s) => {
       s.categoryList = categoryList;
     });
-
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   } catch (e) {
-    const error = e as HTTPError;
-    if (error.response?.status === 401) {
-      return redirectToLoginProps();
-    }
-
-    return { props: {} };
+    console.error(e);
+  } finally {
+    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
   }
 };
 
@@ -54,6 +47,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
   const { t } = useTranslation('content');
+  const matches = useMediaQuery('(min-width: 1150px)');
 
   const ways = {
     buy: {
@@ -91,33 +85,43 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
         <meta name="description" content="Aouis Homepage" />
       </Head>
 
-      {/* Ways */}
-      <Container size={'xl'} my={'xl'}>
-        <Group noWrap spacing={'xl'}>
-          <WayCard way={ways.buy} />
-          <WayCard way={ways.sell} />
-        </Group>
-        <Container my={'xl'}>
-          <WayCard way={ways.exchange} />
-        </Container>
-      </Container>
+      <Box>
+        {/* Ways */}
+        <Box my={'xl'}>
+          <Group wrap={matches ? 'nowrap' : 'wrap'} gap={'xl'}>
+            <WayCard way={ways.buy} />
+            <WayCard way={ways.sell} />
+          </Group>
+          <Group mx={'auto'} mt={'xl'} w={matches ? '60%' : 'auto'}>
+            <WayCard way={ways.exchange} />
+          </Group>
+        </Box>
 
-      <Flex direction={'column'} gap={96} px={128} mt={'xl'}>
-        {/* What is Aouis */}
-        <Group spacing={'md'}>
-          <Title>{t('homepage.p1.title')}</Title>
-          <Text>{t('homepage.p1.text')}</Text>
-        </Group>
+        <Flex direction={'column'} gap={128} px={matches ? 128 : 'xl'} mt={90}>
+          {/* What is Aouis */}
+          <Flex direction={'column'} gap={'lg'}>
+            <Title>{t('homepage.p1.title')}</Title>
+            <Text>{t('homepage.p1.text')}</Text>
+          </Flex>
 
-        {/* How does it work */}
-        <Group spacing={'md'}>
-          <Title>{t('homepage.p2.title')}</Title>
-          <Text>{t('homepage.p2.text')}</Text>
-        </Group>
+          {/* How does it work */}
+          <Flex direction={'column'} gap={'lg'}>
+            <Title>{t('homepage.p2.title')}</Title>
+            <Text>{t('homepage.p2.text')}</Text>
+          </Flex>
+        </Flex>
 
         {/* FAQ */}
-        <Box>
-          <Title mb={'md'}>{t('homepage.p3.title')}</Title>
+        <Box
+          bg={'primary.2'}
+          w={'100%'}
+          px={matches ? 128 : 'xl'}
+          py={48}
+          my={96}
+        >
+          <Title mb={'lg'} c={'white'}>
+            {t('homepage.p3.title')}
+          </Title>
           <Accordion variant="separated" radius="md" chevronPosition="left">
             <Accordion.Item value="transactions">
               <Accordion.Control>
@@ -150,17 +154,17 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
         </Box>
 
         {/* Contact */}
-        <Box>
-          <Title mb={'md'}>{t('contact.title')}</Title>
+        <Flex direction={'column'} gap={'lg'} px={matches ? 128 : 'xl'}>
+          <Title>{t('contact.title')}</Title>
           <Text>
             {t('contact.text')}{' '}
-            <Anchor span href={`mailto:${t('contact.email')}`}>
+            <Anchor href={`mailto:${t('contact.email')}`}>
               {t('contact.email')}
             </Anchor>
           </Text>
           <Text>{t('contact.text2')}</Text>
-        </Box>
-      </Flex>
+        </Flex>
+      </Box>
     </AuthenticatedAppLayout>
   );
 };
