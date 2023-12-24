@@ -1,14 +1,10 @@
-import { Container, Paper, Text, Title } from '@mantine/core';
+import { Container, Text, Title } from '@mantine/core';
 
-const Messages = () => {
+export const Messages = () => {
   return (
     <Container size={'2xl'}>
-      <Paper shadow="sm" radius="md" p="lg" withBorder mb={'lg'}>
-        <Title order={2}>Messages</Title>
-        <Text>Retrouvez ici, votre fil de discussion.</Text>
-      </Paper>
+      <Title order={2}>Messages</Title>
+      <Text>Retrouvez ici, votre fil de discussion.</Text>
     </Container>
   );
 };
-
-export default Messages;

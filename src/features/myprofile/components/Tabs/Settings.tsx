@@ -1,14 +1,10 @@
-import { Container, Paper, Text, Title } from '@mantine/core';
+import { Container, Text, Title } from '@mantine/core';
 
-const Settings = () => {
+export const Settings = () => {
   return (
     <Container size={'2xl'}>
-      <Paper shadow="sm" radius="md" p="lg" withBorder mb={'lg'}>
-        <Title order={2}>Paramètres</Title>
-        <Text>Gérez ici tous vos paramètres.</Text>
-      </Paper>
+      <Title order={2}>Paramètres</Title>
+      <Text>Gérez ici tous vos paramètres.</Text>
     </Container>
   );
 };
-
-export default Settings;

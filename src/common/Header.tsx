@@ -41,8 +41,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
-import DisplayName from './DisplayName';
-import LanguageSelector from './LanguageSelector';
+import { DisplayName } from './DisplayName';
+import { LanguageSelector } from './LanguageSelector';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -232,7 +232,7 @@ export function HeaderSection() {
               </Box>
               <Menu shadow="md" width={200}>
                 <Menu.Target>
-                  <Button>
+                  <Button fw={'bold'}>
                     <DisplayName />
                   </Button>
                 </Menu.Target>

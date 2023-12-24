@@ -11,7 +11,6 @@ import {
   Group,
   Image,
   InputBase,
-  Paper,
   Select,
   Text,
   TextInput,
@@ -28,7 +27,7 @@ const Salutation = {
   [SalutationType.MRS]: 'Mme.',
 };
 
-const Me = () => {
+export const Me = () => {
   const user = AccountStore.useState((s) => s.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -104,10 +103,8 @@ const Me = () => {
 
   return (
     <Container size={'2xl'}>
-      <Paper shadow="sm" radius="md" p="lg" withBorder mb={'lg'}>
-        <Title order={2}>Mon compte</Title>
-        <Text>Retrouvez ici, vos informations confidentielles.</Text>
-      </Paper>
+      <Title order={2}>Mon compte</Title>
+      <Text>Retrouvez ici, vos informations confidentielles.</Text>
 
       {/* User Form */}
       <form>
@@ -224,5 +221,3 @@ const Me = () => {
     </Container>
   );
 };
-
-export default Me;

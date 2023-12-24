@@ -8,7 +8,7 @@ import i18next from 'i18next';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from 'react-i18next';
 
-const LanguageSelector = () => {
+export const LanguageSelector = () => {
   const { t } = useTranslation('account');
   const user = AccountStore.useState((s) => s.user);
   const languageDict: Record<string, JSX.Element> = {
@@ -90,5 +90,3 @@ const LanguageSelector = () => {
     </Menu>
   );
 };
-
-export default LanguageSelector;

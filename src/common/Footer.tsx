@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const FooterSection = () => {
   const { t } = useTranslation('documents');
   return (
-    <Group gap={0} justify="space-between" p={'xl'}>
+    <Group gap={0} justify="space-between" px={'xl'} pt={'sm'}>
       <Image
         style={{ cursor: 'pointer' }}
         onClick={() => router.push('/')}

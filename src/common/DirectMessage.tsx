@@ -3,7 +3,7 @@ import { Box, Button, Dialog, Textarea, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMessageCircle2 } from '@tabler/icons-react';
 import { useState } from 'react';
-import DisplayName from './DisplayName';
+import { DisplayName } from './DisplayName';
 
 type MessageProps = {
   product: Product;
@@ -34,7 +34,7 @@ export const DirectMessage = ({ product }: MessageProps) => {
         size="lg"
         radius="md"
       >
-        <Title size="sm" mb="xs" weight={500}>
+        <Title size="sm" mb="xs" fw={500}>
           Envoyer un message à <DisplayName user={product.owner} />
         </Title>
 

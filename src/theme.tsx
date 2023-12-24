@@ -14,6 +14,7 @@ const theme: MantineThemeOverride = {
       '#214BF2',
       '#0E3BEF',
       '#0D35D9',
+      '#0D35D9',
     ],
     secondary: [
       '#FF6D8A',
@@ -24,6 +25,7 @@ const theme: MantineThemeOverride = {
       '#FF1D4A',
       '#FF0739',
       '#F00030',
+      '#DB002C',
       '#DB002C',
     ],
   },

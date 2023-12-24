@@ -1,5 +1,5 @@
 import { DirectMessage } from '@/common/DirectMessage';
-import DisplayName from '@/common/DisplayName';
+import { DisplayName } from '@/common/DisplayName';
 import { AccountStore } from '@/features/accounts/store';
 import { Carousel } from '@mantine/carousel';
 import {

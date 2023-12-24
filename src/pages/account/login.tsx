@@ -1,5 +1,5 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
-import LoginPage from '@/features/authentication/components/LoginPage';
+import { LoginPage } from '@/features/authentication/components/LoginPage';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ const Login = () => {
           'content:header.navigation.login'
         )}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
-        <meta name="description" content="Aouis - Login" />
+        <meta name="Aouis - Login" content="Aouis - Login" />
       </Head>
 
       <LoginPage />

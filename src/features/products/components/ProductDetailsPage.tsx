@@ -1,5 +1,4 @@
 import { BackLinkButton } from '@/common/BackLinkButton';
-import DisplayName from '@/common/DisplayName';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
@@ -22,6 +21,7 @@ import { ProductStore } from '../store';
 import { PaymentType } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
 import { paymentType } from '../variables/PaymentType';
+import { DisplayName } from '@/common/DisplayName';
 
 export const ProductDetailsPage = () => {
   const product = ProductStore.useState((s) => s.product);

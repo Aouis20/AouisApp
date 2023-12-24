@@ -1,7 +1,7 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import MyProfilePage from '@/features/myprofile/components/MyProfilePage';
+import { MyProfilePage } from '@/features/myprofile/components/MyProfilePage';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';

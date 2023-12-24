@@ -82,14 +82,23 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
           </HoverCard>
         </Group>
 
-        <Badge>{totalItems} annonces</Badge>
+        <Badge fz={'md'} p={'sm'}>
+          {totalItems} annonces
+        </Badge>
       </Group>
+      
       <Group mt={'xl'}>
         <SegmentedControl
           onChange={(e) => setDisplay(e as 'column' | 'row')}
           data={[
-            { label: <IconLayoutList size={16} />, value: 'column' },
-            { label: <IconLayoutColumns size={16} />, value: 'row' },
+            {
+              label: <IconLayoutList size={16} style={{ marginTop: 4 }} />,
+              value: 'column',
+            },
+            {
+              label: <IconLayoutColumns size={16} style={{ marginTop: 4 }} />,
+              value: 'row',
+            },
           ]}
         />
       </Group>

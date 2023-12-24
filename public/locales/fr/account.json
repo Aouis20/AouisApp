@@ -8,15 +8,14 @@
       "byClicking": "En cliquant, vous acceptez nos",
       "termsOfService": "conditions de service",
       "andOur": "et notre",
-      "privacyPolicy": "politique de confidentialité."
+      "privacyPolicy": "politique de confidentialité"
     },
     "login" : {
       "pageTitle": "Connectez-vous à votre compte",
       "text": "Veuillez remplir les champs afin de vous connecter.",
       "form": {
         "submit": "Se connecter",
-        "missingAccount": "Vous n'avez pas de compte ?",
-        "register": "Crée mon compte"
+        "missingAccount": "Vous n'avez pas de compte ? Créer mon compte"
       },
       "notifications": {
         "success": {
@@ -34,8 +33,7 @@
       "text": "Veuillez remplir les champs afin de vous connecter.",
       "form": {
         "submit": "S'inscrire",
-        "existingAccount": "Vous avez déjà un compte ?",
-        "login": "Se connecter"
+        "existingAccount": "Vous avez déjà un compte ? Se connecter"
       },
       "notifications": {
         "success": {
