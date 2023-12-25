@@ -379,6 +379,7 @@ export function HeaderSection() {
               style={{ marginBottom: -3, marginLeft: 4 }}
             />
           </Anchor>
+
           <Collapse in={linksOpened}>
             <Flex gap={'md'} wrap={'wrap'}>
               {renderCategories}

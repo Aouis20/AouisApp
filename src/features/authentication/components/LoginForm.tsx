@@ -111,7 +111,11 @@ export const LoginForm = () => {
       </Anchor>
 
       {/* Divider */}
-      <Divider label="OU SINON CONTINUER AVEC" labelPosition="center" my="lg" />
+      <Divider
+        label={t('authentication.form.orContinueWith')}
+        labelPosition="center"
+        my="lg"
+      />
 
       {/* Socials links */}
       <SocialLinks />

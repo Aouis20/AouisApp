@@ -17,22 +17,21 @@ export const LanguageSelector = () => {
   };
 
   const handleChangeLanguage = async (language: string) => {
-    if (!user) {
-      return;
-    }
     const api = setupPrivateApi();
 
     try {
-      const updatedUser = await updateUser(
-        user.id,
-        { language: language },
-        api
-      );
+      if (user) {
+        const updatedUser = await updateUser(
+          user.id,
+          { language: language },
+          api
+        );
+        AccountStore.update((s) => {
+          s.user = updatedUser;
+        });
+      }
       i18next.changeLanguage(language);
       i18next.reloadResources();
-      AccountStore.update((s) => {
-        s.user = updatedUser;
-      });
       showNotification({
         title: t('languageSelector.notifications.success.title'),
         message: t('languageSelector.notifications.success.message', {

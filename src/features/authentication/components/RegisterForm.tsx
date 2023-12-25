@@ -1,3 +1,4 @@
+import { createUser } from '@/features/accounts/api';
 import { RegisterPayloadType } from '@/features/accounts/types/RegisterPayloadType';
 import { setupPrivateApi } from '@/pages/api';
 import {
@@ -15,12 +16,11 @@ import {
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import Link from 'next/link';
+import router from 'next/router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { setTokens } from '../tokens.helper';
 import { SocialLinks } from './SocialLinks';
-import { createUser } from '@/features/accounts/api';
-import router from 'next/router';
 
 export const RegisterForm = () => {
   const { t } = useTranslation('account');
@@ -151,7 +151,7 @@ export const RegisterForm = () => {
             disabled={isLoading}
             onChange={(event) => setTerms(event.currentTarget.checked)}
           />
-          <Button type="submit" mt={'md'} disabled={isLoading}>
+          <Button type="submit" mt={'md'} disabled={isLoading || !terms}>
             {t('authentication.register.form.submit')}
           </Button>
         </Stack>
@@ -163,13 +163,17 @@ export const RegisterForm = () => {
         c="dimmed"
         onClick={() => router.push('/account/login')}
         size="sm"
-        disabled={isLoading}
+        disabled={isLoading || !terms}
       >
         {t('authentication.register.form.existingAccount')}
       </Anchor>
 
       {/* Divider */}
-      <Divider label="OU SINON CONTINUER AVEC" labelPosition="center" my="lg" />
+      <Divider
+        label={t('authentication.form.orContinueWith')}
+        labelPosition="center"
+        my="lg"
+      />
 
       {/* Socials links */}
       <SocialLinks />

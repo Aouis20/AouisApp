@@ -1,4 +1,3 @@
-import { debug } from 'console';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
@@ -14,7 +13,7 @@ i18n
   .use(LanguageDetector)
   .init({
     fallbackLng: 'fr',
-    supportedLngs: ['fr'],
+    supportedLngs: ['fr', 'en'],
     debug: false,
     ns: ['common', 'account', 'documents', 'content'],
     defaultNS: 'common',

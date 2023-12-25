@@ -2,7 +2,7 @@
   "authentication": {
     "form": {
       "email": "Email",
-      "password": "Mot de passe",
+      "password": "Password",
       "passwordConfirmation": "Confirmer le mot de passe",
       "orContinueWith": "SINON CONTINUER AVEC",
       "byClicking": "En cliquant, vous acceptez nos",
@@ -29,7 +29,7 @@
       }
     },
     "register": {
-      "pageTitle": "Crée votre compte",
+      "pageTitle": "Créer votre compte",
       "text": "Veuillez remplir les champs afin de vous connecter.",
       "form": {
         "submit": "S'inscrire",

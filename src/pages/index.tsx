@@ -71,7 +71,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       description: t('homepage.intro.exchange.description'),
       icon: <IconArrowsLeftRight stroke={2.2} />,
       button: t('homepage.intro.exchange.button'),
-      onclick: 'products/create',
+      onclick: 'exchange',
       img: 'assets/homepage-exchange.svg',
     },
   };
