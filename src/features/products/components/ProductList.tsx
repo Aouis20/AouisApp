@@ -3,14 +3,20 @@ import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
 import { Box, Flex, Loader, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
-import { ProductStore } from '../../store';
-import { ProductCard } from '../ProductCard';
+import { ProductStore } from '../store';
+import { ProductCard } from './ProductCard';
 
 type ProductListProps = {
   display?: 'column' | 'row';
+  user_id?: number;
+  ids?: number[];
 };
 
-const ProductList = ({ display = 'column' }: ProductListProps) => {
+export const ProductList = ({
+  display = 'column',
+  user_id,
+  ids,
+}: ProductListProps) => {
   const productList = ProductStore.useState((s) => s.productList);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activePage, setPage] = useState(1);
@@ -27,7 +33,7 @@ const ProductList = ({ display = 'column' }: ProductListProps) => {
     // Called when page is changed
     const api = setupPrivateApi();
     setIsLoading(true);
-    const newProductList = await getProducts(page, {}, api);
+    const newProductList = await getProducts(page, { user_id, ids }, api);
     ProductStore.update((s) => {
       s.productList = newProductList;
     });
@@ -39,7 +45,7 @@ const ProductList = ({ display = 'column' }: ProductListProps) => {
   }, [activePage]);
 
   return (
-    <>
+    <Flex direction={'column'} gap={48}>
       <PaginationComponent
         page={activePage}
         setPage={setPage}
@@ -68,8 +74,6 @@ const ProductList = ({ display = 'column' }: ProductListProps) => {
         setPage={setPage}
         total={productList.total_pages}
       />
-    </>
+    </Flex>
   );
 };
-
-export default ProductList;

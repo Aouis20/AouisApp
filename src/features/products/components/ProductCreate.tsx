@@ -1,12 +1,11 @@
-import ImagesDropzone from '@/common/ImagesDropzone';
 import { CategoryStore } from '@/features/categories/store';
 import { setupPrivateApi } from '@/pages/api';
 import {
   Badge,
-  Box,
   Button,
   Chip,
   Container,
+  FileInput,
   Flex,
   Group,
   NumberInput,
@@ -19,10 +18,8 @@ import {
   Title,
   Tooltip,
 } from '@mantine/core';
-import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import { IconHelp } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { createProduct } from '../api';
 import {
@@ -31,12 +28,13 @@ import {
 } from '../types/CreateProductForm';
 import { ConditionType, PaymentType } from '../types/Product';
 
-const ProductCreate = () => {
+export const ProductCreate = () => {
   const { t } = useTranslation('content');
   const categories = CategoryStore.useState((s) => s.categoryList);
+
   const createProductForm = useForm<CreateProductFormType>({
     initialValues: {
-      isService: false,
+      is_service: false,
       images: [],
       title: '',
       description: '',
@@ -49,20 +47,20 @@ const ProductCreate = () => {
     },
     validate: {
       title: (value) => value.length < 2 && t('addAd.form.error.title'),
-      price: (value) => value < 0.01 && t('addAd.form.error.price'),
+      price: (value) => Number(value) < 0.01 && t('addAd.form.error.price'),
     },
   });
 
-  const handleChangeImages = (images: FileWithPath[]) => {
-    createProductForm.setFieldValue('images', images);
-    console.log('images sets', images);
-  };
-
   const handleSubmit = async (values: CreateProductFormType) => {
-    // TODO create product
     try {
       const api = setupPrivateApi();
-      await createProduct(createProductForm.values, api);
+      const payload = values;
+      payload.category = Number(payload.category);
+      payload.price = String(payload.price);
+
+      console.log(payload);
+
+      await createProduct(payload, api);
       showNotification({
         title: t('product.create.notifications.success.title'),
         message: t('product.create.notifications.success.message'),
@@ -97,8 +95,8 @@ const ProductCreate = () => {
             defaultValue="product"
             onChange={(value) =>
               value == 'service'
-                ? createProductForm.setFieldValue('isService', true)
-                : createProductForm.setFieldValue('isService', false)
+                ? createProductForm.setFieldValue('is_service', true)
+                : createProductForm.setFieldValue('is_service', false)
             }
           >
             <Group mt="xs">
@@ -108,13 +106,22 @@ const ProductCreate = () => {
           </Radio.Group>
 
           {/* Images */}
-          <ImagesDropzone onChange={handleChangeImages} />
-          {/* TODO SET IMAGES INTO CREATEPRODUCTFORM */}
+          <FileInput
+            label="Photos"
+            description={t('addAd.form.dropzone.tips') as string}
+            placeholder={t('addAd.form.dropzone.placeholder') as string}
+            accept="image/png,image/jpeg"
+            multiple
+            clearable
+            {...createProductForm.getInputProps('images')}
+          />
 
           {/* Categories */}
-          {!createProductForm.values.isService && (
+          {!createProductForm.values.is_service && (
             <Select
               label={t('addAd.form.categories')}
+              allowDeselect={false}
+              searchable
               data={categories.map((category) => ({
                 value: String(category.id),
                 label: category.title,
@@ -135,6 +142,7 @@ const ProductCreate = () => {
           <Textarea
             label={t('addAd.form.description')}
             placeholder={t('addAd.form.description') as string}
+            autosize
             {...createProductForm.getInputProps('description')}
           />
 
@@ -146,10 +154,10 @@ const ProductCreate = () => {
             hideControls
             step={0.5}
             min={0.01}
-            rightSectionWidth={'xl'}
-            required={true}
+            required
+            style={{ position: 'relative' }}
             rightSection={
-              <Badge mr={'sm'}>
+              <Badge style={{ position: 'absolute', right: 8 }}>
                 {t(
                   `product.paymentTypesFormat.${
                     createProductForm.values.payment_type as string
@@ -157,13 +165,14 @@ const ProductCreate = () => {
                 )}
               </Badge>
             }
-            precision={2}
+            decimalScale={2}
             {...createProductForm.getInputProps('price')}
           />
 
           {/* Payment Method */}
           <Select
             label={t('addAd.form.priceMethod')}
+            allowDeselect={false}
             data={Object.entries(PaymentType).map(([key, value]) => ({
               value: value,
               label: t(`product.paymentTypes.${key}`) as string,
@@ -172,9 +181,10 @@ const ProductCreate = () => {
           />
 
           {/* Condition */}
-          {!createProductForm.values.isService && (
+          {!createProductForm.values.is_service && (
             <Select
               label={t('addAd.form.condition')}
+              allowDeselect={false}
               data={Object.entries(ConditionType).map(([key, value]) => ({
                 value: value,
                 label: t(`product.conditionTypes.${key}`) as string,
@@ -184,9 +194,10 @@ const ProductCreate = () => {
           )}
 
           {/* Status */}
-          {!createProductForm.values.isService && (
+          {!createProductForm.values.is_service && (
             <Select
               label={t('addAd.form.status')}
+              allowDeselect={false}
               data={Object.entries(CreateStatusType).map(([key, value]) => ({
                 value: value,
                 label: t(`product.statusTypes.${key}`) as string,
@@ -196,17 +207,11 @@ const ProductCreate = () => {
           )}
 
           {/* Visibility */}
-          <Box>
-            <Group>
-              <Text>{t('addAd.form.visibility')} :</Text>
-              <Tooltip label={t('addAd.form.visibilityTooltip')}>
-                <IconHelp />
-              </Tooltip>
-            </Group>
-            <Box>
+          <Group>
+            <Text>{t('addAd.form.visibility')} :</Text>
+            <Tooltip label={t('addAd.form.visibilityTooltip')}>
               <Chip
                 defaultChecked
-                mt={'sm'}
                 variant="filled"
                 {...createProductForm.getInputProps('visibility')}
               >
@@ -214,8 +219,8 @@ const ProductCreate = () => {
                   ? t('common:yes')
                   : t('common:no')}
               </Chip>
-            </Box>
-          </Box>
+            </Tooltip>
+          </Group>
 
           <Button type="submit">{t('addAd.form.submit')}</Button>
         </Flex>
@@ -223,5 +228,3 @@ const ProductCreate = () => {
     </Container>
   );
 };
-
-export default ProductCreate;

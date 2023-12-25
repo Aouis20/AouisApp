@@ -1,6 +1,10 @@
+import { updateUser } from '@/features/accounts/api';
 import { AccountStore } from '@/features/accounts/store';
+import { setupPrivateApi } from '@/pages/api';
 import { ActionIcon, Group } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
+import { useTranslation } from 'react-i18next';
 import { Product } from '../types/Product';
 
 type LikeButtonProps = {
@@ -10,11 +14,46 @@ type LikeButtonProps = {
 
 export const LikeButton = ({ hovered, product }: LikeButtonProps) => {
   const user = AccountStore.useState((s) => s.user);
+  const { t } = useTranslation('account');
 
-  const handleLike = (e: any) => {
+  if (!user) return <></>;
+
+  const handleLike = async (e: any) => {
     e.stopPropagation();
-    // TODO add product to user wishlist
-    // + if product already exists in his wishlist ? IconHeartFilled avec dans ActionIcon(color="pink") : HeartIcon
+    try {
+      let newFavoris: number[] = [];
+      const api = setupPrivateApi();
+      if (user.favoris.includes(product.id)) {
+        newFavoris = user.favoris.filter((p) => p != product.id);
+      } else {
+        const favoris = [...user.favoris, product.id];
+        newFavoris = [...new Set(favoris)];
+      }
+      const newUser = await updateUser(user?.id, { favoris: newFavoris }, api);
+      AccountStore.update((s) => {
+        s.user = newUser;
+      });
+      if (user.favoris.includes(product.id)) {
+        showNotification({
+          title: t('updateUser.favoris.success.unlike.title'),
+          message: t('updateUser.favoris.success.unlike.message'),
+          color: 'green',
+        });
+      } else {
+        showNotification({
+          title: t('updateUser.favoris.success.like.title'),
+          message: t('updateUser.favoris.success.like.message'),
+          color: 'green',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      showNotification({
+        title: t('updateUser.favoris.error.title'),
+        message: t('updateUser.favoris.error.message'),
+        color: 'red',
+      });
+    }
   };
 
   return (
@@ -31,13 +70,11 @@ export const LikeButton = ({ hovered, product }: LikeButtonProps) => {
         display: hovered ? 'block' : 'none',
         color: hovered ? 'red' : 'inherit',
         animation: hovered ? 'enlarge 0.3s ease' : 'none',
-        zIndex: 100,
       }}
-      onClick={(e) => handleLike(e)}
-      color={user?.favoris.includes(product.id) ? 'red' : 'gray'}
+      onClick={handleLike}
     >
       <Group justify={'center'}>
-        {user?.favoris.includes(product.id) ? (
+        {user.favoris.includes(product.id) ? (
           <IconHeartFilled />
         ) : (
           <IconHeart />

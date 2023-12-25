@@ -55,6 +55,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     </Carousel.Slide>
   ));
 
+  if (product.title == 'azerty') {
+    console.log(product);
+  }
   return (
     <Card
       withBorder
@@ -175,7 +178,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                   </ActionIcon>
                 </Group>
               </Group>
-              <Text c="dimmed">{dayjs(product.created_at).format('ll')}</Text>
+              {/* <Text c="dimmed">{dayjs(product.created_at).format('ll')}</Text> */}
             </Flex>
 
             {/* Action Buttons */}

@@ -27,7 +27,7 @@ const Salutation = {
   [SalutationType.MRS]: 'Mme.',
 };
 
-export const Me = () => {
+export const MeTab = () => {
   const user = AccountStore.useState((s) => s.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

@@ -214,25 +214,25 @@ export function HeaderSection() {
                   <Menu.Label>{t('myAccount')}</Menu.Label>
                   <Menu.Item
                     leftSection={<IconUser size={14} />}
-                    onClick={() => router.push('/myprofile?tab=profile')}
+                    onClick={() => router.push('/profile?tab=profile')}
                   >
                     {t('content:header.profileMenu.profile')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconPhoto size={14} />}
-                    onClick={() => router.push('/myprofile?tab=ads')}
+                    onClick={() => router.push('/profile?tab=ads')}
                   >
                     {t('content:header.profileMenu.myAds')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconArrowsExchange size={14} />}
-                    onClick={() => router.push('/myprofile?tab=historic')}
+                    onClick={() => router.push('/profile?tab=historic')}
                   >
                     {t('content:header.profileMenu.transactions')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconHeart size={14} />}
-                    onClick={() => router.push('/myprofile?tab=favoris')}
+                    onClick={() => router.push('/profile?tab=favoris')}
                   >
                     {t('content:header.profileMenu.favorites')}
                   </Menu.Item>
@@ -242,7 +242,7 @@ export function HeaderSection() {
                   </Menu.Label>
                   <Menu.Item
                     leftSection={<IconMessageCircle2 size={14} />}
-                    onClick={() => router.push('/myprofile?tab=message')}
+                    onClick={() => router.push('/profile?tab=message')}
                   >
                     {t('content:header.profileMenu.messages')}
                     <Badge
@@ -258,7 +258,7 @@ export function HeaderSection() {
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconBell size={14} />}
-                    onClick={() => router.push('/myprofile?tab=notifications')}
+                    onClick={() => router.push('/profile?tab=notifications')}
                   >
                     {t('content:header.profileMenu.notifications')}
                     <Badge
@@ -278,7 +278,7 @@ export function HeaderSection() {
                   </Menu.Label>
                   <Menu.Item
                     leftSection={<IconSettings size={14} />}
-                    onClick={() => router.push('/myprofile?tab=settings')}
+                    onClick={() => router.push('/profile?tab=settings')}
                   >
                     {t('content:header.profileMenu.settings')}
                   </Menu.Item>

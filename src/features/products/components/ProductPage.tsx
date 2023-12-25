@@ -1,8 +1,8 @@
 import { Box, Divider, Drawer, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
+import { ProductList } from './ProductList';
 import Filters from './filters/Filters';
-import ProductList from './filters/ProductList';
 
 export const ProductPage = () => {
   const [opened, { open, close }] = useDisclosure(false);

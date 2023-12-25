@@ -5,12 +5,10 @@ import {
   Flex,
   Group,
   NumberInput,
-  RangeSlider,
   Text,
   Title,
 } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
-import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProductStore } from '../../store';
@@ -24,14 +22,9 @@ const PriceFilter = () => {
     return <Text>Aucune donnée disponible</Text>;
   }
 
-  const min =
-    Math.floor(Number(_.minBy(products.results, 'price')?.price)) || 0;
-  const max = Math.ceil(Number(_.maxBy(products.results, 'price')?.price)) || 0;
-
-  // Price
-  const [priceRange, setPriceRange] = useState<[number, number]>(
-    filters.price ? filters.price : [min, max]
-  );
+  // Prices
+  const [minPrice, setMinPrice] = useState<number | string>('');
+  const [maxPrice, setMaxPrice] = useState<number | string>('');
 
   // Payments
   // [Payments] Keep existing payments on at least 1 product
@@ -48,6 +41,7 @@ const PriceFilter = () => {
   const [payments, handlers] = useListState(paymentData);
   const allChecked = payments.every((value) => value.checked);
   const indeterminate = payments.some((value) => value.checked) && !allChecked;
+  const priceRange: [number, number] = [minPrice as number, maxPrice as number];
 
   // Update filters in ProductStore
   useEffect(() => {
@@ -59,30 +53,6 @@ const PriceFilter = () => {
       };
     });
   }, [priceRange, payments]);
-
-  const handleMinInput = (newValue: number) => {
-    if (!Number.isNaN(newValue)) {
-      setPriceRange([newValue, priceRange[1]]);
-    }
-  };
-
-  const handleMaxInput = (newValue: number) => {
-    if (!Number.isNaN(newValue)) {
-      setPriceRange([priceRange[0], newValue]);
-    }
-  };
-
-  const setErrors = (value: number) => {
-    const currentValue = value;
-    if (_.isNaN(currentValue)) {
-      return 'Veuillez entrer un prix valide.';
-    }
-    if (currentValue < min || currentValue > max) {
-      return `Veuillez entrer un prix entre ${min}€ et ${max}€.`;
-    }
-    // Values are good
-    return false;
-  };
 
   const renderPayments = payments.map((payment, index) => (
     <Checkbox
@@ -115,7 +85,6 @@ const PriceFilter = () => {
           checked={allChecked}
           indeterminate={indeterminate}
           label="All"
-          transitionDuration={0}
           onChange={() =>
             handlers.setState((current) =>
               current.map((value) => ({ ...value, checked: !allChecked }))
@@ -127,53 +96,31 @@ const PriceFilter = () => {
 
       {/* Price inputs (min and max) */}
       <Text c={'gray'}>Prix</Text>
-      <Group align="start" mt={-8}>
+      <Group align="start" mt={-10}>
         <NumberInput
           label="Min"
-          value={priceRange[0]}
-          onChange={handleMinInput}
+          value={minPrice}
+          onChange={setMinPrice}
+          allowNegative={false}
           hideControls
           step={0.5}
+          min={0.01}
           style={{ maxWidth: '40%' }}
           rightSection={'€'}
-          error={setErrors(priceRange[0])}
-          precision={2}
+          decimalScale={2}
         />
         <NumberInput
           label="Max"
-          value={priceRange[1]}
-          onChange={handleMaxInput}
+          value={maxPrice}
+          onChange={setMaxPrice}
+          allowNegative={false}
           hideControls
           step={0.5}
+          min={(minPrice as number) + 0.01}
           style={{ maxWidth: '40%' }}
           rightSection={'€'}
-          error={setErrors(priceRange[1])}
-          precision={2}
+          decimalScale={2}
         />
-      </Group>
-
-      {/* Price Slider */}
-      <RangeSlider
-        mt={24}
-        px={20}
-        radius="lg"
-        w={'100%'}
-        min={min}
-        max={max}
-        label={(value) => `${value}€`}
-        value={priceRange}
-        onChange={(newValue) => {
-          setPriceRange([newValue[0], newValue[1]]);
-        }}
-      />
-      <Group
-        justify="space-between"
-        w={'100%'}
-        mt={'-10px'}
-        style={{ alignSelf: 'center' }}
-      >
-        <Text color="gray">{min}€</Text>
-        <Text color="gray">{max}€</Text>
       </Group>
     </Flex>
   );

@@ -5,6 +5,7 @@ import { CreateProductFormType } from './types/CreateProductForm';
 
 export type ProductListFilter = {
   user_id?: number | null;
+  ids?: number[]
 };
 
 export const getProducts = async (page: number, filters: ProductListFilter, api: KyInstance): Promise<ProductList> => {

@@ -1,6 +1,6 @@
 import { Container, Text, Title } from '@mantine/core';
 
-export const Messages = () => {
+export const MessagesTab = () => {
   return (
     <Container size={'2xl'}>
       <Title order={2}>Messages</Title>

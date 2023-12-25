@@ -1,6 +1,6 @@
 import { Container, Text, Title } from '@mantine/core';
 
-export const Settings = () => {
+export const SettingsTab = () => {
   return (
     <Container size={'2xl'}>
       <Title order={2}>Paramètres</Title>

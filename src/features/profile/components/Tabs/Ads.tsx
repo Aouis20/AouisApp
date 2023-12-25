@@ -1,9 +1,9 @@
 import { AccountStore } from '@/features/accounts/store';
-import ProductList from '@/features/products/components/filters/ProductList';
+import { ProductList } from '@/features/products/components/ProductList';
 import { Container, Text, Title } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
 
-export const Ads = () => {
+export const AdsTab = () => {
   const { t } = useTranslation('');
   const user = AccountStore.useState((s) => s.user);
   if (!user) {

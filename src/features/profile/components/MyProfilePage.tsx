@@ -1,7 +1,6 @@
 import { DisplayName } from '@/common/DisplayName';
 import { AccountStore } from '@/features/accounts/store';
 import { Badge, Flex, Paper, Tabs, Text, Title } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import {
   IconArrowsExchange,
   IconBell,
@@ -11,12 +10,13 @@ import {
   IconSettings,
   IconUser,
 } from '@tabler/icons-react';
-import { Settings } from 'lucide-react';
 import { Ads } from './Tabs/Ads';
 import { Favoris } from './Tabs/Favoris';
 import { Historic } from './Tabs/Historic';
 import { Me } from './Tabs/Me';
 import { Messages } from './Tabs/Messages';
+import { NotificationsTab } from './Tabs/Notifications';
+import { SettingsTab } from './Tabs/Settings';
 
 type MyProfilePageProps = {
   tab: string | null;
@@ -45,8 +45,8 @@ export const MyProfilePage = ({ tab }: MyProfilePageProps) => {
         </Text>
       </Paper>
 
-      <Paper shadow="sm" radius="md" p={0} withBorder>
-        <Tabs variant="outline" defaultValue={tab || 'profile'}>
+      <Paper shadow="sm" radius="md" py={0} withBorder>
+        <Tabs variant="default" defaultValue={tab || 'profile'}>
           {/* TABS */}
           <Tabs.List
             style={{
@@ -56,27 +56,27 @@ export const MyProfilePage = ({ tab }: MyProfilePageProps) => {
               flexWrap: 'nowrap',
             }}
           >
-            <Tabs.Tab value="profile" leftSection={<IconUser size="0.8rem" />}>
+            <Tabs.Tab value="profile" leftSection={<IconUser size="0.9rem" />}>
               Profile
             </Tabs.Tab>
-            <Tabs.Tab value="ads" leftSection={<IconPhoto size="0.8rem" />}>
+            <Tabs.Tab value="ads" leftSection={<IconPhoto size="0.9rem" />}>
               Ads
             </Tabs.Tab>
 
             <Tabs.Tab
               value="historic"
-              leftSection={<IconArrowsExchange size="0.8rem" />}
+              leftSection={<IconArrowsExchange size="0.9rem" />}
             >
               Historic
             </Tabs.Tab>
 
-            <Tabs.Tab value="favoris" leftSection={<IconHeart size="0.8rem" />}>
+            <Tabs.Tab value="favoris" leftSection={<IconHeart size="0.9rem" />}>
               Favoris
             </Tabs.Tab>
 
             <Tabs.Tab
               value="message"
-              leftSection={<IconMessageCircle2 size="0.8rem" />}
+              leftSection={<IconMessageCircle2 size="0.9rem" />}
               rightSection={
                 <Badge
                   w={16}
@@ -95,7 +95,7 @@ export const MyProfilePage = ({ tab }: MyProfilePageProps) => {
 
             <Tabs.Tab
               value="notifications"
-              leftSection={<IconBell size="0.8rem" />}
+              leftSection={<IconBell size="0.9rem" />}
               rightSection={
                 <Badge
                   w={16}
@@ -114,7 +114,7 @@ export const MyProfilePage = ({ tab }: MyProfilePageProps) => {
 
             <Tabs.Tab
               value="settings"
-              leftSection={<IconSettings size="0.8rem" />}
+              leftSection={<IconSettings size="1rem" />}
             >
               Settings
             </Tabs.Tab>
@@ -148,12 +148,12 @@ export const MyProfilePage = ({ tab }: MyProfilePageProps) => {
 
           {/* Notifications */}
           <Tabs.Panel value="notifications" p="xl">
-            <Notifications />
+            <NotificationsTab />
           </Tabs.Panel>
 
           {/* Settings */}
           <Tabs.Panel value="settings" p="xl">
-            <Settings />
+            <SettingsTab />
           </Tabs.Panel>
         </Tabs>
       </Paper>

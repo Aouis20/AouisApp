@@ -36,8 +36,8 @@
     "form": {
         "type": "Type de l'annonce",
         "dropzone": {
-            "placeholder": "Glisser des images ici ou cliquer pour séléctionner des images.",
-            "tips": "Les images ne doivent pas excéder plus de 10MB."
+            "placeholder": "Cliquer pour séléctionner des photos.",
+            "tips": "Les photos ne doivent pas excéder plus de 10MB."
         },
         "categories": "Categories",
         "title": "Titre",

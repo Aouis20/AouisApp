@@ -12,11 +12,10 @@ type MessageProps = {
 export const DirectMessage = ({ product }: MessageProps) => {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [message, setMessage] = useState<string>(
-    `Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?`
+    'Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?'
   );
 
-  // TODO Connection required
-
+  // TODO Connexion required
   const handleSubmit = () => {
     console.log('to send');
   };
