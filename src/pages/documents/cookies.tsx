@@ -9,11 +9,11 @@ import {
   Title,
 } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 function Cookies() {
-  const { t } = useTranslation('documents');
+  const t = useTranslations();
   return (
     <Box>
       <Container size={'xl'} my={'xl'}>
@@ -23,7 +23,7 @@ function Cookies() {
           variant="default"
           leftSection={<IconArrowNarrowLeft />}
         >
-          {t('common:back')}
+          {t('back')}
         </Button>
         <Flex direction={'column'} gap={64}>
           <Title>{t('cookies.title')}</Title>

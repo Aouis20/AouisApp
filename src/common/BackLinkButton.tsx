@@ -1,10 +1,10 @@
 import { Button } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 export const BackLinkButton = () => {
-  const { t } = useTranslation();
+  const t = useTranslations();
   return (
     <Button
       onClick={() => router.back()}
@@ -12,7 +12,7 @@ export const BackLinkButton = () => {
       variant="default"
       leftSection={<IconArrowNarrowLeft />}
     >
-      {t('common:back')}
+      {t('back')}
     </Button>
   );
 };

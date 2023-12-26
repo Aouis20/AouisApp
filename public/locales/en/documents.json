@@ -1,107 +1,106 @@
-
 {
   "termsOfService": {
-    "title": "Mentions Légales",
+    "title": "Terms of Service",
     "property": {
-      "title": "Propriété Intellectuelle",
-      "text": "Le contenu du site web Aouis, y compris les textes, images, vidéos, graphiques et autres éléments, est protégé par les lois sur la propriété intellectuelle et les droits d'auteur. Toute reproduction, distribution, modification ou utilisation non autorisée du contenu, en tout ou en partie, est strictement interdite."
+      "title": "Intellectual Property",
+      "text": "The content of the Aouis website, including texts, images, videos, graphics, and other elements, is protected by intellectual property laws and copyrights. Any reproduction, distribution, modification, or unauthorized use of the content, in whole or in part, is strictly prohibited."
     },
     "datas": {
-      "title": "Données Personnelles",
-      "text": "Le site web 'Aouis' peut collecter et traiter certaines données personnelles conformément à sa Politique de Confidentialité. En utilisant notre site, vous consentez au traitement de vos données personnelles conformément à notre Politique de Confidentialité."
+      "title": "Personal Data",
+      "text": "The 'Aouis' website may collect and process certain personal data in accordance with its Privacy Policy. By using our site, you consent to the processing of your personal data in accordance with our Privacy Policy."
     },
     "externalLinks": {
-      "title": "Liens Externes",
-      "text": "Le site web 'Aouis' peut contenir des liens vers des sites web externes. Nous ne sommes pas responsables du contenu ou de la politique de confidentialité de ces sites externes."
+      "title": "External Links",
+      "text": "The 'Aouis' website may contain links to external websites. We are not responsible for the content or privacy policy of these external sites."
     },
-    "responsability": {
-      "title": "Responsabilité",
-      "text": "Nous nous efforçons de maintenir les informations du site web 'Aouis' à jour et précises. Cependant, nous ne pouvons garantir l'exactitude et l'exhaustivité des informations fournies sur notre site. En utilisant notre site, vous acceptez que nous ne soyons pas responsables des erreurs, omissions ou inexactitudes dans les informations fournies."
+    "responsibility": {
+      "title": "Responsibility",
+      "text": "We strive to keep the information on the 'Aouis' website up to date and accurate. However, we cannot guarantee the accuracy and completeness of the information provided on our site. By using our site, you agree that we are not responsible for errors, omissions, or inaccuracies in the information provided."
     },
     "contact": {
-      "title": "Contactez-nous",
-      "text": "Si vous avez des questions concernant nos Mentions Légales ou sur notre site web en général, n'hésitez pas à nous contacter à",
+      "title": "Contact Us",
+      "text": "If you have any questions regarding our Terms of Service or our website in general, feel free to contact us at",
       "email": "aouiscontact@gmail.com"
     }
   },
   "privacy": {
-    "title": "Politique de confidentialité",
-    "introduction": "La présente Politique de Confidentialité explique comment le site web 'Aouis' collecte, utilise, partage et protège vos données personnelles lorsque vous utilisez notre site. En visitant notre site, vous consentez à la collecte et à l'utilisation de vos données conformément à cette politique.",
+    "title": "Privacy Policy",
+    "introduction": "This Privacy Policy explains how the 'Aouis' website collects, uses, shares, and protects your personal data when you use our site. By visiting our site, you consent to the collection and use of your data in accordance with this policy.",
     "dataCollection": {
-      "title": "Collecte de données",
-      "text": "Nous pouvons collecter différentes catégories de données personnelles lorsque vous utilisez notre site, y compris votre nom, votre adresse e-mail, votre adresse IP et d'autres informations pertinentes. Ces données sont collectées lorsque vous remplissez des formulaires, souscrivez à des newsletters, effectuez des achats ou interagissez avec notre site d'une manière ou d'une autre."
+      "title": "Data Collection",
+      "text": "We may collect various categories of personal data when you use our site, including your name, email address, IP address, and other relevant information. This data is collected when you fill out forms, subscribe to newsletters, make purchases, or interact with our site in any way."
     },
     "dataUses": {
-      "title": "Utilisation des données",
-      "text": "Les données personnelles collectées peuvent être utilisées pour les raisons suivantes :",
-      "item1": "Fournir et gérer nos services.",
-      "item2": "Répondre à vos demandes et questions.",
-      "item3": "Vous envoyer des informations, des newsletters et des offres promotionnelles.",
-      "item4": "Analyser et améliorer notre site et nos services."
+      "title": "Use of Data",
+      "text": "The collected personal data may be used for the following reasons:",
+      "item1": "Provide and manage our services.",
+      "item2": "Respond to your requests and questions.",
+      "item3": "Send you information, newsletters, and promotional offers.",
+      "item4": "Analyze and improve our site and services."
     },
     "sharing": {
-      "title": "Partage des données",
-      "text": "Nous pouvons partager vos données personnelles avec des tiers dans les circonstances suivantes :",
-      "item1": "Lorsque cela est nécessaire pour fournir les services que vous avez demandés.",
-      "item2": "Lorsque vous avez donné votre consentement pour le partage de vos données.",
-      "item3": "Lorsque la loi l'exige ou lorsque nous croyons que cela est nécessaire pour protéger nos droits, notre sécurité ou celle d'autrui."
+      "title": "Data Sharing",
+      "text": "We may share your personal data with third parties in the following circumstances:",
+      "item1": "When necessary to provide the services you have requested.",
+      "item2": "When you have given your consent for the sharing of your data.",
+      "item3": "When the law requires it or when we believe it is necessary to protect our rights, safety, or that of others."
     },
     "protection": {
-      "title": "Protection des données",
-      "text": "Nous prenons des mesures de sécurité appropriées pour protéger vos données personnelles contre tout accès non autorisé, toute divulgation, toute altération ou toute destruction."
+      "title": "Data Protection",
+      "text": "We take appropriate security measures to protect your personal data against unauthorized access, disclosure, alteration, or destruction."
     },
     "rights": {
-      "title": "Vos droits",
-      "text": "Vous avez le droit d'accéder, de corriger, de supprimer et de limiter l'utilisation de vos données personnelles. Vous pouvez également retirer votre consentement à tout moment. Pour exercer ces droits ou pour poser des questions sur notre politique de confidentialité, veuillez nous contacter à",
+      "title": "Your Rights",
+      "text": "You have the right to access, correct, delete, and limit the use of your personal data. You can also withdraw your consent at any time. To exercise these rights or ask questions about our privacy policy, please contact us at",
       "email": "aouiscontact@gmail.com"
     },
     "politicModifications": {
-      "title": "Modifications de la politique",
-      "text": "Nous pouvons mettre à jour cette Politique de Confidentialité de temps à autre pour refléter les changements dans nos pratiques de collecte et d'utilisation de données. Nous vous encourageons à consulter cette page régulièrement pour rester informé de nos pratiques les plus récentes."
+      "title": "Policy Modifications",
+      "text": "We may update this Privacy Policy from time to time to reflect changes in our data collection and use practices. We encourage you to check this page regularly to stay informed of our most recent practices."
     },
     "contact": {
-      "title": "Contactez-nous",
-      "text": "Si vous avez des questions concernant notre Politique de Confidentialité ou sur notre site web en général, n'hésitez pas à nous contacter à l'adresse suivante :",
+      "title": "Contact Us",
+      "text": "If you have any questions regarding our Privacy Policy or our website in general, feel free to contact us at the following address:",
       "email": "aouiscontact@gmail.com"
     }
   },
   "cookies": {
     "title": "Cookies",
-    "introduction": "Cette Politique de Cookies explique comment le site web 'Aouis' utilise les cookies et autres technologies similaires pour améliorer votre expérience de navigation et vous fournir des fonctionnalités personnalisées. En visitant notre site web, vous consentez à l'utilisation des cookies conformément à cette politique.",
+    "introduction": "This Cookies Policy explains how the 'Aouis' website uses cookies and other similar technologies to enhance your browsing experience and provide you with personalized features. By visiting our website, you consent to the use of cookies in accordance with this policy.",
     "definition": {
-        "title": "Qu'est-ce qu'un cookie ?",
-        "text": "Un cookie est un petit fichier texte que le site web que vous visitez enregistre sur votre ordinateur ou appareil mobile. Il permet au site de mémoriser vos actions et préférences (telles que la connexion, la langue, la taille de la police et d'autres préférences d'affichage) sur une période de temps, afin que vous n'ayez pas à les saisir à nouveau lorsque vous revenez sur le site ou naviguez entre les pages."
+        "title": "What is a Cookie?",
+        "text": "A cookie is a small text file that the website you visit saves on your computer or mobile device. It allows the site to remember your actions and preferences (such as login, language, font size, and other display preferences) over a period of time, so you don't have to enter them again when you return to the site or browse between pages."
     },
     "uses": {
-        "title": "Utilisations",
-        "text": "Nous utilisons les cookies pour plusieurs raisons, notamment pour :",
-        "item1": "Assurer le bon fonctionnement de certaines fonctionnalités du site.",
-        "item2": "Améliorer votre expérience de navigation en personnalisant le contenu et les annonces.",
-        "item3": "Analyser comment vous utilisez le site pour mieux comprendre vos préférences et améliorer nos services."
+        "title": "Uses",
+        "text": "We use cookies for several reasons, including to:",
+        "item1": "Ensure the proper functioning of certain site features.",
+        "item2": "Enhance your browsing experience by personalizing content and ads.",
+        "item3": "Analyze how you use the site to better understand your preferences and improve our services."
     },
     "types": {
-        "title": "Types de cookies que nous utilisons",
+        "title": "Types of Cookies We Use",
         "type1": {
-            "span": "Cookies de session :",
-            "text": "Ces cookies sont temporaires et sont supprimés de votre appareil une fois que vous fermez votre navigateur. Ils sont essentiels pour garantir le bon fonctionnement de certaines fonctionnalités et pour maintenir votre session active lorsque vous naviguez sur notre site."
+            "span": "Session Cookies:",
+            "text": "These cookies are temporary and are deleted from your device once you close your browser. They are essential to ensure the proper functioning of certain features and to maintain your session active as you navigate our site."
         },
         "type2": {
-            "span": "Cookies de préférences :",
-            "text": "Ces cookies permettent au site de se souvenir de vos préférences et choix, tels que la langue et la région, afin que vous n'ayez pas à les saisir à chaque fois que vous visitez le site."
+            "span": "Preference Cookies:",
+            "text": "These cookies allow the site to remember your preferences and choices, such as language and region, so you don't have to enter them every time you visit the site."
         },
         "type3": {
-            "span": "Cookies d'analyse :",
-            "text": "Ces cookies collectent des informations sur la manière dont vous utilisez notre site, comme les pages que vous visitez le plus souvent ou les messages d'erreur que vous pourriez rencontrer. Ces données nous aident à améliorer notre site et à mieux répondre à vos besoins."
+            "span": "Analytics Cookies:",
+            "text": "These cookies collect information about how you use our site, such as the pages you visit most often or any error messages you might encounter. This data helps us improve our site and better meet your needs."
         }
     },
     "management": {
-        "title": "Comment gérer les cookies ?",
-        "text1": "La plupart des navigateurs acceptent automatiquement les cookies, mais vous pouvez généralement modifier les paramètres de votre navigateur pour refuser les cookies ou vous alerter lorsque des cookies sont envoyés sur votre appareil. Consultez les paramètres de votre navigateur ou l'aide en ligne pour obtenir des instructions spécifiques sur la gestion des cookies.",
-        "text2": "Veuillez noter que le refus des cookies peut affecter certaines fonctionnalités du site et limiter votre expérience de navigation."
+        "title": "How to Manage Cookies?",
+        "text1": "Most browsers automatically accept cookies, but you can usually change your browser settings to refuse cookies or alert you when cookies are sent to your device. Check your browser settings or online help for specific instructions on managing cookies.",
+        "text2": "Please note that refusing cookies may affect certain features of the site and limit your browsing experience."
     },
     "contact": {
-        "title": "Contactez-nous",
-        "text": "Si vous avez des questions concernant notre utilisation des cookies ou sur notre Politique de Cookies en général, n'hésitez pas à nous contacter à",
+        "title": "Contact Us",
+        "text": "If you have any questions regarding our use of cookies or our Cookies Policy in general, feel free to contact us at",
         "email": "aouiscontact@gmail.com"
     }
   }

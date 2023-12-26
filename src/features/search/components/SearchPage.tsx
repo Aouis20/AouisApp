@@ -25,12 +25,12 @@ import {
   IconMapPinFilled,
   IconSearch,
 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 import { SearchPayload } from '../types/SearchPayload';
 
 export const SearchPage = () => {
-  const { t } = useTranslation('');
+  const t = useTranslations();
   const [opened, { toggle }] = useDisclosure(false);
   const categoryList = CategoryStore.useState((s) => s.categoryList);
   const router = useRouter();
@@ -62,12 +62,12 @@ export const SearchPage = () => {
     <Flex m={'xl'} direction={'column'} align={'center'}>
       <Paper shadow="md" radius={'md'} withBorder p={'xl'}>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <Title>{t('content:header.navigation.search')}</Title>
+          <Title>{t('header.navigation.search')}</Title>
           <Flex gap={'xl'} mt={'md'} wrap={'wrap'}>
             {/* Search Input */}
             <TextInput
               w={300}
-              label={t('content:header.navigation.search')}
+              label={t('header.navigation.search')}
               placeholder="Voiture, Casque, Meuble ..."
               leftSection={<IconSearch size={18} />}
               {...form.getInputProps('name')}

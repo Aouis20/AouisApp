@@ -7,8 +7,8 @@ import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -22,7 +22,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       s.productList = products;
     });
 
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+        },
+      },
+    };
   } catch (e) {
     const error = e as HTTPError;
     if (error?.response?.status === 401) {
@@ -38,14 +47,14 @@ type ProductsProps = {
 };
 
 const Products: NextPage<ProductsProps> = ({ snapshot }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('content:header.navigation.products')} | {t('appName')}
+          {t('header.navigation.products')} | {t('appName')}
         </title>
         <meta name="description" content="Aouis Products" />
       </Head>

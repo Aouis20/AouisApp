@@ -1,145 +1,146 @@
 {
-  "contact": {
-    "title": "Nous contacter",
-    "text": "Pour nous contacter, veuillez nous envoyer un mail à l'adresse suivante:",
-    "email": "aouiscontact@gmail.com",
-    "text2": "Nous traiterons votre demande dans les plus brefs délais."
-  },
-  "header": {
-    "navigation": {
-        "addAd": "Déposer une annonce",
-        "homepage": "Accueil",
-        "products" : "Produits",
-        "search" : "Rechercher",
-        "users": "Utilisateurs",
-        "categories": "Categories",
-        "customerService": "Service Client",
-        "createAccount": "Créer mon compte",
-        "register": "Inscription",
-        "login": "Connexion",
-        "logout": "Déconnexion"
+    "contact": {
+      "title": "Contact Us",
+      "text": "To contact us, please send an email to the following address:",
+      "email": "aouiscontact@gmail.com",
+      "text2": "We will process your request as soon as possible."
     },
-    "profileMenu": {
-        "profile": "Profile",
-        "myAds": "Mes annonces",
-        "transactions": "Transactions",
-        "favorites": "Favoris",
-        "news": "News",
-        "messages": "Messages",
-        "notifications": "Notifications",
-        "settings": "Paramètres"
-    }
-  },
-  "addAd": {
-    "title": "Déposer une annonce",
-    "text": "Créer ici une annonce, vous pourrez la modifier plus tard.",
-    "form": {
-        "type": "Type de l'annonce",
-        "dropzone": {
-            "placeholder": "Cliquer pour séléctionner des photos.",
-            "tips": "Les photos ne doivent pas excéder plus de 10MB."
-        },
-        "categories": "Categories",
-        "title": "Titre",
-        "description": "Description",
-        "price": "Prix",
-        "priceMethod": "Moyen de paiment",
-        "condition": "Etat",
-        "status": "Status",
-        "visibility": "Visibilité",
-        "visibilityTooltip": "Vous pouvez décider si votre annonce est disponible ou non à la vue de tout le monde.",
-        "submit": "Créer une annonce",
-        "error": {
-            "title": "Le titre doit faire au minimum 2 caractères",
-            "price": "Le prix minimum acceptable est de 0.01€"
-        }
-    }
-  },
-  "homepage": {
-    "intro": {
-        "buy": {
-            "button": "J'achètes !",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-        },
-        "sell": {
-            "button":"Je vends !",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-        },
-        "exchange": {
-            "button": "J'échanges !",
-            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-        }
+    "header": {
+      "navigation": {
+          "addAd": "Post an Ad",
+          "homepage": "Home",
+          "products" : "Products",
+          "search" : "Search",
+          "users": "Users",
+          "categories": "Categories",
+          "customerService": "Customer Service",
+          "createAccount": "Create My Account",
+          "register": "Register",
+          "login": "Login",
+          "logout": "Logout"
+      },
+      "profileMenu": {
+          "profile": "Profile",
+          "myAds": "My Ads",
+          "transactions": "Transactions",
+          "favorites": "Favorites",
+          "news": "News",
+          "messages": "Messages",
+          "notifications": "Notifications",
+          "settings": "Settings"
+      }
     },
-    "p1": {
-        "title": "Qu'est-ce que Aouis ?",
-        "text": "Aouis est une plateforme en ligne qui permet aux utilisateurs de vendre et d'acheter une grande variété de produits et de services, tels que des voitures d'occasion, des meubles, des vêtements, des emplois, et même des locations immobilières."
+    "addAd": {
+      "title": "Post an Ad",
+      "text": "Create an ad here, you can modify it later.",
+      "form": {
+          "type": "Ad Type",
+          "dropzone": {
+              "placeholder": "Click to select photos.",
+              "tips": "Photos should not exceed 10MB each."
+          },
+          "categories": "Categories",
+          "title": "Title",
+          "description": "Description",
+          "price": "Price",
+          "priceMethod": "Payment Method",
+          "condition": "Condition",
+          "status": "Status",
+          "visibility": "Visibility",
+          "visibilityTooltip": "You can decide if your ad is visible to everyone or not.",
+          "submit": "Create Ad",
+          "error": {
+              "title": "The title must be at least 2 characters long",
+              "price": "The minimum acceptable price is €0.01"
+          }
+      }
     },
-    "p2": {
-        "title": "Comment ça marche ?",
-        "text": "Il fonctionne comme un marché de petites annonces où les utilisateurs peuvent publier leurs annonces gratuitement, interagir avec les acheteurs ou les vendeurs par le biais de messages, et conclure des transactions en personne ou en ligne."
+    "homepage": {
+      "intro": {
+          "buy": {
+              "button": "I'm buying!",
+              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+          },
+          "sell": {
+              "button":"I'm selling!",
+              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+          },
+          "exchange": {
+              "button": "I'm exchanging!",
+              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+          }
+      },
+      "p1": {
+          "title": "What is Aouis?",
+          "text": "Aouis is an online platform that allows users to buy and sell a wide variety of products and services, such as used cars, furniture, clothing, jobs, and even real estate rentals."
+      },
+      "p2": {
+          "title": "How does it work?",
+          "text": "It functions like a classified ads marketplace where users can post their ads for free, interact with buyers or sellers through messages, and conclude transactions in person or online."
+      },
+      "p3": {
+          "title": "FAQ",
+          "q1": {
+              "question": "How to buy or sell a product?",
+              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+          },
+          "q2": {
+              "question": "What are the payment methods?",
+              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+          },
+          "q3": {
+              "question": "Lost or stolen package? What to do?",
+              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+          },
+          "q4": {
+              "question": "Is it secure?",
+              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+          }
+      }
     },
-    "p3": {
-        "title": "FAQ",
-        "q1": {
-            "question": "Comment acheter ou vendre un produit ?",
-            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-        },
-        "q2": {
-            "question": "Quelles sont les moyens de paiment",
-            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-        },
-        "q3": {
-            "question": "Colis perdu, volé ? Comment faire ?",
-            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-        },
-        "q4": {
-            "question": "Est-ce sécurisé ?",
-            "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-        }
-    }
-  },
-  "product": {
-    "paymentTypesFormat": {
-        "UNIQ": "€",
-        "WEEKLY": "€/semaine",
-        "MONTHLY": "€/mois",
-        "YEARLY": "€/an"
-    },
-    "paymentTypes": {
-        "UNIQ": "Permanent",
-        "WEEKLY": "Hebdomadaire",
-        "MONTHLY": "Mensuel",
-        "YEARLY": "Annuel"
-    },
-    "conditionTypes": {
-        "MINT": "Neuf",
-        "EXCELLENT": "Excellent",
-        "GOOD": "Bon",
-        "FAIR": "Moyen",
-        "POOR": "Mauvais"
-    },
-    "statusTypes": {
-        "SOLD": "Vendu",
-        "FOR_SALE": "À vendre",
-        "EXCHANGED": "Echangé",
-        "TO_EXCHANGE": "À échanger",
-        "REFUNDED": "Remboursé",
-        "PENDING_REFUND": "Remboursement en cours",
-        "RESERVED": "Réservé",
-        "PENDING_PAYMENT": "Paiement en attente",
-        "NEGOTIATING": "Négotiation en cours"
-    },
-    "create": {
-        "notifications": {
-            "success": {
-                "title": "Produit crée !",
-                "message": "Votre produit a été ajouté avec succès !"
-            },
-            "error": {
-                "title": "Erreur",
-                "message": "Une erreur est survenue lors de la création de votre produit"
-            }
-        }
+    "product": {
+      "paymentTypesFormat": {
+          "UNIQ": "€",
+          "WEEKLY": "€/week",
+          "MONTHLY": "€/month",
+          "YEARLY": "€/year"
+      },
+      "paymentTypes": {
+          "UNIQ": "Permanent",
+          "WEEKLY": "Weekly",
+          "MONTHLY": "Monthly",
+          "YEARLY": "Yearly"
+      },
+      "conditionTypes": {
+          "MINT": "New",
+          "EXCELLENT": "Excellent",
+          "GOOD": "Good",
+          "FAIR": "Fair",
+          "POOR": "Poor"
+      },
+      "statusTypes": {
+          "SOLD": "Sold",
+          "FOR_SALE": "For Sale",
+          "EXCHANGED": "Exchanged",
+          "TO_EXCHANGE": "To Exchange",
+          "REFUNDED": "Refunded",
+          "PENDING_REFUND": "Pending Refund",
+          "RESERVED": "Reserved",
+          "PENDING_PAYMENT": "Pending Payment",
+          "NEGOTIATING": "Negotiating"
+      },
+      "create": {
+          "notifications": {
+              "success": {
+                  "title": "Product created!",
+                  "message": "Your product has been successfully added!"
+              },
+              "error": {
+                  "title": "Error",
+                  "message": "An error occurred while creating your product"
+              }
+          }
+      }
     }
   }
-}
+  

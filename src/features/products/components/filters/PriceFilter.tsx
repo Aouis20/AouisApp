@@ -10,13 +10,13 @@ import {
 } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { ProductStore } from '../../store';
+import { useTranslations } from 'next-intl';
 
 const PriceFilter = () => {
   const products = ProductStore.useState((s) => s.productList);
   const filters = ProductStore.useState((s) => s.filters);
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   if (!products) {
     return <Text>Aucune donnée disponible</Text>;

@@ -1,6 +1,6 @@
 import { Button, Flex, Group, Image, Paper, Text, Title } from '@mantine/core';
 import { useHover, useMediaQuery } from '@mantine/hooks';
-import { t } from 'i18next';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { WayType } from '../types/WayType';
 
@@ -10,6 +10,7 @@ interface WayCardProps {
 
 export const WayCard = ({ way }: WayCardProps) => {
   const router = useRouter();
+  const t = useTranslations();
   const matches = useMediaQuery('(min-width: 500px)');
   const { hovered, ref } = useHover();
 
@@ -51,9 +52,7 @@ export const WayCard = ({ way }: WayCardProps) => {
             w={'auto'}
             h={'auto'}
             rightSection={way.icon}
-            color={
-              way.title === t('common:exchange') ? 'secondary.4' : 'primary.4'
-            }
+            color={way.title === t('exchange') ? 'secondary.4' : 'primary.4'}
           >
             {way.title}
           </Button>

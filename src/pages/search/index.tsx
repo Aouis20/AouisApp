@@ -5,8 +5,8 @@ import { SearchPage } from '@/features/search/components/SearchPage';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import type { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -21,7 +21,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   } catch (e) {
     console.error(e);
   } finally {
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+        },
+      },
+    };
   }
 };
 
@@ -31,13 +40,13 @@ interface SearchPageProps {
 
 const Search: NextPage<SearchPageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('content:header.navigation.search')} | {t('appName')}
+          {t('header.navigation.search')} | {t('appName')}
         </title>
         <meta name="description" content="Aouis Search" />
       </Head>

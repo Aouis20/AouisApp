@@ -18,8 +18,8 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { IMaskInput } from 'react-imask';
 
 const Salutation = {
@@ -34,7 +34,7 @@ export const MeTab = () => {
   if (!user) {
     return <Text>Veuillez vous authentifier</Text>;
   }
-  const { t } = useTranslation('');
+  const t = useTranslations();
   const userForm = useForm<Partial<User>>({
     initialValues: {
       salutation: user.salutation || '',

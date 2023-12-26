@@ -20,7 +20,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
-import { useTranslation } from 'react-i18next';
+import { useTranslations } from 'next-intl';
 import { createProduct } from '../api';
 import {
   CreateProductFormType,
@@ -29,7 +29,7 @@ import {
 import { ConditionType, PaymentType } from '../types/Product';
 
 export const ProductCreate = () => {
-  const { t } = useTranslation('content');
+  const t = useTranslations();
   const categories = CategoryStore.useState((s) => s.categoryList);
 
   const createProductForm = useForm<CreateProductFormType>({
@@ -215,9 +215,7 @@ export const ProductCreate = () => {
                 variant="filled"
                 {...createProductForm.getInputProps('visibility')}
               >
-                {createProductForm.values.visibility
-                  ? t('common:yes')
-                  : t('common:no')}
+                {createProductForm.values.visibility ? t('yes') : t('no')}
               </Chip>
             </Tooltip>
           </Group>

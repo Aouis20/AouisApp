@@ -4,8 +4,8 @@ import { setupPrivateApi } from '@/pages/api';
 import { ActionIcon, Group } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
-import { useTranslation } from 'react-i18next';
 import { Product } from '../types/Product';
+import { useTranslations } from 'next-intl';
 
 type LikeButtonProps = {
   hovered: any;
@@ -14,7 +14,7 @@ type LikeButtonProps = {
 
 export const LikeButton = ({ hovered, product }: LikeButtonProps) => {
   const user = AccountStore.useState((s) => s.user);
-  const { t } = useTranslation('account');
+  const t = useTranslations();
 
   if (!user) return <></>;
 

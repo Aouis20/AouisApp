@@ -19,9 +19,9 @@ import {
 } from '@tabler/icons-react';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -50,7 +50,7 @@ type MyFavorisProps = {
 };
 
 const MyFavoris: NextPage<MyFavorisProps> = ({ snapshot }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
   const user = AccountStore.useState((s) => s.user);
   const router = useRouter();

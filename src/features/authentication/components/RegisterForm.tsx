@@ -15,15 +15,15 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import router from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { setTokens } from '../tokens.helper';
 import { SocialLinks } from './SocialLinks';
 
 export const RegisterForm = () => {
-  const { t } = useTranslation('account');
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [terms, setTerms] = useState<boolean>(false);
   const passwordReggex = new RegExp(
@@ -163,7 +163,7 @@ export const RegisterForm = () => {
         c="dimmed"
         onClick={() => router.push('/account/login')}
         size="sm"
-        disabled={isLoading || !terms}
+        disabled={isLoading}
       >
         {t('authentication.register.form.existingAccount')}
       </Anchor>

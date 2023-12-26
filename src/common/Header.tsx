@@ -30,9 +30,9 @@ import {
   IconSquarePlus,
   IconUser,
 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import { DisplayName } from './DisplayName';
@@ -42,7 +42,7 @@ export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const [logged, setLogged] = useState<boolean>(false);
   const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
@@ -61,10 +61,8 @@ export function HeaderSection() {
       removeTokens();
 
       showNotification({
-        title: t('account:authentication.logout.notifications.success.title'),
-        message: t(
-          'account:authentication.logout.notifications.success.message'
-        ),
+        title: t('authentication.logout.notifications.success.title'),
+        message: t('authentication.logout.notifications.success.message'),
         color: 'gray',
       });
       router.replace('/account/login');
@@ -72,8 +70,8 @@ export function HeaderSection() {
       console.log(err);
 
       showNotification({
-        title: t('account:authentication.logout.notifications.error.title'),
-        message: t('account:authentication.logout.notifications.error.message'),
+        title: t('authentication.logout.notifications.error.title'),
+        message: t('authentication.logout.notifications.error.message'),
         color: 'red',
       });
     }
@@ -122,7 +120,7 @@ export function HeaderSection() {
             leftSection={<IconSquarePlus size={20} />}
             onClick={() => router.push('/products/create')}
           >
-            {t('content:header.navigation.addAd')}
+            {t('header.navigation.addAd')}
           </Button>
         </Group>
 
@@ -140,7 +138,7 @@ export function HeaderSection() {
               textDecoration: 'none',
             }}
           >
-            {t('content:header.navigation.homepage')}
+            {t('header.navigation.homepage')}
           </Anchor>
           <Anchor
             href="/search"
@@ -150,7 +148,7 @@ export function HeaderSection() {
           >
             <Group wrap="nowrap" gap={6}>
               <Text fw={'bold'} ml={4}>
-                {t('content:header.navigation.search')}
+                {t('header.navigation.search')}
               </Text>
               <IconSearch stroke={2.5} size={18} />
             </Group>
@@ -162,7 +160,7 @@ export function HeaderSection() {
               textDecoration: 'none',
             }}
           >
-            {t('content:header.navigation.products')}
+            {t('header.navigation.products')}
           </Anchor>
           <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
             <HoverCard.Target>
@@ -174,17 +172,15 @@ export function HeaderSection() {
                 }}
               >
                 <Group wrap="nowrap" gap={4}>
-                  {t('content:header.navigation.categories')}
+                  {t('header.navigation.categories')}
                   <IconChevronDown stroke={3} size={16} />
                 </Group>
               </Anchor>
             </HoverCard.Target>
 
-            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={'70%'}>
+            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={'60%'}>
               <Group justify="space-between" px="md">
-                <Text fw={500}>
-                  {t('content:header.navigation.categories')}
-                </Text>
+                <Text fw={500}>{t('header.navigation.categories')}</Text>
                 <Anchor href="/categories">{t('viewAll')}</Anchor>
               </Group>
 
@@ -216,35 +212,33 @@ export function HeaderSection() {
                     leftSection={<IconUser size={14} />}
                     onClick={() => router.push('/profile?tab=profile')}
                   >
-                    {t('content:header.profileMenu.profile')}
+                    {t('header.profileMenu.profile')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconPhoto size={14} />}
                     onClick={() => router.push('/profile?tab=ads')}
                   >
-                    {t('content:header.profileMenu.myAds')}
+                    {t('header.profileMenu.myAds')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconArrowsExchange size={14} />}
                     onClick={() => router.push('/profile?tab=historic')}
                   >
-                    {t('content:header.profileMenu.transactions')}
+                    {t('header.profileMenu.transactions')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconHeart size={14} />}
                     onClick={() => router.push('/profile?tab=favoris')}
                   >
-                    {t('content:header.profileMenu.favorites')}
+                    {t('header.profileMenu.favorites')}
                   </Menu.Item>
                   <Menu.Divider />
-                  <Menu.Label>
-                    {t('content:header.profileMenu.news')}
-                  </Menu.Label>
+                  <Menu.Label>{t('header.profileMenu.news')}</Menu.Label>
                   <Menu.Item
                     leftSection={<IconMessageCircle2 size={14} />}
                     onClick={() => router.push('/profile?tab=message')}
                   >
-                    {t('content:header.profileMenu.messages')}
+                    {t('header.profileMenu.messages')}
                     <Badge
                       ml={'xs'}
                       color="red"
@@ -260,7 +254,7 @@ export function HeaderSection() {
                     leftSection={<IconBell size={14} />}
                     onClick={() => router.push('/profile?tab=notifications')}
                   >
-                    {t('content:header.profileMenu.notifications')}
+                    {t('header.profileMenu.notifications')}
                     <Badge
                       ml={'xs'}
                       color="red"
@@ -273,14 +267,12 @@ export function HeaderSection() {
                     </Badge>
                   </Menu.Item>
                   <Menu.Divider />
-                  <Menu.Label>
-                    {t('content:header.profileMenu.settings')}
-                  </Menu.Label>
+                  <Menu.Label>{t('header.profileMenu.settings')}</Menu.Label>
                   <Menu.Item
                     leftSection={<IconSettings size={14} />}
                     onClick={() => router.push('/profile?tab=settings')}
                   >
-                    {t('content:header.profileMenu.settings')}
+                    {t('header.profileMenu.settings')}
                   </Menu.Item>
                   <Menu.Divider />
                   <Menu.Item
@@ -288,7 +280,7 @@ export function HeaderSection() {
                     leftSection={<IconLogout size={14} />}
                     onClick={logout}
                   >
-                    {t('content:header.navigation.logout')}
+                    {t('header.navigation.logout')}
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
@@ -299,10 +291,10 @@ export function HeaderSection() {
                 variant="default"
                 onClick={() => router.replace('/account/login')}
               >
-                {t('content:header.navigation.login')}
+                {t('header.navigation.login')}
               </Button>
               <Button variant="filled">
-                {t('content:header.navigation.createAccount')}
+                {t('header.navigation.createAccount')}
               </Button>
             </>
           )}
@@ -339,7 +331,7 @@ export function HeaderSection() {
               textDecoration: 'none',
             }}
           >
-            {t('content:header.navigation.homepage')}
+            {t('header.navigation.homepage')}
           </Anchor>
           <Anchor
             href="/products"
@@ -350,10 +342,10 @@ export function HeaderSection() {
               textDecoration: 'none',
             }}
           >
-            {t('content:header.navigation.products')}
+            {t('header.navigation.products')}
           </Anchor>
           <Anchor href="/search" fw={500} fz={'sm'}>
-            {t('content:header.navigation.search')}
+            {t('header.navigation.search')}
             <IconSearch
               style={{
                 transform: 'scaleX(-1)',
@@ -373,7 +365,7 @@ export function HeaderSection() {
             mr={5}
             onClick={toggleLinks}
           >
-            {t('content:header.navigation.categories')}
+            {t('header.navigation.categories')}
             <IconChevronDown
               size={16}
               style={{ marginBottom: -3, marginLeft: 4 }}
@@ -392,18 +384,16 @@ export function HeaderSection() {
         <Group justify="center" grow pb="xl" px="md">
           {logged ? (
             <>
-              <Button>{t('content:header.profileMenu.profile')}</Button>
+              <Button>{t('header.profileMenu.profile')}</Button>
               <Button variant="outline" onClick={logout}>
-                {t('content:header.navigation.logout')}
+                {t('header.navigation.logout')}
               </Button>
             </>
           ) : (
             <>
-              <Button variant="default">
-                {t('content:header.navigation.login')}
-              </Button>
+              <Button variant="default">{t('header.navigation.login')}</Button>
               <Button variant="filled">
-                {t('content:header.navigation.register')}
+                {t('header.navigation.register')}
               </Button>
             </>
           )}

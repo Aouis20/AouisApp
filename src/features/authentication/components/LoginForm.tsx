@@ -14,14 +14,14 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { setTokens } from '../tokens.helper';
 import { SocialLinks } from './SocialLinks';
 
 export const LoginForm = () => {
-  const { t } = useTranslation('account');
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const form = useForm<LoginPayloadType>({

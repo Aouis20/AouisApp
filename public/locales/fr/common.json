@@ -24,5 +24,23 @@
       "title": "Vous n'êtes pas autorisé à accéder à cette page",
       "message": "Vous n'êtes pas autorisé à accéder à cette page."
     }
+  },
+  "languageSelector": {
+    "title": "Langues",
+    "label": "Séléctionnez une langue",
+    "languages": {
+      "fr": "Français",
+      "en": "Anglais"
+    },
+    "notifications": {
+      "success": {
+          "title": "Changement de langue",
+          "message": "La langue a été changé en {language}."
+        },
+      "error": {
+        "title": "Erreur au changement de langue",
+        "message": "Erreur lors du changement de la langue en {language}"
+      }
+    }
   }
 }

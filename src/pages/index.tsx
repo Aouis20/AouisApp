@@ -19,8 +19,8 @@ import {
   IconShoppingBag,
 } from '@tabler/icons-react';
 import type { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 import { setupPrivateApi } from './api';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -36,7 +36,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   } catch (e) {
     console.error(e);
   } finally {
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+        },
+      },
+    };
   }
 };
 
@@ -46,12 +55,12 @@ interface HomePageProps {
 
 const Home: NextPage<HomePageProps> = ({ snapshot }) => {
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
-  const { t } = useTranslation('content');
+  const t = useTranslations();
   const matches = useMediaQuery('(min-width: 1150px)');
 
   const ways = {
     buy: {
-      title: t('common:buy'),
+      title: t('buy'),
       description: t('homepage.intro.buy.description'),
       icon: <IconShoppingBag stroke={2.3} />,
       button: t('homepage.intro.buy.button'),
@@ -59,7 +68,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       img: 'assets/homepage-buy.svg',
     },
     sell: {
-      title: t('common:sell'),
+      title: t('sell'),
       description: t('homepage.intro.sell.description'),
       icon: <IconCurrencyEuro stroke={2.45} />,
       button: t('homepage.intro.sell.button'),
@@ -67,7 +76,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
       img: 'assets/homepage-sell.svg',
     },
     exchange: {
-      title: t('common:exchange'),
+      title: t('exchange'),
       description: t('homepage.intro.exchange.description'),
       icon: <IconArrowsLeftRight stroke={2.2} />,
       button: t('homepage.intro.exchange.button'),
@@ -80,7 +89,7 @@ const Home: NextPage<HomePageProps> = ({ snapshot }) => {
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('content:header.navigation.homepage')} | {t('common:appName')}
+          {t('header.navigation.homepage')} | {t('appName')}
         </title>
         <meta name="description" content="Aouis Homepage" />
       </Head>

@@ -8,11 +8,11 @@ import {
   Title,
 } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 export default function Terms() {
-  const { t } = useTranslation('documents');
+  const t = useTranslations();
 
   return (
     <Box>
@@ -23,7 +23,7 @@ export default function Terms() {
           variant="default"
           leftSection={<IconArrowNarrowLeft />}
         >
-          {t('common:back')}
+          {t('back')}
         </Button>
         <Flex direction={'column'} gap={64}>
           <Title>{t('termsOfService.title')}</Title>

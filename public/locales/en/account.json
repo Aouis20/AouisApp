@@ -59,24 +59,6 @@
       }
     }
   },
-  "languageSelector": {
-    "title": "Languages",
-    "label": "Select a language",
-    "languages": {
-      "fr": "French",
-      "en": "English"
-    },
-    "notifications": {
-      "success": {
-        "title": "Language change",
-        "message": "The language has been changed to {{language}}."
-      },
-      "error": {
-        "title": "Error changing language",
-        "message": "Error changing the language to {{language}}"
-      }
-    }
-  },
   "updateUser": {
     "favoris": {
       "success": {

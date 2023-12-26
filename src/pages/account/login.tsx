@@ -1,17 +1,15 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
 import { LoginPage } from '@/features/authentication/components/LoginPage';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
 const Login = () => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   return (
     <UnAuthenticatedAppLayout>
       <Head>
-        <title>{`${t('appName')} - ${t(
-          'content:header.navigation.login'
-        )}`}</title>
+        <title>{`${t('appName')} - ${t('header.navigation.login')}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="Aouis - Login" content="Aouis - Login" />
       </Head>
@@ -22,3 +20,18 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`public/locales/${context.locale}/common.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/account.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/content.json`))
+          .default,
+      },
+    },
+  };
+}

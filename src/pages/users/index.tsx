@@ -8,8 +8,8 @@ import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { Box } from '@mantine/core';
 import { HTTPError } from 'ky-universal';
 import { GetServerSidePropsContext, NextPage } from 'next';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
@@ -38,14 +38,14 @@ type UsersPageProps = {
 };
 
 const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
   return (
     <AuthenticatedAppLayout instance={instance}>
       <Head>
         <title>
-          {t('appName')} | {t('content:header.navigation.users')}
+          {t('appName')} | {t('header.navigation.users')}
         </title>
         <meta name="description" content="test" />
       </Head>

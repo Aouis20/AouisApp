@@ -1,9 +1,9 @@
 import { Anchor, Group, Image } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
 const FooterSection = () => {
-  const { t } = useTranslation('documents');
+  const t = useTranslations();
   return (
     <Group
       gap={0}

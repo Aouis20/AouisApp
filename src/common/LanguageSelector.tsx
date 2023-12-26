@@ -4,12 +4,13 @@ import { setupPrivateApi } from '@/pages/api';
 import { Button, Menu } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconWorld } from '@tabler/icons-react';
-import i18next from 'i18next';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 import ReactCountryFlag from 'react-country-flag';
-import { useTranslation } from 'react-i18next';
 
 export const LanguageSelector = () => {
-  const { t } = useTranslation('account');
+  const t = useTranslations();
+  const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
   const languageDict: Record<string, JSX.Element> = {
     FR: <ReactCountryFlag countryCode="FR" svg />,
@@ -30,8 +31,7 @@ export const LanguageSelector = () => {
           s.user = updatedUser;
         });
       }
-      i18next.changeLanguage(language);
-      i18next.reloadResources();
+      router.replace(router.asPath, router.asPath, { locale: language });
       showNotification({
         title: t('languageSelector.notifications.success.title'),
         message: t('languageSelector.notifications.success.message', {
@@ -42,6 +42,7 @@ export const LanguageSelector = () => {
         color: 'green',
       });
     } catch (err) {
+      console.log(err);
       showNotification({
         title: t('languageSelector.notifications.error.title'),
         message: t('languageSelector.notifications.error.message', {
@@ -75,13 +76,13 @@ export const LanguageSelector = () => {
         <Menu.Label>{t('languageSelector.label')}</Menu.Label>
         <Menu.Item
           leftSection={<ReactCountryFlag countryCode="FR" svg />}
-          onClick={() => handleChangeLanguage('FR')}
+          onClick={() => handleChangeLanguage('fr')}
         >
           {t('languageSelector.languages.fr')}
         </Menu.Item>
         <Menu.Item
           leftSection={<ReactCountryFlag countryCode="GB" svg />}
-          onClick={() => handleChangeLanguage('EN')}
+          onClick={() => handleChangeLanguage('en')}
         >
           {t('languageSelector.languages.en')}
         </Menu.Item>

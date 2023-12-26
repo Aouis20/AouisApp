@@ -9,6 +9,11 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "./src/_mantine.scss";`
   },
+  i18n: {
+    locales: ['fr', 'en'],
+    defaultLocale: 'fr',
+    localeDetection: false
+  }
 };
 
 module.exports = nextConfig

@@ -1,11 +1,11 @@
 import { LanguageSelector } from '@/common/LanguageSelector';
-import { useTranslation } from 'react-i18next';
+import { Flex } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { LeftPanel } from './LeftPanel';
 import { RegisterForm } from './RegisterForm';
-import { Flex } from '@mantine/core';
 
 const RegisterPage = () => {
-  const { t } = useTranslation('account');
+  const t = useTranslations();
   return (
     <div className="container min-h-screen relative flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       {/* Left Panel */}
