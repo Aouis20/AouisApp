@@ -19,12 +19,14 @@ export const LanguageSelector = () => {
 
   const handleChangeLanguage = async (language: string) => {
     const api = setupPrivateApi();
+    console.log(router.asPath);
 
     try {
       if (user) {
+        console.log('oui user');
         const updatedUser = await updateUser(
           user.id,
-          { language: language },
+          { language: language.toUpperCase() },
           api
         );
         AccountStore.update((s) => {

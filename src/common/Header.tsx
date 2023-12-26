@@ -61,11 +61,14 @@ export function HeaderSection() {
   const logout = () => {
     try {
       removeTokens();
+      AccountStore.update((s) => {
+        s.user = null;
+      });
 
       showNotification({
         title: t('authentication.logout.notifications.success.title'),
         message: t('authentication.logout.notifications.success.message'),
-        color: 'gray',
+        color: 'green',
       });
       router.replace('/account/login');
     } catch (err) {
@@ -193,7 +196,10 @@ export function HeaderSection() {
               >
                 {t('header.navigation.login')}
               </Button>
-              <Button variant="filled">
+              <Button
+                variant="filled"
+                onClick={() => router.replace('/account/register')}
+              >
                 {t('header.navigation.createAccount')}
               </Button>
             </>

@@ -1,9 +1,11 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
+import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
 import { getTokens } from '@/features/authentication/tokens.helper';
 import { SearchPage } from '@/features/search/components/SearchPage';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
+import { HTTPError } from 'ky';
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
@@ -28,7 +30,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
   } catch (e) {
-    console.error(e);
+    const error = e as HTTPError;
+    if (error?.response?.status === 401) {
+      return redirectToLoginProps();
+    }
   }
 };
 

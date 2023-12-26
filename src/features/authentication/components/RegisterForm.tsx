@@ -27,7 +27,7 @@ export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [terms, setTerms] = useState<boolean>(false);
   const passwordReggex = new RegExp(
-    '^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}[]:;<>,.?~-]).{8,}$'
+    '^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()-_=+{};:,<.>]).{8,}$'
   );
 
   const form = useForm<RegisterPayloadType>({
@@ -63,7 +63,7 @@ export const RegisterForm = () => {
 
       setTokens(token);
 
-      router.replace('/');
+      router.replace('/account/login');
 
       showNotification({
         title: t('authentication.register.notifications.success.title'),
@@ -77,6 +77,8 @@ export const RegisterForm = () => {
         message: t('authentication.register.notifications.error.message'),
         color: 'red',
       });
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -104,10 +106,11 @@ export const RegisterForm = () => {
           />
 
           {/* Password */}
-          <TextInput
+          <PasswordInput
             id="password"
             type="password"
             placeholder={t('authentication.form.password') as string}
+            autoComplete="password"
             disabled={isLoading}
             required
             {...form.getInputProps('password')}

@@ -12,8 +12,8 @@ export const getAccountById = async (id: number, api: KyInstance): Promise<User>
   return data;
 };
 
-export const createUser = async (payload: RegisterPayloadType, api: KyInstance): Promise<User> => {
-  const data = await api.post('accounts/', { json: payload }).json<User>();
+export const createUser = async (payload: RegisterPayloadType, api: KyInstance): Promise<any> => {
+  const data = await api.post('accounts/', { json: payload }).json<any>();
   return data;
 };
 
