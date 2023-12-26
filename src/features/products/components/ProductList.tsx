@@ -2,6 +2,7 @@ import { PaginationComponent } from '@/common/pagination/Pagination';
 import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
 import { Box, Flex, Loader, Text } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { ProductStore } from '../store';
 import { ProductCard } from './ProductCard';
@@ -20,11 +21,12 @@ export const ProductList = ({
   const productList = ProductStore.useState((s) => s.productList);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [activePage, setPage] = useState(1);
+  const t = useTranslations();
 
   if (!productList || productList.total_items === 0) {
     return (
       <Text fs={'italic'} fz={'lg'}>
-        Aucun produit trouvé
+        {t('noData')}
       </Text>
     );
   }

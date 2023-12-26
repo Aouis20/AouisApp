@@ -1,5 +1,7 @@
 import { getCategories } from '@/features/categories/api';
 import { CategoryStore } from '@/features/categories/store';
+import { Category } from '@/features/categories/types/Category';
+import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
   Burger,
@@ -27,8 +29,6 @@ import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import { AccountMenu } from './AccountMenu';
 import { LanguageSelector } from './LanguageSelector';
-import { setupPrivateApi } from '@/pages/api';
-import { Category } from '@/features/categories/types/Category';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -48,14 +48,14 @@ export function HeaderSection() {
     CategoryStore.update((s) => {
       s.categoryList = categoryList;
     });
-    setCategoryList(categoryList)
+    setCategoryList(categoryList);
   };
 
   useEffect(() => {
     if (user) {
       return setLogged(true);
     }
-    fetchCategories()
+    fetchCategories();
   }, []);
 
   const logout = () => {
@@ -182,11 +182,9 @@ export function HeaderSection() {
 
         {/* Right Section - Add product button && Account Menu */}
         <Group wrap="nowrap" style={{ display: matches ? 'flex' : 'none' }}>
+          <LanguageSelector />
           {logged ? (
-            <Group gap={'sm'} wrap="nowrap">
-              <LanguageSelector />
-              <AccountMenu logout={logout} />
-            </Group>
+            <AccountMenu logout={logout} />
           ) : (
             <>
               <Button

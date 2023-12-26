@@ -2,7 +2,7 @@ import { Anchor, Group, Image } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-const FooterSection = () => {
+export const FooterSection = () => {
   const t = useTranslations();
   return (
     <Group
@@ -22,17 +22,15 @@ const FooterSection = () => {
       />
       <Group c="gray" py={'md'}>
         <Anchor href="/documents/terms" c={'gray'} p={'sm'}>
-          {t('termsOfService.title')}
+          {t('termsOfServiceTitle')}
         </Anchor>
         <Anchor href="/documents/privacy" c={'gray'} p={'sm'}>
-          {t('privacy.title')}
+          {t('privacyTitle')}
         </Anchor>
         <Anchor href="/documents/cookies" c={'gray'} p={'sm'}>
-          {t('cookies.title')}
+          {t('cookiesTitle')}
         </Anchor>
       </Group>
     </Group>
   );
 };
-
-export default FooterSection;

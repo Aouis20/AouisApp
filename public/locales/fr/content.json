@@ -11,8 +11,9 @@
         "homepage": "Accueil",
         "products" : "Produits",
         "search" : "Rechercher",
+        "results": "Résultats",
         "users": "Utilisateurs",
-        "categories": "Categories",
+        "categories": "Catégories",
         "customerService": "Service Client",
         "createAccount": "Créer mon compte",
         "register": "Inscription",
@@ -52,6 +53,27 @@
         "error": {
             "title": "Le titre doit faire au minimum 2 caractères",
             "price": "Le prix minimum acceptable est de 0.01€"
+        }
+    }
+  },
+  "searchpage": {
+    "showAdvancedSettings": "Afficher les réglages avancées",
+    "hideAdvancedSettings": "Masquer les réglages avancées",
+    "inputs": {
+        "minPrice": "Prix min.",
+        "maxPrice": "Prix max.",
+        "conditions": "États",
+        "categories": "Catégories",
+        "localization": "Localisation"
+    },
+    "notifications": {
+        "success": {
+            "title": "Recherche",
+            "message": "Une recherche est en cours..."
+        },
+        "error": {
+            "title": "Erreur",
+            "message": "Une erreur s'est produite lors d'une recherche"
         }
     }
   },

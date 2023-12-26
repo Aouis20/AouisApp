@@ -46,7 +46,7 @@ export const HistoricTable = () => {
         <Table.Td>{row.price}</Table.Td>
         <Table.Td>{row.type}</Table.Td>
         <Table.Td>
-          <Anchor href={`accounts/row.user.id`} fz="md">
+          <Anchor href="" fz="md">
             {row.user}
           </Anchor>
         </Table.Td>

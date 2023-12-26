@@ -18,6 +18,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useDisclosure } from '@mantine/hooks';
+import { showNotification } from '@mantine/notifications';
 import {
   IconArticle,
   IconCategory,
@@ -25,7 +26,6 @@ import {
   IconMapPinFilled,
   IconSearch,
 } from '@tabler/icons-react';
-import _ from 'lodash';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { SearchPayload } from '../types/SearchPayload';
@@ -37,7 +37,7 @@ export const SearchPage = () => {
   const router = useRouter();
   const form = useForm<SearchPayload>({
     initialValues: {
-      name: '',
+      title: '',
       min_price: 0,
       max_price: 100,
       conditions: [],
@@ -49,15 +49,25 @@ export const SearchPage = () => {
   const handleSubmit = async (values: SearchPayload) => {
     try {
       const api = setupPrivateApi();
-      const payload = _.pickBy(values, (value) => value !== '');
-
-      const productList = await submitSearch(payload, api);
+      showNotification({
+        title: t('searchpage.notifications.success.title'),
+        message: t('searchpage.notifications.success.message'),
+        color: 'primary.4',
+        loading: true,
+        withCloseButton: false,
+      });
+      const productList = await submitSearch(values, api);
       ProductStore.update((s) => {
         s.productList = productList;
       });
-      router.push('/products/search');
+      router.push('/search/results');
     } catch (err) {
       console.log(err);
+      showNotification({
+        title: t('searchpage.notifications.error.title'),
+        message: t('searchpage.notifications.error.message'),
+        color: 'red',
+      });
     }
   };
 
@@ -73,14 +83,14 @@ export const SearchPage = () => {
               label={t('header.navigation.search')}
               placeholder="Voiture, Casque, Meuble ..."
               leftSection={<IconSearch size={18} />}
-              {...form.getInputProps('name')}
+              {...form.getInputProps('title')}
             />
             {/* Price */}
             <Group wrap="nowrap">
               <NumberInput
                 w={160}
                 label="Min"
-                placeholder="Prix min."
+                placeholder={t('searchpage.inputs.maxPrice')}
                 min={0}
                 hideControls
                 step={0.5}
@@ -91,7 +101,7 @@ export const SearchPage = () => {
               <NumberInput
                 w={160}
                 label="Max"
-                placeholder="Prix max."
+                placeholder={t('searchpage.inputs.maxPrice')}
                 min={0}
                 hideControls
                 step={0.5}
@@ -106,7 +116,7 @@ export const SearchPage = () => {
               <Flex gap={'xl'} mt={'xl'} wrap={'wrap'}>
                 {/* Conditions */}
                 <MultiSelect
-                  label="Conditions"
+                  label={t('searchpage.inputs.conditions')}
                   leftSection={<IconArticle size={18} />}
                   clearable
                   searchable
@@ -117,7 +127,7 @@ export const SearchPage = () => {
                 {/* Categories */}
                 <MultiSelect
                   leftSection={<IconCategory size={18} />}
-                  label="Categories"
+                  label={t('searchpage.inputs.categories')}
                   searchable
                   clearable
                   data={categoryList.map((category) => ({
@@ -130,7 +140,7 @@ export const SearchPage = () => {
                 {/* Localization */}
                 <NumberInput
                   w={200}
-                  label="Localization"
+                  label={t('searchpage.inputs.localization')}
                   hideControls
                   leftSection={<IconMapPinFilled size={18} />}
                   {...form.getInputProps('localization')}
@@ -142,15 +152,15 @@ export const SearchPage = () => {
           <Group justify="space-between">
             <Anchor onClick={toggle}>
               {opened
-                ? 'Masquer les réglages avancées'
-                : 'Afficher les réglages avancées'}
+                ? t('searchpage.hideAdvancedSettings')
+                : t('searchpage.showAdvancedSettings')}
             </Anchor>
 
             <Button type="submit">{t('search')}</Button>
           </Group>
         </form>
       </Paper>
-      <Image mt={'xl'} src="assets/search/search.svg" w={'50%'} />
+      <Image mt={'xl'} src={'/search.svg'} w={'50%'} />
     </Flex>
   );
 };

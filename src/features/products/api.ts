@@ -24,6 +24,6 @@ export const createProduct = async (payload: CreateProductFormType, api: KyInsta
 };
 
 export const submitSearch = async (payload: SearchPayload, api: KyInstance): Promise<ProductList> => {
-  const data = await api.post('products/search', { json: payload }).json<ProductList>();
+  const data = await api.post('products/search/', { json: payload }).json<ProductList>();
   return data;
 };

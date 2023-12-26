@@ -22,6 +22,9 @@
   "clearFilters": "Clear Filters",
   "ads": "ads",
   "sendMessageTo": "Send a message to",
+  "termsOfServiceTitle": "Terms of Service",
+  "privacyTitle": "Privacy Policy",
+  "cookiesTitle": "Cookies",
   "notifications": {
     "notAuthorized": {
       "title": "You are not authorized to access this page",

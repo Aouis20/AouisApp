@@ -11,6 +11,7 @@
           "homepage": "Home",
           "products" : "Products",
           "search" : "Search",
+          "results": "Results",
           "users": "Users",
           "categories": "Categories",
           "customerService": "Customer Service",
@@ -55,6 +56,27 @@
           }
       }
     },
+    "searchpage": {
+        "showAdvancedSettings": "Show advanced settings",
+        "hideAdvancedSettings": "Hide advanced settings",
+        "inputs": {
+            "minPrice": "Min Price",
+            "maxPrice": "Max Price",
+            "conditions": "Conditions",
+            "categories": "Categories",
+            "localization": "Localization"
+        },
+        "notifications": {
+            "success": {
+                "title": "Searching",
+                "message": "Research in progress..."
+            },
+            "error": {
+                "title": "Error",
+                "message": "An error occurred while searching"
+            }
+        }
+    },    
     "homepage": {
       "intro": {
           "buy": {

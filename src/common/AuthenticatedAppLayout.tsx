@@ -1,8 +1,8 @@
 import { AppShell } from '@mantine/core';
 import { PullstateProvider } from 'pullstate';
 import { PullStateInstance } from '../pullstate.core';
-import FooterSection from './Footer';
 import { HeaderSection } from './Header';
+import { FooterSection } from './Footer';
 
 type AppLayoutProps = {
   children?: React.ReactNode;

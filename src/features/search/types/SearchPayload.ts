@@ -1,5 +1,5 @@
 export type SearchPayload = {
-    name?: string,
+    title?: string,
     min_price?: number,
     max_price?: number,
     conditions?: string[],

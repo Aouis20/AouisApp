@@ -1,6 +1,5 @@
 {
   "termsOfService": {
-    "title": "Terms of Service",
     "property": {
       "title": "Intellectual Property",
       "text": "The content of the Aouis website, including texts, images, videos, graphics, and other elements, is protected by intellectual property laws and copyrights. Any reproduction, distribution, modification, or unauthorized use of the content, in whole or in part, is strictly prohibited."
@@ -24,7 +23,6 @@
     }
   },
   "privacy": {
-    "title": "Privacy Policy",
     "introduction": "This Privacy Policy explains how the 'Aouis' website collects, uses, shares, and protects your personal data when you use our site. By visiting our site, you consent to the collection and use of your data in accordance with this policy.",
     "dataCollection": {
       "title": "Data Collection",
@@ -65,7 +63,6 @@
     }
   },
   "cookies": {
-    "title": "Cookies",
     "introduction": "This Cookies Policy explains how the 'Aouis' website uses cookies and other similar technologies to enhance your browsing experience and provide you with personalized features. By visiting our website, you consent to the use of cookies in accordance with this policy.",
     "definition": {
         "title": "What is a Cookie?",

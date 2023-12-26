@@ -23,6 +23,9 @@
   "clearFilters": "Supprimer les filtres",
   "ads": "annonces",
   "sendMessageTo": "Envoyer un message à",
+  "termsOfServiceTitle": "Mentions Légales",
+  "privacyTitle": "Politique de confidentialité",
+  "cookiesTitle": "Cookies",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",

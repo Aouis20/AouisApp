@@ -1,7 +1,6 @@
 
 {
   "termsOfService": {
-    "title": "Mentions Légales",
     "property": {
       "title": "Propriété Intellectuelle",
       "text": "Le contenu du site web Aouis, y compris les textes, images, vidéos, graphiques et autres éléments, est protégé par les lois sur la propriété intellectuelle et les droits d'auteur. Toute reproduction, distribution, modification ou utilisation non autorisée du contenu, en tout ou en partie, est strictement interdite."
@@ -25,7 +24,6 @@
     }
   },
   "privacy": {
-    "title": "Politique de confidentialité",
     "introduction": "La présente Politique de Confidentialité explique comment le site web 'Aouis' collecte, utilise, partage et protège vos données personnelles lorsque vous utilisez notre site. En visitant notre site, vous consentez à la collecte et à l'utilisation de vos données conformément à cette politique.",
     "dataCollection": {
       "title": "Collecte de données",
@@ -66,7 +64,6 @@
     }
   },
   "cookies": {
-    "title": "Cookies",
     "introduction": "Cette Politique de Cookies explique comment le site web 'Aouis' utilise les cookies et autres technologies similaires pour améliorer votre expérience de navigation et vous fournir des fonctionnalités personnalisées. En visitant notre site web, vous consentez à l'utilisation des cookies conformément à cette politique.",
     "definition": {
         "title": "Qu'est-ce qu'un cookie ?",
