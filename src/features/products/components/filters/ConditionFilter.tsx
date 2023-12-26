@@ -1,11 +1,13 @@
 import { Badge, Box, Checkbox, Flex, Text, Title } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
+import { useTranslations } from 'next-intl';
 import { ProductStore } from '../../store';
 
-const ConditionFilter = () => {
+export const ConditionFilter = () => {
+  const t = useTranslations();
   const products = ProductStore.useState((s) => s.productList);
   if (!products) {
-    return <Text>Aucune donnée disponible</Text>;
+    return <Text>{t('noData')}</Text>;
   }
 
   // Conditions
@@ -58,7 +60,6 @@ const ConditionFilter = () => {
           checked={allChecked}
           indeterminate={indeterminate}
           label="All"
-          transitionDuration={0}
           onChange={() =>
             handlers.setState((current) =>
               current.map((value) => ({ ...value, checked: !allChecked }))
@@ -70,5 +71,3 @@ const ConditionFilter = () => {
     </Flex>
   );
 };
-
-export default ConditionFilter;

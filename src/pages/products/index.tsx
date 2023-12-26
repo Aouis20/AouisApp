@@ -1,6 +1,7 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
+import { getTokens } from '@/features/authentication/tokens.helper';
 import { getProducts } from '@/features/products/api';
 import { ProductPage } from '@/features/products/components/ProductPage';
 import { setupPrivateApi } from '@/pages/api';
@@ -15,7 +16,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const api = setupPrivateApi(ctx);
 
   try {
-    await getUserInfo(stateInstance, api);
+    const authTokens = getTokens(ctx);
+    if (authTokens?.access) {
+      await getUserInfo(stateInstance, api);
+    }
 
     const products = await getProducts(1, {}, api);
     stateInstance.stores.ProductStore.update((s) => {

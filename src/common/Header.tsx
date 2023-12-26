@@ -1,8 +1,7 @@
+import { getCategories } from '@/features/categories/api';
 import { CategoryStore } from '@/features/categories/store';
 import {
   Anchor,
-  Badge,
-  Box,
   Burger,
   Button,
   Collapse,
@@ -12,31 +11,24 @@ import {
   Group,
   HoverCard,
   Image,
-  Menu,
   Text,
 } from '@mantine/core';
 import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import {
-  IconArrowsExchange,
-  IconBell,
   IconChevronDown,
-  IconHeart,
-  IconLogout,
-  IconMessageCircle2,
-  IconPhoto,
   IconSearch,
-  IconSettings,
   IconSquarePlus,
-  IconUser,
 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
-import { DisplayName } from './DisplayName';
+import { AccountMenu } from './AccountMenu';
 import { LanguageSelector } from './LanguageSelector';
+import { setupPrivateApi } from '@/pages/api';
+import { Category } from '@/features/categories/types/Category';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -46,14 +38,24 @@ export function HeaderSection() {
   const [logged, setLogged] = useState<boolean>(false);
   const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
-  const categoryList = CategoryStore.useState((s) => s.categoryList);
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
   const matches = useMediaQuery('(min-width: 1150px)');
   const matchesSM = useMediaQuery('(min-width: 720px)');
+
+  const fetchCategories = async () => {
+    const api = setupPrivateApi();
+    const categoryList = await getCategories(api);
+    CategoryStore.update((s) => {
+      s.categoryList = categoryList;
+    });
+    setCategoryList(categoryList)
+  };
 
   useEffect(() => {
     if (user) {
       return setLogged(true);
     }
+    fetchCategories()
   }, []);
 
   const logout = () => {
@@ -77,22 +79,7 @@ export function HeaderSection() {
     }
   };
 
-  // TODO get categories
-  const truc = [
-    { id: 1, title: 'Category1', description: 'Bienvenue sur la category ici' },
-    {
-      id: 2,
-      title: 'Category2',
-      description: 'Bienvenue sur la category2 ici',
-    },
-    {
-      id: 3,
-      title: 'Category3',
-      description: 'Bienvenue sur la category3 ici',
-    },
-  ];
-
-  const categories = [...categoryList, ...truc].map((category) => ({
+  const categories = categoryList.map((category) => ({
     ...category,
   }));
 
@@ -196,95 +183,10 @@ export function HeaderSection() {
         {/* Right Section - Add product button && Account Menu */}
         <Group wrap="nowrap" style={{ display: matches ? 'flex' : 'none' }}>
           {logged ? (
-            <>
-              <Box>
-                <LanguageSelector />
-              </Box>
-              <Menu shadow="md" width={200}>
-                <Menu.Target>
-                  <Button fw={'bold'}>
-                    <DisplayName />
-                  </Button>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Label>{t('myAccount')}</Menu.Label>
-                  <Menu.Item
-                    leftSection={<IconUser size={14} />}
-                    onClick={() => router.push('/profile?tab=profile')}
-                  >
-                    {t('header.profileMenu.profile')}
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<IconPhoto size={14} />}
-                    onClick={() => router.push('/profile?tab=ads')}
-                  >
-                    {t('header.profileMenu.myAds')}
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<IconArrowsExchange size={14} />}
-                    onClick={() => router.push('/profile?tab=historic')}
-                  >
-                    {t('header.profileMenu.transactions')}
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<IconHeart size={14} />}
-                    onClick={() => router.push('/profile?tab=favoris')}
-                  >
-                    {t('header.profileMenu.favorites')}
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Label>{t('header.profileMenu.news')}</Menu.Label>
-                  <Menu.Item
-                    leftSection={<IconMessageCircle2 size={14} />}
-                    onClick={() => router.push('/profile?tab=message')}
-                  >
-                    {t('header.profileMenu.messages')}
-                    <Badge
-                      ml={'xs'}
-                      color="red"
-                      variant="filled"
-                      p={2}
-                      w={16}
-                      h={16}
-                    >
-                      2
-                    </Badge>
-                  </Menu.Item>
-                  <Menu.Item
-                    leftSection={<IconBell size={14} />}
-                    onClick={() => router.push('/profile?tab=notifications')}
-                  >
-                    {t('header.profileMenu.notifications')}
-                    <Badge
-                      ml={'xs'}
-                      color="red"
-                      variant="filled"
-                      p={2}
-                      w={16}
-                      h={16}
-                    >
-                      2
-                    </Badge>
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Label>{t('header.profileMenu.settings')}</Menu.Label>
-                  <Menu.Item
-                    leftSection={<IconSettings size={14} />}
-                    onClick={() => router.push('/profile?tab=settings')}
-                  >
-                    {t('header.profileMenu.settings')}
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Item
-                    color="red"
-                    leftSection={<IconLogout size={14} />}
-                    onClick={logout}
-                  >
-                    {t('header.navigation.logout')}
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            </>
+            <Group gap={'sm'} wrap="nowrap">
+              <LanguageSelector />
+              <AccountMenu logout={logout} />
+            </Group>
           ) : (
             <>
               <Button

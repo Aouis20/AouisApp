@@ -11,7 +11,7 @@ import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-export default function Terms() {
+export const Terms = () => {
   const t = useTranslations();
 
   return (
@@ -67,4 +67,4 @@ export default function Terms() {
       </Container>
     </Box>
   );
-}
+};

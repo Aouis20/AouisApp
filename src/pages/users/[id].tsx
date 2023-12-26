@@ -1,8 +1,9 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
-import { getUserList } from '@/features/accounts/api';
-import AccountList from '@/features/accounts/components/AccountPage';
+import { getAccountById } from '@/features/accounts/api';
+import { AccountDetails } from '@/features/accounts/components/AccountDetails';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
+import { getTokens } from '@/features/authentication/tokens.helper';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { Box } from '@mantine/core';
@@ -14,12 +15,16 @@ import Head from 'next/head';
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const stateInstance = PullstateCore.instantiate({ ssr: true });
   const api = setupPrivateApi(ctx);
+  const id = Number(ctx.params?.id);
 
   try {
-    await getUserInfo(stateInstance, api);
-    const userList = await getUserList(api);
+    const authTokens = getTokens(ctx);
+    if (authTokens?.access) {
+      await getUserInfo(stateInstance, api);
+    }
+    const account = await getAccountById(id, api);
     stateInstance.stores.AccountStore.update((s) => {
-      s.userList = userList;
+      s.account = account;
     });
 
     return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
@@ -58,7 +63,7 @@ const UsersPage: NextPage<UsersPageProps> = ({ snapshot }) => {
           paddingTop: '32px',
         }}
       >
-        <AccountList />
+        <AccountDetails />
       </Box>
     </AuthenticatedAppLayout>
   );

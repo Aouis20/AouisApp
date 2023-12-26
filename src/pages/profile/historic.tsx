@@ -30,7 +30,18 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const user = await getUserInfo(stateInstance, api);
     // TODO fetch transactions related to user
 
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+          ...(await import(`public/locales/${ctx.locale}/account.json`))
+            .default,
+        },
+      },
+    };
   } catch (e) {
     const error = e as HTTPError;
     if (error?.response?.status === 401) {
@@ -76,7 +87,7 @@ const Historic: NextPage<HistoricProps> = ({ snapshot }) => {
         </Paper>
         <Paper shadow="sm" radius="md" pb={'lg'} withBorder>
           <Flex direction={'row'} gap={'lg'} mb={'md'}>
-            <Tabs defaultValue="profile" w={'100%'}>
+            <Tabs defaultValue="historic" w={'100%'}>
               <Tabs.List>
                 <Tabs.Tab
                   value="myprofile"
@@ -100,7 +111,7 @@ const Historic: NextPage<HistoricProps> = ({ snapshot }) => {
                   Historic
                 </Tabs.Tab>
                 <Tabs.Tab
-                  value="ads"
+                  value="favoris"
                   onClick={() => router.push('/profile/favoris')}
                   leftSection={<IconHeart size="0.9rem" />}
                 >
@@ -126,7 +137,7 @@ const Historic: NextPage<HistoricProps> = ({ snapshot }) => {
                   Messages
                 </Tabs.Tab>
                 <Tabs.Tab
-                  value="Notifications"
+                  value="notifications"
                   onClick={() => router.push('/profile/notifications')}
                   leftSection={<IconBell size="0.9rem" />}
                   rightSection={

@@ -25,6 +25,7 @@ import {
   IconMapPinFilled,
   IconSearch,
 } from '@tabler/icons-react';
+import _ from 'lodash';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { SearchPayload } from '../types/SearchPayload';
@@ -45,12 +46,14 @@ export const SearchPage = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values: SearchPayload) => {
     try {
       const api = setupPrivateApi();
-      const products = await submitSearch(form.values, api);
+      const payload = _.pickBy(values, (value) => value !== '');
+
+      const productList = await submitSearch(payload, api);
       ProductStore.update((s) => {
-        s.productList = products;
+        s.productList = productList;
       });
       router.push('/products/search');
     } catch (err) {

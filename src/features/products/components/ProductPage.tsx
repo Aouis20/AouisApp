@@ -1,5 +1,6 @@
 import { Box, Divider, Drawer, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { ProductList } from './ProductList';
 import Filters from './filters/Filters';
@@ -7,6 +8,7 @@ import Filters from './filters/Filters';
 export const ProductPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const [display, setDisplay] = useState<'column' | 'row'>('column');
+  const t = useTranslations();
 
   return (
     <Flex direction={'column'} align={'center'} gap={'xl'}>
@@ -14,7 +16,11 @@ export const ProductPage = () => {
       <ProductList display={display} />
 
       {/* Filters */}
-      <Drawer opened={opened} onClose={close} title={<Title>Filtres</Title>}>
+      <Drawer
+        opened={opened}
+        onClose={close}
+        title={<Title>{t('filters')}</Title>}
+      >
         <Divider my="sm" />
         {/* From current categories display it filters */}
         <Box></Box>
@@ -22,5 +28,3 @@ export const ProductPage = () => {
     </Flex>
   );
 };
-
-export default ProductPage;

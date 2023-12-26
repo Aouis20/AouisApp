@@ -1,7 +1,6 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
 import { redirectToLoginProps } from '@/features/authentication/redirect.helper';
-import { getCategories } from '@/features/categories/api';
 import { ProductCreate } from '@/features/products/components/ProductCreate';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
@@ -16,19 +15,21 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     await getUserInfo(stateInstance, api);
-    const categoryList = await getCategories(api);
-    stateInstance.stores.CategoryStore.update((s) => {
-      s.categoryList = categoryList;
-    });
-
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+        },
+      },
+    };
   } catch (e) {
     const error = e as HTTPError;
     if (error?.response?.status === 401) {
       return redirectToLoginProps();
     }
-
-    return { props: {} };
   }
 };
 

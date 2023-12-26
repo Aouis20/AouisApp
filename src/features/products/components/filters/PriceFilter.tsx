@@ -9,17 +9,17 @@ import {
   Title,
 } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
-import { useTranslations } from 'next-intl';
 
-const PriceFilter = () => {
+export const PriceFilter = () => {
   const products = ProductStore.useState((s) => s.productList);
   const filters = ProductStore.useState((s) => s.filters);
   const t = useTranslations();
 
   if (!products) {
-    return <Text>Aucune donnée disponible</Text>;
+    return <Text>{t('noData')}</Text>;
   }
 
   // Prices
@@ -125,5 +125,3 @@ const PriceFilter = () => {
     </Flex>
   );
 };
-
-export default PriceFilter;

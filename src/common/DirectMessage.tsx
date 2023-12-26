@@ -1,7 +1,9 @@
+import { AccountStore } from '@/features/accounts/store';
 import { Product } from '@/features/products/types/Product';
 import { Box, Button, Dialog, Textarea, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMessageCircle2 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { DisplayName } from './DisplayName';
 
@@ -11,11 +13,14 @@ type MessageProps = {
 
 export const DirectMessage = ({ product }: MessageProps) => {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const t = useTranslations();
   const [message, setMessage] = useState<string>(
     'Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?'
   );
+  const user = AccountStore.useState((s) => s.user);
 
-  // TODO Connexion required
+  if (!user) return <></>;
+
   const handleSubmit = () => {
     console.log('to send');
   };
@@ -34,7 +39,8 @@ export const DirectMessage = ({ product }: MessageProps) => {
         radius="md"
       >
         <Title size="sm" mb="xs" fw={500}>
-          Envoyer un message à <DisplayName user={product.owner} />
+          {t('sendMessageTo')}
+          <DisplayName user={product.owner} />
         </Title>
 
         <Textarea
@@ -52,7 +58,7 @@ export const DirectMessage = ({ product }: MessageProps) => {
             close();
           }}
         >
-          Envoyer
+          {t('send')}
         </Button>
       </Dialog>
     </Box>

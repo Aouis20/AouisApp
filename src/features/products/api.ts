@@ -19,11 +19,11 @@ export const getProductById = async (id: number, api: KyInstance): Promise<Produ
 };
 
 export const createProduct = async (payload: CreateProductFormType, api: KyInstance): Promise<Product> => {
-  const data = await api.post(`products/`, { json: payload }).json<Product>();
+  const data = await api.post('products/', { json: payload }).json<Product>();
   return data;
 };
 
 export const submitSearch = async (payload: SearchPayload, api: KyInstance): Promise<ProductList> => {
-  const data = await api.post(`products/search`, { json: payload }).json<ProductList>();
+  const data = await api.post('products/search', { json: payload }).json<ProductList>();
   return data;
 };

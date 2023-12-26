@@ -1,5 +1,6 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
+import { getTokens } from '@/features/authentication/tokens.helper';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
 import { Flex, Image, Title } from '@mantine/core';
 import type { GetServerSidePropsContext, NextPage } from 'next';
@@ -12,10 +13,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const api = setupPrivateApi(ctx);
 
   try {
-    await getUserInfo(stateInstance, api);
-  } catch (e) {
-    console.error(e);
-  } finally {
+    const authTokens = getTokens(ctx);
+    if (authTokens?.access) {
+      await getUserInfo(stateInstance, api);
+    }
     return {
       props: {
         snapshot: stateInstance.getPullstateSnapshot(),
@@ -26,6 +27,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         },
       },
     };
+  } catch (e) {
+    console.error(e);
   }
 };
 

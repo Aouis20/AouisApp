@@ -17,10 +17,11 @@ import {
   IconLayoutList,
   IconTag,
 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
-import ConditionFilter from './ConditionFilter';
-import PriceFilter from './PriceFilter';
+import { ConditionFilter } from './ConditionFilter';
+import { PriceFilter } from './PriceFilter';
 
 type FiltersProps = {
   open: () => void;
@@ -33,6 +34,7 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
   const filters = ProductStore.useState((s) => s.filters);
   const [initialFilters, setInitialFilters] = useState(filters);
   const matches = useMediaQuery('(min-width: 1055px)');
+  const t = useTranslations();
 
   useEffect(() => {
     filters != initialFilters ? setIsModifying(true) : setIsModifying(false);
@@ -48,9 +50,10 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
     <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
       <Flex direction={'column'} gap={'lg'} align={'center'}>
         <Title>Others category</Title>
+        {/* TODO category name */}
 
         <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
-          {totalItems} annonces
+          {totalItems} {t('ads')}
         </Badge>
 
         <Group justify={matches ? 'space-between' : 'center'}>
@@ -60,7 +63,7 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
             disabled={!isModifying}
             onClick={handleClearFilters}
           >
-            Clear Filters
+            {t('clearFilters')}
           </Button>
 
           <Group justify="center">

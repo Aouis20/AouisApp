@@ -1,6 +1,6 @@
 import { AuthenticatedAppLayout } from '@/common/AuthenticatedAppLayout';
 import { getUserInfo } from '@/features/accounts/helper';
-import { getCategories } from '@/features/categories/api';
+import { getTokens } from '@/features/authentication/tokens.helper';
 import { SearchPage } from '@/features/search/components/SearchPage';
 import { setupPrivateApi } from '@/pages/api';
 import { PullStateInstance, PullstateCore } from '@/pullstate.core';
@@ -13,14 +13,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const api = setupPrivateApi(ctx);
 
   try {
-    await getUserInfo(stateInstance, api);
-    const categoryList = await getCategories(api);
-    stateInstance.stores.CategoryStore.update((s) => {
-      s.categoryList = categoryList;
-    });
-  } catch (e) {
-    console.error(e);
-  } finally {
+    const authTokens = getTokens(ctx);
+    if (authTokens?.access) {
+      await getUserInfo(stateInstance, api);
+    }
     return {
       props: {
         snapshot: stateInstance.getPullstateSnapshot(),
@@ -31,6 +27,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         },
       },
     };
+  } catch (e) {
+    console.error(e);
   }
 };
 

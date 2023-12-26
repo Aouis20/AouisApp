@@ -12,7 +12,7 @@ import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-export default function Privacy() {
+export const Privacy = () => {
   const t = useTranslations();
   return (
     <Box>
@@ -99,4 +99,4 @@ export default function Privacy() {
       </Container>
     </Box>
   );
-}
+};

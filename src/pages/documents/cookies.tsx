@@ -12,7 +12,7 @@ import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-function Cookies() {
+const Cookies = () => {
   const t = useTranslations();
   return (
     <Box>
@@ -99,6 +99,5 @@ function Cookies() {
       </Container>
     </Box>
   );
-}
+};
 
-export default Cookies;
