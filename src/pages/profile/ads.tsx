@@ -41,8 +41,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
           ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
           ...(await import(`public/locales/${ctx.locale}/content.json`))
             .default,
-          ...(await import(`public/locales/${ctx.locale}/account.json`))
-            .default,
         },
       },
     };

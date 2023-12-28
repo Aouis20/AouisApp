@@ -1,46 +1,46 @@
 import {
-  Container,
+  Badge,
+  Box,
+  Flex,
+  Group,
   Overlay,
+  Paper,
   SimpleGrid,
   Text,
+  Title,
   UnstyledButton,
   rem,
 } from '@mantine/core';
-
-const categories = [
-  {
-    label: 'Customer Support',
-    image:
-      'https://images.unsplash.com/photo-1508780709619-79562169bc64?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    label: 'User Guides',
-    image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    label: 'Sales Questions',
-    image:
-      'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
-  },
-];
+import { useTranslations } from 'next-intl';
+import { CategoryStore } from '../store';
 
 export const Categories = () => {
-  const items = categories.map((category) => (
+  const categoryList = CategoryStore.useState((s) => s.categoryList);
+  const truc = [
+    ...categoryList.filter((c) => c.title != 'Others'),
+    { title: 'Décorations' },
+    { title: 'Informatique' },
+    { title: 'Sport' },
+    { title: 'Immobilier' },
+    { title: 'Jardinerie' },
+    { title: 'Cuisine' },
+  ];
+  const t = useTranslations();
+  const items = truc.map((category) => (
     <UnstyledButton
       style={{
-        backgroundImage: `url(${category.image})`,
+        backgroundImage: `url(https://cdn.pixabay.com/photo/2023/11/29/11/55/pine-hills-8419433_1280.jpg)`,
         height: rem('160px'),
         position: 'relative',
         backgroundSize: '100%',
         backgroundPosition: 'center',
         color: 'white',
-        borderRadius: 'lg',
-        padding: 'xl',
+        borderRadius: 14,
+        margin: 16,
         overflow: 'hidden',
         transition: 'backgroundSize 300ms ease',
       }}
-      key={category.label}
+      key={category.title}
     >
       <Overlay color="#000" opacity={0.6} zIndex={1} />
       <Text
@@ -49,14 +49,32 @@ export const Categories = () => {
         fw={700}
         style={{ color: 'white', zIndex: 2, position: 'relative' }}
       >
-        {category.label}
+        {category.title}
       </Text>
     </UnstyledButton>
   ));
 
   return (
-    <Container pt={'md'} pb={'xl'} size="lg">
+    <Box mx={'xl'}>
+      <Group justify="center" mb={'xl'}>
+        <Paper
+          shadow="sm"
+          radius="md"
+          p="xl"
+          withBorder
+          w={'50%'}
+          pos={'relative'}
+        >
+          <Flex direction={'column'} gap={'lg'} align={'center'}>
+            <Title>Catégories</Title>
+
+            <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
+              {categoryList.length} catégories
+            </Badge>
+          </Flex>
+        </Paper>
+      </Group>
       <SimpleGrid cols={{ base: 1, sm: 3 }}>{items}</SimpleGrid>
-    </Container>
+    </Box>
   );
 };

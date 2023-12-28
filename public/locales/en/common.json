@@ -25,6 +25,7 @@
   "termsOfServiceTitle": "Terms of Service",
   "privacyTitle": "Privacy Policy",
   "cookiesTitle": "Cookies",
+  "photos":"{count, plural, =0 {No photos} =1 {# photo} other {# photos}}",
   "notifications": {
     "notAuthorized": {
       "title": "You are not authorized to access this page",
@@ -47,6 +48,22 @@
         "title": "Error changing language",
         "message": "Error changing the language to {language}"
       }
+    }
+  },
+  "favoris": {
+    "success": {
+      "like": {
+        "title": "Added to favorites!",
+        "message": "The listing has been added to favorites."
+      },
+      "unlike": {
+        "title": "Removed from favorites",
+        "message": "The listing has been removed from your favorites."
+      }
+    },
+    "error": {
+      "title": "Error",
+      "message": "Error updating your favorites."
     }
   },
   "authentication": {

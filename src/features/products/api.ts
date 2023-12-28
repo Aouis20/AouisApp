@@ -19,7 +19,18 @@ export const getProductById = async (id: number, api: KyInstance): Promise<Produ
 };
 
 export const createProduct = async (payload: CreateProductFormType, api: KyInstance): Promise<Product> => {
-  const data = await api.post('products/', { json: payload }).json<Product>();
+  const formData = new FormData();
+  
+  Object.keys(payload).map((key) => {
+    if (key === 'images' && payload.images.length) {
+      payload.images.map((image, index) => {
+        formData.append(`images[${index}]`, image);
+      });
+    } else {
+      formData.append(key, (payload as Record<string, any>)[key]);
+    }
+  });
+  const data = await api.post('products/', { body: formData }).json<Product>();
   return data;
 };
 

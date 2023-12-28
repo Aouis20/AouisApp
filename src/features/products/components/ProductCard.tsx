@@ -11,6 +11,7 @@ import {
   Group,
   Image,
   Spoiler,
+  Stack,
   Text,
   Title,
 } from '@mantine/core';
@@ -20,6 +21,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/en';
 import 'dayjs/locale/fr';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { PaymentType, Product } from '../types/Product';
 import { conditionIcon } from '../variables/Conditions';
@@ -35,29 +37,28 @@ dayjs.extend(LocalizedFormat);
 export const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { hovered, ref } = useHover();
+  const t = useTranslations();
 
-  const handleDistance = () => {
-    // TODO get distance between user and product owner
-  };
-
-  const images = [
-    'https://cdn.pixabay.com/photo/2023/07/29/17/36/fly-8157417_1280.jpg',
-    'https://cdn.pixabay.com/photo/2023/11/30/07/51/bridge-8420945_640.jpg',
-    'https://cdn.pixabay.com/photo/2023/04/22/10/28/sheep-7943526_640.jpg',
-    'https://cdn.pixabay.com/photo/2023/12/04/18/10/lilac-8430051_640.jpg',
-    'https://cdn.pixabay.com/photo/2023/06/01/05/59/oranges-8032713_640.jpg',
-    'https://cdn.pixabay.com/photo/2023/11/25/16/56/dragon-8412130_640.jpg',
-  ];
-
-  const slides = images.map((image) => (
-    <Carousel.Slide key={image}>
-      <Image src={image} height={200} />
+  const slides = product.images.length ? (
+    product.images.map((image, index) => (
+      <Carousel.Slide key={index}>
+        <Image
+          src={process.env.NEXT_PUBLIC_API_BASE_URL + image.image}
+          height={200}
+        />
+      </Carousel.Slide>
+    ))
+  ) : (
+    <Carousel.Slide>
+      <Image
+        src={
+          'https://th.bing.com/th/id/OIG.i1YcxZb19CgF3995jFq_?w=1024&h=1024&rs=1&pid=ImgDetMain'
+        }
+        height={200}
+      />
     </Carousel.Slide>
-  ));
+  );
 
-  if (product.title == 'azerty') {
-    console.log(product);
-  }
   return (
     <Card
       withBorder
@@ -74,7 +75,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <Group wrap={'nowrap'} gap={'xs'} align="start">
         {/* Left Section */}
         <Box w={'40%'} miw={'40%'}>
-          <Carousel loop withControls={hovered ? true : false}>
+          <Carousel
+            loop
+            withControls={hovered ? product.images.length > 1 && true : false}
+          >
             {slides}
           </Carousel>
           {hovered && (
@@ -86,7 +90,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                   userSelect: 'none',
                 }}
               >
-                {images.length} Images
+                {t('photos', { count: product.images.length })}
               </Badge>
             </Group>
           )}
@@ -124,34 +128,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               >
                 <Text c={'dimmed'} fz={14}>
                   {product.description}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Beatae itaque fugiat sunt provident distinctio excepturi id,
-                  eaque reiciendis sed maiores accusantium cumque odit eveniet
-                  consequatur quasi ea mollitia hic autem! jeizgaeignoierg Lorem
-                  ipsum, dolor sit amet consectetur adipisicing elit. Esse
-                  assumenda exercitationem est quidem culpa fugit voluptatibus.
-                  Qui, similique iste unde maiores molestiae in labore maxime
-                  officia enim sequi! Facere, nam.
                 </Text>
               </Spoiler>
             </Flex>
 
             {/* Badges */}
-            <Flex direction={'column'} gap={'xs'}>
-              <Badge color="green" variant="light" fz={14} p={10} mt={40}>
+            <Stack gap={'xs'} align={'end'}>
+              <Badge variant="light" fz={14} p={10} mt={40}>
                 {product.price}€
                 {product.payment_type != PaymentType.UNIQ &&
                   paymentType[product.payment_type]}
               </Badge>
               <Badge
-                color="secondary.5"
-                variant="light"
+                variant="transparent"
+                color="secondary.2"
                 fz={12}
                 rightSection={conditionIcon[product.condition]}
               >
                 {product.condition}
               </Badge>
-            </Flex>
+            </Stack>
           </Group>
 
           {/* Owner */}
@@ -186,7 +182,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               <Button
                 leftSection={<IconMapPinFilled size={22} />}
                 variant="subtle"
-                onClick={handleDistance}
                 p={8}
               >
                 95

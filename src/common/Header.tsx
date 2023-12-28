@@ -44,16 +44,16 @@ export function HeaderSection() {
 
   const fetchCategories = async () => {
     const api = setupPrivateApi();
-    const categoryList = await getCategories(api);
+    const newCategoryList = await getCategories(api);
     CategoryStore.update((s) => {
-      s.categoryList = categoryList;
+      s.categoryList = newCategoryList;
     });
-    setCategoryList(categoryList);
+    setCategoryList(newCategoryList);
   };
 
   useEffect(() => {
     if (user) {
-      return setLogged(true);
+      setLogged(true);
     }
     fetchCategories();
   }, []);

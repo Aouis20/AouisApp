@@ -27,7 +27,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       s.product = product;
     });
 
-    return { props: { snapshot: stateInstance.getPullstateSnapshot() } };
+    return {
+      props: {
+        snapshot: stateInstance.getPullstateSnapshot(),
+        messages: {
+          ...(await import(`public/locales/${ctx.locale}/common.json`)).default,
+          ...(await import(`public/locales/${ctx.locale}/content.json`))
+            .default,
+        },
+      },
+    };
   } catch (e) {
     const error = e as HTTPError;
     if (error?.response?.status === 401) {

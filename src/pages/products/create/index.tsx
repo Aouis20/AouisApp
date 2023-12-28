@@ -30,14 +30,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     if (error?.response?.status === 401) {
       return redirectToLoginProps();
     }
+    return { props: {} };
   }
 };
 
-type SearchProps = {
+type CreateProps = {
   snapshot: PullStateInstance;
 };
 
-const Search: NextPage<SearchProps> = ({ snapshot }) => {
+const Create: NextPage<CreateProps> = ({ snapshot }) => {
   const t = useTranslations();
   const instance = PullstateCore.instantiate({ hydrateSnapshot: snapshot });
 
@@ -54,4 +55,4 @@ const Search: NextPage<SearchProps> = ({ snapshot }) => {
     </AuthenticatedAppLayout>
   );
 };
-export default Search;
+export default Create;

@@ -5,7 +5,6 @@ import {
   Button,
   Chip,
   Container,
-  FileInput,
   Flex,
   Group,
   NumberInput,
@@ -18,6 +17,7 @@ import {
   Title,
   Tooltip,
 } from '@mantine/core';
+import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { useTranslations } from 'next-intl';
@@ -27,6 +27,7 @@ import {
   CreateStatusType,
 } from '../types/CreateProductForm';
 import { ConditionType, PaymentType } from '../types/Product';
+import { ImagesDropzone } from './ImagesDropzone';
 
 export const ProductCreate = () => {
   const t = useTranslations();
@@ -37,7 +38,7 @@ export const ProductCreate = () => {
       is_service: false,
       images: [],
       title: '',
-      description: '',
+      description: null,
       price: 0,
       category: '',
       payment_type: PaymentType.UNIQ,
@@ -58,8 +59,6 @@ export const ProductCreate = () => {
       payload.category = Number(payload.category);
       payload.price = String(payload.price);
 
-      console.log(payload);
-
       await createProduct(payload, api);
       showNotification({
         title: t('product.create.notifications.success.title'),
@@ -70,13 +69,16 @@ export const ProductCreate = () => {
       // if yes back to form
       // else redirect to homepage
     } catch (err) {
-      console.log(err);
       showNotification({
         title: t('product.create.notifications.error.title'),
         message: t('product.create.notifications.error.message'),
         color: 'red',
       });
     }
+  };
+
+  const handleChangeImages = (images: FileWithPath[]) => {
+    createProductForm.setFieldValue('images', images);
   };
 
   return (
@@ -105,16 +107,46 @@ export const ProductCreate = () => {
             </Group>
           </Radio.Group>
 
+          {/* Title */}
+          <TextInput
+            label={t('addAd.form.title')}
+            placeholder={t('addAd.form.title')}
+            withAsterisk
+            required
+            {...createProductForm.getInputProps('title')}
+          />
+
+          {/* Price */}
+          <NumberInput
+            label={t('addAd.form.price')}
+            placeholder={t('addAd.form.price')}
+            withAsterisk
+            hideControls
+            step={0.5}
+            min={0.01}
+            required
+            rightSection={
+              <Badge style={{ position: 'absolute', right: 8 }}>
+                {t(
+                  `product.paymentTypesFormat.${createProductForm.values.payment_type}`
+                )}
+              </Badge>
+            }
+            decimalScale={2}
+            {...createProductForm.getInputProps('price')}
+          />
+
           {/* Images */}
-          <FileInput
+          {/* <FileInput
             label="Photos"
-            description={t('addAd.form.dropzone.tips') as string}
-            placeholder={t('addAd.form.dropzone.placeholder') as string}
+            description={t('addAd.form.dropzone.tips')}
+            placeholder={t('addAd.form.dropzone.placeholder')}
             accept="image/png,image/jpeg"
             multiple
             clearable
             {...createProductForm.getInputProps('images')}
-          />
+          /> */}
+          <ImagesDropzone onChange={handleChangeImages} />
 
           {/* Categories */}
           {!createProductForm.values.is_service && (
@@ -130,43 +162,12 @@ export const ProductCreate = () => {
             />
           )}
 
-          {/* Title */}
-          <TextInput
-            label={t('addAd.form.title')}
-            placeholder={t('addAd.form.title') as string}
-            withAsterisk
-            {...createProductForm.getInputProps('title')}
-          />
-
           {/* Description */}
           <Textarea
             label={t('addAd.form.description')}
-            placeholder={t('addAd.form.description') as string}
+            placeholder={t('addAd.form.description')}
             autosize
             {...createProductForm.getInputProps('description')}
-          />
-
-          {/* Price */}
-          <NumberInput
-            label={t('addAd.form.price')}
-            placeholder={t('addAd.form.price') as string}
-            withAsterisk
-            hideControls
-            step={0.5}
-            min={0.01}
-            required
-            style={{ position: 'relative' }}
-            rightSection={
-              <Badge style={{ position: 'absolute', right: 8 }}>
-                {t(
-                  `product.paymentTypesFormat.${
-                    createProductForm.values.payment_type as string
-                  }`
-                )}
-              </Badge>
-            }
-            decimalScale={2}
-            {...createProductForm.getInputProps('price')}
           />
 
           {/* Payment Method */}
@@ -175,7 +176,7 @@ export const ProductCreate = () => {
             allowDeselect={false}
             data={Object.entries(PaymentType).map(([key, value]) => ({
               value: value,
-              label: t(`product.paymentTypes.${key}`) as string,
+              label: t(`product.paymentTypes.${key}`),
             }))}
             {...createProductForm.getInputProps('payment_type')}
           />
@@ -187,7 +188,7 @@ export const ProductCreate = () => {
               allowDeselect={false}
               data={Object.entries(ConditionType).map(([key, value]) => ({
                 value: value,
-                label: t(`product.conditionTypes.${key}`) as string,
+                label: t(`product.conditionTypes.${key}`),
               }))}
               {...createProductForm.getInputProps('condition')}
             />
@@ -200,7 +201,7 @@ export const ProductCreate = () => {
               allowDeselect={false}
               data={Object.entries(CreateStatusType).map(([key, value]) => ({
                 value: value,
-                label: t(`product.statusTypes.${key}`) as string,
+                label: t(`product.statusTypes.${key}`),
               }))}
               {...createProductForm.getInputProps('status')}
             />

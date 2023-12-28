@@ -27,8 +27,6 @@ export async function getStaticProps(context: { locale: string }) {
       messages: {
         ...(await import(`public/locales/${context.locale}/common.json`))
           .default,
-        ...(await import(`public/locales/${context.locale}/account.json`))
-          .default,
         ...(await import(`public/locales/${context.locale}/content.json`))
           .default,
       },

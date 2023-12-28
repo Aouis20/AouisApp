@@ -4,8 +4,8 @@ import { setupPrivateApi } from '@/pages/api';
 import { ActionIcon, Group } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react';
-import { Product } from '../types/Product';
 import { useTranslations } from 'next-intl';
+import { Product } from '../types/Product';
 
 type LikeButtonProps = {
   hovered: any;
@@ -35,22 +35,22 @@ export const LikeButton = ({ hovered, product }: LikeButtonProps) => {
       });
       if (user.favoris.includes(product.id)) {
         showNotification({
-          title: t('updateUser.favoris.success.unlike.title'),
-          message: t('updateUser.favoris.success.unlike.message'),
+          title: t('favoris.success.unlike.title'),
+          message: t('favoris.success.unlike.message'),
           color: 'green',
         });
       } else {
         showNotification({
-          title: t('updateUser.favoris.success.like.title'),
-          message: t('updateUser.favoris.success.like.message'),
+          title: t('favoris.success.like.title'),
+          message: t('favoris.success.like.message'),
           color: 'green',
         });
       }
     } catch (err) {
       console.log(err);
       showNotification({
-        title: t('updateUser.favoris.error.title'),
-        message: t('updateUser.favoris.error.message'),
+        title: t('favoris.error.title'),
+        message: t('favoris.error.message'),
         color: 'red',
       });
     }
@@ -61,8 +61,8 @@ export const LikeButton = ({ hovered, product }: LikeButtonProps) => {
       bg={'white'}
       h={40}
       w={40}
-      right={2}
-      top={2}
+      right={6}
+      top={6}
       style={{
         position: 'absolute',
         borderRadius: '50%',

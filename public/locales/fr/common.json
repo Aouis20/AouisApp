@@ -26,6 +26,7 @@
   "termsOfServiceTitle": "Mentions Légales",
   "privacyTitle": "Politique de confidentialité",
   "cookiesTitle": "Cookies",
+  "photos":"{count, plural, =0 {Aucune photos} =1 {# photo} other {# photos}}",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",
@@ -48,6 +49,22 @@
         "title": "Erreur au changement de langue",
         "message": "Erreur lors du changement de la langue en {language}"
       }
+    }
+  },
+  "favoris": {
+    "success": {
+      "like": {
+        "title": "Ajouté au favoris !",
+        "message": "L'annonce a été ajouté au favoris."
+      },
+      "unlike": {
+        "title": "Supprimé des favoris",
+        "message": "L'annonce a été supprimer de vos favoris."
+      }
+    },
+    "error": {
+      "title": "Erreur",
+      "message": "Erreur lors de la mise à jour de vos favoris."
     }
   },
   "authentication": {
