@@ -3,10 +3,12 @@ import { User } from './types/User';
 
 export type AccountStoreType = {
     user: User | null;
-    userList: User[]
+    userList: User[],
+    account: User | null
 };
 
 export const AccountStore = new Store<AccountStoreType>({
     user: null,
-    userList: []
+    userList: [],
+    account: null
 });

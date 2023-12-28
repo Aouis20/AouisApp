@@ -9,10 +9,11 @@
     "navigation": {
         "addAd": "Déposer une annonce",
         "homepage": "Accueil",
-        "products" : "Produits",
+        "products" : "Annonces",
         "search" : "Rechercher",
+        "results": "Résultats",
         "users": "Utilisateurs",
-        "categories": "Categories",
+        "categories": "Catégories",
         "customerService": "Service Client",
         "createAccount": "Créer mon compte",
         "register": "Inscription",
@@ -36,8 +37,8 @@
     "form": {
         "type": "Type de l'annonce",
         "dropzone": {
-            "placeholder": "Glisser des images ici ou cliquer pour séléctionner des images.",
-            "tips": "Les images ne doivent pas excéder plus de 10MB."
+            "placeholder": "Cliquer pour séléctionner des photos.",
+            "tips": "Les photos ne doivent pas excéder plus de 10MB."
         },
         "categories": "Categories",
         "title": "Titre",
@@ -55,15 +56,49 @@
         }
     }
   },
+  "searchpage": {
+    "showAdvancedSettings": "Afficher les réglages avancées",
+    "hideAdvancedSettings": "Masquer les réglages avancées",
+    "inputs": {
+        "minPrice": "Prix min.",
+        "maxPrice": "Prix max.",
+        "conditions": "États",
+        "categories": "Catégories",
+        "localization": "Localisation"
+    },
+    "notifications": {
+        "success": {
+            "title": "Recherche",
+            "message": "Une recherche est en cours..."
+        },
+        "error": {
+            "title": "Erreur",
+            "message": "Une erreur s'est produite lors d'une recherche"
+        }
+    }
+  },
   "homepage": {
-    "introduction": "Je souhaite...",
+    "intro": {
+        "buy": {
+            "button": "J'achètes !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        },
+        "sell": {
+            "button":"Je vends !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        },
+        "exchange": {
+            "button": "J'échanges !",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+        }
+    },
     "p1": {
         "title": "Qu'est-ce que Aouis ?",
         "text": "Aouis est une plateforme en ligne qui permet aux utilisateurs de vendre et d'acheter une grande variété de produits et de services, tels que des voitures d'occasion, des meubles, des vêtements, des emplois, et même des locations immobilières."
     },
     "p2": {
         "title": "Comment ça marche ?",
-        "text": "Il fonctionne comme un marché de petites annonces où les utilisateurs peuvent publier leurs annonces gratuitement, interagir avec les acheteurs ou les vendeurs par le biais de messages, et conclure des transactions en personne."
+        "text": "Il fonctionne comme un marché de petites annonces où les utilisateurs peuvent publier leurs annonces gratuitement, interagir avec les acheteurs ou les vendeurs par le biais de messages, et conclure des transactions en personne ou en ligne."
     },
     "p3": {
         "title": "FAQ",
@@ -115,6 +150,18 @@
         "RESERVED": "Réservé",
         "PENDING_PAYMENT": "Paiement en attente",
         "NEGOTIATING": "Négotiation en cours"
+    },
+    "create": {
+        "notifications": {
+            "success": {
+                "title": "Produit crée !",
+                "message": "Votre produit a été ajouté avec succès !"
+            },
+            "error": {
+                "title": "Erreur",
+                "message": "Une erreur est survenue lors de la création de votre produit"
+            }
+        }
     }
   }
 }

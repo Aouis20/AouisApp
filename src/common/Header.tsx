@@ -1,400 +1,217 @@
 import { getCategories } from '@/features/categories/api';
 import { CategoryStore } from '@/features/categories/store';
+import { Category } from '@/features/categories/types/Category';
 import { setupPrivateApi } from '@/pages/api';
 import {
   Anchor,
-  Badge,
-  Box,
   Burger,
   Button,
-  Center,
   Collapse,
   Divider,
   Drawer,
+  Flex,
   Group,
-  Header,
   HoverCard,
   Image,
-  Menu,
-  ScrollArea,
-  SimpleGrid,
   Text,
-  ThemeIcon,
-  UnstyledButton,
-  createStyles,
-  rem,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
 import {
-  IconArrowsExchange,
-  IconBell,
   IconChevronDown,
-  IconCode,
-  IconHeart,
-  IconLogout,
-  IconMessageCircle2,
-  IconPhoto,
   IconSearch,
-  IconSettings,
   IconSquarePlus,
-  IconUser,
 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
-import DisplayName from './DisplayName';
-import LanguageSelector from './LanguageSelector';
-
-const useStyles = createStyles((theme) => ({
-  logo: {
-    cursor: 'pointer',
-  },
-  link: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '100%',
-    paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
-    textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    fontWeight: 500,
-    fontSize: theme.fontSizes.sm,
-
-    [theme.fn.smallerThan('sm')]: {
-      height: rem(42),
-      display: 'flex',
-      alignItems: 'center',
-      width: '100%',
-    },
-
-    ...theme.fn.hover({
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
-    }),
-  },
-
-  subLink: {
-    width: '100%',
-    padding: `${theme.spacing.xs} ${theme.spacing.md}`,
-    borderRadius: theme.radius.md,
-
-    ...theme.fn.hover({
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[7]
-          : theme.colors.gray[0],
-    }),
-
-    '&:active': theme.activeStyles,
-  },
-
-  hiddenMobile: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
-    },
-  },
-
-  hiddenMobileLg: {
-    [theme.fn.smallerThan('lg')]: {
-      display: 'none',
-    },
-  },
-
-  hiddenDesktop: {
-    [theme.fn.largerThan('md')]: {
-      display: 'none',
-    },
-  },
-}));
+import { AccountMenu } from './AccountMenu';
+import { LanguageSelector } from './LanguageSelector';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const { classes, theme } = useStyles();
-  const { t } = useTranslation('common');
+  const t = useTranslations();
   const [logged, setLogged] = useState<boolean>(false);
   const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
-  const categoryList = CategoryStore.useState((s) => s.categoryList);
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
+  const matches = useMediaQuery('(min-width: 1150px)');
+  const matchesSM = useMediaQuery('(min-width: 720px)');
 
   const fetchCategories = async () => {
     const api = setupPrivateApi();
-    const categories = await getCategories(api);
+    const newCategoryList = await getCategories(api);
     CategoryStore.update((s) => {
-      s.categoryList = categories;
+      s.categoryList = newCategoryList;
     });
-    console.log(categoryList);
+    setCategoryList(newCategoryList);
   };
 
   useEffect(() => {
     if (user) {
-      return setLogged(true);
+      setLogged(true);
     }
-
-    if (!categoryList.length) {
-      fetchCategories();
-    }
-    console.log('oui');
+    fetchCategories();
   }, []);
 
   const logout = () => {
     try {
       removeTokens();
+      AccountStore.update((s) => {
+        s.user = null;
+      });
 
       showNotification({
-        title: t('account:authentication.logout.notifications.success.title'),
-        message: t(
-          'account:authentication.logout.notifications.success.message'
-        ),
-        color: 'gray',
+        title: t('authentication.logout.notifications.success.title'),
+        message: t('authentication.logout.notifications.success.message'),
+        color: 'green',
       });
       router.replace('/account/login');
     } catch (err) {
       console.log(err);
 
       showNotification({
-        title: t('account:authentication.logout.notifications.error.title'),
-        message: t('account:authentication.logout.notifications.error.message'),
+        title: t('authentication.logout.notifications.error.title'),
+        message: t('authentication.logout.notifications.error.message'),
         color: 'red',
       });
     }
   };
 
-  // TODO get categories
-  const truc = [
-    { id: 1, title: 'Category1', description: 'Bienvenue sur la category ici' },
-    {
-      id: 2,
-      title: 'Category2',
-      description: 'Bienvenue sur la category2 ici',
-    },
-    {
-      id: 3,
-      title: 'Category3',
-      description: 'Bienvenue sur la category3 ici',
-    },
-  ];
-
-  const categories = truc.map((category) => ({
-    icon: IconCode,
+  const categories = categoryList.map((category) => ({
     ...category,
   }));
 
   const renderCategories = categories.map((category, index) => (
-    <UnstyledButton className={classes.subLink} key={index}>
-      <Group noWrap align="flex-start">
-        <ThemeIcon size={34} variant="default" radius="md">
-          <category.icon size={rem(22)} color={theme.fn.primaryColor()} />
-        </ThemeIcon>
-        <Box>
-          <Text size="sm" fw={500}>
-            {category.title}
-          </Text>
-          <Text size="xs" color="dimmed">
-            {category.description}
-          </Text>
-        </Box>
-      </Group>
-    </UnstyledButton>
+    <Button variant="light" key={index}>
+      {category.title}
+    </Button>
   ));
 
   return (
-    <Box>
-      <Header height={60} px="md" pos={'relative'}>
-        <Group position="apart" h={'100%'}>
-          {/* Left Section - Logo */}
-          <Group>
-            <Image
-              onClick={() => router.push('/')}
-              className={classes.logo}
-              alt={'logo'}
-              src={'/logo.png'}
-              width={150}
-            />
-            <Button
-              className={classes.hiddenMobileLg}
-              variant="light"
-              leftIcon={<IconSquarePlus size={20} />}
-              onClick={() => router.push('/products/create')}
-            >
-              {t('content:header.navigation.addAd')}
-            </Button>
-          </Group>
-
-          {/* Middle Section - Nav links */}
-          <Group h={'100%'} spacing={0} className={classes.hiddenMobile}>
-            <Anchor href="/" className={classes.link}>
-              {t('content:header.navigation.homepage')}
-            </Anchor>
-            <Anchor href="/search" className={classes.link}>
-              <IconSearch size={18} />
-              <Text ml={4}>{t('content:header.navigation.search')}</Text>
-            </Anchor>
-            <Anchor href="/products" className={classes.link}>
-              {t('content:header.navigation.products')}
-            </Anchor>
-            <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
-              <HoverCard.Target>
-                <Anchor href="/categories" className={classes.link}>
-                  <Center inline>
-                    <Box component="span" mr={5}>
-                      {t('content:header.navigation.categories')}
-                    </Box>
-                    <IconChevronDown
-                      size={16}
-                      color={theme.fn.primaryColor()}
-                    />
-                  </Center>
-                </Anchor>
-              </HoverCard.Target>
-
-              <HoverCard.Dropdown sx={{ overflow: 'hidden' }}>
-                <Group position="apart" px="md">
-                  <Text fw={500}>
-                    {t('content:header.navigation.categories')}
-                  </Text>
-                  <Anchor href="/categories">{t('viewAll')}</Anchor>
-                </Group>
-
-                <Divider
-                  my="sm"
-                  mx="-md"
-                  color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
-                />
-
-                <SimpleGrid cols={3} spacing={0}>
-                  {renderCategories}
-                </SimpleGrid>
-              </HoverCard.Dropdown>
-            </HoverCard>
-          </Group>
-
-          {/* Right Section - Add product button && Account Menu */}
-          <Group className={classes.hiddenMobile}>
-            {logged ? (
-              <>
-                <Box className={classes.hiddenMobileLg}>
-                  <LanguageSelector />
-                </Box>
-                <Menu shadow="md" width={200}>
-                  <Menu.Target>
-                    <Button>
-                      <DisplayName />
-                    </Button>
-                  </Menu.Target>
-                  <Menu.Dropdown>
-                    <Menu.Label>{t('myAccount')}</Menu.Label>
-                    <Menu.Item
-                      icon={<IconUser size={14} />}
-                      onClick={() => router.push('/myprofile?tab=profile')}
-                    >
-                      {t('content:header.profileMenu.profile')}
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={<IconPhoto size={14} />}
-                      onClick={() => router.push('/myprofile?tab=ads')}
-                    >
-                      {t('content:header.profileMenu.myAds')}
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={<IconArrowsExchange size={14} />}
-                      onClick={() => router.push('/myprofile?tab=historic')}
-                    >
-                      {t('content:header.profileMenu.transactions')}
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={<IconHeart size={14} />}
-                      onClick={() => router.push('/myprofile?tab=favoris')}
-                    >
-                      {t('content:header.profileMenu.favorites')}
-                    </Menu.Item>
-                    <Menu.Divider />
-                    <Menu.Label>
-                      {t('content:header.profileMenu.news')}
-                    </Menu.Label>
-                    <Menu.Item
-                      icon={<IconMessageCircle2 size={14} />}
-                      onClick={() => router.push('/myprofile?tab=message')}
-                    >
-                      {t('content:header.profileMenu.messages')}
-                      <Badge
-                        ml={'xs'}
-                        color="red"
-                        variant="filled"
-                        p={2}
-                        w={16}
-                        h={16}
-                      >
-                        2
-                      </Badge>
-                    </Menu.Item>
-                    <Menu.Item
-                      icon={<IconBell size={14} />}
-                      onClick={() =>
-                        router.push('/myprofile?tab=notifications')
-                      }
-                    >
-                      {t('content:header.profileMenu.notifications')}
-                      <Badge
-                        ml={'xs'}
-                        color="red"
-                        variant="filled"
-                        p={2}
-                        w={16}
-                        h={16}
-                      >
-                        2
-                      </Badge>
-                    </Menu.Item>
-                    <Menu.Divider />
-                    <Menu.Label>
-                      {t('content:header.profileMenu.settings')}
-                    </Menu.Label>
-                    <Menu.Item
-                      icon={<IconSettings size={14} />}
-                      onClick={() => router.push('/myprofile?tab=settings')}
-                    >
-                      {t('content:header.profileMenu.settings')}
-                    </Menu.Item>
-                    <Menu.Divider />
-                    <Menu.Item
-                      color="red"
-                      icon={<IconLogout size={14} />}
-                      onClick={logout}
-                    >
-                      {t('content:header.navigation.logout')}
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="default"
-                  onClick={() => router.replace('/account/login')}
-                >
-                  {t('content:header.navigation.login')}
-                </Button>
-                <Button variant="filled">
-                  {t('content:header.navigation.createAccount')}
-                </Button>
-              </>
-            )}
-          </Group>
-
-          <Burger
-            opened={drawerOpened}
-            onClick={toggleDrawer}
-            className={classes.hiddenDesktop}
+    <>
+      <Group justify="space-between" h={60} px="md" pos={'relative'}>
+        {/* Left Section - Logo */}
+        <Group>
+          <Image
+            onClick={() => router.push('/')}
+            style={{ cursor: 'pointer' }}
+            alt={'logo'}
+            src={'/logo.png'}
+            w={150}
           />
+          <Button
+            style={{ display: matches ? 'block' : 'none' }}
+            variant="light"
+            leftSection={<IconSquarePlus size={20} />}
+            onClick={() => router.push('/products/create')}
+          >
+            {t('header.navigation.addAd')}
+          </Button>
         </Group>
-      </Header>
+
+        {/* Middle Section - Nav links */}
+        <Group
+          h={'100%'}
+          gap={'xl'}
+          align="center"
+          style={{ display: matchesSM ? 'flex' : 'none' }}
+        >
+          <Anchor
+            fw={'bold'}
+            href="/"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            {t('header.navigation.homepage')}
+          </Anchor>
+          <Anchor
+            href="/search"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Group wrap="nowrap" gap={6}>
+              <Text fw={'bold'} ml={4}>
+                {t('header.navigation.search')}
+              </Text>
+              <IconSearch stroke={2.5} size={18} />
+            </Group>
+          </Anchor>
+          <Anchor
+            fw={'bold'}
+            href="/products"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            {t('header.navigation.products')}
+          </Anchor>
+          <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
+            <HoverCard.Target>
+              <Anchor
+                fw={'bold'}
+                href="/categories"
+                style={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Group wrap="nowrap" gap={4}>
+                  {t('header.navigation.categories')}
+                  <IconChevronDown stroke={3} size={16} />
+                </Group>
+              </Anchor>
+            </HoverCard.Target>
+
+            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={'60%'}>
+              <Group justify="space-between" px="md">
+                <Text fw={500}>{t('header.navigation.categories')}</Text>
+                <Anchor href="/categories">{t('viewAll')}</Anchor>
+              </Group>
+
+              <Divider my="sm" mx="-md" color={'gray.1'} />
+
+              <Flex gap={'md'} wrap={'wrap'}>
+                {renderCategories}
+              </Flex>
+            </HoverCard.Dropdown>
+          </HoverCard>
+        </Group>
+
+        {/* Right Section - Add product button && Account Menu */}
+        <Group wrap="nowrap" style={{ display: matches ? 'flex' : 'none' }}>
+          <LanguageSelector />
+          {logged ? (
+            <AccountMenu logout={logout} />
+          ) : (
+            <>
+              <Button
+                variant="default"
+                onClick={() => router.replace('/account/login')}
+              >
+                {t('header.navigation.login')}
+              </Button>
+              <Button
+                variant="filled"
+                onClick={() => router.replace('/account/register')}
+              >
+                {t('header.navigation.createAccount')}
+              </Button>
+            </>
+          )}
+        </Group>
+
+        <Burger
+          opened={drawerOpened}
+          onClick={toggleDrawer}
+          style={{ display: matches ? 'none' : 'block' }}
+        />
+      </Group>
 
       {/* Mobile View */}
       <Drawer
@@ -402,59 +219,92 @@ export function HeaderSection() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        className={classes.hiddenDesktop}
-        zIndex={1000000}
       >
-        <Image alt={'logo'} src={'/logo.png'} width={200} />
+        <Group justify="space-between">
+          <Image alt={'logo'} src={'/logo.png'} w={200} />
+          <LanguageSelector />
+        </Group>
 
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
-          />
+        <Divider my="sm" />
 
-          <Anchor href="/" className={classes.link}>
-            Accueil
+        <Flex direction={'column'} gap={'sm'} pl={'lg'}>
+          <Anchor
+            href="/"
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            {t('header.navigation.homepage')}
           </Anchor>
-          <Anchor href="/products" className={classes.link}>
-            Produits
+          <Anchor
+            href="/products"
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+          >
+            {t('header.navigation.products')}
           </Anchor>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Catégories
-              </Box>
-              <IconChevronDown size={16} color={theme.fn.primaryColor()} />
-            </Center>
-          </UnstyledButton>
-          <Collapse in={linksOpened}>{renderCategories}</Collapse>
+          <Anchor href="/search" fw={500} fz={'sm'}>
+            {t('header.navigation.search')}
+            <IconSearch
+              style={{
+                transform: 'scaleX(-1)',
+                marginBottom: -3,
+                marginLeft: 4,
+              }}
+              size={18}
+            />
+          </Anchor>
+          <Anchor
+            fw={500}
+            fz={'sm'}
+            style={{
+              alignItems: 'center',
+              textDecoration: 'none',
+            }}
+            mr={5}
+            onClick={toggleLinks}
+          >
+            {t('header.navigation.categories')}
+            <IconChevronDown
+              size={16}
+              style={{ marginBottom: -3, marginLeft: 4 }}
+            />
+          </Anchor>
 
-          <Divider
-            my="sm"
-            color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
-          />
+          <Collapse in={linksOpened}>
+            <Flex gap={'md'} wrap={'wrap'}>
+              {renderCategories}
+            </Flex>
+          </Collapse>
+        </Flex>
 
-          <Group position="center" grow pb="xl" px="md">
-            {logged ? (
-              <>
-                <Button variant="light">Mon profil</Button>
-                <Button variant="default" onClick={logout}>
-                  {t('content:header.navigation.logout')}
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="default">
-                  {t('content:header.navigation.login')}
-                </Button>
-                <Button variant="filled">
-                  {t('content:header.navigation.register')}
-                </Button>
-              </>
-            )}
-          </Group>
-        </ScrollArea>
+        <Divider my="sm" color="gray.1" />
+
+        <Group justify="center" grow pb="xl" px="md">
+          {logged ? (
+            <>
+              <Button>{t('header.profileMenu.profile')}</Button>
+              <Button variant="outline" onClick={logout}>
+                {t('header.navigation.logout')}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="default">{t('header.navigation.login')}</Button>
+              <Button variant="filled">
+                {t('header.navigation.register')}
+              </Button>
+            </>
+          )}
+        </Group>
       </Drawer>
-    </Box>
+    </>
   );
 }

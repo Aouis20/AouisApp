@@ -1,25 +1,40 @@
-import { Badge, Button, Group, HoverCard, Paper } from '@mantine/core';
+import {
+  Badge,
+  Button,
+  Flex,
+  Group,
+  HoverCard,
+  Paper,
+  SegmentedControl,
+  Title,
+} from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   IconAdjustments,
   IconArticle,
   IconFilterOff,
+  IconLayoutColumns,
+  IconLayoutList,
   IconTag,
 } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
-import ConditionFilter from './ConditionFilter';
-import PriceFilter from './PriceFilter';
+import { ConditionFilter } from './ConditionFilter';
+import { PriceFilter } from './PriceFilter';
 
 type FiltersProps = {
   open: () => void;
+  setDisplay: Dispatch<SetStateAction<'column' | 'row'>>;
 };
 
-const Filters = ({ open }: FiltersProps) => {
+const Filters = ({ open, setDisplay }: FiltersProps) => {
   const totalItems = ProductStore.useState((s) => s.productList?.total_items);
-
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const filters = ProductStore.useState((s) => s.filters);
   const [initialFilters, setInitialFilters] = useState(filters);
+  const matches = useMediaQuery('(min-width: 1055px)');
+  const t = useTranslations();
 
   useEffect(() => {
     filters != initialFilters ? setIsModifying(true) : setIsModifying(false);
@@ -33,44 +48,65 @@ const Filters = ({ open }: FiltersProps) => {
 
   return (
     <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
-      <Group position="apart">
-        <Button
-          variant="light"
-          leftIcon={<IconFilterOff size={16} />}
-          disabled={!isModifying}
-          onClick={handleClearFilters}
-        >
-          Clear Filters
-        </Button>
+      <Flex direction={'column'} gap={'lg'} align={'center'}>
+        <Title>Others category</Title>
+        {/* TODO category name */}
 
-        <Group>
-          {/* Filters */}
-          <Button leftIcon={<IconAdjustments />} onClick={open}>
-            Filters
+        <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
+          {totalItems} {t('ads')}
+        </Badge>
+
+        <Group justify={matches ? 'space-between' : 'center'}>
+          <Button
+            variant="light"
+            leftSection={<IconFilterOff size={16} />}
+            disabled={!isModifying}
+            onClick={handleClearFilters}
+          >
+            {t('clearFilters')}
           </Button>
-          {/* Price Filter */}
-          <HoverCard withArrow arrowPosition="center" width={400}>
-            <HoverCard.Target>
-              <Button leftIcon={<IconTag />}>Price</Button>
-            </HoverCard.Target>
-            <HoverCard.Dropdown>
-              <PriceFilter />
-            </HoverCard.Dropdown>
-          </HoverCard>
 
-          {/* Condition Filter */}
-          <HoverCard withArrow arrowPosition="center" width={400}>
-            <HoverCard.Target>
-              <Button leftIcon={<IconArticle />}>Condition</Button>
-            </HoverCard.Target>
-            <HoverCard.Dropdown>
-              <ConditionFilter />
-            </HoverCard.Dropdown>
-          </HoverCard>
+          <Group justify="center">
+            {/* Filters */}
+            <Button leftSection={<IconAdjustments />} onClick={open}>
+              Filters
+            </Button>
+            {/* Price Filter */}
+            <HoverCard withArrow arrowPosition="center" width={400}>
+              <HoverCard.Target>
+                <Button leftSection={<IconTag />}>Price</Button>
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <PriceFilter />
+              </HoverCard.Dropdown>
+            </HoverCard>
+
+            {/* Condition Filter */}
+            <HoverCard withArrow arrowPosition="center" width={400}>
+              <HoverCard.Target>
+                <Button leftSection={<IconArticle />}>Condition</Button>
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <ConditionFilter />
+              </HoverCard.Dropdown>
+            </HoverCard>
+          </Group>
+
+          <SegmentedControl
+            onChange={(e) => setDisplay(e as 'column' | 'row')}
+            data={[
+              {
+                label: <IconLayoutList size={16} style={{ marginTop: 4 }} />,
+                value: 'column',
+              },
+              {
+                label: <IconLayoutColumns size={16} style={{ marginTop: 4 }} />,
+                value: 'row',
+              },
+            ]}
+          />
         </Group>
-
-        <Badge>{totalItems} annonces</Badge>
-      </Group>
+      </Flex>
     </Paper>
   );
 };

@@ -1,5 +1,5 @@
+import { LoginPayloadType } from '@/features/accounts/types/LoginPayloadType';
 import { RefreshUserAccessTokenResponseType } from '@/features/accounts/types/RefreshToken';
-import { LoginPayloadType } from '@/features/accounts/types/SignIn';
 import { User } from '@/features/accounts/types/User';
 import { KyInstance } from 'ky/distribution/types/ky';
 import { TokensType } from './tokens.helper';

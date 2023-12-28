@@ -1,0 +1,104 @@
+{
+  "termsOfService": {
+    "property": {
+      "title": "Intellectual Property",
+      "text": "The content of the Aouis website, including texts, images, videos, graphics, and other elements, is protected by intellectual property laws and copyrights. Any reproduction, distribution, modification, or unauthorized use of the content, in whole or in part, is strictly prohibited."
+    },
+    "datas": {
+      "title": "Personal Data",
+      "text": "The 'Aouis' website may collect and process certain personal data in accordance with its Privacy Policy. By using our site, you consent to the processing of your personal data in accordance with our Privacy Policy."
+    },
+    "externalLinks": {
+      "title": "External Links",
+      "text": "The 'Aouis' website may contain links to external websites. We are not responsible for the content or privacy policy of these external sites."
+    },
+    "responsibility": {
+      "title": "Responsibility",
+      "text": "We strive to keep the information on the 'Aouis' website up to date and accurate. However, we cannot guarantee the accuracy and completeness of the information provided on our site. By using our site, you agree that we are not responsible for errors, omissions, or inaccuracies in the information provided."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "If you have any questions regarding our Terms of Service or our website in general, feel free to contact us at",
+      "email": "aouiscontact@gmail.com"
+    }
+  },
+  "privacy": {
+    "introduction": "This Privacy Policy explains how the 'Aouis' website collects, uses, shares, and protects your personal data when you use our site. By visiting our site, you consent to the collection and use of your data in accordance with this policy.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "text": "We may collect various categories of personal data when you use our site, including your name, email address, IP address, and other relevant information. This data is collected when you fill out forms, subscribe to newsletters, make purchases, or interact with our site in any way."
+    },
+    "dataUses": {
+      "title": "Use of Data",
+      "text": "The collected personal data may be used for the following reasons:",
+      "item1": "Provide and manage our services.",
+      "item2": "Respond to your requests and questions.",
+      "item3": "Send you information, newsletters, and promotional offers.",
+      "item4": "Analyze and improve our site and services."
+    },
+    "sharing": {
+      "title": "Data Sharing",
+      "text": "We may share your personal data with third parties in the following circumstances:",
+      "item1": "When necessary to provide the services you have requested.",
+      "item2": "When you have given your consent for the sharing of your data.",
+      "item3": "When the law requires it or when we believe it is necessary to protect our rights, safety, or that of others."
+    },
+    "protection": {
+      "title": "Data Protection",
+      "text": "We take appropriate security measures to protect your personal data against unauthorized access, disclosure, alteration, or destruction."
+    },
+    "rights": {
+      "title": "Your Rights",
+      "text": "You have the right to access, correct, delete, and limit the use of your personal data. You can also withdraw your consent at any time. To exercise these rights or ask questions about our privacy policy, please contact us at",
+      "email": "aouiscontact@gmail.com"
+    },
+    "politicModifications": {
+      "title": "Policy Modifications",
+      "text": "We may update this Privacy Policy from time to time to reflect changes in our data collection and use practices. We encourage you to check this page regularly to stay informed of our most recent practices."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "text": "If you have any questions regarding our Privacy Policy or our website in general, feel free to contact us at the following address:",
+      "email": "aouiscontact@gmail.com"
+    }
+  },
+  "cookies": {
+    "introduction": "This Cookies Policy explains how the 'Aouis' website uses cookies and other similar technologies to enhance your browsing experience and provide you with personalized features. By visiting our website, you consent to the use of cookies in accordance with this policy.",
+    "definition": {
+        "title": "What is a Cookie?",
+        "text": "A cookie is a small text file that the website you visit saves on your computer or mobile device. It allows the site to remember your actions and preferences (such as login, language, font size, and other display preferences) over a period of time, so you don't have to enter them again when you return to the site or browse between pages."
+    },
+    "uses": {
+        "title": "Uses",
+        "text": "We use cookies for several reasons, including to:",
+        "item1": "Ensure the proper functioning of certain site features.",
+        "item2": "Enhance your browsing experience by personalizing content and ads.",
+        "item3": "Analyze how you use the site to better understand your preferences and improve our services."
+    },
+    "types": {
+        "title": "Types of Cookies We Use",
+        "type1": {
+            "span": "Session Cookies:",
+            "text": "These cookies are temporary and are deleted from your device once you close your browser. They are essential to ensure the proper functioning of certain features and to maintain your session active as you navigate our site."
+        },
+        "type2": {
+            "span": "Preference Cookies:",
+            "text": "These cookies allow the site to remember your preferences and choices, such as language and region, so you don't have to enter them every time you visit the site."
+        },
+        "type3": {
+            "span": "Analytics Cookies:",
+            "text": "These cookies collect information about how you use our site, such as the pages you visit most often or any error messages you might encounter. This data helps us improve our site and better meet your needs."
+        }
+    },
+    "management": {
+        "title": "How to Manage Cookies?",
+        "text1": "Most browsers automatically accept cookies, but you can usually change your browser settings to refuse cookies or alert you when cookies are sent to your device. Check your browser settings or online help for specific instructions on managing cookies.",
+        "text2": "Please note that refusing cookies may affect certain features of the site and limit your browsing experience."
+    },
+    "contact": {
+        "title": "Contact Us",
+        "text": "If you have any questions regarding our use of cookies or our Cookies Policy in general, feel free to contact us at",
+        "email": "aouiscontact@gmail.com"
+    }
+  }
+}

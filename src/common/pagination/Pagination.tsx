@@ -1,4 +1,4 @@
-import { Pagination } from '@mantine/core';
+import { Group, Pagination } from '@mantine/core';
 
 type PaginationProps = {
   page: number;
@@ -12,11 +12,8 @@ export const PaginationComponent = ({
   total,
 }: PaginationProps) => {
   return (
-    <Pagination
-      value={page}
-      onChange={setPage}
-      total={total}
-      position="center"
-    />
+    <Group justify="center">
+      <Pagination value={page} onChange={setPage} total={total} />
+    </Group>
   );
 };

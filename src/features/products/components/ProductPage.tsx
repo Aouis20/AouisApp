@@ -1,27 +1,26 @@
 import { Box, Divider, Drawer, Flex, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { ProductStore } from '../store';
-import ProductHeader from './ProductHeader';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { ProductList } from './ProductList';
 import Filters from './filters/Filters';
-import ProductList from './filters/ProductList';
 
 export const ProductPage = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const productList = ProductStore.useState((s) => s.productList);
-
-  // TODO filtres (voir la centrale)
-  // Footer avec code départemental + distance en km (demande l'autorisation à l'utilsateur de prendre sa position (useEffect au changement qui va réactualiser tous les produits) puis calcul)
-  // Button pour engager la discussion avec le propriétaire du product
-  // [OPTIONNEL] Chatbox si need help ?
+  const [display, setDisplay] = useState<'column' | 'row'>('column');
+  const t = useTranslations();
 
   return (
     <Flex direction={'column'} align={'center'} gap={'xl'}>
-      <ProductHeader />
-      <Filters open={open} />
-      <ProductList />
+      <Filters open={open} setDisplay={setDisplay} />
+      <ProductList display={display} />
 
       {/* Filters */}
-      <Drawer opened={opened} onClose={close} title={<Title>Filtres</Title>}>
+      <Drawer
+        opened={opened}
+        onClose={close}
+        title={<Title>{t('filters')}</Title>}
+      >
         <Divider my="sm" />
         {/* From current categories display it filters */}
         <Box></Box>
@@ -29,5 +28,3 @@ export const ProductPage = () => {
     </Flex>
   );
 };
-
-export default ProductPage;

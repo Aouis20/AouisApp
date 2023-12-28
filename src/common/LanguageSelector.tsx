@@ -4,12 +4,13 @@ import { setupPrivateApi } from '@/pages/api';
 import { Button, Menu } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { IconWorld } from '@tabler/icons-react';
-import i18next from 'i18next';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 import ReactCountryFlag from 'react-country-flag';
-import { useTranslation } from 'react-i18next';
 
-const LanguageSelector = () => {
-  const { t } = useTranslation('account');
+export const LanguageSelector = () => {
+  const t = useTranslations();
+  const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
   const languageDict: Record<string, JSX.Element> = {
     FR: <ReactCountryFlag countryCode="FR" svg />,
@@ -17,34 +18,37 @@ const LanguageSelector = () => {
   };
 
   const handleChangeLanguage = async (language: string) => {
-    if (!user) {
-      return;
-    }
     const api = setupPrivateApi();
 
     try {
-      const updatedUser = await updateUser(
-        user.id,
-        { language: language },
-        api
-      );
-      i18next.changeLanguage(language);
-      i18next.reloadResources();
-      AccountStore.update((s) => {
-        s.user = updatedUser;
-      });
+      if (user) {
+        const updatedUser = await updateUser(
+          user.id,
+          { language: language.toUpperCase() },
+          api
+        );
+        AccountStore.update((s) => {
+          s.user = updatedUser;
+        });
+      }
+      router.replace(router.asPath, router.asPath, { locale: language });
       showNotification({
         title: t('languageSelector.notifications.success.title'),
         message: t('languageSelector.notifications.success.message', {
-          language: t(`languageSelector.languages.${String(language)}`),
+          language: t(
+            `languageSelector.languages.${String(language).toLowerCase()}`
+          ),
         }),
         color: 'green',
       });
     } catch (err) {
+      console.log(err);
       showNotification({
         title: t('languageSelector.notifications.error.title'),
         message: t('languageSelector.notifications.error.message', {
-          language: t(`languageSelector.languages.${String(language)}`),
+          language: t(
+            `languageSelector.languages.${String(language).toLowerCase()}`
+          ),
         }),
         color: 'red',
       });
@@ -55,8 +59,8 @@ const LanguageSelector = () => {
     <Menu shadow="md" width={200}>
       <Menu.Target>
         <Button
-          variant="outline"
-          leftIcon={
+          variant="light"
+          leftSection={
             user?.language ? (
               languageDict[user.language]
             ) : (
@@ -71,14 +75,14 @@ const LanguageSelector = () => {
       <Menu.Dropdown>
         <Menu.Label>{t('languageSelector.label')}</Menu.Label>
         <Menu.Item
-          icon={<ReactCountryFlag countryCode="FR" svg />}
-          onClick={() => handleChangeLanguage('FR')}
+          leftSection={<ReactCountryFlag countryCode="FR" svg />}
+          onClick={() => handleChangeLanguage('fr')}
         >
           {t('languageSelector.languages.fr')}
         </Menu.Item>
         <Menu.Item
-          icon={<ReactCountryFlag countryCode="GB" svg />}
-          onClick={() => handleChangeLanguage('EN')}
+          leftSection={<ReactCountryFlag countryCode="GB" svg />}
+          onClick={() => handleChangeLanguage('en')}
         >
           {t('languageSelector.languages.en')}
         </Menu.Item>
@@ -86,5 +90,3 @@ const LanguageSelector = () => {
     </Menu>
   );
 };
-
-export default LanguageSelector;

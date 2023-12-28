@@ -10,7 +10,7 @@ type DisplayNameProps = {
 // Render username by preference
 // If a user is specified => other account
 // Else its the current user
-const DisplayName = (props: DisplayNameProps) => {
+export const DisplayName = (props: DisplayNameProps) => {
   let user;
   if (props.user) {
     user = props.user;
@@ -23,7 +23,19 @@ const DisplayName = (props: DisplayNameProps) => {
         ? user.username
         : _.upperFirst(user?.first_name) + ' ' + user?.last_name?.toUpperCase()
       : user?.email;
-  return <Text span>{name}</Text>;
+  return (
+    <Text
+      span
+      fz={'inherit'}
+      fw={'inherit'}
+      size={'inherit'}
+      c={'inherit'}
+      ta={'inherit'}
+      tt={'inherit'}
+      td={'inherit'}
+      fs={'inherit'}
+    >
+      {name}
+    </Text>
+  );
 };
-
-export default DisplayName;

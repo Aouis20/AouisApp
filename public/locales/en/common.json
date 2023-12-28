@@ -1,0 +1,129 @@
+{
+  "appName": "Aouis",
+  "myAccount": "My account",
+  "viewAll": "View all",
+  "buy": "Buy",
+  "sell": "Sell",
+  "exchange": "Exchange",
+  "yes": "Yes",
+  "no": "No",
+  "save": "Save",
+  "modify": "Modify",
+  "cancel": "Cancel",
+  "send": "Send",
+  "at": "at",
+  "back": "Back",
+  "noData": "No data available",
+  "delete": "Delete",
+  "comments": "Comments",
+  "price": "Price",
+  "search": "Search",
+  "filters": "Filters",
+  "clearFilters": "Clear Filters",
+  "ads": "ads",
+  "sendMessageTo": "Send a message to",
+  "termsOfServiceTitle": "Terms of Service",
+  "privacyTitle": "Privacy Policy",
+  "cookiesTitle": "Cookies",
+  "photos":"{count, plural, =0 {No photos} =1 {# photo} other {# photos}}",
+  "notifications": {
+    "notAuthorized": {
+      "title": "You are not authorized to access this page",
+      "message": "You are not authorized to access this page."
+    }
+  },
+  "languageSelector": {
+    "title": "Languages",
+    "label": "Select a language",
+    "languages": {
+      "fr": "French",
+      "en": "English"
+    },
+    "notifications": {
+      "success": {
+          "title": "Language change",
+          "message": "The language has been changed to {language}."
+        },
+      "error": {
+        "title": "Error changing language",
+        "message": "Error changing the language to {language}"
+      }
+    }
+  },
+  "favoris": {
+    "success": {
+      "like": {
+        "title": "Added to favorites!",
+        "message": "The listing has been added to favorites."
+      },
+      "unlike": {
+        "title": "Removed from favorites",
+        "message": "The listing has been removed from your favorites."
+      }
+    },
+    "error": {
+      "title": "Error",
+      "message": "Error updating your favorites."
+    }
+  },
+  "authentication": {
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "passwordConfirmation": "Confirm Password",
+      "orContinueWith": "OR CONTINUE WITH",
+      "byClicking": "By clicking, you agree to our",
+      "termsOfService": "Terms of Service",
+      "andOur": "and our",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "login": {
+      "pageTitle": "Log in to your account",
+      "text": "Please fill in the fields to log in.",
+      "form": {
+        "submit": "Log in",
+        "missingAccount": "Don't have an account? Create my account"
+      },
+      "notifications": {
+        "success": {
+          "title": "Login successful",
+          "message": "You are now logged in"
+        },
+        "error": {
+          "title": "Login failed",
+          "message": "Error during login"
+        }
+      }
+    },
+    "register": {
+      "pageTitle": "Create your account",
+      "text": "Please fill in the fields to register.",
+      "form": {
+        "submit": "Sign up",
+        "existingAccount": "Already have an account? Log in"
+      },
+      "notifications": {
+        "success": {
+          "title": "Registration successful",
+          "message": "You are now registered"
+        },
+        "error": {
+          "title": "Registration failed",
+          "message": "Error during registration"
+        }
+      }
+    },
+    "logout": {
+      "notifications": {
+        "success": {
+          "title": "Logout successful",
+          "message": "You are now logged out"
+        },
+        "error": {
+          "title": "Logout failed",
+          "message": "Error during logout"
+        }
+      }
+    }
+  }
+}

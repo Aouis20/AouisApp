@@ -17,10 +17,114 @@
   "noData": "Aucune donnée disponible",
   "delete": "Supprimer",
   "comments": "Commentaires",
+  "price": "Prix",
+  "search": "Rechercher",
+  "filters": "Filtres",
+  "clearFilters": "Supprimer les filtres",
+  "ads": "annonces",
+  "sendMessageTo": "Envoyer un message à",
+  "termsOfServiceTitle": "Mentions Légales",
+  "privacyTitle": "Politique de confidentialité",
+  "cookiesTitle": "Cookies",
+  "photos":"{count, plural, =0 {Aucune photos} =1 {# photo} other {# photos}}",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",
       "message": "Vous n'êtes pas autorisé à accéder à cette page."
+    }
+  },
+  "languageSelector": {
+    "title": "Langues",
+    "label": "Séléctionnez une langue",
+    "languages": {
+      "fr": "Français",
+      "en": "Anglais"
+    },
+    "notifications": {
+      "success": {
+          "title": "Changement de langue",
+          "message": "La langue a été changé en {language}."
+        },
+      "error": {
+        "title": "Erreur au changement de langue",
+        "message": "Erreur lors du changement de la langue en {language}"
+      }
+    }
+  },
+  "favoris": {
+    "success": {
+      "like": {
+        "title": "Ajouté au favoris !",
+        "message": "L'annonce a été ajouté au favoris."
+      },
+      "unlike": {
+        "title": "Supprimé des favoris",
+        "message": "L'annonce a été supprimer de vos favoris."
+      }
+    },
+    "error": {
+      "title": "Erreur",
+      "message": "Erreur lors de la mise à jour de vos favoris."
+    }
+  },
+  "authentication": {
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "passwordConfirmation": "Confirmer le mot de passe",
+      "orContinueWith": "SINON CONTINUER AVEC",
+      "byClicking": "En cliquant, vous acceptez nos",
+      "termsOfService": "conditions de service",
+      "andOur": "et notre",
+      "privacyPolicy": "politique de confidentialité"
+    },
+    "login" : {
+      "pageTitle": "Connectez-vous à votre compte",
+      "text": "Veuillez remplir les champs afin de vous connecter.",
+      "form": {
+        "submit": "Se connecter",
+        "missingAccount": "Vous n'avez pas de compte ? Créer mon compte"
+      },
+      "notifications": {
+        "success": {
+          "title": "Connexion réussie",
+          "message": "Vous êtes maintenant connecté"
+        },
+        "error": {
+          "title": "Connexion échouée",
+          "message": "Erreur lors de la connexion"
+        }
+      }
+    },
+    "register": {
+      "pageTitle": "Créer votre compte",
+      "text": "Veuillez remplir les champs afin de vous connecter.",
+      "form": {
+        "submit": "S'inscrire",
+        "existingAccount": "Vous avez déjà un compte ? Se connecter"
+      },
+      "notifications": {
+        "success": {
+          "title": "Inscription réussie",
+          "message": "Vous êtes maintenant inscrit"
+        },
+        "error": {
+          "title": "Inscription échouée",
+          "message": "Erreur lors de l'inscription"
+        }
+      }
+    },
+    "logout" : {
+      "notifications": {
+        "success": {
+          "title": "Déconnexion réussie",
+          "message": "Vous êtes maintenant déconnecté"
+        },
+        "error": {
+          "title": "Déconnexion échouée",
+          "message": "Erreur lors de la déconnexion"
+        }
+      }
     }
   }
 }

@@ -8,7 +8,8 @@
         "Users",
         "Products",
         "Search",
-        "UI / UX"
+        "UI / UX",
+        "Translations"
     ],
     "css.customData": [".vscode/tailwind.json"],
 }

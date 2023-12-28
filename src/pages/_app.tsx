@@ -1,39 +1,39 @@
-import { AppProps } from "next/app";
-import Head from "next/head";
-import { MantineProvider, createEmotionCache } from "@mantine/core";
-import "../i18n";
-import '../styles/globals.css'
-import theme from "../theme";
-import { Notifications } from "@mantine/notifications";
+import theme from '@/theme';
+import { MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
+import { NextIntlClientProvider } from 'next-intl';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import 'tailwindcss/tailwind.css';
+import '@mantine/dropzone/styles.css';
+import '@mantine/carousel/styles.css';
 
-
-export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
-  const emotionCache = createEmotionCache({
-    key: 'mantine',
-    prepend: false
-  });
+export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
 
   return (
     <>
       <Head>
-        <title>Page title</title>
+        <title>Aouis</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={theme}
-        emotionCache={emotionCache}
+      <NextIntlClientProvider
+        locale={router.locale}
+        timeZone="Europe/Paris"
+        messages={pageProps.messages}
       >
-        <Notifications />
-        <Component {...pageProps} />
-      </MantineProvider>
+        <MantineProvider theme={theme}>
+          <Notifications />
+          <Component {...pageProps} />
+        </MantineProvider>
+      </NextIntlClientProvider>
     </>
   );
 }
-

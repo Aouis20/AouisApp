@@ -1,3 +1,4 @@
+import { FileWithPath } from "@mantine/dropzone";
 import { ConditionType, PaymentType } from "./Product";
 
 export enum CreateStatusType {
@@ -7,14 +8,14 @@ export enum CreateStatusType {
 }
 
 export type CreateProductFormType = {
-    isService: boolean;
-    images?: any,
-    title: string,
-    description?: string,
-    price: number,
-    category?: string,
-    payment_type: PaymentType,
-    condition?: ConditionType,
-    status?: CreateStatusType,
-    visibility: boolean
+  is_service: boolean;
+  images: FileWithPath[],
+  title: string,
+  description: string | null,
+  price: number | string,
+  category?: string | number,
+  payment_type: PaymentType,
+  condition?: ConditionType,
+  status: CreateStatusType,
+  visibility: boolean
 }

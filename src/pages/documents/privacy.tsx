@@ -9,11 +9,11 @@ import {
   Title,
 } from '@mantine/core';
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import router from 'next/router';
-import { useTranslation } from 'react-i18next';
 
-export default function Privacy() {
-  const { t } = useTranslation('documents');
+export const Privacy = () => {
+  const t = useTranslations();
   return (
     <Box>
       <Container size={'xl'} my={'xl'}>
@@ -21,11 +21,11 @@ export default function Privacy() {
           onClick={() => router.back()}
           my={'xl'}
           variant="default"
-          leftIcon={<IconArrowNarrowLeft />}
+          leftSection={<IconArrowNarrowLeft />}
         >
-          {t('common:back')}
+          {t('back')}
         </Button>
-        <Flex direction={'column'} gap={'md'}>
+        <Flex direction={'column'} gap={64}>
           <Title>{t('privacy.title')}</Title>
 
           {/* Introduction */}
@@ -99,4 +99,4 @@ export default function Privacy() {
       </Container>
     </Box>
   );
-}
+};

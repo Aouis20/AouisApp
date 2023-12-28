@@ -1,21 +1,25 @@
+import { AccountStore } from '@/features/accounts/store';
 import { Product } from '@/features/products/types/Product';
-import { Box, Button, Dialog, Group, Textarea, Title } from '@mantine/core';
+import { Box, Button, Dialog, Textarea, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconMessageCircle2 } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import DisplayName from './DisplayName';
+import { DisplayName } from './DisplayName';
 
 type MessageProps = {
   product: Product;
 };
 
-const DirectMessage = ({ product }: MessageProps) => {
+export const DirectMessage = ({ product }: MessageProps) => {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const t = useTranslations();
   const [message, setMessage] = useState<string>(
-    `Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?`
+    'Bonjour, je suis intéressé par votre annonce, est-elle toujours disponible ?'
   );
+  const user = AccountStore.useState((s) => s.user);
 
-  // TODO Connection required
+  if (!user) return <></>;
 
   const handleSubmit = () => {
     console.log('to send');
@@ -23,11 +27,9 @@ const DirectMessage = ({ product }: MessageProps) => {
 
   return (
     <Box onClick={(e) => e.stopPropagation()}>
-      <Group position="center">
-        <Button variant="subtle" radius="md" onClick={(e) => toggle()}>
-          <IconMessageCircle2 size={22} />
-        </Button>
-      </Group>
+      <Button variant="subtle" radius="md" onClick={() => toggle()} p={6}>
+        <IconMessageCircle2 size={22} />
+      </Button>
 
       <Dialog
         opened={opened}
@@ -36,8 +38,9 @@ const DirectMessage = ({ product }: MessageProps) => {
         size="lg"
         radius="md"
       >
-        <Title size="sm" mb="xs" weight={500}>
-          Envoyer un message à <DisplayName user={product.owner} />
+        <Title size="sm" mb="xs" fw={500}>
+          {t('sendMessageTo')}
+          <DisplayName user={product.owner} />
         </Title>
 
         <Textarea
@@ -55,11 +58,9 @@ const DirectMessage = ({ product }: MessageProps) => {
             close();
           }}
         >
-          Envoyer
+          {t('send')}
         </Button>
       </Dialog>
     </Box>
   );
 };
-
-export default DirectMessage;

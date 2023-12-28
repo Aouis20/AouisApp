@@ -1,40 +1,15 @@
 import { UnAuthenticatedAppLayout } from '@/common/UnAuthenticatedAppLayout';
 import RegisterPage from '@/features/authentication/components/RegisterPage';
-import { createStyles } from '@mantine/core';
+import { useTranslations } from 'next-intl';
 import Head from 'next/head';
-import { useTranslation } from 'react-i18next';
-
-const useStyles = createStyles((theme) => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: theme.colors.gray[0],
-    height: '100vh',
-  },
-  logoSection: {
-    padding: theme.spacing.sm,
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  logoContainer: {
-    height: '200px',
-  },
-}));
 
 const Register = () => {
-  const { t } = useTranslation();
-  const { classes } = useStyles();
-
-  // TODO améliorer avec shadcn/ui authentication : https://ui.shadcn.com/examples/authentication
+  const t = useTranslations();
 
   return (
     <UnAuthenticatedAppLayout>
       <Head>
-        <title>{`${t('appName')} - ${t(
-          'content:header.navigation.register'
-        )}`}</title>
+        <title>{`${t('appName')} - ${t('header.navigation.register')}`}</title>
         <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - Register" />
       </Head>
@@ -45,3 +20,16 @@ const Register = () => {
 };
 
 export default Register;
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`public/locales/${context.locale}/common.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/content.json`))
+          .default,
+      },
+    },
+  };
+}
