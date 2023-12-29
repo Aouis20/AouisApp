@@ -59,6 +59,10 @@
     "searchpage": {
         "showAdvancedSettings": "Afficher les réglages avancées",
         "hideAdvancedSettings": "Masquer les réglages avancées",
+        "results": {
+            "backToSearch": "Retourner à la recherche",
+            "seeSomeAds": "Découvrir des annonces"
+        },
         "inputs": {
             "minPrice": "Prix min.",
             "maxPrice": "Prix max.",

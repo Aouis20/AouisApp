@@ -14,7 +14,7 @@ export const AdsTab = () => {
     <Container size={'2xl'}>
       <Title order={2}>Mes annonces</Title>
       <Text>Retrouvez ici toutes vos annonces</Text>
-      <ProductList />
+      <ProductList user_id={user.id} />
     </Container>
   );
 };

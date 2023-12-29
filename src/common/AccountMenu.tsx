@@ -45,7 +45,7 @@ export const AccountMenu = ({ logout }: AccountMenuProps) => {
           leftSection={<IconArrowsExchange size={14} />}
           onClick={() => router.push('/profile/historic')}
         >
-          {t('header.profileMenu.transactions')}
+          {t('header.profileMenu.historic')}
         </Menu.Item>
         <Menu.Item
           leftSection={<IconHeart size={14} />}

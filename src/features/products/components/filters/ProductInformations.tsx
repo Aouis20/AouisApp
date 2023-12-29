@@ -6,7 +6,6 @@ import {
   HoverCard,
   Paper,
   SegmentedControl,
-  Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import {
@@ -23,12 +22,15 @@ import { ProductStore } from '../../store';
 import { ConditionFilter } from './ConditionFilter';
 import { PriceFilter } from './PriceFilter';
 
-type FiltersProps = {
+type ProductInformationProps = {
   open: () => void;
   setDisplay: Dispatch<SetStateAction<'column' | 'row'>>;
 };
 
-const Filters = ({ open, setDisplay }: FiltersProps) => {
+export const ProductInformation = ({
+  open,
+  setDisplay,
+}: ProductInformationProps) => {
   const totalItems = ProductStore.useState((s) => s.productList?.total_items);
   const [isModifying, setIsModifying] = useState<boolean>(false);
   const filters = ProductStore.useState((s) => s.filters);
@@ -49,11 +51,8 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
   return (
     <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
       <Flex direction={'column'} gap={'lg'} align={'center'}>
-        <Title>Others category</Title>
-        {/* TODO category name */}
-
         <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
-          {totalItems} {t('ads')}
+          {t('ads', { count: totalItems })}
         </Badge>
 
         <Group justify={matches ? 'space-between' : 'center'}>
@@ -110,5 +109,3 @@ const Filters = ({ open, setDisplay }: FiltersProps) => {
     </Paper>
   );
 };
-
-export default Filters;

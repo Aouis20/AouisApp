@@ -1,11 +1,12 @@
 import { PaginationComponent } from '@/common/pagination/Pagination';
 import { getProducts } from '@/features/products/api';
 import { setupPrivateApi } from '@/pages/api';
-import { Box, Flex, Loader, Text } from '@mantine/core';
+import { Box, Flex, Text } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { ProductStore } from '../store';
 import { ProductCard } from './ProductCard';
+import { SkeletonLoadingCard } from '@/features/search/components/SkeletonLoadingCard';
 
 type ProductListProps = {
   display?: 'column' | 'row';
@@ -54,7 +55,7 @@ export const ProductList = ({
         total={productList.total_pages}
       />
       {isLoading ? (
-        <Loader />
+        <SkeletonLoadingCard />
       ) : (
         <Flex
           direction={display}

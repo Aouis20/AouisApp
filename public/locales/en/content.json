@@ -59,6 +59,10 @@
     "searchpage": {
         "showAdvancedSettings": "Show advanced settings",
         "hideAdvancedSettings": "Hide advanced settings",
+        "results": {
+            "backToSearch": "Back to search page",
+            "seeSomeAds": "Discover some ads"
+        },
         "inputs": {
             "minPrice": "Min Price",
             "maxPrice": "Max Price",
