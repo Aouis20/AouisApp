@@ -29,6 +29,6 @@
     ],
     "types": ["react", "react-dom"],
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/features/products/variables/Conditions.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/features/products/variables/Conditions.js", "jest.setup.js", "__tests__/index.test.tsx"],
   "exclude": ["node_modules"]
 }
