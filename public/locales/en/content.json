@@ -1,60 +1,60 @@
 {
     "contact": {
-      "title": "Contact Us",
-      "text": "To contact us, please send an email to the following address:",
-      "email": "aouiscontact@gmail.com",
-      "text2": "We will process your request as soon as possible."
+        "title": "Contact Us",
+        "text": "To contact us, please send an email to the following address:",
+        "email": "aouiscontact@gmail.com",
+        "text2": "We will process your request as soon as possible."
     },
     "header": {
-      "navigation": {
-          "addAd": "Post an Ad",
-          "homepage": "Home",
-          "products" : "Ads",
-          "search" : "Search",
-          "results": "Results",
-          "users": "Users",
-          "categories": "Categories",
-          "customerService": "Customer Service",
-          "createAccount": "Create My Account",
-          "register": "Register",
-          "login": "Login",
-          "logout": "Logout"
-      },
-      "profileMenu": {
-          "profile": "Profile",
-          "myAds": "My Ads",
-          "transactions": "Transactions",
-          "favorites": "Favorites",
-          "news": "News",
-          "messages": "Messages",
-          "notifications": "Notifications",
-          "settings": "Settings"
-      }
+        "navigation": {
+            "addAd": "Post an Ad",
+            "homepage": "Home",
+            "products": "Ads",
+            "search": "Search",
+            "results": "Results",
+            "users": "Users",
+            "categories": "Categories",
+            "customerService": "Customer Service",
+            "createAccount": "Create My Account",
+            "register": "Register",
+            "login": "Login",
+            "logout": "Logout"
+        },
+        "profileMenu": {
+            "profile": "Profile",
+            "myAds": "My Ads",
+            "historic": "Historic",
+            "favorites": "Favorites",
+            "news": "News",
+            "messages": "Messages",
+            "notifications": "Notifications",
+            "settings": "Settings"
+        }
     },
     "addAd": {
-      "title": "Post an Ad",
-      "text": "Create an ad here, you can modify it later.",
-      "form": {
-          "type": "Ad Type",
-          "dropzone": {
-              "placeholder": "Click to select photos.",
-              "tips": "Photos should not exceed 10MB each."
-          },
-          "categories": "Categories",
-          "title": "Title",
-          "description": "Description",
-          "price": "Price",
-          "priceMethod": "Payment Method",
-          "condition": "Condition",
-          "status": "Status",
-          "visibility": "Visibility",
-          "visibilityTooltip": "You can decide if your ad is visible to everyone or not.",
-          "submit": "Create Ad",
-          "error": {
-              "title": "The title must be at least 2 characters long",
-              "price": "The minimum acceptable price is €0.01"
-          }
-      }
+        "title": "Post an Ad",
+        "text": "Create an ad here, you can modify it later.",
+        "form": {
+            "type": "Ad Type",
+            "dropzone": {
+                "placeholder": "Click to select photos.",
+                "tips": "Photos should not exceed 10MB each."
+            },
+            "categories": "Categories",
+            "title": "Title",
+            "description": "Description",
+            "price": "Price",
+            "priceMethod": "Payment Method",
+            "condition": "Condition",
+            "status": "Status",
+            "visibility": "Visibility",
+            "visibilityTooltip": "You can decide if your ad is visible to everyone or not.",
+            "submit": "Create Ad",
+            "error": {
+                "title": "The title must be at least 2 characters long",
+                "price": "The minimum acceptable price is €0.01"
+            }
+        }
     },
     "searchpage": {
         "showAdvancedSettings": "Show advanced settings",
@@ -76,93 +76,92 @@
                 "message": "An error occurred while searching"
             }
         }
-    },    
+    },
     "homepage": {
-      "intro": {
-          "buy": {
-              "button": "I'm buying!",
-              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-          },
-          "sell": {
-              "button":"I'm selling!",
-              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-          },
-          "exchange": {
-              "button": "I'm exchanging!",
-              "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
-          }
-      },
-      "p1": {
-          "title": "What is Aouis?",
-          "text": "Aouis is an online platform that allows users to buy and sell a wide variety of products and services, such as used cars, furniture, clothing, jobs, and even real estate rentals."
-      },
-      "p2": {
-          "title": "How does it work?",
-          "text": "It functions like a classified ads marketplace where users can post their ads for free, interact with buyers or sellers through messages, and conclude transactions in person or online."
-      },
-      "p3": {
-          "title": "FAQ",
-          "q1": {
-              "question": "How to buy or sell a product?",
-              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-          },
-          "q2": {
-              "question": "What are the payment methods?",
-              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-          },
-          "q3": {
-              "question": "Lost or stolen package? What to do?",
-              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-          },
-          "q4": {
-              "question": "Is it secure?",
-              "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
-          }
-      }
+        "intro": {
+            "buy": {
+                "button": "I'm buying!",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+            },
+            "sell": {
+                "button": "I'm selling!",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+            },
+            "exchange": {
+                "button": "I'm exchanging!",
+                "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus sint facilis voluptas praesentium ratione sed. Temporibus at animi explicabo quia ducimus nam laudantium officiis ipsum, voluptatum nesciunt soluta, a in."
+            }
+        },
+        "p1": {
+            "title": "What is Aouis?",
+            "text": "Aouis is an online platform that allows users to buy and sell a wide variety of products and services, such as used cars, furniture, clothing, jobs, and even real estate rentals."
+        },
+        "p2": {
+            "title": "How does it work?",
+            "text": "It functions like a classified ads marketplace where users can post their ads for free, interact with buyers or sellers through messages, and conclude transactions in person or online."
+        },
+        "p3": {
+            "title": "FAQ",
+            "q1": {
+                "question": "How to buy or sell a product?",
+                "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+            },
+            "q2": {
+                "question": "What are the payment methods?",
+                "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+            },
+            "q3": {
+                "question": "Lost or stolen package? What to do?",
+                "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+            },
+            "q4": {
+                "question": "Is it secure?",
+                "response": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum nobis iure dolorem harum deleniti necessitatibus, veritatis consequuntur doloremque ipsum perspiciatis facilis molestias nulla ratione consequatur sit eius maxime? Quas, reprehenderit?"
+            }
+        }
     },
     "product": {
-      "paymentTypesFormat": {
-          "UNIQ": "€",
-          "WEEKLY": "€/week",
-          "MONTHLY": "€/month",
-          "YEARLY": "€/year"
-      },
-      "paymentTypes": {
-          "UNIQ": "Permanent",
-          "WEEKLY": "Weekly",
-          "MONTHLY": "Monthly",
-          "YEARLY": "Yearly"
-      },
-      "conditionTypes": {
-          "MINT": "New",
-          "EXCELLENT": "Excellent",
-          "GOOD": "Good",
-          "FAIR": "Fair",
-          "POOR": "Poor"
-      },
-      "statusTypes": {
-          "SOLD": "Sold",
-          "FOR_SALE": "For Sale",
-          "EXCHANGED": "Exchanged",
-          "TO_EXCHANGE": "To Exchange",
-          "REFUNDED": "Refunded",
-          "PENDING_REFUND": "Pending Refund",
-          "RESERVED": "Reserved",
-          "PENDING_PAYMENT": "Pending Payment",
-          "NEGOTIATING": "Negotiating"
-      },
-      "create": {
-          "notifications": {
-              "success": {
-                  "title": "Product created!",
-                  "message": "Your product has been successfully added!"
-              },
-              "error": {
-                  "title": "Error",
-                  "message": "An error occurred while creating your product"
-              }
-          }
-      }
+        "paymentTypesFormat": {
+            "UNIQ": "€",
+            "WEEKLY": "€/week",
+            "MONTHLY": "€/month",
+            "YEARLY": "€/year"
+        },
+        "paymentTypes": {
+            "UNIQ": "Permanent",
+            "WEEKLY": "Weekly",
+            "MONTHLY": "Monthly",
+            "YEARLY": "Yearly"
+        },
+        "conditionTypes": {
+            "MINT": "New",
+            "EXCELLENT": "Excellent",
+            "GOOD": "Good",
+            "FAIR": "Fair",
+            "POOR": "Poor"
+        },
+        "statusTypes": {
+            "SOLD": "Sold",
+            "FOR_SALE": "For Sale",
+            "EXCHANGED": "Exchanged",
+            "TO_EXCHANGE": "To Exchange",
+            "REFUNDED": "Refunded",
+            "PENDING_REFUND": "Pending Refund",
+            "RESERVED": "Reserved",
+            "PENDING_PAYMENT": "Pending Payment",
+            "NEGOTIATING": "Negotiating"
+        },
+        "create": {
+            "notifications": {
+                "success": {
+                    "title": "Product created!",
+                    "message": "Your product has been successfully added!"
+                },
+                "error": {
+                    "title": "Error",
+                    "message": "An error occurred while creating your product"
+                }
+            }
+        }
     }
-  }
-  
+}

@@ -1,0 +1,21 @@
+{
+    "profile": {
+        "description": "Bienvenue sur votre profil, retrouvez ici, toutes les informations vous concernant."
+    },
+    "me": {
+        "title": "Mon compte",
+        "description": "Retrouvez ici, vos informations confidentielles.",
+        "form": {
+            "civility": "Civilité",
+            "nickname": "Pseudo",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "phone": "Téléphone",
+            "address1": "Adresse",
+            "address2": "Complément d'adresse",
+            "city": "Ville",
+            "state": "Région",
+            "zipCode": "Code postal"
+        }
+    }
+}

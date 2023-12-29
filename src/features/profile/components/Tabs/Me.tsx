@@ -3,13 +3,10 @@ import { AccountStore } from '@/features/accounts/store';
 import { SalutationType, User } from '@/features/accounts/types/User';
 import { setupPrivateApi } from '@/pages/api';
 import {
-  AspectRatio,
-  Box,
   Button,
   Container,
   Flex,
   Group,
-  Image,
   InputBase,
   Select,
   Text,
@@ -103,119 +100,107 @@ export const MeTab = () => {
 
   return (
     <Container size={'2xl'}>
-      <Title order={2}>Mon compte</Title>
-      <Text>Retrouvez ici, vos informations confidentielles.</Text>
+      <Title order={2}>{t('me.title')}</Title>
+      <Text>{t('me.description')}</Text>
 
       {/* User Form */}
       <form>
         <Group align="start" mt={'md'}>
-          <Box w={300} style={{ alignSelf: 'start' }} mt={'sm'} mr={30} mb={32}>
-            <AspectRatio ratio={4 / 3} maw={300}>
-              <Image
-                style={{ borderRadius: 8 }}
-                src="https://images.unsplash.com/photo-1527118732049-c88155f2107c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80"
-                alt="Panda"
-              />
-            </AspectRatio>
-          </Box>
+          {/* Civil */}
+          <Flex direction={'column'} gap={'xl'} mb={32}>
+            <Select
+              label={t('me.form.civility')}
+              placeholder="M."
+              data={Object.entries(Salutation).map(([value, label]) => ({
+                value: value,
+                label: label,
+              }))}
+              {...userForm.getInputProps('salutation')}
+            />
+            <TextInput
+              label={t('me.form.nickname')}
+              placeholder={t('me.form.nickname')}
+              {...userForm.getInputProps('username')}
+            />
+            <TextInput
+              label={t('me.form.firstName')}
+              placeholder={t('me.form.firstName')}
+              {...userForm.getInputProps('first_name')}
+            />
+            <TextInput
+              label={t('me.form.lastName')}
+              placeholder={t('me.form.lastName')}
+              {...userForm.getInputProps('last_name')}
+            />
+          </Flex>
 
-          <Group align="start">
-            {/* Civil */}
-            <Flex direction={'column'} gap={'xl'} mb={32}>
-              <Select
-                label="Civilité"
-                placeholder="M."
-                data={Object.entries(Salutation).map(([value, label]) => ({
-                  value: value,
-                  label: label,
-                }))}
-                {...userForm.getInputProps('salutation')}
-              />
-              <TextInput
-                label="Username"
-                placeholder="Username"
-                {...userForm.getInputProps('username')}
-              />
-              <TextInput
-                label="First name"
-                placeholder="First name"
-                {...userForm.getInputProps('first_name')}
-              />
-              <TextInput
-                label="Last name"
-                placeholder="Last name"
-                {...userForm.getInputProps('last_name')}
-              />
-            </Flex>
+          {/* Contact  */}
+          <Flex direction={'column'} gap={'xl'} mb={32}>
+            <TextInput
+              label="Email"
+              placeholder="Email"
+              {...userForm.getInputProps('email')}
+            />
+            <InputBase
+              label={t('me.form.phone')}
+              placeholder={t('me.form.phone')}
+              component={IMaskInput}
+              mask="+33 0 00 00 00 00"
+              {...userForm.getInputProps('phone_number')}
+            />
+          </Flex>
 
-            {/* Contact  */}
-            <Flex direction={'column'} gap={'xl'} mb={32}>
-              <TextInput
-                label="Email"
-                placeholder="Email"
-                {...userForm.getInputProps('email')}
-              />
-              <InputBase
-                label="Phone"
-                placeholder="Phone number"
-                component={IMaskInput}
-                mask="+33 0 00 00 00 00"
-                {...userForm.getInputProps('phone_number')}
-              />
-            </Flex>
+          {/* Address */}
+          <Flex direction={'column'} gap={'xl'}>
+            <TextInput
+              label={t('me.form.address1')}
+              placeholder={t('me.form.address1')}
+              {...userForm.getInputProps('address_line1')}
+            />
+            <TextInput
+              label={t('me.form.address2')}
+              placeholder={t('me.form.address2')}
+              {...userForm.getInputProps('address_line2')}
+            />
+            <TextInput
+              label={t('me.form.city')}
+              placeholder={t('me.form.city')}
+              {...userForm.getInputProps('city')}
+            />
+            <TextInput
+              label={t('me.form.state')}
+              placeholder={t('me.form.state')}
+              {...userForm.getInputProps('state')}
+            />
+            <TextInput
+              label={t('me.form.zipCode')}
+              placeholder={t('me.form.zipCode')}
+              {...userForm.getInputProps('postal_code')}
+            />
+          </Flex>
 
-            {/* Address */}
-            <Flex direction={'column'} gap={'xl'}>
-              <TextInput
-                label="Address"
-                placeholder="Your address line 1"
-                {...userForm.getInputProps('address_line1')}
-              />
-              <TextInput
-                label="Address 2"
-                placeholder="Your address line 2"
-                {...userForm.getInputProps('address_line2')}
-              />
-              <TextInput
-                label="City"
-                placeholder="City"
-                {...userForm.getInputProps('city')}
-              />
-              <TextInput
-                label="State"
-                placeholder="State"
-                {...userForm.getInputProps('state')}
-              />
-              <TextInput
-                label="Postal Code"
-                placeholder="Postal Code"
-                {...userForm.getInputProps('postal_code')}
-              />
-            </Flex>
-
-            {/* Buttons */}
-            {/* isDirty: compare form values and initial form values */}
-            {userForm.isDirty() && (
-              <Group
-                gap={'xl'}
-                mt={'xl'}
-                w={300}
-                style={{ justifyContent: 'end' }}
+          {/* Buttons */}
+          {/* isDirty: compare form values and initial form values */}
+          {userForm.isDirty() && (
+            <Group
+              gap={'xl'}
+              mt={'xl'}
+              w={300}
+              style={{ justifyContent: 'end' }}
+            >
+              <Button
+                disabled={isLoading}
+                variant="outline"
+                onClick={handleCancel}
+                size="md"
               >
-                <Button
-                  disabled={isLoading}
-                  variant="outline"
-                  onClick={handleCancel}
-                  size="md"
-                >
-                  Cancel
-                </Button>
-                <Button disabled={isLoading} onClick={handleSubmit} size="md">
-                  Save
-                </Button>
-              </Group>
-            )}
-          </Group>
+                {t('cancel')}
+              </Button>
+              <Button disabled={isLoading} onClick={handleSubmit} size="md">
+                {t('save')}
+              </Button>
+            </Group>
+          )}
         </Group>
       </form>
     </Container>

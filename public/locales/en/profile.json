@@ -1,0 +1,21 @@
+{
+    "profile": {
+        "description": "Welcome to your profile. Here you will find all the information about you."
+    },
+    "me": {
+        "title": "My account",
+        "description": "Here you'll find all your confidential information.",
+        "form": {
+            "civility": "Civility",
+            "nickname": "Nickname",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "phone": "Phone number",
+            "address1": "Address line 1",
+            "address2": "Address line 2",
+            "city": "City",
+            "state": "State",
+            "zipCode": "Zip code"
+        }
+    }
+}
