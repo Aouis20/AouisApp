@@ -26,7 +26,7 @@ const Cookies = () => {
           {t('back')}
         </Button>
         <Flex direction={'column'} gap={64}>
-          <Title>{t('cookies.title')}</Title>
+          <Title>{t('cookiesTitle')}</Title>
 
           {/* Introduction */}
           <Text>{t('cookies.introduction')}</Text>
@@ -101,3 +101,17 @@ const Cookies = () => {
   );
 };
 
+export default Cookies;
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`public/locales/${context.locale}/common.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/documents.json`))
+          .default,
+      },
+    },
+  };
+}

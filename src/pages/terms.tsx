@@ -11,7 +11,7 @@ import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-export const Terms = () => {
+const Terms = () => {
   const t = useTranslations();
 
   return (
@@ -26,7 +26,7 @@ export const Terms = () => {
           {t('back')}
         </Button>
         <Flex direction={'column'} gap={64}>
-          <Title>{t('termsOfService.title')}</Title>
+          <Title>{t('termsOfServiceTitle')}</Title>
 
           {/* Property */}
           <Box>
@@ -68,3 +68,18 @@ export const Terms = () => {
     </Box>
   );
 };
+
+export default Terms;
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`public/locales/${context.locale}/common.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/documents.json`))
+          .default,
+      },
+    },
+  };
+}

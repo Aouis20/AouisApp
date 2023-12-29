@@ -21,13 +21,13 @@ export const FooterSection = () => {
         w={150}
       />
       <Group c="gray" py={'md'}>
-        <Anchor href="/documents/terms" c={'gray'} p={'sm'}>
+        <Anchor href="/terms" c={'gray'} p={'sm'}>
           {t('termsOfServiceTitle')}
         </Anchor>
-        <Anchor href="/documents/privacy" c={'gray'} p={'sm'}>
+        <Anchor href="/privacy" c={'gray'} p={'sm'}>
           {t('privacyTitle')}
         </Anchor>
-        <Anchor href="/documents/cookies" c={'gray'} p={'sm'}>
+        <Anchor href="/cookies" c={'gray'} p={'sm'}>
           {t('cookiesTitle')}
         </Anchor>
       </Group>

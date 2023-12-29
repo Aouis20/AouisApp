@@ -12,7 +12,7 @@ import { IconArrowNarrowLeft } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import router from 'next/router';
 
-export const Privacy = () => {
+const Privacy = () => {
   const t = useTranslations();
   return (
     <Box>
@@ -26,7 +26,7 @@ export const Privacy = () => {
           {t('back')}
         </Button>
         <Flex direction={'column'} gap={64}>
-          <Title>{t('privacy.title')}</Title>
+          <Title>{t('privacyTitle')}</Title>
 
           {/* Introduction */}
           <Text>{t('privacy.introduction')}</Text>
@@ -100,3 +100,18 @@ export const Privacy = () => {
     </Box>
   );
 };
+
+export default Privacy
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`public/locales/${context.locale}/common.json`))
+          .default,
+        ...(await import(`public/locales/${context.locale}/documents.json`))
+          .default,
+      },
+    },
+  };
+}

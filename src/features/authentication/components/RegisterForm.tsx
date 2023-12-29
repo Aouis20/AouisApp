@@ -135,14 +135,14 @@ export const RegisterForm = () => {
               <Text c={'dimmed'} fz={'sm'}>
                 {t('authentication.form.byClicking')}{' '}
                 <Link
-                  href="/documents/terms"
+                  href="/terms"
                   className="underline underline-offset-4 hover:text-primary"
                 >
                   {t('authentication.form.termsOfService')}
                 </Link>{' '}
                 {t('authentication.form.andOur')}{' '}
                 <Link
-                  href="/documents/privacy"
+                  href="/privacy"
                   className="underline underline-offset-4 hover:text-primary"
                 >
                   {t('authentication.form.privacyPolicy')}
