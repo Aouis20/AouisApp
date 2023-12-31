@@ -10,7 +10,6 @@ const Register = () => {
     <UnAuthenticatedAppLayout>
       <Head>
         <title>{`${t('appName')} - ${t('header.navigation.register')}`}</title>
-        <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="description" content="Aouis - Register" />
       </Head>
 

@@ -10,7 +10,6 @@ const Login = () => {
     <UnAuthenticatedAppLayout>
       <Head>
         <title>{`${t('appName')} - ${t('header.navigation.login')}`}</title>
-        <link rel="shortcut icon" href="/logo-mark.png" />
         <meta name="Aouis - Login" content="Aouis - Login" />
       </Head>
 
