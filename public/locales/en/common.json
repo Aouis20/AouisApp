@@ -27,6 +27,8 @@
   "privacyTitle": "Privacy Policy",
   "cookiesTitle": "Cookies",
   "photos": "{count, plural, =0 {No photos} =1 {# photo} other {# photos}}",
+  "aproduct": "Product",
+  "service": "Service",
   "notifications": {
     "notAuthorized": {
       "title": "You are not authorized to access this page",

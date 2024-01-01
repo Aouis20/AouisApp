@@ -7,10 +7,13 @@ import {
   Container,
   Flex,
   Group,
+  LoadingOverlay,
+  Modal,
   NumberInput,
   Paper,
   Radio,
   Select,
+  Stack,
   Text,
   TextInput,
   Textarea,
@@ -19,8 +22,12 @@ import {
 } from '@mantine/core';
 import { FileWithPath } from '@mantine/dropzone';
 import { useForm } from '@mantine/form';
+import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
+import _ from 'lodash';
 import { useTranslations } from 'next-intl';
+import router from 'next/router';
+import { useState } from 'react';
 import { createProduct } from '../api';
 import {
   CreateProductFormType,
@@ -32,13 +39,15 @@ import { ImagesDropzone } from './ImagesDropzone';
 export const ProductCreate = () => {
   const t = useTranslations();
   const categories = CategoryStore.useState((s) => s.categoryList);
+  const [opened, { open, close }] = useDisclosure(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const createProductForm = useForm<CreateProductFormType>({
     initialValues: {
       is_service: false,
       images: [],
       title: '',
-      description: null,
+      description: '',
       price: 0,
       category: '',
       payment_type: PaymentType.UNIQ,
@@ -53,11 +62,13 @@ export const ProductCreate = () => {
   });
 
   const handleSubmit = async (values: CreateProductFormType) => {
+    setIsLoading(true);
     try {
       const api = setupPrivateApi();
       const payload = values;
       payload.category = Number(payload.category);
       payload.price = String(payload.price);
+      !payload.images?.length && _.omit(payload, 'images');
 
       await createProduct(payload, api);
       showNotification({
@@ -65,20 +76,25 @@ export const ProductCreate = () => {
         message: t('product.create.notifications.success.message'),
         color: 'green',
       });
-      // TODO ask user create a new one ?
-      // if yes back to form
-      // else redirect to homepage
+      open();
     } catch (err) {
       showNotification({
         title: t('product.create.notifications.error.title'),
         message: t('product.create.notifications.error.message'),
         color: 'red',
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleChangeImages = (images: FileWithPath[]) => {
     createProductForm.setFieldValue('images', images);
+  };
+
+  const handleCreateAgain = () => {
+    createProductForm.reset();
+    close();
   };
 
   return (
@@ -89,7 +105,7 @@ export const ProductCreate = () => {
       </Paper>
 
       <form onSubmit={createProductForm.onSubmit(handleSubmit)}>
-        <Flex direction={'column'} gap={'xl'} mb={32}>
+        <Flex direction={'column'} gap={'xl'} mb={32} pos={'relative'}>
           {/* Ad Type */}
           <Radio.Group
             name="adType"
@@ -102,8 +118,8 @@ export const ProductCreate = () => {
             }
           >
             <Group mt="xs">
-              <Radio label="Produit" value="product" />
-              <Radio label="Service" value="service" />
+              <Radio label={t('aproduct')} value="product" />
+              <Radio label={t('service')} value="service" />
             </Group>
           </Radio.Group>
 
@@ -137,15 +153,6 @@ export const ProductCreate = () => {
           />
 
           {/* Images */}
-          {/* <FileInput
-            label="Photos"
-            description={t('addAd.form.dropzone.tips')}
-            placeholder={t('addAd.form.dropzone.placeholder')}
-            accept="image/png,image/jpeg"
-            multiple
-            clearable
-            {...createProductForm.getInputProps('images')}
-          /> */}
           <ImagesDropzone onChange={handleChangeImages} />
 
           {/* Categories */}
@@ -222,8 +229,43 @@ export const ProductCreate = () => {
           </Group>
 
           <Button type="submit">{t('addAd.form.submit')}</Button>
+          <LoadingOverlay
+            visible={isLoading}
+            zIndex={1000}
+            overlayProps={{ radius: 'sm', blur: 2 }}
+            loaderProps={{ color: 'secondary.4', type: 'bars' }}
+          />
         </Flex>
       </form>
+
+      {/* Modal */}
+      <>
+        <Modal
+          opened={opened}
+          onClose={close}
+          title={<Title>{t('addAd.form.addAgain.title')}</Title>}
+          size={'lg'}
+          padding={'lg'}
+          centered
+          withCloseButton={false}
+        >
+          <Stack gap={'lg'}>
+            <Text>{t('addAd.form.addAgain.message')}</Text>
+            <Group>
+              <Button
+                onClick={() => router.push('/')}
+                variant="outline"
+                size="md"
+              >
+                {t('no')}
+              </Button>
+              <Button onClick={() => handleCreateAgain()} size="md">
+                {t('yes')}
+              </Button>
+            </Group>
+          </Stack>
+        </Modal>
+      </>
     </Container>
   );
 };

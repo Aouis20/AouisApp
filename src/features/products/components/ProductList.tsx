@@ -12,12 +12,14 @@ type ProductListProps = {
   display?: 'column' | 'row';
   user_id?: number;
   ids?: number[];
+  category_id?: number;
 };
 
 export const ProductList = ({
   display = 'column',
   user_id,
   ids,
+  category_id
 }: ProductListProps) => {
   const productList = ProductStore.useState((s) => s.productList);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,7 +38,7 @@ export const ProductList = ({
     // Called when page is changed
     const api = setupPrivateApi();
     setIsLoading(true);
-    const newProductList = await getProducts(page, { user_id, ids }, api);
+    const newProductList = await getProducts(page, { user_id, ids, category_id }, api);
     ProductStore.update((s) => {
       s.productList = newProductList;
     });

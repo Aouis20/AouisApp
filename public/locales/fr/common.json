@@ -3,7 +3,7 @@
   "appName": "Aouis",
   "myAccount": "Mon compte",
   "welcome": "Bienvenue",
-  "viewAll": "Voir tout",
+  "viewAll": "Tout voir",
   "buy": "Acheter",
   "sell": "Vendre",
   "exchange": "Echanger",
@@ -28,6 +28,8 @@
   "privacyTitle": "Politique de confidentialité",
   "cookiesTitle": "Cookies",
   "photos": "{count, plural, =0 {Aucune photos} =1 {# photo} other {# photos}}",
+  "aproduct": "Produit",
+  "service": "Service",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",

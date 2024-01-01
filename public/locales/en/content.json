@@ -53,6 +53,10 @@
             "error": {
                 "title": "The title must be at least 2 characters long",
                 "price": "The minimum acceptable price is €0.01"
+            },
+            "addAgain": {
+                "title": "Create an other ad?",
+                "message": "Your ad has been added, do you want to create another one?"
             }
         }
     },

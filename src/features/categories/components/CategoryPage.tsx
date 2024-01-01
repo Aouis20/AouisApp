@@ -13,20 +13,13 @@ import {
 } from '@mantine/core';
 import { useTranslations } from 'next-intl';
 import { CategoryStore } from '../store';
+import { useRouter } from 'next/router';
 
 export const Categories = () => {
   const categoryList = CategoryStore.useState((s) => s.categoryList);
-  const truc = [
-    ...categoryList.filter((c) => c.title != 'Others'),
-    { title: 'Décorations' },
-    { title: 'Informatique' },
-    { title: 'Sport' },
-    { title: 'Immobilier' },
-    { title: 'Jardinerie' },
-    { title: 'Cuisine' },
-  ];
   const t = useTranslations();
-  const items = truc.map((category) => (
+  const router = useRouter();
+  const items = categoryList.map((category) => (
     <UnstyledButton
       style={{
         backgroundImage: `url(https://cdn.pixabay.com/photo/2023/11/29/11/55/pine-hills-8419433_1280.jpg)`,
@@ -41,6 +34,7 @@ export const Categories = () => {
         transition: 'backgroundSize 300ms ease',
       }}
       key={category.title}
+      onClick={() => router.push(`/categories/${category.id}`)}
     >
       <Overlay color="#000" opacity={0.6} zIndex={1} />
       <Text
@@ -66,10 +60,11 @@ export const Categories = () => {
           pos={'relative'}
         >
           <Flex direction={'column'} gap={'lg'} align={'center'}>
-            <Title>Catégories</Title>
+            <Title>{t('header.navigation.categories')}</Title>
 
             <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
-              {categoryList.length} catégories
+              {categoryList.length}{' '}
+              {t('header.navigation.categories').toLowerCase()}
             </Badge>
           </Flex>
         </Paper>

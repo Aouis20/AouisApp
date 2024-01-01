@@ -9,7 +9,7 @@ export enum CreateStatusType {
 
 export type CreateProductFormType = {
   is_service: boolean;
-  images: FileWithPath[],
+  images?: FileWithPath[],
   title: string,
   description: string | null,
   price: number | string,

@@ -53,6 +53,10 @@
             "error": {
                 "title": "Le titre doit faire au minimum 2 caractères",
                 "price": "Le prix minimum acceptable est de 0.01€"
+            },
+            "addAgain": {
+                "title": "Ajouter une autre annonce ?",
+                "message": "Votre annonce a été ajouté, souhaitez-vous en créer une autre ?"
             }
         }
     },

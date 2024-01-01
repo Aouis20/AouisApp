@@ -17,6 +17,7 @@ import {
   IconTag,
 } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
 import { ConditionFilter } from './ConditionFilter';
@@ -36,6 +37,8 @@ export const ProductInformation = ({
   const filters = ProductStore.useState((s) => s.filters);
   const [initialFilters, setInitialFilters] = useState(filters);
   const matches = useMediaQuery('(min-width: 1055px)');
+  const router = useRouter();
+  const inCategoryPage = router.pathname === '/categories/[id]';
   const t = useTranslations();
 
   useEffect(() => {
@@ -67,9 +70,11 @@ export const ProductInformation = ({
 
           <Group justify="center">
             {/* Filters */}
-            <Button leftSection={<IconAdjustments />} onClick={open}>
-              Filters
-            </Button>
+            {inCategoryPage && (
+              <Button leftSection={<IconAdjustments />} onClick={open}>
+                {t('filters')}
+              </Button>
+            )}
             {/* Price Filter */}
             <HoverCard withArrow arrowPosition="center" width={400}>
               <HoverCard.Target>

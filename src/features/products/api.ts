@@ -6,6 +6,7 @@ import { CreateProductFormType } from './types/CreateProductForm';
 export type ProductListFilter = {
   user_id?: number | null;
   ids?: number[]
+  category_id?: number
 };
 
 export const getProducts = async (page: number, filters: ProductListFilter, api: KyInstance): Promise<ProductList> => {
@@ -22,7 +23,7 @@ export const createProduct = async (payload: CreateProductFormType, api: KyInsta
   const formData = new FormData();
   
   Object.keys(payload).map((key) => {
-    if (key === 'images' && payload.images.length) {
+    if (key === 'images' && payload.images?.length) {
       payload.images.map((image, index) => {
         formData.append(`images[${index}]`, image);
       });
@@ -30,6 +31,7 @@ export const createProduct = async (payload: CreateProductFormType, api: KyInsta
       formData.append(key, (payload as Record<string, any>)[key]);
     }
   });
+  console.log(formData)
   const data = await api.post('products/', { body: formData }).json<Product>();
   return data;
 };

@@ -82,12 +82,12 @@ export function HeaderSection() {
     }
   };
 
-  const categories = categoryList.map((category) => ({
+  const categories = categoryList.slice(0, 10).map((category) => ({
     ...category,
   }));
 
   const renderCategories = categories.map((category, index) => (
-    <Button variant="light" key={index}>
+    <Button variant="light" key={index} onClick={() => router.push(`/categories/${category.id}`)}>
       {category.title}
     </Button>
   ));
@@ -168,7 +168,7 @@ export function HeaderSection() {
               </Anchor>
             </HoverCard.Target>
 
-            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={'60%'}>
+            <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={500}>
               <Group justify="space-between" px="md">
                 <Text fw={500}>{t('header.navigation.categories')}</Text>
                 <Anchor href="/categories">{t('viewAll')}</Anchor>
