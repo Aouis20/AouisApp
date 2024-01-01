@@ -1,5 +1,4 @@
 import theme from '@/theme';
-import '@mantine/carousel/styles.css';
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dropzone/styles.css';
@@ -10,6 +9,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import 'tailwindcss/tailwind.css';
+import '@mantine/carousel/styles.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
