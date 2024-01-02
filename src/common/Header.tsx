@@ -29,6 +29,7 @@ import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import { AccountMenu } from './AccountMenu';
 import { LanguageSelector } from './LanguageSelector';
+import { size } from 'lodash';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -158,17 +159,17 @@ export function HeaderSection() {
           </Anchor>
           <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
             <HoverCard.Target>
-              <Group wrap="nowrap" gap={4}>
-                <Anchor
-                  fw={'bold'}
-                  style={{
-                    textDecoration: 'none',
-                  }}
-                >
+              <Anchor
+                fw={'bold'}
+                style={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Group wrap="nowrap" gap={4}>
                   {t('header.navigation.categories')}
-                </Anchor>
-                <IconChevronDown stroke={3} size={16} />
-              </Group>
+                  <IconChevronDown stroke={3} size={16} />
+                </Group>
+              </Anchor>
             </HoverCard.Target>
 
             <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={500}>

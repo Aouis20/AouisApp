@@ -11,7 +11,7 @@ interface WayCardProps {
 export const WayCard = ({ way }: WayCardProps) => {
   const router = useRouter();
   const t = useTranslations();
-  const matches = useMediaQuery('(min-width: 500px)');
+  const matches = useMediaQuery('(min-width: 700px)');
   const { hovered, ref } = useHover();
 
   return (
