@@ -19,17 +19,6 @@ export const ProductPage = ({ isSearch = false }: ProductPageProps) => {
     <Flex direction={'column'} align={'center'} gap={'xl'}>
       <ProductInformation open={open} setDisplay={setDisplay} />
       {isSearch ? <ResultsList /> : <ProductList display={display} />}
-
-      {/* Filters */}
-      <Drawer
-        opened={opened}
-        onClose={close}
-        title={<Title>{t('filters')}</Title>}
-      >
-        <Divider my="sm" />
-        {/* From current categories display it filters */}
-        <Box></Box>
-      </Drawer>
     </Flex>
   );
 };
