@@ -87,7 +87,11 @@ export function HeaderSection() {
   }));
 
   const renderCategories = categories.map((category, index) => (
-    <Button variant="light" key={index} onClick={() => router.push(`/categories/${category.id}`)}>
+    <Button
+      variant="light"
+      key={index}
+      onClick={() => router.push(`/categories/${category.id}`)}
+    >
       {category.title}
     </Button>
   ));
@@ -154,18 +158,17 @@ export function HeaderSection() {
           </Anchor>
           <HoverCard position="bottom" radius="md" shadow="md" withinPortal>
             <HoverCard.Target>
-              <Anchor
-                fw={'bold'}
-                href="/categories"
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
-                <Group wrap="nowrap" gap={4}>
+              <Group wrap="nowrap" gap={4}>
+                <Anchor
+                  fw={'bold'}
+                  style={{
+                    textDecoration: 'none',
+                  }}
+                >
                   {t('header.navigation.categories')}
-                  <IconChevronDown stroke={3} size={16} />
-                </Group>
-              </Anchor>
+                </Anchor>
+                <IconChevronDown stroke={3} size={16} />
+              </Group>
             </HoverCard.Target>
 
             <HoverCard.Dropdown style={{ overflow: 'hidden' }} maw={500}>
@@ -290,15 +293,25 @@ export function HeaderSection() {
         <Group justify="center" grow pb="xl" px="md">
           {logged ? (
             <>
-              <Button>{t('header.profileMenu.profile')}</Button>
+              <Button onClick={() => router.push('/profile/')}>
+                {t('header.profileMenu.profile')}
+              </Button>
               <Button variant="outline" onClick={logout}>
                 {t('header.navigation.logout')}
               </Button>
             </>
           ) : (
             <>
-              <Button variant="default">{t('header.navigation.login')}</Button>
-              <Button variant="filled">
+              <Button
+                variant="default"
+                onClick={() => router.push('/account/login')}
+              >
+                {t('header.navigation.login')}
+              </Button>
+              <Button
+                variant="filled"
+                onClick={() => router.push('/account/register')}
+              >
                 {t('header.navigation.register')}
               </Button>
             </>

@@ -15,7 +15,7 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { useHover } from '@mantine/hooks';
+import { useHover, useMediaQuery } from '@mantine/hooks';
 import { IconMapPinFilled, IconStarFilled } from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en';
@@ -38,6 +38,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { hovered, ref } = useHover();
   const t = useTranslations();
+  const matches = useMediaQuery('(min-width: 630px)');
 
   const slides = product.images.length ? (
     product.images.map((image, index) => (
@@ -66,7 +67,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       p={0}
       ref={ref}
       h={200}
-      w={600}
+      maw={600}
       style={{
         transition: 'all .4s ease-in-out',
         transform: hovered ? 'scale(1.05)' : 'none',
@@ -74,7 +75,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     >
       <Group wrap={'nowrap'} gap={'xs'} align="start">
         {/* Left Section */}
-        <Box w={'40%'} miw={'40%'}>
+        <Box
+          w={'40%'}
+          miw={'40%'}
+          style={{ display: matches ? 'block' : 'none' }}
+        >
           <Carousel
             loop
             withControls={hovered ? product.images.length > 1 && true : false}

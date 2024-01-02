@@ -19,7 +19,7 @@ export const ProductList = ({
   display = 'column',
   user_id,
   ids,
-  category_id
+  category_id,
 }: ProductListProps) => {
   const productList = ProductStore.useState((s) => s.productList);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,7 +38,11 @@ export const ProductList = ({
     // Called when page is changed
     const api = setupPrivateApi();
     setIsLoading(true);
-    const newProductList = await getProducts(page, { user_id, ids, category_id }, api);
+    const newProductList = await getProducts(
+      page,
+      { user_id, ids, category_id },
+      api
+    );
     ProductStore.update((s) => {
       s.productList = newProductList;
     });
@@ -62,13 +66,13 @@ export const ProductList = ({
         <Flex
           direction={display}
           gap={48}
-          px={8}
+          px={'md'}
           wrap={'wrap'}
           justify={'center'}
           align={'center'}
         >
           {productList.results.map((product) => (
-            <Box key={product.id}>
+            <Box key={product.id} w={'100%'}>
               <ProductCard product={product} />
             </Box>
           ))}

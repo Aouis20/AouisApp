@@ -22,6 +22,7 @@
   "search": "Rechercher",
   "filters": "Filtres",
   "clearFilters": "Supprimer les filtres",
+  "applyFilters": "Appliquer les filtres",
   "ads": "{count, plural, =0 {Aucune annonces} =1 {# annonce} other {# annonces}}",
   "sendMessageTo": "Envoyer un message à",
   "termsOfServiceTitle": "Mentions Légales",
@@ -30,6 +31,7 @@
   "photos": "{count, plural, =0 {Aucune photos} =1 {# photo} other {# photos}}",
   "aproduct": "Produit",
   "service": "Service",
+  "condition": "Etat",
   "notifications": {
     "notAuthorized": {
       "title": "Vous n'êtes pas autorisé à accéder à cette page",

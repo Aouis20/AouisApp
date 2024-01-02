@@ -1,3 +1,4 @@
+import { CategoryStore } from '@/features/categories/store';
 import {
   Badge,
   Button,
@@ -23,7 +24,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { ProductStore } from '../../store';
 import { ConditionFilter } from './ConditionFilter';
 import { PriceFilter } from './PriceFilter';
-import { CategoryStore } from '@/features/categories/store';
 
 type ProductInformationProps = {
   open: () => void;
@@ -42,7 +42,7 @@ export const ProductInformation = ({
   const router = useRouter();
   const inCategoryPage = router.pathname === '/categories/[id]';
   const t = useTranslations();
-  const category = CategoryStore.useState((s) => s.category)
+  const category = CategoryStore.useState((s) => s.category);
 
   useEffect(() => {
     filters != initialFilters ? setIsModifying(true) : setIsModifying(false);
@@ -55,9 +55,9 @@ export const ProductInformation = ({
   };
 
   return (
-    <Paper shadow="sm" radius="md" p="xl" withBorder w={'50%'} pos={'relative'}>
+    <Paper shadow="sm" radius="md" p="xl" withBorder pos={'relative'}>
       <Flex direction={'column'} gap={'lg'} align={'center'}>
-        {inCategoryPage && (<Title>{category?.title}</Title>)}
+        {inCategoryPage && <Title>{category?.title}</Title>}
         <Badge fz={'sm'} p={'sm'} tt={'lowercase'} variant="light">
           {t('ads', { count: totalItems })}
         </Badge>
@@ -114,6 +114,12 @@ export const ProductInformation = ({
             ]}
           />
         </Group>
+
+        {isModifying && (
+          <Group justify="center">
+            <Button variant="default">{t('applyFilters')}</Button>
+          </Group>
+        )}
       </Flex>
     </Paper>
   );

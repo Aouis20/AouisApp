@@ -21,6 +21,7 @@
   "search": "Search",
   "filters": "Filters",
   "clearFilters": "Clear Filters",
+  "applyFilters": "Apply Filters",
   "ads": "{count, plural, =0 {No ads} =1 {# ad} other {# ads}}",
   "sendMessageTo": "Send a message to",
   "termsOfServiceTitle": "Terms of Service",
@@ -29,6 +30,7 @@
   "photos": "{count, plural, =0 {No photos} =1 {# photo} other {# photos}}",
   "aproduct": "Product",
   "service": "Service",
+  "condition": "Condition",
   "notifications": {
     "notAuthorized": {
       "title": "You are not authorized to access this page",

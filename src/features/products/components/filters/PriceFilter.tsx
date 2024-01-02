@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ProductStore } from '../../store';
 
 export const PriceFilter = () => {
@@ -44,7 +44,14 @@ export const PriceFilter = () => {
   const priceRange: [number, number] = [minPrice as number, maxPrice as number];
 
   // Update filters in ProductStore
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     ProductStore.update((s) => {
       s.filters = {
         ...s.filters,

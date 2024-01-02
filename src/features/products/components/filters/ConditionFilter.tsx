@@ -2,6 +2,7 @@ import { Badge, Box, Checkbox, Flex, Text, Title } from '@mantine/core';
 import { useListState } from '@mantine/hooks';
 import { useTranslations } from 'next-intl';
 import { ProductStore } from '../../store';
+import { conditionIcon } from '../../variables/Conditions';
 
 export const ConditionFilter = () => {
   const t = useTranslations();
@@ -36,7 +37,7 @@ export const ConditionFilter = () => {
       ml={33}
       label={
         <Flex gap={6}>
-          <Text>{value.label}</Text>
+          <Text>{t(`product.conditionTypes.${value.label}`)}</Text>
           <Badge p={4}>{value.count}</Badge>
         </Flex>
       }
@@ -50,11 +51,11 @@ export const ConditionFilter = () => {
 
   return (
     <Flex direction={'column'} gap={16} px={16}>
-      <Title order={2}>Condition</Title>
+      <Title order={2}> {t('condition')}</Title>
       {/* Conditions */}
       <Box>
         <Text c={'gray'} mb={12}>
-          Conditions
+          {t('condition')}
         </Text>
         <Checkbox
           checked={allChecked}
