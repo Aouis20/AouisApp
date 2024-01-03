@@ -10,7 +10,8 @@
         "Search",
         "UI / UX",
         "Translations",
-        "Categories"
+        "Categories",
+        "Profile"
     ],
     "css.customData": [".vscode/tailwind.json"],
 }

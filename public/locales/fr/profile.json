@@ -17,5 +17,14 @@
             "state": "Région",
             "zipCode": "Code postal"
         }
+    },
+    "messages": {
+        "title": "Messages",
+        "description": "Retrouvez ici, vos fils de discussion.",
+        "viewAd": "Voir l'annonce",
+        "makeAnOffer": "Faire une offre",
+        "counterOffer": "Faire une contre-offre",
+        "purchases": "Achats",
+        "sales": "Ventes"
     }
 }

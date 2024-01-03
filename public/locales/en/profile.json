@@ -17,5 +17,14 @@
             "state": "State",
             "zipCode": "Zip code"
         }
+    },
+    "messages": {
+        "title": "Messages",
+        "description": "Find your conversation threads here.",
+        "viewAd": "View the ad",
+        "makeAnOffer": "Make an offer",
+        "counterOffer": "Make a counter-offer",
+        "purchases": "Purchases",
+        "sales": "Sales"
     }
 }
