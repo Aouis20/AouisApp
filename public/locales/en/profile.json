@@ -26,5 +26,19 @@
         "counterOffer": "Make a counter-offer",
         "purchases": "Purchases",
         "sales": "Sales"
+    },
+    "profileNotifications": {
+        "title": "Notifications",
+        "description": "Keep up to date with all the latest news here.",
+        "type": {
+            "message": {
+                "title": "You have received a new message !",
+                "text": "You have received a message from {name}"
+            },
+            "news": {
+                "title": "A new offer has appeared!",
+                "text": "Go to the settings section to take advantage of special offers for your situation."
+            }
+        }
     }
 }

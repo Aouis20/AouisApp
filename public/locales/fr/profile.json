@@ -26,5 +26,19 @@
         "counterOffer": "Faire une contre-offre",
         "purchases": "Achats",
         "sales": "Ventes"
+    },
+    "profileNotifications": {
+        "title": "Notifications",
+        "description": "Tenez-vous à jour en retrouvant toutes les nouvelles ici. ",
+        "type": {
+            "message": {
+                "title": "Vous avez reçu un nouveau message !",
+                "text": "Vous avez reçu un message de {name}"
+            },
+            "news": {
+                "title": "Une nouvelle offre est apparue !",
+                "text": "Rendez-vous dans la section paramètres afin de bénéficier des offres avantageuses concernant votre situation."
+            }
+        }
     }
 }
