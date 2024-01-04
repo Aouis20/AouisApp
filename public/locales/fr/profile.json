@@ -16,6 +16,20 @@
             "city": "Ville",
             "state": "Région",
             "zipCode": "Code postal"
+        },
+        "salutation": {
+            "MR": "Mr",
+            "MRS": "Mrs"
+        },
+        "notifications" : {
+            "success" : {
+                "title" : "Compte mis à jour",
+                "message" : "Le compte a été mis à jour avec succès"
+            },
+            "error" : {
+                "title" : "Erreur",
+                "message" : "Une erreur s'est produite lors de la mise à jour de votre compte"
+            }
         }
     },
     "messages": {

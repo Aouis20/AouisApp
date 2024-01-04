@@ -16,6 +16,20 @@
             "city": "City",
             "state": "State",
             "zipCode": "Zip code"
+        },
+        "salutation": {
+            "MR": "M",
+            "MRS": "Mme"
+        },
+        "notifications": {
+            "success": {
+                "title": "Account Updated",
+                "message": "Account has been successfully updated"
+            },
+            "error": {
+                "title": "Error updating account",
+                "message": "An error has occurred while updating your account"
+            }
         }
     },
     "messages": {

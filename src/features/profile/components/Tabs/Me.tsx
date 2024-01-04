@@ -19,19 +19,18 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { IMaskInput } from 'react-imask';
 
-const Salutation = {
-  [SalutationType.MR]: 'M.',
-  [SalutationType.MRS]: 'Mme.',
-};
-
 export const MeTab = () => {
   const user = AccountStore.useState((s) => s.user);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const t = useTranslations();
+  const Salutation = {
+    [SalutationType.MR]: t('me.salutation.MR'),
+    [SalutationType.MRS]: t('me.salutation.MRS'),
+  };
 
   if (!user) {
     return <Text>Veuillez vous authentifier</Text>;
   }
-  const t = useTranslations();
   const userForm = useForm<Partial<User>>({
     initialValues: {
       salutation: user.salutation || '',
@@ -85,16 +84,18 @@ export const MeTab = () => {
       userForm.resetDirty();
 
       showNotification({
-        title: 'Account Updated',
-        message: 'Account has been successfully updated',
+        title: t('me.notifications.success.title'),
+        message: t('me.notifications.success.message'),
         color: 'green',
       });
     } catch (err) {
       showNotification({
-        title: 'Error updating account',
-        message: 'An error has occurred while updating your account',
+        title: t('me.notifications.error.title'),
+        message: t('me.notifications.error.message'),
         color: 'red',
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
