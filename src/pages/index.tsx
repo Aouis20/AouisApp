@@ -35,6 +35,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       return redirectToLoginProps();
     }
   }
+  return { props: {} };
 };
 
 interface HomePageProps {
