@@ -24,7 +24,7 @@
   "clearFilters": "Supprimer les filtres",
   "applyFilters": "Appliquer les filtres",
   "ads": "{count, plural, =0 {Aucune annonces} =1 {# annonce} other {# annonces}}",
-  "sendMessageTo": "Envoyer un message à",
+  "sendMessageTo": "Envoyer un message à ",
   "termsOfServiceTitle": "Mentions Légales",
   "privacyTitle": "Politique de confidentialité",
   "cookiesTitle": "Cookies",

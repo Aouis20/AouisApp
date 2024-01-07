@@ -23,7 +23,7 @@
   "clearFilters": "Clear Filters",
   "applyFilters": "Apply Filters",
   "ads": "{count, plural, =0 {No ads} =1 {# ad} other {# ads}}",
-  "sendMessageTo": "Send a message to",
+  "sendMessageTo": "Send a message to ",
   "termsOfServiceTitle": "Terms of Service",
   "privacyTitle": "Privacy Policy",
   "cookiesTitle": "Cookies",

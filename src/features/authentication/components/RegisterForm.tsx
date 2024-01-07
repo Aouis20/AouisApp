@@ -82,7 +82,7 @@ export const RegisterForm = () => {
     }
   };
   return (
-    <Flex direction={'column'} gap={'lg'} maw={'54%'}>
+    <Flex direction={'column'} gap={'lg'}>
       {/* Form Header */}
       <Title order={2} ta={'center'}>
         {t('authentication.register.pageTitle')}

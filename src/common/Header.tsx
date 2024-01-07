@@ -29,7 +29,6 @@ import { AccountStore } from '../features/accounts/store';
 import { removeTokens } from '../features/authentication/tokens.helper';
 import { AccountMenu } from './AccountMenu';
 import { LanguageSelector } from './LanguageSelector';
-import { size } from 'lodash';
 
 export function HeaderSection() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -226,7 +225,16 @@ export function HeaderSection() {
       >
         <Group justify="space-between">
           <Image alt={'logo'} src={'/logo.png'} w={200} />
-          <LanguageSelector />
+          <Group>
+            <Button
+              variant="light"
+              leftSection={<IconSquarePlus size={20} />}
+              onClick={() => router.push('/products/create')}
+            >
+              {t('header.navigation.addAd')}
+            </Button>
+            <LanguageSelector />
+          </Group>
         </Group>
 
         <Divider my="sm" />

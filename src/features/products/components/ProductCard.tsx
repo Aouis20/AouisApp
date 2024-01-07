@@ -1,5 +1,6 @@
 import { DirectMessage } from '@/common/DirectMessage';
 import { DisplayName } from '@/common/DisplayName';
+import classes from '@/common/styles/carou.module.css';
 import { Carousel } from '@mantine/carousel';
 import {
   ActionIcon,
@@ -75,14 +76,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     >
       <Group wrap={'nowrap'} gap={'xs'} align="start">
         {/* Left Section */}
-        <Box
-          w={'40%'}
-          miw={'40%'}
-          style={{ display: matches ? 'block' : 'none' }}
-        >
+        <Box w={'40%'} miw={'40%'} pos={'relative'}>
           <Carousel
-            loop
             withControls={hovered ? product.images.length > 1 && true : false}
+            classNames={classes}
           >
             {slides}
           </Carousel>

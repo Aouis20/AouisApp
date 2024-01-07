@@ -1,5 +1,6 @@
 import { BackLinkButton } from '@/common/BackLinkButton';
 import { DisplayName } from '@/common/DisplayName';
+import classes from '@/common/styles/carou.module.css';
 import { Carousel } from '@mantine/carousel';
 import {
   Anchor,
@@ -65,7 +66,6 @@ export const ProductDetailsPage = () => {
                   : '50%'
               }
               slideGap="md"
-              loop
               slidesToScroll={
                 product.images.length >= 3
                   ? matchesMD
@@ -76,6 +76,7 @@ export const ProductDetailsPage = () => {
                   : 1
               }
               controlSize={32}
+              classNames={classes}
               style={{ backgroundColor: '#F6F6F6' }}
             >
               {product.images.map((image, index) => (
