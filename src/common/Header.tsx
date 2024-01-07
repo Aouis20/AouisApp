@@ -39,7 +39,7 @@ export function HeaderSection() {
   const router = useRouter();
   const user = AccountStore.useState((s) => s.user);
   const [categoryList, setCategoryList] = useState<Category[]>([]);
-  const matches = useMediaQuery('(min-width: 1150px)');
+  const matches = useMediaQuery('(min-width: 1300px)');
   const matchesSM = useMediaQuery('(min-width: 720px)');
 
   const fetchCategories = async () => {
